@@ -1,0 +1,17 @@
+﻿Sample	Insert Size	Duplication	Reads mapped	% Duplication	Reads After Filtering	GC content	% PF	% Adapter	GC
+260629_Emseq_LV_index_A2_Bap1_Math1_adult_ctrl_M2_S5	.	38.940999999999995	1363.1199789999998	28.738599999999998	1372.425074	22.5204	100	9.109851923326199	22
+260629_Emseq_LV_index_A2_Bap1_Math1_adult_ctrl_M2_S5.good_mapq	250	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6	.	35.0011	3394.6988659999997	32.887	3432.00196	23.2734	100	18.0880537725567	23
+260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6.good_mapq	204	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_C2_Bap1_Math1_adult_ctrl_F2_S7	.	35.354200000000006	1591.2331829999998	27.588600000000003	1605.998196	22.8159	100	15.183057154567315	22
+260629_Emseq_LV_index_C2_Bap1_Math1_adult_ctrl_F2_S7.good_mapq	216	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_D2_Bap1_Math1_adult_mut_F2_S8	.	32.6474	1348.585091	24.3625	1358.072486	22.9825	100	16.61208015961528	22
+260629_Emseq_LV_index_D2_Bap1_Math1_adult_mut_F2_S8.good_mapq	207	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_E1_Bap1_Math1_adult_ctrl_M1_S1	.	31.4181	1035.758225	23.3553	1043.9734939999998	23.7962	100	16.704057813942928	23
+260629_Emseq_LV_index_E1_Bap1_Math1_adult_ctrl_M1_S1.good_mapq	204	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2	.	36.6747	1159.8076019999999	26.3283	1169.955182	22.6149	100	12.107196085738607	22
+260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2.good_mapq	237	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_G1_Bap1_Math1_adult_ctrl_F1_S3	.	37.9999	1477.292199	28.3193	1488.527488	22.578899999999997	100	9.867994993989658	22
+260629_Emseq_LV_index_G1_Bap1_Math1_adult_ctrl_F1_S3.good_mapq	246	.	.	.	.	.	.	.	.
+260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4	.	35.952400000000004	2925.20577	31.8303	2949.200808	22.6883	100	11.841853598190117	22
+260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4.good_mapq	228	.	.	.	.	.	.	.	.

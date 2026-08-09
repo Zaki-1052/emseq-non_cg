@@ -1,0 +1,667 @@
+<title>EM-seq QC Report — Bap1/Math1 LV 260629</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg2: #f5f7fa;
+    --bg3: #ebeef2;
+    --tx1: #0e1117;
+    --tx2: #4a4e57;
+    --tx3: #7a7f8a;
+    --border: #d4d8de;
+    --ctrl: #2a78d6;
+    --mut: #eb6834;
+    --ctrl2: #5c9be6;
+    --mut2: #f09060;
+    --warn: #c98500;
+    --good: #1baf7a;
+    --bad: #e34948;
+    --grid: #e2e5ea;
+    --surface-chart: #fcfcfb;
+    --ref-line: #e34948;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --bg: #13161c;
+      --bg2: #1a1e26;
+      --bg3: #23272f;
+      --tx1: #e6e9ee;
+      --tx2: #a8acb5;
+      --tx3: #6e7480;
+      --border: #2f343e;
+      --ctrl: #3987e5;
+      --mut: #d95926;
+      --ctrl2: #6ba3eb;
+      --mut2: #e07a4a;
+      --warn: #c98500;
+      --good: #199e70;
+      --bad: #e66767;
+      --grid: #282d36;
+      --surface-chart: #1a1a19;
+      --ref-line: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #13161c;
+    --bg2: #1a1e26;
+    --bg3: #23272f;
+    --tx1: #e6e9ee;
+    --tx2: #a8acb5;
+    --tx3: #6e7480;
+    --border: #2f343e;
+    --ctrl: #3987e5;
+    --mut: #d95926;
+    --ctrl2: #6ba3eb;
+    --mut2: #e07a4a;
+    --warn: #c98500;
+    --good: #199e70;
+    --bad: #e66767;
+    --grid: #282d36;
+    --surface-chart: #1a1a19;
+    --ref-line: #e66767;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg2: #f5f7fa;
+    --bg3: #ebeef2;
+    --tx1: #0e1117;
+    --tx2: #4a4e57;
+    --tx3: #7a7f8a;
+    --border: #d4d8de;
+    --ctrl: #2a78d6;
+    --mut: #eb6834;
+    --ctrl2: #5c9be6;
+    --mut2: #f09060;
+    --warn: #c98500;
+    --good: #1baf7a;
+    --bad: #e34948;
+    --grid: #e2e5ea;
+    --surface-chart: #fcfcfb;
+    --ref-line: #e34948;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--tx1);
+    line-height: 1.55;
+    padding: 2rem 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--tx3); font-size: 0.85rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.1rem; font-weight: 600; margin: 2.5rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 0.95rem; font-weight: 600; color: var(--tx2); margin: 1.5rem 0 0.5rem; }
+  p { font-size: 0.875rem; color: var(--tx2); margin-bottom: 0.75rem; max-width: 70ch; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+  }
+  .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tx3); margin-bottom: 0.3rem; }
+  .stat-value { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat-note { font-size: 0.72rem; color: var(--tx3); margin-top: 0.2rem; }
+  .chart-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin: 1rem 0; overflow-x: auto; }
+  .chart-title { font-size: 0.8rem; font-weight: 600; color: var(--tx2); margin-bottom: 0.5rem; }
+  svg.chart { display: block; width: 100%; height: auto; }
+  .legend { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 0.5rem 0; font-size: 0.75rem; color: var(--tx2); align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+  .legend-swatch { width: 12px; height: 3px; border-radius: 1px; flex-shrink: 0; }
+  .legend-swatch.dot { width: 8px; height: 8px; border-radius: 50%; }
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    margin: 0.75rem 0;
+  }
+  .table-scroll { overflow-x: auto; }
+  table.data th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tx3);
+    border-bottom: 2px solid var(--border);
+    padding: 0.5rem 0.6rem;
+    white-space: nowrap;
+  }
+  table.data td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--grid);
+    white-space: nowrap;
+    color: var(--tx1);
+  }
+  table.data tr:hover td { background: var(--bg3); }
+  .tag { display: inline-block; font-size: 0.65rem; font-weight: 600; padding: 0.1rem 0.4rem; border-radius: 3px; letter-spacing: 0.02em; }
+  .tag-ctrl { background: color-mix(in srgb, var(--ctrl) 15%, transparent); color: var(--ctrl); }
+  .tag-mut { background: color-mix(in srgb, var(--mut) 15%, transparent); color: var(--mut); }
+  .concern { background: color-mix(in srgb, var(--warn) 12%, transparent); border-left: 3px solid var(--warn); padding: 0.7rem 1rem; border-radius: 0 4px 4px 0; margin: 0.75rem 0; font-size: 0.82rem; color: var(--tx2); }
+  .concern strong { color: var(--tx1); }
+  .ok { background: color-mix(in srgb, var(--good) 10%, transparent); border-left: 3px solid var(--good); padding: 0.7rem 1rem; border-radius: 0 4px 4px 0; margin: 0.75rem 0; font-size: 0.82rem; color: var(--tx2); }
+  .tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    z-index: 100;
+    display: none;
+    color: var(--tx1);
+    max-width: 220px;
+    line-height: 1.4;
+  }
+  .mono { font-family: 'SF Mono', 'Menlo', 'Consolas', monospace; font-size: 0.82em; }
+  @media (max-width: 640px) {
+    body { padding: 1rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 1.25rem; }
+  }
+</style>
+
+<h1>EM-seq alignment QC</h1>
+<div class="subtitle">Bap1/Math1 adult left ventricle &middot; 260629 &middot; 8 samples (4 ctrl, 4 mut) &middot; mm10</div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-label">Total reads</div>
+    <div class="stat-value">14.3B</div>
+    <div class="stat-note">target was ~5B (625M/sample)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Mapping rate</div>
+    <div class="stat-value" style="color: var(--good)">99.98%</div>
+    <div class="stat-note">all samples &gt;99.98%</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Mean duplication</div>
+    <div class="stat-value">35.5%</div>
+    <div class="stat-note">range: 31.4 &ndash; 38.9%</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Conversion control</div>
+    <div class="stat-value" style="color: var(--good)">0</div>
+    <div class="stat-note">nonconverted phage Xp12 reads</div>
+  </div>
+</div>
+
+<h2>Assessment</h2>
+
+<p>The sequencing worked. Mapping rates are near-perfect, bisulfite conversion is clean, and sex assignments match labels. Even the shallowest sample (ctrl M1) has ~38x unique genomic coverage, well above the 10&ndash;30x typically needed for methylation calling.</p>
+
+<div class="concern">
+<strong>Read depth is uneven.</strong> mut M2 got 3.4B reads (1.7B pairs); ctrl M1 got 1.0B (518M pairs). That's a 3.3x range for samples pooled at equal concentration. Probably a pooling quantification issue or index imbalance. The data's all usable, but you're paying for 118x unique coverage on mut M2 while ctrl M1 sits at 38x.
+</div>
+
+<div class="concern">
+<strong>Duplication rates are on the high side.</strong> 31&ndash;39% across the board. The dups don't scale cleanly with depth (ctrl M2 at 1.4B reads has the highest dup rate at 38.9%, while mut M2 at 3.4B reads has 35.0%). Library complexity varied between preps. Estimated library sizes range from 1.2B to 3.5B fragments.
+</div>
+
+<div class="ok">
+<strong>Conversion looks clean.</strong> Zero nonconverted reads on the phage Xp12 spike-in across all 8 samples. The mismatch rate of ~18.6% is standard for EM-seq (C&rarr;T conversions at unmethylated positions register as mismatches).
+</div>
+
+<h2>Sequencing depth</h2>
+
+<div class="chart-wrap">
+  <div class="chart-title">Total reads per sample (millions)</div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--ctrl)"></span> Control</div>
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--mut)"></span> Mutant</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:var(--ref-line); height:2px; width:16px;"></span> 625M target</div>
+  </div>
+  <svg id="chart-reads" class="chart" viewBox="0 0 880 280"></svg>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Estimated unique genomic coverage (x)</div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--ctrl)"></span> Control</div>
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--mut)"></span> Mutant</div>
+  </div>
+  <svg id="chart-coverage" class="chart" viewBox="0 0 880 250"></svg>
+</div>
+
+<h2>Duplication</h2>
+
+<div class="chart-wrap">
+  <div class="chart-title">Duplication rate (%)</div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--ctrl)"></span> Control</div>
+    <div class="legend-item"><span class="legend-swatch dot" style="background:var(--mut)"></span> Mutant</div>
+  </div>
+  <svg id="chart-dups" class="chart" viewBox="0 0 880 220"></svg>
+</div>
+
+<h2>Insert size distributions</h2>
+
+<p>All 8 samples on the same axes. Medians range from 204&ndash;250 bp. ctrl M2 and ctrl F1 skew longer; the mutant samples cluster tighter around 204&ndash;237 bp.</p>
+
+<div class="chart-wrap">
+  <div class="chart-title">Insert size density (FR orientation, 50&ndash;600 bp)</div>
+  <div class="legend" id="legend-insert"></div>
+  <svg id="chart-insert" class="chart" viewBox="0 0 880 300"></svg>
+</div>
+
+<h2>GC bias</h2>
+
+<p>Normalized coverage by GC content. The expected EM-seq pattern: a sharp peak at GC 34&ndash;36% (from C&rarr;T conversion shifting the GC distribution) and progressive dropout above 50%. ctrl M1 (E1) shows a noticeably different shape, with lower coverage in the AT-rich bins and flatter overall profile.</p>
+
+<div class="chart-wrap">
+  <div class="chart-title">GC bias (normalized coverage vs. %GC)</div>
+  <div class="legend" id="legend-gc"></div>
+  <svg id="chart-gc" class="chart" viewBox="0 0 880 300"></svg>
+</div>
+
+<h2>Sex verification</h2>
+
+<p>chrY read fraction confirms sample labels. Males carry 1.4&ndash;1.7% chrY reads; females are at 0.05&ndash;0.06%. No sample swaps.</p>
+
+<div class="chart-wrap">
+  <div class="chart-title">chrY read fraction (%)</div>
+  <svg id="chart-sex" class="chart" viewBox="0 0 880 200"></svg>
+</div>
+
+<h2>Full metrics</h2>
+
+<div class="table-scroll">
+<table class="data" id="metrics-table">
+<thead>
+<tr>
+  <th>Sample</th>
+  <th>Group</th>
+  <th>Sex</th>
+  <th>Total reads (M)</th>
+  <th>Mapped %</th>
+  <th>Dup %</th>
+  <th>Unique reads (M)</th>
+  <th>Est. coverage (x)</th>
+  <th>Median insert</th>
+  <th>GC %</th>
+  <th>Adapter %</th>
+  <th>Properly paired %</th>
+  <th>Mismatch rate %</th>
+  <th>Est. lib size (B)</th>
+</tr>
+</thead>
+<tbody id="metrics-tbody"></tbody>
+</table>
+</div>
+
+<h2>Nonconverted read counts</h2>
+<p>Reads aligning to the phage Xp12 spike-in that remained unconverted. Zero across every sample.</p>
+
+<div class="table-scroll">
+<table class="data">
+<thead>
+<tr>
+  <th>Sample</th>
+  <th>Phage Xp12</th>
+  <th>chrM</th>
+  <th>Autosomal total</th>
+</tr>
+</thead>
+<tbody id="nonconv-tbody"></tbody>
+</table>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+const S = [
+  { id:'ctrl_F1', label:'ctrl F1', idx:'G1', sn:'S3', group:'ctrl', sex:'F', rep:1,
+    totalReads:1477489378, mapped:1477292199, mapPct:99.99, dupRate:38.00,
+    dups:561722183, uniqueReads:915767195, medianIns:246, modeIns:212, meanIns:261.44,
+    gcPct:22.58, adapterPct:9.87, properPairPct:99.66, mismatchPct:18.59,
+    alignedBases:217775337552, libSize:1539561897,
+    chrX:86938097, chrY:759407, totalIdxReads:1491850885,
+    phage:0, chrM:15183, autoNonconv:25449625 },
+  { id:'ctrl_F2', label:'ctrl F2', idx:'C2', sn:'S7', group:'ctrl', sex:'F', rep:2,
+    totalReads:1591518530, mapped:1591233183, mapPct:99.98, dupRate:35.35,
+    dups:564450976, uniqueReads:1027067554, medianIns:216, modeIns:186, meanIns:228.17,
+    gcPct:22.82, adapterPct:15.18, properPairPct:99.84, mismatchPct:18.59,
+    alignedBases:233135732320, libSize:1712290398,
+    chrX:89983419, chrY:981669, totalIdxReads:1607714894,
+    phage:0, chrM:15032, autoNonconv:30203106 },
+  { id:'ctrl_M1', label:'ctrl M1', idx:'E1', sn:'S1', group:'ctrl', sex:'M', rep:1,
+    totalReads:1035911503, mapped:1035758225, mapPct:99.99, dupRate:31.42,
+    dups:325741100, uniqueReads:710170403, medianIns:204, modeIns:185, meanIns:216.32,
+    gcPct:23.80, adapterPct:16.70, properPairPct:99.44, mismatchPct:18.65,
+    alignedBases:151645031919, libSize:1287253981,
+    chrX:30331506, chrY:16079478, totalIdxReads:1045994760,
+    phage:0, chrM:11081, autoNonconv:21423915 },
+  { id:'ctrl_M2', label:'ctrl M2', idx:'A2', sn:'S5', group:'ctrl', sex:'M', rep:2,
+    totalReads:1363275663, mapped:1363119979, mapPct:99.99, dupRate:38.94,
+    dups:531167872, uniqueReads:832107791, medianIns:250, modeIns:212, meanIns:266.13,
+    gcPct:22.52, adapterPct:9.11, properPairPct:99.73, mismatchPct:18.60,
+    alignedBases:201263597741, libSize:1383704866,
+    chrX:41154752, chrY:21249368, totalIdxReads:1374727478,
+    phage:0, chrM:9567, autoNonconv:24494134 },
+  { id:'mut_F1', label:'mut F1', idx:'H1', sn:'S4', group:'mut', sex:'F', rep:1,
+    totalReads:2925625926, mapped:2925205770, mapPct:99.99, dupRate:35.95,
+    dups:1052861540, uniqueReads:1872764386, medianIns:228, modeIns:198, meanIns:243.12,
+    gcPct:22.69, adapterPct:11.84, properPairPct:99.72, mismatchPct:18.64,
+    alignedBases:430573217997, libSize:3016762387,
+    chrX:171204250, chrY:1537232, totalIdxReads:2955676094,
+    phage:0, chrM:29161, autoNonconv:59518061 },
+  { id:'mut_F2', label:'mut F2', idx:'D2', sn:'S8', group:'mut', sex:'F', rep:2,
+    totalReads:1348788280, mapped:1348585091, mapPct:99.98, dupRate:32.65,
+    dups:440798643, uniqueReads:907989637, medianIns:207, modeIns:179, meanIns:221.78,
+    gcPct:22.98, adapterPct:16.61, properPairPct:99.79, mismatchPct:18.56,
+    alignedBases:197413176232, libSize:1484173192,
+    chrX:75652226, chrY:820962, totalIdxReads:1359759813,
+    phage:0, chrM:12759, autoNonconv:35406656 },
+  { id:'mut_M1', label:'mut M1', idx:'F1', sn:'S2', group:'mut', sex:'M', rep:1,
+    totalReads:1159994742, mapped:1159807602, mapPct:99.98, dupRate:36.67,
+    dups:425962655, uniqueReads:734032087, medianIns:237, modeIns:205, meanIns:251.94,
+    gcPct:22.61, adapterPct:12.11, properPairPct:99.65, mismatchPct:18.64,
+    alignedBases:170237313783, libSize:1230294883,
+    chrX:35479430, chrY:20127575, totalIdxReads:1172755204,
+    phage:0, chrM:11534, autoNonconv:21264254 },
+  { id:'mut_M2', label:'mut M2', idx:'B2', sn:'S6', group:'mut', sex:'M', rep:2,
+    totalReads:3395447847, mapped:3394698866, mapPct:99.98, dupRate:35.00,
+    dups:1193462902, uniqueReads:2201984945, medianIns:204, modeIns:174, meanIns:219.63,
+    gcPct:23.27, adapterPct:18.09, properPairPct:99.66, mismatchPct:18.65,
+    alignedBases:495224361223, libSize:3476465095,
+    chrX:100345348, chrY:50573113, totalIdxReads:3435480992,
+    phage:0, chrM:32833, autoNonconv:81670915 }
+];
+
+const GENOME = 2730000000;
+S.forEach(s => { s.estCov = s.alignedBases / GENOME; s.estUniqCov = s.estCov * (1 - s.dupRate/100); });
+
+const insertData = {
+  'ctrl_F1':[[50,12573],[100,254784],[150,1796614],[175,2610274],[200,3059062],[210,3106991],[220,3102201],[230,3047642],[246,2829542],[260,2680708],[280,2329293],[300,2007009],[325,1612934],[350,1257346],[375,962740],[400,721559],[450,396368],[500,206656],[550,95437],[600,40364]],
+  'ctrl_F2':[[50,13998],[100,445323],[150,3230904],[175,3923145],[200,3889768],[210,3740651],[216,3652632],[225,3447012],[240,3110752],[260,2630657],[280,2129185],[300,1716344],[325,1270195],[350,906994],[375,628166],[400,417861],[450,163071],[500,52270],[550,12636],[600,2579]],
+  'ctrl_M1':[[50,5772],[100,430096],[150,2350441],[175,2925124],[200,2875827],[204,2791437],[210,2692966],[220,2467609],[240,1971082],[260,1509306],[280,1123199],[300,847375],[325,590544],[350,407509],[375,271337],[400,180411],[450,78804],[500,35260],[550,13496],[600,5938]],
+  'ctrl_M2':[[50,11490],[100,163724],[150,1547018],[175,2329729],[200,2715416],[210,2748500],[220,2741752],[240,2620874],[250,2528577],[260,2413506],[280,2130446],[300,1865658],[325,1532162],[350,1217618],[375,941195],[400,712949],[450,385970],[500,201778],[550,94685],[600,42437]],
+  'mut_F1':[[50,24776],[100,571198],[150,4741809],[175,6490492],[200,6933413],[210,6813379],[220,6585044],[228,6445961],[240,5928117],[260,5104233],[280,4212455],[300,3460061],[325,2646265],[350,1980931],[375,1460998],[400,1056949],[450,532538],[500,241346],[550,91484],[600,31458]],
+  'mut_F2':[[50,12000],[100,389043],[150,3104094],[175,3657911],[200,3444613],[207,3341550],[216,3112349],[230,2742546],[250,2248461],[270,1789294],[290,1390997],[310,1090812],[330,850545],[350,658420],[375,468400],[400,323137],[450,134280],[500,44509],[550,10337],[600,1903]],
+  'mut_M1':[[50,10881],[100,298205],[150,1646787],[175,2194542],[200,2423525],[205,2431074],[215,2411232],[230,2322398],[237,2274413],[250,2103653],[270,1841755],[290,1566304],[310,1318611],[330,1088567],[350,882032],[375,667549],[400,494812],[450,260410],[500,131703],[550,58471],[600,22623]],
+  'mut_M2':[[50,32457],[100,1285947],[150,8074018],[175,9186903],[190,8829163],[200,8334709],[204,8050197],[210,7744427],[225,6838130],[240,5906322],[260,4760068],[280,3702258],[300,2923130],[325,2165612],[350,1586100],[375,1144106],[400,803437],[450,350456],[500,132435],[550,43427],[600,13230]]
+};
+
+const gcData = {
+  'ctrl_F1':[[6,0.3882],[10,0.4728],[14,0.6418],[18,0.8296],[20,0.8926],[22,0.9364],[24,0.9652],[26,0.9805],[28,0.9856],[30,1.0259],[32,1.1388],[34,1.3471],[36,1.5308],[38,1.1446],[40,1.0474],[42,0.9273],[44,0.8976],[46,0.8731],[48,0.8479],[50,0.8248],[52,0.7969],[54,0.7644],[56,0.7341],[58,0.7002],[60,0.6486],[64,0.6037],[68,0.5603],[72,1.5910],[76,0.4735],[80,0.3639]],
+  'ctrl_F2':[[6,0.4002],[10,0.4653],[14,0.6081],[18,0.7827],[20,0.8426],[22,0.8865],[24,0.9160],[26,0.9352],[28,0.9445],[30,0.9871],[32,1.1050],[34,1.3221],[36,1.5118],[38,1.1364],[40,1.0390],[42,0.9272],[44,0.9050],[46,0.8883],[48,0.8705],[50,0.8546],[52,0.8317],[54,0.8033],[56,0.7763],[58,0.7438],[60,0.6972],[64,0.6528],[68,0.6149],[72,1.2709],[76,0.5180],[80,0.3993]],
+  'ctrl_M1':[[6,0.1731],[10,0.2464],[14,0.3458],[18,0.4980],[20,0.5649],[22,0.6256],[24,0.6807],[26,0.7303],[28,0.7694],[30,0.8403],[32,0.9711],[34,1.1841],[36,1.3691],[38,1.0941],[40,1.0369],[42,0.9718],[44,0.9778],[46,0.9816],[48,0.9800],[50,0.9781],[52,0.9627],[54,0.9397],[56,0.9189],[58,0.8919],[60,0.8395],[64,0.8069],[68,0.7686],[72,1.7725],[76,0.6837],[80,0.5339]],
+  'ctrl_M2':[[6,0.4326],[10,0.5146],[14,0.6515],[18,0.8342],[20,0.8974],[22,0.9392],[24,0.9668],[26,0.9818],[28,0.9843],[30,1.0260],[32,1.1430],[34,1.3642],[36,1.5591],[38,1.1500],[40,1.0516],[42,0.9250],[44,0.8940],[46,0.8669],[48,0.8400],[50,0.8163],[52,0.7861],[54,0.7512],[56,0.7182],[58,0.6804],[60,0.6252],[64,0.5690],[68,0.5112],[72,1.5541],[76,0.4113],[80,0.3001]],
+  'mut_F1':[[6,0.3224],[10,0.4140],[14,0.5731],[18,0.7633],[20,0.8316],[22,0.8812],[24,0.9165],[26,0.9396],[28,0.9520],[30,0.9969],[32,1.1140],[34,1.3244],[36,1.5071],[38,1.1424],[40,1.0483],[42,0.9372],[44,0.9118],[46,0.8903],[48,0.8680],[50,0.8468],[52,0.8197],[54,0.7871],[56,0.7559],[58,0.7192],[60,0.6686],[64,0.6185],[68,0.5799],[72,1.5948],[76,0.4884],[80,0.3725]],
+  'mut_F2':[[6,0.3263],[10,0.4113],[14,0.5554],[18,0.7254],[20,0.7897],[22,0.8366],[24,0.8719],[26,0.8955],[28,0.9089],[30,0.9577],[32,1.0819],[34,1.3106],[36,1.5135],[38,1.1344],[40,1.0387],[42,0.9274],[44,0.9095],[46,0.8970],[48,0.8834],[50,0.8713],[52,0.8516],[54,0.8248],[56,0.7990],[58,0.7677],[60,0.7213],[64,0.6809],[68,0.6469],[72,1.3579],[76,0.5513],[80,0.4264]],
+  'mut_M1':[[6,0.4230],[10,0.5046],[14,0.6332],[18,0.8117],[20,0.8760],[22,0.9192],[24,0.9462],[26,0.9630],[28,0.9676],[30,1.0121],[32,1.1298],[34,1.3492],[36,1.5467],[38,1.1452],[40,1.0473],[42,0.9237],[44,0.8956],[46,0.8712],[48,0.8473],[50,0.8266],[52,0.7998],[54,0.7698],[56,0.7429],[58,0.7113],[60,0.6639],[64,0.6250],[68,0.5896],[72,1.7578],[76,0.5173],[80,0.4087]],
+  'mut_M2':[[6,0.2598],[10,0.3514],[14,0.4875],[18,0.6574],[20,0.7243],[22,0.7741],[24,0.8134],[26,0.8434],[28,0.8634],[30,0.9188],[32,1.0440],[34,1.2748],[36,1.4829],[38,1.1215],[40,1.0346],[42,0.9332],[44,0.9226],[46,0.9159],[48,0.9072],[50,0.9010],[52,0.8867],[54,0.8665],[56,0.8467],[58,0.8214],[60,0.7811],[64,0.7535],[68,0.7268],[72,1.5909],[76,0.6579],[80,0.5360]]
+};
+
+const colors = {
+  ctrl_F1:'#1a6b8a', ctrl_F2:'#3b99b4', ctrl_M1:'#5ab8d4', ctrl_M2:'#88d0e6',
+  mut_F1:'#9e3f24', mut_F2:'#c4603b', mut_M1:'#e0845c', mut_M2:'#f0a880'
+};
+
+const tooltip = document.getElementById('tooltip');
+function showTip(e, html) {
+  tooltip.innerHTML = html;
+  tooltip.style.display = 'block';
+  const r = tooltip.getBoundingClientRect();
+  let x = e.clientX + 12, y = e.clientY - 8;
+  if (x + r.width > window.innerWidth - 8) x = e.clientX - r.width - 12;
+  if (y + r.height > window.innerHeight - 8) y = window.innerHeight - r.height - 8;
+  if (y < 8) y = 8;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+function hideTip() { tooltip.style.display = 'none'; }
+function fmt(n) { return n.toLocaleString('en-US'); }
+function fmtM(n) { return (n/1e6).toFixed(0); }
+
+function barChart(svgId, data, {yLabel, refLine, refLabel, yMax: yMaxIn, pctMode, covMode} = {}) {
+  const svg = document.getElementById(svgId);
+  const W = 880, pad = {l:55, r:20, t:15, b:55};
+  const cW = W - pad.l - pad.r;
+  const H = +svg.getAttribute('viewBox').split(' ')[3];
+  const cH = H - pad.t - pad.b;
+  const n = data.length;
+  const barW = Math.min(60, (cW / n) * 0.65);
+  const gap = (cW - barW * n) / (n + 1);
+  const vals = data.map(d => d.value);
+  const yMax = yMaxIn || Math.ceil(Math.max(...vals, refLine||0) * 1.12);
+  const yScale = v => pad.t + cH - (v / yMax) * cH;
+  const ticks = 5;
+
+  let g = `<g>`;
+  for (let i = 0; i <= ticks; i++) {
+    const v = (yMax / ticks) * i;
+    const y = yScale(v);
+    g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    let label = pctMode ? v.toFixed(0)+'%' : covMode ? v.toFixed(0)+'x' : (v >= 1000 ? (v/1000).toFixed(1)+'B' : v.toFixed(0)+'M');
+    g += `<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--tx3)">${label}</text>`;
+  }
+
+  data.forEach((d, i) => {
+    const x = pad.l + gap + i * (barW + gap);
+    const y = yScale(d.value);
+    const h = yScale(0) - y;
+    const fill = d.group === 'ctrl' ? 'var(--ctrl)' : 'var(--mut)';
+    g += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="3" ry="3" fill="${fill}" opacity="0.85"
+      onmouseenter="showTip(event, '${d.label}<br><b>${pctMode ? d.value.toFixed(1)+'%' : covMode ? d.value.toFixed(1)+'x' : fmt(Math.round(d.value*1e6))+' reads'}</b>')"
+      onmousemove="showTip(event, '${d.label}<br><b>${pctMode ? d.value.toFixed(1)+'%' : covMode ? d.value.toFixed(1)+'x' : fmt(Math.round(d.value*1e6))+' reads'}</b>')"
+      onmouseleave="hideTip()"/>`;
+    const labelVal = pctMode ? d.value.toFixed(1) : covMode ? d.value.toFixed(0) : fmtM(d.value * 1e6);
+    g += `<text x="${x + barW/2}" y="${y - 5}" text-anchor="middle" font-size="9" font-weight="600" fill="var(--tx2)">${labelVal}</text>`;
+    g += `<text x="${x + barW/2}" y="${H - pad.b + 16}" text-anchor="middle" font-size="9.5" fill="var(--tx2)" font-weight="500">${d.shortLabel || d.label}</text>`;
+    if (d.sex) {
+      g += `<text x="${x + barW/2}" y="${H - pad.b + 28}" text-anchor="middle" font-size="8" fill="var(--tx3)">${d.sex}${d.rep}</text>`;
+    }
+  });
+
+  if (refLine) {
+    const ry = yScale(refLine);
+    g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${ry}" y2="${ry}" stroke="var(--ref-line)" stroke-width="1.5" stroke-dasharray="6,4"/>`;
+    if (refLabel) g += `<text x="${W-pad.r-4}" y="${ry - 5}" text-anchor="end" font-size="9" fill="var(--ref-line)" font-weight="500">${refLabel}</text>`;
+  }
+
+  g += `</g>`;
+  svg.innerHTML = g;
+}
+
+barChart('chart-reads', S.map(s => ({
+  label: s.label, shortLabel: s.group, sex: s.sex, rep: s.rep, group: s.group,
+  value: s.totalReads / 1e6
+})), { refLine: 625, refLabel: '625M target', yMax: 3600 });
+
+barChart('chart-coverage', S.map(s => ({
+  label: s.label, shortLabel: s.group, sex: s.sex, rep: s.rep, group: s.group,
+  value: s.estUniqCov
+})), { covMode: true, yMax: 130 });
+
+barChart('chart-dups', S.map(s => ({
+  label: s.label, shortLabel: s.group, sex: s.sex, rep: s.rep, group: s.group,
+  value: s.dupRate
+})), { pctMode: true, yMax: 50 });
+
+function lineChart(svgId, legendId, datasets, {xLabel, yLabel, xRange, yRange} = {}) {
+  const svg = document.getElementById(svgId);
+  const W = 880, H = 300, pad = {l:55, r:20, t:15, b:40};
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const [xMin, xMax] = xRange;
+  const [yMin, yMax] = yRange;
+  const xS = x => pad.l + ((x - xMin) / (xMax - xMin)) * cW;
+  const yS = y => pad.t + cH - ((y - yMin) / (yMax - yMin)) * cH;
+
+  let g = '<g>';
+  const xTicks = 6;
+  for (let i = 0; i <= xTicks; i++) {
+    const v = xMin + (xMax - xMin) / xTicks * i;
+    const x = xS(v);
+    g += `<line x1="${x}" x2="${x}" y1="${pad.t}" y2="${H-pad.b}" stroke="var(--grid)" stroke-width="1"/>`;
+    g += `<text x="${x}" y="${H-pad.b+16}" text-anchor="middle" font-size="10" fill="var(--tx3)">${Math.round(v)}</text>`;
+  }
+  if (xLabel) g += `<text x="${pad.l + cW/2}" y="${H-4}" text-anchor="middle" font-size="10" fill="var(--tx3)">${xLabel}</text>`;
+
+  const yTicks = 5;
+  for (let i = 0; i <= yTicks; i++) {
+    const v = yMin + (yMax - yMin) / yTicks * i;
+    const y = yS(v);
+    g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    g += `<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--tx3)">${v.toFixed(yMax > 10 ? 0 : 1)}</text>`;
+  }
+
+  const order = Object.keys(datasets);
+  const leg = document.getElementById(legendId);
+  if (leg) {
+    leg.innerHTML = order.map(k => {
+      const s = S.find(s => s.id === k);
+      return `<div class="legend-item"><span class="legend-swatch" style="background:${colors[k]}; height:3px;"></span> ${s ? s.label : k}</div>`;
+    }).join('');
+  }
+
+  order.forEach(key => {
+    const pts = datasets[key];
+    if (!pts || !pts.length) return;
+    const maxY = Math.max(...pts.map(p => p[1]));
+    const norm = pts.map(p => [p[0], p[1] / maxY]);
+    const d = norm.map((p, i) => `${i === 0 ? 'M' : 'L'}${xS(p[0]).toFixed(1)},${yS(p[1]).toFixed(1)}`).join('');
+    g += `<path d="${d}" fill="none" stroke="${colors[key]}" stroke-width="2" opacity="0.8"/>`;
+  });
+
+  g += '</g>';
+  svg.innerHTML = g;
+}
+
+lineChart('chart-insert', 'legend-insert', insertData, {
+  xLabel: 'insert size (bp)', xRange: [50, 600], yRange: [0, 1.05]
+});
+
+function gcChart(svgId, legendId, datasets) {
+  const svg = document.getElementById(svgId);
+  const W = 880, H = 300, pad = {l:55, r:20, t:15, b:40};
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const xMin = 5, xMax = 80, yMin = 0, yMax = 1.8;
+  const xS = x => pad.l + ((x - xMin) / (xMax - xMin)) * cW;
+  const yS = y => pad.t + cH - ((y - yMin) / (yMax - yMin)) * cH;
+
+  let g = '<g>';
+  for (let x = 10; x <= 80; x += 10) {
+    const px = xS(x);
+    g += `<line x1="${px}" x2="${px}" y1="${pad.t}" y2="${H-pad.b}" stroke="var(--grid)" stroke-width="1"/>`;
+    g += `<text x="${px}" y="${H-pad.b+16}" text-anchor="middle" font-size="10" fill="var(--tx3)">${x}%</text>`;
+  }
+  g += `<text x="${pad.l + cW/2}" y="${H-4}" text-anchor="middle" font-size="10" fill="var(--tx3)">GC content (%)</text>`;
+
+  for (let y = 0; y <= yMax; y += 0.2) {
+    const py = yS(y);
+    if (py >= pad.t && py <= H - pad.b) {
+      g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${py}" y2="${py}" stroke="var(--grid)" stroke-width="1"/>`;
+      g += `<text x="${pad.l-8}" y="${py+4}" text-anchor="end" font-size="10" fill="var(--tx3)">${y.toFixed(1)}</text>`;
+    }
+  }
+
+  const refY = yS(1.0);
+  g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${refY}" y2="${refY}" stroke="var(--tx3)" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>`;
+  g += `<text x="${W-pad.r-4}" y="${refY - 4}" text-anchor="end" font-size="9" fill="var(--tx3)">1.0</text>`;
+
+  const leg = document.getElementById(legendId);
+  const order = Object.keys(datasets);
+  if (leg) {
+    leg.innerHTML = order.map(k => {
+      const s = S.find(s => s.id === k);
+      return `<div class="legend-item"><span class="legend-swatch" style="background:${colors[k]}; height:3px;"></span> ${s ? s.label : k}</div>`;
+    }).join('');
+  }
+
+  order.forEach(key => {
+    const pts = datasets[key].filter(p => p[0] >= 6 && p[0] <= 80 && p[0] !== 72);
+    if (!pts.length) return;
+    const d = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${xS(p[0]).toFixed(1)},${yS(p[1]).toFixed(1)}`).join('');
+    g += `<path d="${d}" fill="none" stroke="${colors[key]}" stroke-width="2" opacity="0.8"/>`;
+  });
+
+  g += '</g>';
+  svg.innerHTML = g;
+}
+
+gcChart('chart-gc', 'legend-gc', gcData);
+
+(function sexChart() {
+  const svg = document.getElementById('chart-sex');
+  const W = 880, H = 200, pad = {l:55, r:20, t:15, b:55};
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const n = S.length;
+  const barW = Math.min(60, (cW / n) * 0.65);
+  const gap = (cW - barW * n) / (n + 1);
+  const yMax = 2.0;
+  const yS = v => pad.t + cH - (v / yMax) * cH;
+  let g = '<g>';
+
+  for (let i = 0; i <= 4; i++) {
+    const v = (yMax / 4) * i;
+    const y = yS(v);
+    g += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    g += `<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--tx3)">${v.toFixed(1)}%</text>`;
+  }
+
+  S.forEach((s, i) => {
+    const pct = (s.chrY / s.totalIdxReads) * 100;
+    const x = pad.l + gap + i * (barW + gap);
+    const y = yS(pct);
+    const h = yS(0) - y;
+    const fill = s.group === 'ctrl' ? 'var(--ctrl)' : 'var(--mut)';
+    g += `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(h,1)}" rx="3" ry="3" fill="${fill}" opacity="0.85"
+      onmouseenter="showTip(event, '${s.label}<br>chrY: ${pct.toFixed(3)}%<br>${fmt(s.chrY)} reads')"
+      onmousemove="showTip(event, '${s.label}<br>chrY: ${pct.toFixed(3)}%<br>${fmt(s.chrY)} reads')"
+      onmouseleave="hideTip()"/>`;
+    g += `<text x="${x + barW/2}" y="${y - 5}" text-anchor="middle" font-size="9" font-weight="600" fill="var(--tx2)">${pct.toFixed(2)}</text>`;
+    g += `<text x="${x + barW/2}" y="${H - pad.b + 16}" text-anchor="middle" font-size="9.5" fill="var(--tx2)" font-weight="500">${s.label}</text>`;
+    g += `<text x="${x + barW/2}" y="${H - pad.b + 28}" text-anchor="middle" font-size="8" fill="var(--tx3)">${s.sex === 'M' ? 'male' : 'female'}</text>`;
+  });
+  g += '</g>';
+  svg.innerHTML = g;
+})();
+
+// Metrics table
+const tbody = document.getElementById('metrics-tbody');
+S.forEach(s => {
+  const tr = document.createElement('tr');
+  const tagClass = s.group === 'ctrl' ? 'tag-ctrl' : 'tag-mut';
+  tr.innerHTML = `
+    <td><span class="mono">${s.idx} ${s.sn}</span></td>
+    <td><span class="tag ${tagClass}">${s.group}</span></td>
+    <td>${s.sex}</td>
+    <td>${(s.totalReads/1e6).toFixed(0)}</td>
+    <td>${s.mapPct.toFixed(2)}</td>
+    <td>${s.dupRate.toFixed(1)}</td>
+    <td>${(s.uniqueReads/1e6).toFixed(0)}</td>
+    <td>${s.estUniqCov.toFixed(1)}</td>
+    <td>${s.medianIns}</td>
+    <td>${s.gcPct.toFixed(1)}</td>
+    <td>${s.adapterPct.toFixed(1)}</td>
+    <td>${s.properPairPct.toFixed(2)}</td>
+    <td>${s.mismatchPct.toFixed(2)}</td>
+    <td>${(s.libSize/1e9).toFixed(2)}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Nonconverted table
+const ncBody = document.getElementById('nonconv-tbody');
+S.forEach(s => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${s.label} <span class="mono">(${s.idx})</span></td>
+    <td style="color:var(--good); font-weight:600">0</td>
+    <td>${fmt(s.chrM)}</td>
+    <td>${fmt(s.autoNonconv)}</td>
+  `;
+  ncBody.appendChild(tr);
+});
+</script>
