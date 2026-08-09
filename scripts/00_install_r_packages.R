@@ -11,10 +11,12 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 pkgs <- c(
   "edgeR", "limma", "GenomicRanges", "IRanges", "rtracklayer",
   "bsseq", "dmrseq", "BiocParallel",
-  "clusterProfiler", "fgsea",
+  "clusterProfiler", "enrichplot", "DOSE", "fgsea", "goseq",
+  "ChIPseeker", "TxDb.Mmusculus.UCSC.mm10.knownGene",
   "org.Mm.eg.db", "GO.db", "AnnotationDbi",
   "data.table", "optparse",
-  "ggplot2", "patchwork", "ggrepel",
+  "here", "readr", "dplyr", "tidyr",
+  "ggplot2", "patchwork", "ggrepel", "svglite",
   "clinfun"
 )
 
