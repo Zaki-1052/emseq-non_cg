@@ -1,0 +1,9 @@
+"quadrant","n_total_genes","percent_total_genes","n_sig_genes","percent_sig_genes","label","x","y"
+"Q1 (MeCP2 up / H2A up)",2001,27.1,991,70.6,"Total: n=2001 (27.1%)
+Sig: n=991 (70.6%)",3.3543783225,1.9205551656
+"Q2 (MeCP2 down / H2A up)",2591,35.2,97,6.9,"Total: n=2591 (35.2%)
+Sig: n=97 (6.9%)",-1.1181261075,1.9205551656
+"Q3 (MeCP2 down / H2A down)",2312,31.4,267,19,"Total: n=2312 (31.4%)
+Sig: n=267 (19%)",-1.1181261075,-1.9205551656
+"Q4 (MeCP2 up / H2A down)",467,6.3,48,3.4,"Total: n=467 (6.3%)
+Sig: n=48 (3.4%)",3.3543783225,-1.9205551656

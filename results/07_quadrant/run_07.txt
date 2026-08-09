@@ -1,0 +1,327 @@
+here() starts at /Users/zakiralibhai/emseq
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: generics
+
+Attaching package: ‘generics’
+
+The following objects are masked from ‘package:base’:
+
+    as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,
+    setequal, union
+
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, saveRDS, table, tapply, unique,
+    unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:utils’:
+
+    findMatches
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: Seqinfo
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following object is masked from ‘package:Seqinfo’:
+
+    intersect
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:generics’:
+
+    explain
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+
+ChIPseeker v1.44.0 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+Qianwen Wang, Ming Li, Tianzhi Wu, Li Zhan, Lin Li, Meijun Chen, Wenqin
+Xie, Zijing Xie, Erqiang Hu, Shuangbin Xu, Guangchuang Yu. Exploring
+epigenomic datasets by ChIPseeker. Current Protocols. 2022, 2(10): e585
+Loading required package: GenomicFeatures
+Loading required package: AnnotationDbi
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘AnnotationDbi’
+
+The following object is masked from ‘package:dplyr’:
+
+    select
+
+
+clusterProfiler v4.16.0 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+G Yu. Thirteen years of clusterProfiler. The Innovation. 2024,
+5(6):100722
+
+Attaching package: ‘clusterProfiler’
+
+The following object is masked from ‘package:AnnotationDbi’:
+
+    select
+
+The following object is masked from ‘package:IRanges’:
+
+    slice
+
+The following object is masked from ‘package:S4Vectors’:
+
+    rename
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+enrichplot v1.28.4 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+Guangchuang Yu, Li-Gen Wang, Yanyan Han and Qing-Yu He.
+clusterProfiler: an R package for comparing biological themes among
+gene clusters. OMICS: A Journal of Integrative Biology. 2012,
+16(5):284-287
+DOSE v4.2.0 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+Guangchuang Yu, Li-Gen Wang, Guang-Rong Yan, Qing-Yu He. DOSE: an
+R/Bioconductor package for Disease Ontology Semantic and Enrichment
+analysis. Bioinformatics. 2015, 31(4):608-609
+Loading required package: BiasedUrn
+Loading required package: geneLenDataBase
+
+Attaching package: ‘geneLenDataBase’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    unfactor
+
+MeCP2 peaks loaded: 36804 
+H2AK119Ub peaks loaded: 41295 
+>> preparing features information...		 2026-08-09 14:59:07 
+>> identifying nearest features...		 2026-08-09 14:59:07 
+>> calculating distance from peak to TSS...	 2026-08-09 14:59:08 
+>> assigning genomic annotation...		 2026-08-09 14:59:08 
+>> adding gene annotation...			 2026-08-09 14:59:15 
+'select()' returned 1:many mapping between keys and columns
+>> assigning chromosome lengths			 2026-08-09 14:59:16 
+>> done...					 2026-08-09 14:59:16 
+>> preparing features information...		 2026-08-09 14:59:16 
+>> identifying nearest features...		 2026-08-09 14:59:16 
+>> calculating distance from peak to TSS...	 2026-08-09 14:59:16 
+>> assigning genomic annotation...		 2026-08-09 14:59:16 
+>> adding gene annotation...			 2026-08-09 14:59:17 
+'select()' returned 1:many mapping between keys and columns
+>> assigning chromosome lengths			 2026-08-09 14:59:17 
+>> done...					 2026-08-09 14:59:17 
+MeCP2 peaks after gene-body filter: 27401 
+H2AK119Ub peaks after gene-body filter: 29843 
+Genes with peaks in both marks: 7371 
+Total genes: 7371 
+Significant genes (sig peak in both marks): 1403 
+
+	Spearman's rank correlation rho
+
+data:  gene_df$mecp2_Fold and gene_df$h2a_Fold
+S = 4.1264e+10, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.3817784 
+
+# A tibble: 4 × 6
+  quadrant n_total_genes percent_total_genes n_sig_genes percent_sig_genes label
+  <chr>            <int>               <dbl>       <int>             <dbl> <chr>
+1 Q1 (MeC…          2001                27.1         991              70.6 "Tot…
+2 Q2 (MeC…          2591                35.2          97               6.9 "Tot…
+3 Q3 (MeC…          2312                31.4         267              19   "Tot…
+4 Q4 (MeC…           467                 6.3          48               3.4 "Tot…
+GO-eligible significant genes (|FC| >= 0 in both marks): 1403
+Significant genes below FC threshold: 0
+
+Overlapping peak pairs (any overlap): 22237 
+Overlapping loci after >= 50% reciprocal filter: 10536 
+
+Overlap loci quadrant breakdown (significant):
+# A tibble: 4 × 4
+  quadrant                       n percent label             
+  <chr>                      <int>   <dbl> <chr>             
+1 Q1 (MeCP2 up / H2A up)      1649   15.6  "n = 1649\n15.65%"
+2 Q2 (MeCP2 down / H2A up)       4    0.04 "n = 4\n0.04%"    
+3 Q3 (MeCP2 down / H2A down)   145    1.38 "n = 145\n1.38%"  
+4 Q4 (MeCP2 up / H2A down)       1    0.01 "n = 1\n0.01%"    
+Genes with at least one physically overlapping peak pair: 4688 of 7371 
+
+Peak count vs. significance (Wilcoxon):
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  n_total_peaks by sig
+W = 1151686, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+  66 genes were dropped because they have exons located on both strands of the
+  same reference sequence or on more than one reference sequence, so cannot be
+  represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a GRangesList
+  object, or use suppressMessages() to suppress this message.
+'select()' returned 1:1 mapping between keys and columns
+
+Gene length vs. significance (Wilcoxon):
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  gene_length by sig
+W = 2506500, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+Warning messages:
+1: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.38 | p = <1e-10' in 'mbcsToSbcs': for ρ (U+03C1)
+2: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'Aggregation: median FC of significant peaks | GO filter: |FC| ≥ 0' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+Warning message:
+In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'n = 10536 physically overlapping loci (≥50% reciprocal overlap)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+'select()' returned 1:1 mapping between keys and columns
+
+GO universe size (Entrez IDs): 7371 
+
+Q1: 991 GO-eligible genes
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 991 
+  enrichGO BP: 3 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 295 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q2: 97 GO-eligible genes
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 97 
+  enrichGO BP: 7 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 295 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q3: 267 GO-eligible genes
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 267 
+  enrichGO BP: 0 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 295 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q4: 48 GO-eligible genes
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 48 
+  enrichGO BP: 0 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 295 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+Warning messages:
+1: In pcls(G) : initial point very close to some inequality constraints
+2: In pcls(G) : initial point very close to some inequality constraints
+3: In pcls(G) : initial point very close to some inequality constraints
+4: In pcls(G) : initial point very close to some inequality constraints
+
+--- Saving outputs ---
+  Saved: quadrant_plot_v2/{pdf,svg,png,jpg}
+Warning messages:
+1: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.38 | p = <1e-10' in 'mbcsToSbcs': for ρ (U+03C1)
+2: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'Aggregation: median FC of significant peaks | GO filter: |FC| ≥ 0' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+  Saved: overlap_plot_v2/{pdf,svg,png,jpg}
+Warning message:
+In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'n = 10536 physically overlapping loci (≥50% reciprocal overlap)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+  Saved: diagnostic_peak_count_vs_sig/{pdf,svg,png,jpg}
+  Saved: diagnostic_gene_length_vs_sig/{pdf,svg,png,jpg}
+  Saved: GO_enrichGO_Q1_BP_dotplot/{pdf,svg,png,jpg}
+  Saved: GO_enrichGO_Q2_BP_dotplot/{pdf,svg,png,jpg}
+
+Done.

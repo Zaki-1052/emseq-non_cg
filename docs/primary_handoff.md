@@ -1,7 +1,3 @@
-
-
----
-
 ## Non-CG methylation analysis in BAP1-KO cerebellum — context and goals
 
 ### The system
@@ -55,7 +51,3 @@ Eight EM-seq samples from BAP1-KO and wildtype adult mouse cerebellum (n = 4 per
 ### What the non-CG analysis would test
 
 Whether BAP1 loss — through H2AK119ub accumulation and its downstream effects on DNMT3A recruitment and/or TET access — alters gene-body mCA rates at neuronal and synaptic genes. If it does, this would be the first evidence connecting the Polycomb/H2AK119ub axis to the mCA/MeCP2 gene-regulation system, and would link the lab's existing 5mC/5hmC findings and Hi-C loop remodeling to a third, functionally distinct epigenetic layer.
-
----
-
-That should give whatever you feed it enough context to reason about the data and plan appropriately. I left methodology out entirely — the only "how" in there is the gene-body aggregation rationale, which is more of a constraint on what's feasible than a plan.

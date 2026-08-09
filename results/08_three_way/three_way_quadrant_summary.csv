@@ -1,0 +1,5 @@
+"quadrant","n_total","n_mch_sig","n_mch_down","n_mch_up"
+"Q1 (MeCP2 up / H2A up)",1620,745,347,398
+"Q2 (MeCP2 down / H2A up)",2289,865,817,48
+"Q3 (MeCP2 down / H2A down)",2038,992,990,2
+"Q4 (MeCP2 up / H2A down)",404,141,132,9

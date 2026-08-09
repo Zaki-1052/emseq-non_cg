@@ -1,0 +1,9 @@
+"quadrant_h2a","n_total_genes","percent_total_genes","n_sig_genes","percent_sig_genes","label"
+"Q1 (up / up)",1140,17.9,435,19.9,"Total: n=1140 (17.9%)
+Sig: n=435 (19.9%)"
+"Q2 (down / up)",220,3.5,8,0.4,"Total: n=220 (3.5%)
+Sig: n=8 (0.4%)"
+"Q3 (down / down)",2222,35,838,38.4,"Total: n=2222 (35%)
+Sig: n=838 (38.4%)"
+"Q4 (up / down)",2769,43.6,902,41.3,"Total: n=2769 (43.6%)
+Sig: n=902 (41.3%)"
