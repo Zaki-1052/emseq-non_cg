@@ -1,0 +1,39 @@
+=========================================
+EM-seq: mCH integration analyses
+=========================================
+Job ID: 53095763
+Node: exp-3-33
+Start time: Fri Aug  7 18:36:59 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53095763
+Diff results:     /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/mch_differential_results.tsv
+K119ub consensus: /expanse/lustre/projects/csd940/zalibhai/emseq/references/K119ub_consensus_v3.bed
+K119ub DiffBind:  /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/peaks/diffbind/K119ub_diffbind_results_summit_appended_ap.txt
+MeCP2 consensus:  /expanse/lustre/projects/csd940/zalibhai/emseq/references/mecp2-peaks/MeCP2_adult_concensus_peakset_Conc4.txt
+MeCP2 DiffBind:   /expanse/lustre/projects/csd940/zalibhai/emseq/references/mecp2-peaks/260804_MeCP2_adult_diffbind_results_filtered_Conc4.txt
+Neuronal genes:   /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/plots/visualizations/tables/72_neuronal_gene_set_go_derived.tsv
+CG mC DMR:        /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_mc_control__mutant_20260402_191818.bed
+CG hmC DMR:       /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_hmc_control__mutant_20260402_191818.bed
+
+=== mCH Integration Analyses ===
+
+Differential results loaded: 21097 genes
+
+=== 4a. K119ub Overlap ===
+  K119ub consensus peaks: 34088 
+  Fisher's exact: OR=8.377, p=3.54e-173
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/k119ub_overlap_fisher.tsv 
+  K119ub DiffBind peaks: 41392 
+  Gained: 16715  Lost: 5097  Unchanged: 19580 
+Error in set(x, j = name, value = value) : 
+  Supplied 21846 items to be assigned to 21097 items of column 'k119ub_gained'. If you wish to 'recycle' the RHS please use rep() to make this intent clear to readers of your code.
+Calls: main -> run_k119ub -> $<- -> $<-.data.table -> set
+Execution halted
+
+=========================================
+Complete
+Time: 8s
+Exit code: 1
+End time: Fri Aug  7 18:37:08 PDT 2026
+=========================================

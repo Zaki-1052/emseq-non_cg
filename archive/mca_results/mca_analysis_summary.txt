@@ -1,0 +1,80 @@
+Gene-body mCA differential methylation
+======================================
+
+Genes considered:        21846
+Genes tested:            20371
+Failed CA-site minimum:  706  (--min-ca-sites 100)
+Failed coverage minimum: 1475  (--min-total-coverage 2500)
+Failed both:             706
+
+Conversion noise floor (lambda CA rate)
+---------------------------------------
+  ctrl_F1    ctrl F  0.7900%
+  ctrl_F2    ctrl F  0.8669%
+  ctrl_M1    ctrl M  1.0631%
+  ctrl_M2    ctrl M  0.7869%
+  mut_F1     mut F  0.9231%
+  mut_F2     mut F  1.2954%
+  mut_M1     mut M  0.6546%
+  mut_M2     mut M  1.2506%
+
+Covariate correlations
+----------------------
+                 genotype_mut sex_F lambda_ca_rate
+  genotype_mut          1.000  0.00          0.359
+  sex_F                 0.000  1.00          0.070
+  lambda_ca_rate        0.359  0.07          1.000
+
+Model: ~ genotype + sex + lambda_ca_rate
+  Median dispersion (phi): 0.001000
+  Dispersion range:        [0.001000, 0.012128]
+
+Significance (reported model)
+-----------------------------
+  Bonferroni p < 0.05:  156
+  BH FDR < 0.05:      427
+  BH FDR < 0.10:      597
+
+  Direction among Bonferroni-significant genes:
+    mCA higher in mutant: 106
+    mCA lower in mutant:  50
+    median |mca_diff|:    3.13619%
+    genes overlapping another significant gene: 5
+
+Neuronal gene set
+-----------------
+  Gene set size:              5614
+  Tested genes in set:        4070
+  Significant genes in set:   44
+  Fisher odds ratio:          1.580
+  Fisher p-value:             0.012
+
+Leave-one-out influence (Bonferroni-significant genes)
+------------------------------------------------------
+  Robust in all 8 refits: 23
+  Lost in >= 1 refit:     133
+  Lost in >= 3 refits:    61
+
+Top 20 genes by p-value
+-----------------------
+  gene                 length   mca_ctrl     mca_mut           p bonf
+  Npvf                   3768    4.4375%    14.5926%    1.25e-47 *
+  Olfr437                6580    4.8769%    14.9244%    1.41e-45 *
+  Ttr                    9042    5.2965%    13.7101%    2.17e-33 *
+  Emcn                  91119    5.4903%    12.3092%    4.99e-23 *
+  Kctd12                 6057    3.4494%     9.3416%    6.35e-23 *
+  Zic4                  26936    3.1614%     8.5388%    4.19e-22 *
+  Slc13a1               79810    4.1123%    10.0524%    5.62e-22 *
+  Sap30                  5154    2.8217%     7.9790%    1.38e-20 *
+  2610001J05Rik          3784    5.3089%    11.4816%    8.37e-20 *
+  Fam72a                11970    2.8428%     7.4732%    1.91e-18 *
+  Krt24                  5304    3.4875%     8.7177%    1.93e-18 *
+  Chia1                 18892    3.4117%     8.3608%    1.09e-17 *
+  Slc35g2               18903    3.1256%     7.7401%    1.21e-16 *
+  Islr2                  8023    9.3190%     4.0924%    7.41e-16 *
+  Cd300ld3               6279    6.9164%    12.9225%    1.87e-15 *
+  Lrrc49               119300    3.3465%     7.6320%    3.06e-15 *
+  Dpys                  88984    4.9897%     9.8406%    6.96e-15 *
+  Nsmf                   8527   10.1068%     5.2166%    1.77e-14 *
+  Fgf1                  90800    4.5695%     9.1893%     2.2e-14 *
+  Scg2                   5452    3.4983%     7.4932%     7.1e-14 *

@@ -1,0 +1,101 @@
+#!/bin/bash
+# scripts/ca/02_ca_combine.sb
+#SBATCH --job-name=combine_ca
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=06:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-7
+#SBATCH --output=logs/combine_ca_%A_%a.out
+
+# Combine CA-filtered CHH and CHG methylKit files into a single CA file per sample.
+#
+# Input:  ca_filtered/{prefix}_CA_{CHH,CHG}.methylKit.gz
+# Output: combined_ca/{sample}_CA.methylKit.gz
+#
+# Usage: sbatch --dependency=afterok:<CA_FILTER_JOBID> run_combine_ca.sb
+
+echo "========================================="
+echo "EM-seq: Combine CA_CHH + CA_CHG"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
+SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
+
+CA_DIR="${BASEDIR}/ca_filtered"
+OUTDIR="${BASEDIR}/combined_ca"
+
+declare -A EMSEQ_PREFIX
+EMSEQ_PREFIX=(
+    [ctrl_M1]="260629_Emseq_LV_index_E1_Bap1_Math1_adult_ctrl_M1_S1"
+    [mut_M1]="260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2"
+    [ctrl_F1]="260629_Emseq_LV_index_G1_Bap1_Math1_adult_ctrl_F1_S3"
+    [mut_F1]="260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4"
+    [ctrl_M2]="260629_Emseq_LV_index_A2_Bap1_Math1_adult_ctrl_M2_S5"
+    [mut_M2]="260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6"
+    [ctrl_F2]="260629_Emseq_LV_index_C2_Bap1_Math1_adult_ctrl_F2_S7"
+    [mut_F2]="260629_Emseq_LV_index_D2_Bap1_Math1_adult_mut_F2_S8"
+)
+
+PREFIX="${EMSEQ_PREFIX[$SAMPLE]}"
+CA_CHH_FILE="${CA_DIR}/${PREFIX}_CA_CHH.methylKit.gz"
+CA_CHG_FILE="${CA_DIR}/${PREFIX}_CA_CHG.methylKit.gz"
+OUTFILE="${OUTDIR}/${SAMPLE}_CA.methylKit.gz"
+
+echo "Sample: $SAMPLE"
+echo "CA_CHH: $CA_CHH_FILE"
+echo "CA_CHG: $CA_CHG_FILE"
+echo "Output: $OUTFILE"
+echo ""
+
+if [[ ! -s "$CA_CHH_FILE" ]]; then
+    echo "ERROR: CA_CHH file not found: $CA_CHH_FILE"
+    exit 1
+fi
+if [[ ! -s "$CA_CHG_FILE" ]]; then
+    echo "ERROR: CA_CHG file not found: $CA_CHG_FILE"
+    exit 1
+fi
+
+mkdir -p "$OUTDIR"
+
+START=$(date +%s)
+
+CHH_LINES=$(zcat "$CA_CHH_FILE" | wc -l)
+CHG_LINES=$(zcat "$CA_CHG_FILE" | wc -l)
+EXPECTED_LINES=$((CHH_LINES + CHG_LINES - 1))
+echo "CA_CHH lines: $CHH_LINES"
+echo "CA_CHG lines: $CHG_LINES"
+echo "Expected combined: $EXPECTED_LINES"
+
+(zcat "$CA_CHH_FILE"; zcat "$CA_CHG_FILE" | tail -n +2) \
+    | gzip > "$OUTFILE"
+
+ACTUAL_LINES=$(zcat "$OUTFILE" | wc -l)
+echo "Actual combined: $ACTUAL_LINES"
+
+if [[ "$ACTUAL_LINES" -ne "$EXPECTED_LINES" ]]; then
+    echo "WARNING: Line count mismatch! Expected $EXPECTED_LINES, got $ACTUAL_LINES"
+fi
+
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: $SAMPLE"
+echo "Time: $((END - START))s"
+echo "End time: $(date)"
+echo "========================================="

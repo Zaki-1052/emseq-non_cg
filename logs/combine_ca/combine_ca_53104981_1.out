@@ -1,0 +1,15 @@
+=========================================
+EM-seq: Combine CA_CHH + CA_CHG
+=========================================
+Job ID: 53104981_1
+Node: exp-1-20
+Start time: Sat Aug  8 17:33:04 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53104981_1
+Sample: mut_M1
+CA_CHH: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2_CA_CHH.methylKit.gz
+CA_CHG: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2_CA_CHG.methylKit.gz
+Output: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ca/mut_M1_CA.methylKit.gz
+
+ERROR: CA_CHH file not found: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2_CA_CHH.methylKit.gz

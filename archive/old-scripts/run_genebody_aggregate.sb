@@ -1,0 +1,84 @@
+#!/bin/bash
+#SBATCH --job-name=genebody_mca
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=120G
+#SBATCH --time=24:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-7
+#SBATCH --output=logs/genebody_mca_%A_%a.out
+
+# Aggregate CA-context methylation over gene bodies, one array task per sample.
+#
+# Input:  ca_filtered/<prefix>_CA_CHH.methylKit.gz + <prefix>_CA_CHG.methylKit.gz
+# Output: genebody_mca/<sample>.genebody_mca.tsv
+#
+# Usage: sbatch run_genebody_aggregate.sb
+
+echo "========================================="
+echo "EM-seq gene-body mCA aggregation"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
+SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+CA_DIR="${BASEDIR}/ca_filtered"
+OUTDIR="${BASEDIR}/genebody_mca"
+GENE_BED="${BASEDIR}/references/gene_bodies.protein_coding.bed"
+SCRIPT_DIR="${BASEDIR}/scripts"
+
+mkdir -p "$OUTDIR"
+
+declare -A EMSEQ_PREFIX
+EMSEQ_PREFIX=(
+    [ctrl_M1]="260629_Emseq_LV_index_E1_Bap1_Math1_adult_ctrl_M1_S1"
+    [mut_M1]="260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2"
+    [ctrl_F1]="260629_Emseq_LV_index_G1_Bap1_Math1_adult_ctrl_F1_S3"
+    [mut_F1]="260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4"
+    [ctrl_M2]="260629_Emseq_LV_index_A2_Bap1_Math1_adult_ctrl_M2_S5"
+    [mut_M2]="260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6"
+    [ctrl_F2]="260629_Emseq_LV_index_C2_Bap1_Math1_adult_ctrl_F2_S7"
+    [mut_F2]="260629_Emseq_LV_index_D2_Bap1_Math1_adult_mut_F2_S8"
+)
+
+PREFIX="${EMSEQ_PREFIX[$SAMPLE]}"
+CA_CHH="${CA_DIR}/${PREFIX}_CA_CHH.methylKit.gz"
+CA_CHG="${CA_DIR}/${PREFIX}_CA_CHG.methylKit.gz"
+OUTFILE="${OUTDIR}/${SAMPLE}.genebody_mca.tsv"
+
+echo "Sample:   $SAMPLE"
+echo "CA CHH:   $CA_CHH"
+echo "CA CHG:   $CA_CHG"
+echo "Gene BED: $GENE_BED"
+echo "Output:   $OUTFILE"
+echo ""
+
+START=$(date +%s)
+
+python "${SCRIPT_DIR}/genebody_mca_aggregate.py" \
+    --ca-chh "$CA_CHH" \
+    --ca-chg "$CA_CHG" \
+    --gene-bed "$GENE_BED" \
+    --sample-id "$SAMPLE" \
+    --output "$OUTFILE" \
+    --work-dir "${OUTDIR}/work_${SAMPLE}"
+
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: $SAMPLE"
+echo "Time: $((END - START))s"
+echo "End time: $(date)"
+echo "========================================="

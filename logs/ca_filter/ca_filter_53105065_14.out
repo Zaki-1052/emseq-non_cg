@@ -1,0 +1,48 @@
+=========================================
+EM-seq: CA-context filtering
+=========================================
+Job ID: 53105065_14
+Node: exp-5-33
+Start time: Sat Aug  8 17:52:55 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53105065_14
+Input dir:  /expanse/lustre/projects/csd940/zalibhai/emseq/em-seq_output/methylDackelExtracts
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered
+Reference:  /expanse/lustre/projects/csd940/zalibhai/refs/mm10+controls.fa
+File index: 14
+
+
+Processing 260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4_CHG.methylKit.gz ...
+      10,000,000 lines processed,  4,783,932 CA sites (47.8%)
+      20,000,000 lines processed,  9,540,500 CA sites (47.7%)
+      30,000,000 lines processed, 14,278,679 CA sites (47.6%)
+      40,000,000 lines processed, 18,986,946 CA sites (47.5%)
+      50,000,000 lines processed, 23,748,834 CA sites (47.5%)
+      60,000,000 lines processed, 28,502,150 CA sites (47.5%)
+      70,000,000 lines processed, 33,269,651 CA sites (47.5%)
+      80,000,000 lines processed, 38,007,821 CA sites (47.5%)
+      90,000,000 lines processed, 42,751,848 CA sites (47.5%)
+     100,000,000 lines processed, 47,502,227 CA sites (47.5%)
+     110,000,000 lines processed, 52,241,281 CA sites (47.5%)
+     120,000,000 lines processed, 56,987,520 CA sites (47.5%)
+     130,000,000 lines processed, 61,755,353 CA sites (47.5%)
+     140,000,000 lines processed, 66,528,345 CA sites (47.5%)
+     150,000,000 lines processed, 71,250,155 CA sites (47.5%)
+     160,000,000 lines processed, 75,967,949 CA sites (47.5%)
+     170,000,000 lines processed, 80,738,188 CA sites (47.5%)
+     180,000,000 lines processed, 85,485,958 CA sites (47.5%)
+     190,000,000 lines processed, 90,239,137 CA sites (47.5%)
+     200,000,000 lines processed, 94,973,991 CA sites (47.5%)
+     210,000,000 lines processed, 99,729,081 CA sites (47.5%)
+  Total sites: 218,034,219, CA sites: 103,598,110 (47.5%)
+  Stats written to /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4_CHG.methylKit.gz.ca_stats.json
+
+Done.
+
+=========================================
+Complete
+Time: 1335s
+Exit code: 0
+End time: Sat Aug  8 18:15:13 PDT 2026
+=========================================

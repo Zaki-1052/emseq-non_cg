@@ -1,0 +1,92 @@
+#!/bin/bash
+# scripts/04_mch_integration.sb
+#SBATCH --job-name=mch_integ
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/mch_integration_%j.out
+
+# Integration analyses: K119ub, MeCP2, neuronal/gene-length, CG x mCH.
+#
+# Input:  results/03_differential/mch_differential_results.tsv + reference files
+# Output: results/04_integration/*.tsv + results/plots/04_*/{pdf,svg,jpg}
+#
+# Usage: sbatch run_mch_integration.sb
+
+echo "========================================="
+echo "EM-seq: mCH integration analyses"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+SCRIPT_DIR="${BASEDIR}/scripts"
+MARINER_BASE="/expanse/lustre/projects/csd940/zalibhai/mariner_hi-c"
+
+DIFF_RESULTS="${BASEDIR}/results/03_differential/mch_differential_results.tsv"
+SAMPLE_MATRIX="${BASEDIR}/results/03_differential/mch_sample_matrix.tsv"
+GENE_BED="${BASEDIR}/references/gene_bodies.protein_coding.bed"
+K119UB_CONSENSUS="${BASEDIR}/references/K119ub_consensus_v3.bed"
+K119UB_DIFFBIND="${MARINER_BASE}/peaks/diffbind/K119ub_diffbind_results_summit_appended_ap.txt"
+MECP2_CONSENSUS="${BASEDIR}/references/mecp2-peaks/MeCP2_adult_concensus_peakset_Conc4.txt"
+MECP2_DIFFBIND="${BASEDIR}/references/mecp2-peaks/260804_MeCP2_adult_diffbind_results_filtered_Conc4.txt"
+NEURONAL_GENES="${MARINER_BASE}/biomodal/downstream/plots/visualizations/tables/72_neuronal_gene_set_go_derived.tsv"
+MC_DMR="${MARINER_BASE}/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_mc_control__mutant_20260402_191818.bed"
+HMC_DMR="${MARINER_BASE}/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_hmc_control__mutant_20260402_191818.bed"
+OUTDIR="${BASEDIR}/results/04_integration"
+PLOT_DIR="${BASEDIR}/results/plots"
+
+mkdir -p "$OUTDIR" "$PLOT_DIR"
+
+echo "Diff results:     $DIFF_RESULTS"
+echo "K119ub consensus: $K119UB_CONSENSUS"
+echo "K119ub DiffBind:  $K119UB_DIFFBIND"
+echo "MeCP2 consensus:  $MECP2_CONSENSUS"
+echo "MeCP2 DiffBind:   $MECP2_DIFFBIND"
+echo "Neuronal genes:   $NEURONAL_GENES"
+echo "CG mC DMR:        $MC_DMR"
+echo "CG hmC DMR:       $HMC_DMR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/04_mch_integration.R" \
+    --diff-results "$DIFF_RESULTS" \
+    --sample-matrix "$SAMPLE_MATRIX" \
+    --gene-bed "$GENE_BED" \
+    --k119ub-consensus "$K119UB_CONSENSUS" \
+    --k119ub-diffbind "$K119UB_DIFFBIND" \
+    --mecp2-consensus "$MECP2_CONSENSUS" \
+    --mecp2-diffbind "$MECP2_DIFFBIND" \
+    --neuronal-genes "$NEURONAL_GENES" \
+    --mc-dmr "$MC_DMR" \
+    --hmc-dmr "$HMC_DMR" \
+    --out-dir "$OUTDIR" \
+    --plot-dir "$PLOT_DIR"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

@@ -1,0 +1,73 @@
+=========================================
+EM-seq: Genome-wide mCH DMR discovery
+=========================================
+Job ID: 53095762
+Node: exp-3-01
+Start time: Fri Aug  7 17:29:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53095762
+CH dir:     /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq/results/dmrseq
+
+=== Genome-wide mCH DMR Discovery (dmrseq) ===
+
+Parameters:
+  cutoff: 0.005 
+  minNumRegion: 5 
+  workers: 40 
+  data.table threads: 24 
+
+Building shared-site matrix from 8 samples:
+  Reading ctrl_M1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_M1_CH.methylKit.gz
+    Total sites: 976,562,803
+    Lambda rate: 0.0133 (1.33%)
+    Canonical sites: 975,824,591
+    Shared sites after 1 samples: 975,824,591
+  Reading ctrl_M2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_M2_CH.methylKit.gz
+    Total sites: 988,794,772
+    Lambda rate: 0.0099 (0.99%)
+    Canonical sites: 988,005,369
+    Shared sites after 2 samples: 970,412,754
+  Reading ctrl_F1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F1_CH.methylKit.gz
+    Total sites: 984,900,333
+    Lambda rate: 0.0102 (1.02%)
+    Canonical sites: 984,105,132
+    Shared sites after 3 samples: 963,598,566
+  Reading ctrl_F2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F2_CH.methylKit.gz
+    Total sites: 983,837,632
+    Lambda rate: 0.0112 (1.12%)
+    Canonical sites: 983,058,793
+    Shared sites after 4 samples: 961,658,231
+  Reading mut_M1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M1_CH.methylKit.gz
+    Total sites: 985,722,045
+    Lambda rate: 0.0087 (0.87%)
+    Canonical sites: 984,941,891
+    Shared sites after 5 samples: 957,914,316
+  Reading mut_M2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M2_CH.methylKit.gz
+    Total sites: 994,991,907
+    Lambda rate: 0.0162 (1.62%)
+    Canonical sites: 994,179,784
+    Shared sites after 6 samples: 957,682,536
+  Reading mut_F1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F1_CH.methylKit.gz
+    Total sites: 989,538,971
+    Lambda rate: 0.0118 (1.18%)
+    Canonical sites: 988,717,869
+    Shared sites after 7 samples: 957,520,539
+  Reading mut_F2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F2_CH.methylKit.gz
+    Total sites: 981,846,125
+    Lambda rate: 0.0181 (1.81%)
+    Canonical sites: 981,076,575
+    Shared sites after 8 samples: 955,691,879
+
+Shared sites across all 8 samples: 955,691,879
+Extracting matrices...
+/cm/local/apps/slurm/var/spool/job53095762/slurm_script: line 57: 1334359 Killed                  Rscript "${SCRIPT_DIR}/mch_dmrseq.R" --ch-dir "$CH_DIR" --out-dir "$OUTDIR" --cutoff 0.005 --min-num-region 5 --workers 40
+
+=========================================
+Complete
+Time: 7329s
+Exit code: 137
+End time: Fri Aug  7 19:31:52 PDT 2026
+=========================================
+slurmstepd: error: Detected 1 oom_kill event in StepId=53095762.batch. Some of the step tasks have been OOM Killed.

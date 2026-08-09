@@ -1,0 +1,124 @@
+=========================================
+EM-seq: mCH integration analyses
+=========================================
+Job ID: 53104433
+Node: exp-4-36
+Start time: Sat Aug  8 16:25:54 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53104433
+Diff results:     /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/mch_differential_results.tsv
+K119ub consensus: /expanse/lustre/projects/csd940/zalibhai/emseq/references/K119ub_consensus_v3.bed
+K119ub DiffBind:  /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/peaks/diffbind/K119ub_diffbind_results_summit_appended_ap.txt
+MeCP2 consensus:  /expanse/lustre/projects/csd940/zalibhai/emseq/references/mecp2-peaks/MeCP2_adult_concensus_peakset_Conc4.txt
+MeCP2 DiffBind:   /expanse/lustre/projects/csd940/zalibhai/emseq/references/mecp2-peaks/260804_MeCP2_adult_diffbind_results_filtered_Conc4.txt
+Neuronal genes:   /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/plots/visualizations/tables/72_neuronal_gene_set_go_derived.tsv
+CG mC DMR:        /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_mc_control__mutant_20260402_191818.bed
+CG hmC DMR:       /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_hmc_control__mutant_20260402_191818.bed
+
+=== mCH Integration Analyses ===
+
+Differential results loaded: 21097 genes
+
+=== 4a. K119ub Overlap ===
+  K119ub consensus peaks: 34088 
+  Fisher's exact: OR=3.043, p=3.55e-268
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/k119ub_overlap_fisher.tsv 
+  K119ub DiffBind peaks: 41392 
+  Gained: 16715  Lost: 5097  Unchanged: 19580 
+  Wilcoxon gained vs unchanged: p=9.09e-145
+  Wilcoxon lost vs unchanged: p=4.91e-33
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/k119ub_direction_wilcoxon.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/k119ub_direction_boxplot.{pdf,png} 
+
+=== 4b. MeCP2 Binding ===
+  MeCP2 consensus peaks: 36804 
+  Fisher's exact: OR=2.898, p=3.28e-243
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/mecp2_overlap_fisher.tsv 
+  MeCP2 DiffBind peaks: 36804 
+  Gained: 5675  Lost: 1107  Unchanged: 30022 
+  Wilcoxon gained vs unchanged: p=1.23e-217
+  Wilcoxon lost vs unchanged: p=7.92e-45
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/mecp2_direction_wilcoxon.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/mecp2_direction_boxplot.{pdf,png} 
+
+=== 4c. Neuronal Gene Set / Gene Length ===
+  Neuronal gene set: 5614 genes
+  Matched in testable genes: 4169 / 5614 
+  Wilcoxon neuronal vs non-neuronal: p=4.13e-01
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/neuronal_wilcoxon.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/neuronal_wilcoxon_boxplot.{pdf,png} 
+
+  Gene-length interaction model:
+  Coefficients:
+                         Estimate Std. Error    t value Pr(>|t|)
+(Intercept)             -0.168116   0.015509 -10.839867 0.000000
+neuronalTRUE            -0.082978   0.033614  -2.468587 0.013573
+log_length               0.001152   0.001580   0.729134 0.465928
+neuronalTRUE:log_length  0.007669   0.003264   2.349697 0.018798
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/genelength_interaction_model.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/genelength_quintile_boxplot.{pdf,png} 
+
+  Quintile effects (neuronal - non-neuronal median logFC):
+   length_quintile        effect n_neuronal n_non
+            <fctr>         <num>      <int> <int>
+1:              Q1 -0.0062008780        564  3656
+2:              Q2 -0.0030588940        638  3581
+3:              Q3 -0.0089123073        713  3506
+4:              Q4 -0.0031021257        871  3348
+5:              Q5  0.0002307191       1383  2837
+  JT trend test: statistic=7.0, p=0.2417
+
+  fgsea: neuronal gene set enrichment
+  NES=-0.978, p=6.77e-01, padj=6.77e-01
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/fgsea_neuronal.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/fgsea_neuronal_enrichment.{pdf,png} 
+
+  GO GSEA (biological process):
+'select()' returned 1:1 mapping between keys and columns
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/gsea_go_results.tsv 
+  GO terms at p<0.05: 365
+
+=== 4d. CG x mCH Cross-Modality ===
+  CG mC DMR genes: 20991 
+  CG hmC DMR genes: 20991 
+  Genes with CG mC data: 20891 
+  Genes with CG hmC data: 20891 
+  Spearman (CG mC vs mCH): rho=0.110, p=5.35e-57
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/cg_mch_correlation.tsv 
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/cg_mch_quadrant_counts.tsv 
+  Quadrant counts:
+                quadrant n_genes
+                  <char>   <int>
+1: CG_mC_down / mCH_down    7222
+2:   CG_mC_down / mCH_up    1452
+3:   CG_mC_up / mCH_down    9503
+4:     CG_mC_up / mCH_up    2714
+`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/cg_mch_scatter.{pdf,png} 
+  Fisher CG-sig x mCH-sig: OR=3.076, p=2.02e-259
+
+  Three-way (mC / hmC / mCH):
+  Concordant (mC up + hmC down, both sig): 6661
+  mCH logFC concordant vs rest: p=9.51e-02
+    Concordant median logFC: -0.1750
+    Rest median logFC: -0.1720
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/integration/cg_hmc_mch_threeway.tsv 
+  Plot: /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots/cg_hmc_mch_threeway_scatter.{pdf,png} 
+
+=== Integration Complete ===
+Warning messages:
+1: In preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam,  :
+  There are duplicate gene names, fgsea may produce unexpected results.
+2: In bitr(names(stats_vec), fromType = "SYMBOL", toType = "ENTREZID",  :
+  9.6% of input gene IDs are fail to map...
+3: In cor.test.default(joined$mc_mod_diff[has_mc], joined$edger_logFC[has_mc],  :
+  Cannot compute exact p-value with ties
+
+=========================================
+Complete
+Time: 90s
+Exit code: 0
+End time: Sat Aug  8 16:27:26 PDT 2026
+=========================================

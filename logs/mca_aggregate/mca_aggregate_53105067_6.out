@@ -1,0 +1,48 @@
+=========================================
+EM-seq: Gene-body mCA aggregation
+=========================================
+Job ID: 53105067_6
+Node: exp-2-42
+Start time: Sat Aug  8 19:17:31 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53105067_6
+Sample:   ctrl_F2
+CA file:  /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ca/ctrl_F2_CA.methylKit.gz
+Gene BED: /expanse/lustre/projects/csd940/zalibhai/emseq/references/gene_bodies.protein_coding.bed
+Out dir:  /expanse/lustre/projects/csd940/zalibhai/emseq/results/ca_genebody/aggregated
+
+Sample: ctrl_F2 
+data.table threads: 16 
+
+Gene bodies loaded: 21846 genes
+
+Reading: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ca/ctrl_F2_CA.methylKit.gz 
+  Total sites: 366,423,372
+
+Lambda spike-in:
+  Lambda CH rate: 0.0087 (0.87%)
+  Lambda sites: 7008, total coverage: 107511
+  Saved: /expanse/lustre/projects/csd940/zalibhai/emseq/results/ca_genebody/aggregated/ctrl_F2_lambda.tsv 
+
+Canonical chr sites: 366,122,851
+Building GRanges...
+Finding overlaps...
+  Overlapping pairs: 158,231,649
+Aggregating per gene...
+
+Wrote 21846 genes to: /expanse/lustre/projects/csd940/zalibhai/emseq/results/ca_genebody/aggregated/ctrl_F2_genebody_mch.tsv 
+
+--- Summary ---
+Genes with CH sites: 21511 / 21846 
+Median CH sites/gene: 2648 
+Median total coverage/gene: 50255 
+Gene-body mCH rate: 0.0271 (2.71%)
+Lambda CH rate: 0.0087 (0.87%)
+
+=========================================
+Complete: ctrl_F2
+Time: 248s
+Exit code: 0
+End time: Sat Aug  8 19:21:41 PDT 2026
+=========================================

@@ -1,0 +1,69 @@
+#!/bin/bash
+# scripts/ca/04_ca_differential.sb
+#SBATCH --job-name=mca_diff
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=12:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/mca_differential_%j.out
+
+# Differential gene-body mCA testing (CA-only subset).
+# Uses the same mch_differential.R as the all-CH pipeline
+# (edgeR QL F-test with lambda_ch_rate as covariate).
+#
+# Input:  results/ca/02_aggregate/aggregated/
+# Output: results/ca/03_differential/mch_differential_results.tsv, mch_analysis_summary.txt
+#         results/ca/plots/03_mch_qq_plot/{pdf,svg,jpg}, 03_mch_bcv_plot/{pdf,svg,jpg}
+#
+# Usage: sbatch --dependency=afterok:<MCA_AGG_JOBID> run_mca_differential.sb
+
+echo "========================================="
+echo "EM-seq: Gene-body mCA differential testing"
+echo "========================================="
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SCRIPT_DIR="${BASEDIR}/scripts"
+AGG_DIR="${BASEDIR}/results/ca/02_aggregate/aggregated"
+OUTDIR="${BASEDIR}/results/ca/03_differential"
+PLOT_DIR="${BASEDIR}/results/ca/plots"
+
+echo "Aggregated dir: $AGG_DIR"
+echo "Output dir:     $OUTDIR"
+echo "Plot dir:       $PLOT_DIR"
+echo ""
+
+mkdir -p "$OUTDIR" "$PLOT_DIR"
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/../03_mch_differential.R" \
+    --agg-dir "$AGG_DIR" \
+    --out-dir "$OUTDIR" \
+    --plot-dir "$PLOT_DIR" \
+    --threads "$SLURM_CPUS_PER_TASK"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="

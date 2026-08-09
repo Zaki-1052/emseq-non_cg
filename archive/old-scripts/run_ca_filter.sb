@@ -1,0 +1,61 @@
+#!/bin/bash
+#SBATCH --job-name=ca_filter
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=120G
+#SBATCH --time=24:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-15
+#SBATCH --output=logs/ca_filter_%A_%a.out
+
+# CA-context filtering of EM-seq methylKit files against the reference genome.
+# One array task per input file (8 CHH + 8 CHG = 16 tasks).
+#
+# Output: <sample>_CA_CHH.methylKit.gz / <sample>_CA_CHG.methylKit.gz
+#         <input basename>.ca_stats.json
+#
+# Usage: sbatch run_ca_filter.sb
+
+echo "========================================="
+echo "EM-seq CA-context filter"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+REF="/expanse/lustre/projects/csd940/zalibhai/refs/mm10+controls.fa"
+INPUT_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq/em-seq_output/methylDackelExtracts"
+OUTPUT_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered"
+SCRIPT_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq/scripts"
+
+mkdir -p "$OUTPUT_DIR"
+
+echo "Reference:  ${REF}"
+echo "Input dir:  ${INPUT_DIR}"
+echo "Output dir: ${OUTPUT_DIR}"
+echo "File index: ${SLURM_ARRAY_TASK_ID}"
+echo ""
+
+START=$(date +%s)
+
+python "${SCRIPT_DIR}/ca_filter.py" \
+    --ref "${REF}" \
+    --input-dir "${INPUT_DIR}" \
+    --output-dir "${OUTPUT_DIR}" \
+    --file-index "${SLURM_ARRAY_TASK_ID}"
+
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: task ${SLURM_ARRAY_TASK_ID}"
+echo "Time: $((END - START))s"
+echo "End time: $(date)"
+echo "========================================="

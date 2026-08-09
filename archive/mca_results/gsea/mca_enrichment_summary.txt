@@ -1,0 +1,43 @@
+Gene-body mCA GO enrichment
+===========================
+
+Ontology:              GO BP
+Significance basis:    Bonferroni
+Genes tested:          20371
+Significant:           156 (106 up, 50 down)
+Ranked list (GSEA):    18311 genes mapped to Entrez
+ORA universe:          18311 genes mapped to Entrez
+
+GSEA (all genes ranked by log2_fc)
+----------------------------------
+  Terms with q < 0.05: 72
+  Matching /synap|neuron|axon|dendrit|nervous/: 9
+  NES > 0: 1, NES < 0: 71
+  Top terms by |NES|:
+    sensory perception of bitter taste                         NES  -2.05  q 2.13e-02
+    detection of chemical stimulus involved in sensory percept NES  -2.01  q 2.13e-02
+    negative regulation of myoblast differentiation            NES  -1.93  q 2.36e-02
+    aminoglycan catabolic process                              NES  +1.92  q 4.18e-02
+    positive regulation of cartilage development               NES  -1.91  q 4.18e-02
+    regulation of synaptic vesicle priming                     NES  -1.90  q 3.40e-02
+    chondrocyte differentiation                                NES  -1.89  q 1.07e-02
+    positive regulation of calcium-mediated signaling          NES  -1.88  q 2.15e-02
+    positive regulation of mRNA metabolic process              NES  -1.82  q 1.99e-02
+    synaptic vesicle exocytosis                                NES  -1.82  q 1.99e-02
+    response to pain                                           NES  -1.81  q 4.18e-02
+    post-Golgi vesicle-mediated transport                      NES  -1.81  q 2.14e-02
+    positive regulation of cell projection organization        NES  -1.81  q 2.33e-06
+    endochondral bone morphogenesis                            NES  -1.78  q 3.28e-02
+    negative regulation of cytokine-mediated signaling pathway NES  -1.77  q 3.68e-02
+
+ORA: all significant genes
+--------------------------
+  Terms with q < 0.05: 0
+
+ORA: mCA higher in mutant
+-------------------------
+  Terms with q < 0.05: 0
+
+ORA: mCA lower in mutant
+------------------------
+  Terms with q < 0.05: 0

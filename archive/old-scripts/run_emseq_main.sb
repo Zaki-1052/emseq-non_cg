@@ -1,0 +1,67 @@
+#!/bin/bash
+#SBATCH --job-name=emseq_main
+#SBATCH --output=logs/emseq_main_%j.out
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=200G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --export=ALL
+
+# EM-seq Pipeline Step 2: Alignment + methylation calling + QC
+# Ferguson Lab, UCSD Department of Pathology
+# Nextflow submits individual SLURM jobs per process via the SLURM executor.
+# Typically auto-submitted by run_fastq_to_ubam.sb on success.
+
+echo "======================================"
+echo "EM-seq Step 2: Main Pipeline"
+echo "======================================"
+echo "Started: $(date)"
+echo "SLURM Job ID: ${SLURM_JOBID}"
+echo ""
+
+source ~/.bashrc
+conda activate emseq_env
+
+WORK_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+PIPELINE_DIR="${WORK_DIR}/EM-seq"
+SCRIPT_DIR="${WORK_DIR}/scripts"
+CONFIG="${WORK_DIR}/expanse.config"
+OUTPUT_DIR="${WORK_DIR}/em-seq_output"
+
+export NXF_ANSI_LOG=false
+
+cd "${PIPELINE_DIR}"
+
+echo "Pipeline directory: ${PIPELINE_DIR}"
+echo "uBAM directory: ${PIPELINE_DIR}/ubam"
+echo "Config: ${CONFIG}"
+echo "Output directory: ${OUTPUT_DIR}"
+echo ""
+
+nextflow run main.nf \
+  -resume \
+  -profile conda \
+  -c "${CONFIG}" \
+  --genome 'mm10' \
+  --ubam_dir "${PIPELINE_DIR}/ubam" \
+  --email zalibhai@ucsd.edu \
+  --outputDir "${OUTPUT_DIR}" \
+  -work-dir "${WORK_DIR}/work_main"
+
+EXIT_CODE=$?
+
+echo ""
+echo "Step 2 finished: $(date)"
+echo "Exit code: ${EXIT_CODE}"
+
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "SUCCESS: EM-seq pipeline complete."
+    echo "Output: ${OUTPUT_DIR}"
+else
+    echo "FAILURE: Step 2 failed. Fix issues and re-run (supports -resume)."
+fi
+
+exit $EXIT_CODE

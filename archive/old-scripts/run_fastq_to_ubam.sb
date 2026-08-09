@@ -1,0 +1,69 @@
+#!/bin/bash
+#SBATCH --job-name=emseq_ubam
+#SBATCH --output=logs/emseq_ubam_%j.out
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=200G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --export=ALL
+
+# EM-seq Pipeline Step 1: FASTQ to uBAM conversion
+# Ferguson Lab, UCSD Department of Pathology
+# Nextflow submits individual SLURM jobs per sample via the SLURM executor.
+# On success, automatically submits run_emseq_main.sb (Step 2).
+
+echo "======================================"
+echo "EM-seq Step 1: FASTQ to uBAM"
+echo "======================================"
+echo "Started: $(date)"
+echo "SLURM Job ID: ${SLURM_JOBID}"
+echo ""
+
+source ~/.bashrc
+conda activate emseq_env
+
+WORK_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+PIPELINE_DIR="${WORK_DIR}/EM-seq"
+SCRIPT_DIR="${WORK_DIR}/scripts"
+INPUT_DIR="${WORK_DIR}/input"
+CONFIG="${WORK_DIR}/expanse.config"
+
+export NXF_ANSI_LOG=false
+
+cd "${PIPELINE_DIR}"
+
+echo "Input directory: ${INPUT_DIR}"
+echo "Pipeline directory: ${PIPELINE_DIR}"
+echo "Config: ${CONFIG}"
+echo ""
+
+nextflow run fastq_to_ubam.nf \
+  -resume \
+  -profile conda \
+  -c "${CONFIG}" \
+  --input_glob "${INPUT_DIR}/*{R1_001,R2_001}.fastq.gz" \
+  --read_format 'paired-end' \
+  --outdir "${PIPELINE_DIR}/ubam" \
+  -work-dir "${WORK_DIR}/work_fastq2ubam"
+
+EXIT_CODE=$?
+
+echo ""
+echo "Step 1 finished: $(date)"
+echo "Exit code: ${EXIT_CODE}"
+
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "SUCCESS: uBAM conversion complete."
+    echo "uBAMs in: ${PIPELINE_DIR}/ubam/"
+    echo ""
+    echo "Submitting Step 2 (main pipeline)..."
+    STEP2_JOB=$(sbatch --parsable "${SCRIPT_DIR}/run_emseq_main.sb")
+    echo "Step 2 submitted as SLURM job: ${STEP2_JOB}"
+else
+    echo "FAILURE: Step 1 failed. Fix issues and re-run (supports -resume)."
+fi
+
+exit $EXIT_CODE

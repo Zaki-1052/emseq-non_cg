@@ -1,0 +1,24 @@
+=========================================
+EM-seq: Combine CHH + CHG
+=========================================
+Job ID: 53080573_1
+Node: exp-2-44
+Start time: Fri Aug  7 11:33:59 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53080573_1
+Sample: mut_M1
+CHH:    /expanse/lustre/projects/csd940/zalibhai/emseq/em-seq_output/methylDackelExtracts/260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2_CHH.methylKit.gz
+CHG:    /expanse/lustre/projects/csd940/zalibhai/emseq/em-seq_output/methylDackelExtracts/260629_Emseq_LV_index_F1_Bap1_Math1_adult_mut_M1_S2_CHG.methylKit.gz
+Output: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M1_CH.methylKit.gz
+
+CHH lines: 767830703
+CHG lines: 217891344
+Expected combined: 985722046
+Actual combined: 985722046
+
+=========================================
+Complete: mut_M1
+Time: 1497s
+End time: Fri Aug  7 11:58:56 PDT 2026
+=========================================

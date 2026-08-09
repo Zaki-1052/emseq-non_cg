@@ -1,0 +1,64 @@
+#!/bin/bash
+#SBATCH --job-name=mca_diff
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=120G
+#SBATCH --time=24:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/mca_differential_%j.out
+
+# Differential gene-body mCA testing with DSS.
+#
+# Input:  genebody_mca/*.genebody_mca.tsv + ca_filtered/spike_in_rates.tsv
+# Output: mca_results/mca_differential_results.tsv
+#         mca_results/mca_sample_matrix.tsv
+#         mca_results/mca_analysis_summary.txt
+#
+# Usage: sbatch run_mca_differential.sb
+
+echo "========================================="
+echo "EM-seq gene-body mCA differential testing"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+SCRIPT_DIR="${BASEDIR}/scripts"
+GENEBODY_DIR="${BASEDIR}/genebody_mca"
+SPIKE_IN="${BASEDIR}/ca_filtered/spike_in_rates.tsv"
+OUTDIR="${BASEDIR}/mca_results"
+
+NEURONAL_GENES="/expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/biomodal/downstream/plots/visualizations/tables/72_neuronal_gene_set_go_derived.tsv"
+
+mkdir -p "$OUTDIR"
+
+echo "Gene-body dir: $GENEBODY_DIR"
+echo "Spike-in:      $SPIKE_IN"
+echo "Output dir:    $OUTDIR"
+echo "Neuronal set:  $NEURONAL_GENES"
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/mca_differential.R" \
+    --genebody-dir "$GENEBODY_DIR" \
+    --spike-in "$SPIKE_IN" \
+    --output-dir "$OUTDIR" \
+    --neuronal-gene-set "$NEURONAL_GENES"
+
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "End time: $(date)"
+echo "========================================="

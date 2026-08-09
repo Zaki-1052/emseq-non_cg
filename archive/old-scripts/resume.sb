@@ -1,0 +1,51 @@
+#!/bin/bash
+#SBATCH --job-name=emseq_test
+#SBATCH --output=logs/emseq_run_%j.out
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=128G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+# scripts/run_emseq.sh
+# Run NEB EM-seq pipeline: fastq -> uBAM -> alignment + methylation calling
+
+#set -e  # Exit on error so Step 2 doesn't run if Step 1 fails
+
+echo "======================================"
+echo "EM-seq Pipeline Test Run"
+echo "======================================"
+echo "Started: $(date)"
+echo ""
+
+source ~/.bashrc
+conda activate emseq_env
+
+WORK_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+PIPELINE_DIR="${WORK_DIR}/EM-seq"
+INPUT_DIR="${WORK_DIR}/input"
+
+cd "${PIPELINE_DIR}"
+
+# --- Step 2: Run main EM-seq pipeline ---
+echo "=== Step 2: Main EM-seq pipeline ==="
+echo "Started: $(date)"
+
+# uBAMs are output to current directory by default
+# Adjust --genome to match your references.config entry
+nextflow run main.nf \
+  -resume ca9da406-0e11-4250-a32a-15675a7e5089 \
+  -profile conda \
+  --genome 'mm10' \
+  --ubam_dir "${PIPELINE_DIR}/ubam" \
+  --email zalibhai@ucsd.edu \
+  --flowcell 'L001' \
+  --outputDir "${WORK_DIR}/em-seq_output" \
+  -work-dir "${WORK_DIR}/work_main"
+
+echo ""
+echo "======================================"
+echo "EM-seq Pipeline Complete"
+echo "======================================"
+echo "Finished: $(date)"

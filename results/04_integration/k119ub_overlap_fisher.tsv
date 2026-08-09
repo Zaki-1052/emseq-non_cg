@@ -1,0 +1,2 @@
+test	odds_ratio	p_value	ci_lower	ci_upper	n_sig_overlap	n_sig_no_overlap	n_nonsig_overlap	n_nonsig_no_overlap
+mCH_sig_x_K119ub_overlap	3.04281083919132	3.54513136488217e-268	2.85497877349094	3.2434378750677	3362	2195	5203	10337

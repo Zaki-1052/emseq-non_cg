@@ -1,0 +1,24 @@
+=========================================
+EM-seq: Combine CA_CHH + CA_CHG
+=========================================
+Job ID: 53105066_5
+Node: exp-7-46
+Start time: Sat Aug  8 19:02:48 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53105066_5
+Sample: mut_M2
+CA_CHH: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6_CA_CHH.methylKit.gz
+CA_CHG: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_B2_Bap1_Math1_adult_mut_M2_S6_CA_CHG.methylKit.gz
+Output: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ca/mut_M2_CA.methylKit.gz
+
+CA_CHH lines: 266293647
+CA_CHG lines: 104126122
+Expected combined: 370419768
+Actual combined: 370419768
+
+=========================================
+Complete: mut_M2
+Time: 726s
+End time: Sat Aug  8 19:14:54 PDT 2026
+=========================================

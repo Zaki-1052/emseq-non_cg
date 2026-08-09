@@ -1,0 +1,71 @@
+=========================================
+EM-seq: Gene-body mCH differential testing
+=========================================
+Job ID: 53104431
+Node: exp-4-36
+Start time: Sat Aug  8 16:25:29 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53104431
+Aggregated dir: /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/aggregated
+Output dir:     /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody
+Plot dir:       /expanse/lustre/projects/csd940/zalibhai/emseq/results/plots
+
+=== mCH Gene-Body Differential Testing ===
+
+data.table threads: 16 
+Loading aggregated data:
+  Loaded: ctrl_M1 ( 21846 genes )
+  Loaded: ctrl_M2 ( 21846 genes )
+  Loaded: ctrl_F1 ( 21846 genes )
+  Loaded: ctrl_F2 ( 21846 genes )
+  Loaded: mut_M1 ( 21846 genes )
+  Loaded: mut_M2 ( 21846 genes )
+  Loaded: mut_F1 ( 21846 genes )
+  Loaded: mut_F2 ( 21846 genes )
+
+Loading lambda rates:
+   ctrl_M1=0.0133, ctrl_M2=0.0099, ctrl_F1=0.0102, ctrl_F2=0.0112, mut_M1=0.0087, mut_M2=0.0162, mut_F1=0.0118, mut_F2=0.0181 
+
+Lambda rates merged into sample metadata
+  ctrl mean: 0.0111 
+  mut mean:  0.0137 
+
+--- Gene filtering ---
+Total genes: 21846 
+Failed n_ch_sites >= 100 in all samples: 454 
+Failed total_coverage >= 2500 in all samples: 295 
+Passed both filters: 21097 
+
+--- edgeR quasi-likelihood F-test ---
+Design matrix columns: (Intercept), genotypemut, sexM, lambda_ch_rate 
+Residual df: 4 
+Estimating dispersions (robust=TRUE)...
+Fitting QL model...
+Testing genotype effect...
+
+Significant genes:
+  Bonferroni < 0.05: 949
+  FDR < 0.05: 5557
+  FDR < 0.10: 7141
+
+Results written to: /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/mch_differential_results.tsv ( 21097 genes )
+Sample matrix written to: /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/mch_sample_matrix.tsv 
+
+Generating plots...
+QQ plot saved (lambda_GC = 4.962 )
+BCV plot saved
+  Common dispersion: 0.029855 
+  Common BCV: 0.1728 
+  Tagwise dispersion range: 0.001064 - 0.363230 
+Summary written to: /expanse/lustre/projects/csd940/zalibhai/emseq/results/genebody/mch_analysis_summary.txt 
+
+=== Complete ===
+There were 15 warnings (use warnings() to see them)
+
+=========================================
+Complete
+Time: 14s
+Exit code: 0
+End time: Sat Aug  8 16:25:48 PDT 2026
+=========================================

@@ -1,0 +1,269 @@
+=========================================
+EM-seq: Genome-wide mCH DMR discovery
+=========================================
+Job ID: 53099167
+Node: exp-5-37
+Start time: Sat Aug  8 00:54:39 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53099167
+CH dir:     /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq/results/dmrseq
+
+=== Genome-wide mCH DMR Discovery (dmrseq, per-chromosome) ===
+
+Parameters:
+  cutoff: 0.005 
+  minNumRegion: 5 
+  workers: 40 
+  data.table threads: 24 
+
+Phase 1: Reading samples and splitting by chromosome
+  Reading ctrl_M1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_M1_CH.methylKit.gz
+    Total sites: 976,562,803
+    Lambda rate: 0.0133 (1.33%)
+    Canonical sites: 975,824,591
+    Saved 975,824,591 sites across 21 chromosomes
+  Reading ctrl_M2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_M2_CH.methylKit.gz
+    Total sites: 988,794,772
+    Lambda rate: 0.0099 (0.99%)
+    Canonical sites: 988,005,369
+    Saved 988,005,369 sites across 21 chromosomes
+  Reading ctrl_F1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F1_CH.methylKit.gz
+    Total sites: 984,900,333
+    Lambda rate: 0.0102 (1.02%)
+    Canonical sites: 984,105,132
+    Saved 984,105,132 sites across 21 chromosomes
+  Reading ctrl_F2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F2_CH.methylKit.gz
+    Total sites: 983,837,632
+    Lambda rate: 0.0112 (1.12%)
+    Canonical sites: 983,058,793
+    Saved 983,058,793 sites across 21 chromosomes
+  Reading mut_M1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M1_CH.methylKit.gz
+    Total sites: 985,722,045
+    Lambda rate: 0.0087 (0.87%)
+    Canonical sites: 984,941,891
+    Saved 984,941,891 sites across 21 chromosomes
+  Reading mut_M2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M2_CH.methylKit.gz
+    Total sites: 994,991,907
+    Lambda rate: 0.0162 (1.62%)
+    Canonical sites: 994,179,784
+    Saved 994,179,784 sites across 21 chromosomes
+  Reading mut_F1: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F1_CH.methylKit.gz
+    Total sites: 989,538,971
+    Lambda rate: 0.0118 (1.18%)
+    Canonical sites: 988,717,869
+    Saved 988,717,869 sites across 21 chromosomes
+  Reading mut_F2: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F2_CH.methylKit.gz
+    Total sites: 981,846,125
+    Lambda rate: 0.0181 (1.81%)
+    Canonical sites: 981,076,575
+    Saved 981,076,575 sites across 21 chromosomes
+
+Phase 1 complete. 8 samples split across 21 chromosomes.
+Lambda rates:
+  ctrl_M1: 0.0133 (1.33%)
+  ctrl_M2: 0.0099 (0.99%)
+  ctrl_F1: 0.0102 (1.02%)
+  ctrl_F2: 0.0112 (1.12%)
+  mut_M1: 0.0087 (0.87%)
+  mut_M2: 0.0162 (1.62%)
+  mut_F1: 0.0118 (1.18%)
+  mut_F2: 0.0181 (1.81%)
+
+Phase 2: Running dmrseq per chromosome
+
+--- chr1 ---
+  Shared sites: 71,895,044
+  BSseq: 71,895,044 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr1:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr2 ---
+  Shared sites: 67,817,213
+  BSseq: 67,817,213 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr2:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr3 ---
+  Shared sites: 57,295,387
+  BSseq: 57,295,387 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr3:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr4 ---
+  Shared sites: 57,282,490
+  BSseq: 57,282,490 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr4:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr5 ---
+  Shared sites: 56,216,497
+  BSseq: 56,216,497 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr5:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr6 ---
+  Shared sites: 54,983,335
+  BSseq: 54,983,335 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr6:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr7 ---
+  Shared sites: 53,101,491
+  BSseq: 53,101,491 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr7:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr8 ---
+  Shared sites: 48,035,038
+  BSseq: 48,035,038 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr8:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr9 ---
+  Shared sites: 47,303,689
+  BSseq: 47,303,689 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr9:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr10 ---
+  Shared sites: 47,558,434
+  BSseq: 47,558,434 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr10:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr11 ---
+  Shared sites: 47,693,397
+  BSseq: 47,693,397 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr11:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr12 ---
+  Shared sites: 43,752,926
+  BSseq: 43,752,926 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr12:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr13 ---
+  Shared sites: 43,949,837
+  BSseq: 43,949,837 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr13:   dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr14 ---
+  Shared sites: 43,486,381
+  BSseq: 43,486,381 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr14: Smoothed (2.49 min). Note: Large candidate regions with more than 1000 CpGs detected. If you'd like to detect large-scale blocks, set block=TRUE. If you'd like to detect local DMRs, it is recommended to decrease the values of bpSpan, minInSpan, and/or maxGapSmooth increase computational efficiency.
+  dmrseq error: error in evaluating the argument 'args' in selecting a method for function 'do.call': wrong args for environment subassignment
+  No DMRs
+
+--- chr15 ---
+  Shared sites: 38,486,533
+  BSseq: 38,486,533 sites x 8 samples
+Assuming the test covariate genotype is a factor.
+Condition: mut vs ctrl
+Adjusting for covariate (s): sex
+Parallelizing using 40 workers/cores (backend: BiocParallel:MulticoreParam).
+Computing on 1 chromosome(s) at a time.
+
+Detecting candidate regions with coefficient larger than 0.005 in magnitude.
+...Chromosome chr15: 

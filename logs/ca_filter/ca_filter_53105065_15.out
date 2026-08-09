@@ -1,0 +1,104 @@
+=========================================
+EM-seq: CA-context filtering
+=========================================
+Job ID: 53105065_15
+Node: exp-6-42
+Start time: Sat Aug  8 17:52:55 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53105065_15
+Input dir:  /expanse/lustre/projects/csd940/zalibhai/emseq/em-seq_output/methylDackelExtracts
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered
+Reference:  /expanse/lustre/projects/csd940/zalibhai/refs/mm10+controls.fa
+File index: 15
+
+
+Processing 260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4_CHH.methylKit.gz ...
+      10,000,000 lines processed,  3,530,184 CA sites (35.3%)
+      20,000,000 lines processed,  7,045,724 CA sites (35.2%)
+      30,000,000 lines processed, 10,458,380 CA sites (34.9%)
+      40,000,000 lines processed, 13,933,036 CA sites (34.8%)
+      50,000,000 lines processed, 17,422,290 CA sites (34.8%)
+      60,000,000 lines processed, 20,808,831 CA sites (34.7%)
+      70,000,000 lines processed, 24,330,101 CA sites (34.8%)
+      80,000,000 lines processed, 27,785,701 CA sites (34.7%)
+      90,000,000 lines processed, 31,204,399 CA sites (34.7%)
+     100,000,000 lines processed, 34,632,457 CA sites (34.6%)
+     110,000,000 lines processed, 38,109,918 CA sites (34.6%)
+     120,000,000 lines processed, 41,333,935 CA sites (34.4%)
+     130,000,000 lines processed, 44,548,498 CA sites (34.3%)
+     140,000,000 lines processed, 47,833,040 CA sites (34.2%)
+     150,000,000 lines processed, 51,356,119 CA sites (34.2%)
+     160,000,000 lines processed, 54,782,447 CA sites (34.2%)
+     170,000,000 lines processed, 58,181,090 CA sites (34.2%)
+     180,000,000 lines processed, 61,666,669 CA sites (34.3%)
+     190,000,000 lines processed, 65,032,978 CA sites (34.2%)
+     200,000,000 lines processed, 68,525,784 CA sites (34.3%)
+     210,000,000 lines processed, 72,006,008 CA sites (34.3%)
+     220,000,000 lines processed, 75,367,836 CA sites (34.3%)
+     230,000,000 lines processed, 78,821,197 CA sites (34.3%)
+     240,000,000 lines processed, 82,450,960 CA sites (34.4%)
+     250,000,000 lines processed, 86,006,240 CA sites (34.4%)
+     260,000,000 lines processed, 89,539,670 CA sites (34.4%)
+     270,000,000 lines processed, 92,723,066 CA sites (34.3%)
+     280,000,000 lines processed, 96,056,959 CA sites (34.3%)
+     290,000,000 lines processed, 99,596,798 CA sites (34.3%)
+     300,000,000 lines processed, 103,173,578 CA sites (34.4%)
+     310,000,000 lines processed, 106,457,608 CA sites (34.3%)
+     320,000,000 lines processed, 109,895,612 CA sites (34.3%)
+     330,000,000 lines processed, 113,340,377 CA sites (34.3%)
+     340,000,000 lines processed, 116,818,099 CA sites (34.4%)
+     350,000,000 lines processed, 120,253,072 CA sites (34.4%)
+     360,000,000 lines processed, 123,660,000 CA sites (34.4%)
+     370,000,000 lines processed, 127,040,573 CA sites (34.3%)
+     380,000,000 lines processed, 130,441,306 CA sites (34.3%)
+     390,000,000 lines processed, 133,879,638 CA sites (34.3%)
+     400,000,000 lines processed, 137,379,392 CA sites (34.3%)
+     410,000,000 lines processed, 140,851,660 CA sites (34.4%)
+     420,000,000 lines processed, 144,207,464 CA sites (34.3%)
+     430,000,000 lines processed, 147,563,221 CA sites (34.3%)
+     440,000,000 lines processed, 151,135,544 CA sites (34.3%)
+     450,000,000 lines processed, 154,681,653 CA sites (34.4%)
+     460,000,000 lines processed, 158,026,577 CA sites (34.4%)
+     470,000,000 lines processed, 161,572,565 CA sites (34.4%)
+     480,000,000 lines processed, 165,134,404 CA sites (34.4%)
+     490,000,000 lines processed, 168,562,106 CA sites (34.4%)
+     500,000,000 lines processed, 172,122,614 CA sites (34.4%)
+     510,000,000 lines processed, 175,401,873 CA sites (34.4%)
+     520,000,000 lines processed, 178,568,215 CA sites (34.3%)
+     530,000,000 lines processed, 181,982,456 CA sites (34.3%)
+     540,000,000 lines processed, 185,531,039 CA sites (34.4%)
+     550,000,000 lines processed, 189,038,892 CA sites (34.4%)
+     560,000,000 lines processed, 192,219,635 CA sites (34.3%)
+     570,000,000 lines processed, 195,703,471 CA sites (34.3%)
+     580,000,000 lines processed, 199,121,454 CA sites (34.3%)
+     590,000,000 lines processed, 202,588,600 CA sites (34.3%)
+     600,000,000 lines processed, 206,004,033 CA sites (34.3%)
+     610,000,000 lines processed, 209,434,277 CA sites (34.3%)
+     620,000,000 lines processed, 212,666,833 CA sites (34.3%)
+     630,000,000 lines processed, 216,135,279 CA sites (34.3%)
+     640,000,000 lines processed, 219,539,860 CA sites (34.3%)
+     650,000,000 lines processed, 222,802,395 CA sites (34.3%)
+     660,000,000 lines processed, 226,234,386 CA sites (34.3%)
+     670,000,000 lines processed, 229,810,892 CA sites (34.3%)
+     680,000,000 lines processed, 233,185,682 CA sites (34.3%)
+     690,000,000 lines processed, 236,489,551 CA sites (34.3%)
+     700,000,000 lines processed, 239,944,930 CA sites (34.3%)
+     710,000,000 lines processed, 243,201,292 CA sites (34.3%)
+     720,000,000 lines processed, 246,661,331 CA sites (34.3%)
+     730,000,000 lines processed, 249,998,429 CA sites (34.2%)
+     740,000,000 lines processed, 253,512,027 CA sites (34.3%)
+     750,000,000 lines processed, 257,068,238 CA sites (34.3%)
+     760,000,000 lines processed, 260,585,841 CA sites (34.3%)
+     770,000,000 lines processed, 264,094,905 CA sites (34.3%)
+  Total sites: 771,504,752, CA sites: 264,638,470 (34.3%)
+  Stats written to /expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered/260629_Emseq_LV_index_H1_Bap1_Math1_adult_mut_F1_S4_CHH.methylKit.gz.ca_stats.json
+
+Done.
+
+=========================================
+Complete
+Time: 3862s
+Exit code: 0
+End time: Sat Aug  8 18:57:19 PDT 2026
+=========================================

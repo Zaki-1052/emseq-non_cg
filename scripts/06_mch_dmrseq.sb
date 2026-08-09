@@ -1,0 +1,69 @@
+#!/bin/bash
+# scripts/06_mch_dmrseq.sb
+#SBATCH --job-name=mch_dmrseq
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=200G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/mch_dmrseq_%j.out
+
+# Genome-wide CH DMR discovery with dmrseq.
+#
+# Input:  combined_ch/*_CH.methylKit.gz (8 files)
+# Output: results/dmrseq/mch_bsseq.rds    (BSseq checkpoint)
+#         results/dmrseq/mch_dmrs.tsv
+#         results/dmrseq/mch_dmr_summary.txt
+#
+# Usage: sbatch run_mch_dmrseq.sb
+
+echo "========================================="
+echo "EM-seq: Genome-wide mCH DMR discovery"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+SCRIPT_DIR="${BASEDIR}/scripts"
+CH_DIR="${BASEDIR}/combined_ch"
+OUTDIR="${BASEDIR}/results/dmrseq"
+
+mkdir -p "$OUTDIR"
+
+echo "CH dir:     $CH_DIR"
+echo "Output dir: $OUTDIR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/06_mch_dmrseq.R" \
+    --ch-dir "$CH_DIR" \
+    --out-dir "$OUTDIR" \
+    --cutoff 0.005 \
+    --min-num-region 5 \
+    --workers 40
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

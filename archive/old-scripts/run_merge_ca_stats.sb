@@ -1,0 +1,43 @@
+#!/bin/bash
+#SBATCH --job-name=merge_ca_stats
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=120G
+#SBATCH --time=24:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/merge_ca_stats_%j.out
+
+# Combine per-file CA statistics into run-level summaries and measure the
+# per-sample conversion noise floor from the phage lambda spike-in.
+#
+# Fails non-zero if any QC gate fails, which stops the dependent
+# gene-body aggregation step.
+#
+# Usage: sbatch run_merge_ca_stats.sb
+
+echo "========================================="
+echo "EM-seq CA stats merge + spike-in QC"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+CA_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq/ca_filtered"
+SCRIPT_DIR="/expanse/lustre/projects/csd940/zalibhai/emseq/scripts"
+
+python "${SCRIPT_DIR}/merge_ca_stats.py" \
+    --stats-dir "${CA_DIR}" \
+    --summary-out "${CA_DIR}/ca_summary_stats.tsv" \
+    --spike-in-out "${CA_DIR}/spike_in_rates.tsv"
+
+echo ""
+echo "========================================="
+echo "End time: $(date)"
+echo "========================================="

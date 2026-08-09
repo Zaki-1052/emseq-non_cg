@@ -1,0 +1,34 @@
+=== mCH Integration Analysis Summary ===
+
+Output files:
+   cg_hmc_mch_threeway.tsv 
+   cg_mch_correlation.tsv 
+   cg_mch_quadrant_counts.tsv 
+   fgsea_neuronal.tsv 
+   genelength_interaction_model.tsv 
+   gsea_go_results.tsv 
+   k119ub_direction_wilcoxon.tsv 
+   k119ub_overlap_fisher.tsv 
+   mecp2_direction_wilcoxon.tsv 
+   mecp2_overlap_fisher.tsv 
+   neuronal_wilcoxon.tsv 
+
+Plot files:
+   cg_hmc_mch_threeway_scatter.pdf 
+   cg_hmc_mch_threeway_scatter.png 
+   cg_mch_scatter.pdf 
+   cg_mch_scatter.png 
+   fgsea_neuronal_enrichment.pdf 
+   fgsea_neuronal_enrichment.png 
+   genelength_quintile_boxplot.pdf 
+   genelength_quintile_boxplot.png 
+   k119ub_direction_boxplot.pdf 
+   k119ub_direction_boxplot.png 
+   mch_bcv_plot.pdf 
+   mch_bcv_plot.png 
+   mch_qq_plot.pdf 
+   mch_qq_plot.png 
+   mecp2_direction_boxplot.pdf 
+   mecp2_direction_boxplot.png 
+   neuronal_wilcoxon_boxplot.pdf 
+   neuronal_wilcoxon_boxplot.png 

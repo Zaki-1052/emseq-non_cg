@@ -1,0 +1,2 @@
+test	odds_ratio	p_value	ci_lower	ci_upper	n_sig_overlap	n_sig_no_overlap	n_nonsig_overlap	n_nonsig_no_overlap
+mCH_sig_x_MeCP2_overlap	2.89776110107335	3.27522432539181e-243	2.7162727576612	3.09207325779971	3684	1873	6283	9257

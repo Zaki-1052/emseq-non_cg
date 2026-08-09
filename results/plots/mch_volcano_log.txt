@@ -1,0 +1,45 @@
+=== mCH Volcano Plots ===
+
+========== mCH context ==========
+Reading: results/03_differential/mch_differential_results.tsv 
+
+Writing figures to /Users/zakiralibhai/emseq/results/plots
+  Saved: 05_mch_volcano_direction/{pdf,svg,png,jpg}
+  Saved: 05_mch_volcano_fdr_stringency/{pdf,svg,png,jpg}
+  Saved: 05_mch_volcano_genelength/{pdf,svg,png,jpg}
+  Saved: 05_mch_volcano_panel/{pdf,svg,png,jpg}
+
+Context:                 mCH
+Genes tested:            21097
+Significance basis:      Bonferroni p < 0.05
+Significant:             949  (236 higher, 713 lower in mutant)
+FDR < 0.05:              5557
+Bonferroni raw-p cutoff: 2.37e-06
+BH raw-p cutoff:         0.01316
+Largest -log10(p):       23.51
+Genes labelled:          20
+Median gene length (sig): 157.4 kb
+Median gene length (all): 18.4 kb
+
+========== mCA context ==========
+Reading: results/ca/03_differential/mch_differential_results.tsv 
+
+Writing figures to /Users/zakiralibhai/emseq/results/ca/plots
+  Saved: 05_mca_volcano_direction/{pdf,svg,png,jpg}
+  Saved: 05_mca_volcano_fdr_stringency/{pdf,svg,png,jpg}
+  Saved: 05_mca_volcano_genelength/{pdf,svg,png,jpg}
+  Saved: 05_mca_volcano_panel/{pdf,svg,png,jpg}
+
+Context:                 mCA
+Genes tested:            20369
+Significance basis:      Bonferroni p < 0.05
+Significant:             2548  (617 higher, 1931 lower in mutant)
+FDR < 0.05:              8767
+Bonferroni raw-p cutoff: 2.455e-06
+BH raw-p cutoff:         0.02151
+Largest -log10(p):       23.49
+Genes labelled:          20
+Median gene length (sig): 104.9 kb
+Median gene length (all): 19.6 kb
+
+=== Complete ===

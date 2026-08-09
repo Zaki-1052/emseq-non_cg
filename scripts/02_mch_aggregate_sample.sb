@@ -1,0 +1,78 @@
+#!/bin/bash
+# scripts/02_mch_aggregate_sample.sb
+#SBATCH --job-name=mch_agg
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=120G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-7
+#SBATCH --output=logs/mch_aggregate_%A_%a.out
+
+# Per-sample gene-body CH methylation aggregation, one array task per sample.
+#
+# Input:  combined_ch/{sample}_CH.methylKit.gz
+# Output: results/02_aggregate/aggregated/{sample}_genebody_mch.tsv
+#         results/02_aggregate/aggregated/{sample}_lambda.tsv
+#
+# Usage: sbatch run_mch_aggregate.sb
+
+echo "========================================="
+echo "EM-seq: Gene-body mCH aggregation"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
+SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
+CH_FILE="${BASEDIR}/combined_ch/${SAMPLE}_CH.methylKit.gz"
+GENE_BED="${BASEDIR}/references/gene_bodies.protein_coding.bed"
+OUTDIR="${BASEDIR}/results/02_aggregate/aggregated"
+SCRIPT_DIR="${BASEDIR}/scripts"
+
+mkdir -p "$OUTDIR"
+
+echo "Sample:   $SAMPLE"
+echo "CH file:  $CH_FILE"
+echo "Gene BED: $GENE_BED"
+echo "Output:   $OUTDIR"
+echo ""
+
+if [[ ! -s "$CH_FILE" ]]; then
+    echo "ERROR: Combined CH file not found: $CH_FILE"
+    exit 1
+fi
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/02_mch_aggregate_sample.R" \
+    --sample-id "$SAMPLE" \
+    --ch-file "$CH_FILE" \
+    --gene-bed "$GENE_BED" \
+    --out-dir "$OUTDIR" \
+    --threads "$SLURM_CPUS_PER_TASK"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: $SAMPLE"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

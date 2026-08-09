@@ -1,0 +1,2 @@
+comparison	p_value	statistic	n_neuronal	n_non_neuronal	median_logFC_neuronal	median_logFC_non_neuronal
+neuronal_vs_non_neuronal	0.412677550394722	34997857	4169	16928	-0.177068341327984	-0.172104356535066

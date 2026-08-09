@@ -1,0 +1,31 @@
+
+Writing figures to /Users/zakiralibhai/emseq/mca_results/plots
+  Saved: mca_volcano_direction.{pdf,svg,png}
+Warning message:
+In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+  Saved: mca_volcano_robustness.{pdf,svg,png}
+Warning message:
+In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+  Saved: mca_volcano_genelength.{pdf,svg,png}
+Warning message:
+In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+  Saved: mca_volcano_panel.{pdf,svg,png}
+Warning messages:
+1: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+2: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+3: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  for 'mCA difference (mutant − control, percentage points)' in 'mbcsToSbcs': - substituted for − (U+2212)
+
+Genes tested:            20371
+Significance basis:      Bonferroni p < 0.05
+Significant:             156  (106 higher, 50 lower in mutant)
+Robust to leave-one-out: 23
+Bonferroni raw-p cutoff: 2.454e-06
+BH raw-p cutoff:         0.001043
+Largest -log10(p):       46.9
+Genes labelled:          24

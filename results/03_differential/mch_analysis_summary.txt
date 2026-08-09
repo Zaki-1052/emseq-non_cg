@@ -1,0 +1,73 @@
+=== mCH Gene-Body Differential Analysis Summary ===
+
+--- Model ---
+  Formula: ~ genotype + sex + lambda_ch_rate
+  Lambda enters as covariate (no pre-subtraction of counts)
+  Per-sample rates are raw (uncorrected); genotype effect is
+  lambda-adjusted via the model.
+
+--- Gene counts ---
+Total genes: 21846 
+Testable genes: 21097 
+
+--- Lambda CH rates per sample ---
+  ctrl_M1: 0.0133 (1.33%)
+  ctrl_M2: 0.0099 (0.99%)
+  ctrl_F1: 0.0102 (1.02%)
+  ctrl_F2: 0.0112 (1.12%)
+  mut_M1: 0.0087 (0.87%)
+  mut_M2: 0.0162 (1.62%)
+  mut_F1: 0.0118 (1.18%)
+  mut_F2: 0.0181 (1.81%)
+
+--- Covariate correlations ---
+  genotype_mut     +1.000  +0.000  +0.417
+  sex_F            +0.000  +1.000  +0.129
+  lambda_ch_rate   +0.417  +0.129  +1.000
+
+  genotype vs lambda_ch_rate r = +0.417
+
+--- edgeR dispersion estimates ---
+  Common dispersion: 0.029855 (BCV: 0.1728)
+  Tagwise range: 0.001064 - 0.363230
+  Tagwise median: 0.013904
+  Prior df (NB): median 22.1, range 0.4 - 22.1
+
+--- Significant genes ---
+  Bonferroni < 0.05: 949
+  FDR < 0.05: 5557
+  FDR < 0.10: 7141
+
+--- Direction (FDR < 0.05) ---
+  mCH higher in mutant: 642
+  mCH lower in mutant: 4915
+
+--- Effect sizes (all testable genes) ---
+  logFC range: -2.4663 to 1.9868
+  logFC median: -0.1731
+  logFC IQR: -0.2879 to -0.0387
+
+--- Genomic inflation ---
+  lambda_GC: 4.962
+
+--- Top 20 genes by p-value ---
+   1. Auts2           logFC=-0.5895  F=1406.6  p=3.08e-24  FDR=6.49e-20
+   2. Csmd2           logFC=-0.7025  F=1218.0  p=1.95e-23  FDR=2.05e-19
+   3. Arhgap26        logFC=+0.7042  F=921.3  p=6.84e-22  FDR=4.81e-18
+   4. Rasgef1b        logFC=-0.6264  F=807.8  p=3.62e-21  FDR=1.91e-17
+   5. Lrrc49          logFC=+0.9257  F=744.0  p=1.03e-20  FDR=4.33e-17
+   6. Emcn            logFC=+0.9946  F=726.7  p=1.38e-20  FDR=4.85e-17
+   7. Slc13a1         logFC=+1.0350  F=657.2  p=4.89e-20  FDR=1.47e-16
+   8. Arhgap26        logFC=+0.5604  F=629.9  p=8.34e-20  FDR=2.20e-16
+   9. Dpys            logFC=+0.8039  F=566.0  p=3.18e-19  FDR=7.46e-16
+  10. Fgf1            logFC=+0.8113  F=532.9  p=6.75e-19  FDR=1.39e-15
+  11. Runx1t1         logFC=+0.6298  F=529.8  p=7.26e-19  FDR=1.39e-15
+  12. Btbd11          logFC=-0.5595  F=519.6  p=9.26e-19  FDR=1.63e-15
+  13. Trpm3           logFC=+0.5033  F=500.4  p=1.48e-18  FDR=2.40e-15
+  14. Pcdh9           logFC=+0.4061  F=476.9  p=2.69e-18  FDR=4.05e-15
+  15. Cog5            logFC=+0.6984  F=443.9  p=6.52e-18  FDR=9.17e-15
+  16. Cadps           logFC=-0.4530  F=432.1  p=9.10e-18  FDR=1.20e-14
+  17. Zbbx            logFC=+0.8269  F=395.3  p=2.72e-17  FDR=3.38e-14
+  18. Col9a1          logFC=+0.8020  F=392.2  p=3.00e-17  FDR=3.51e-14
+  19. Gprin3          logFC=+0.7770  F=382.8  p=4.03e-17  FDR=4.48e-14
+  20. Maml3           logFC=+0.4176  F=369.6  p=6.20e-17  FDR=6.54e-14

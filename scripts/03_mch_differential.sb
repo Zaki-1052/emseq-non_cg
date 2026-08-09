@@ -1,0 +1,72 @@
+#!/bin/bash
+# scripts/03_mch_differential.sb
+#SBATCH --job-name=mch_diff
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/mch_differential_%j.out
+
+# Differential gene-body mCH testing with edgeR QL F-test.
+#
+# Input:  results/02_aggregate/aggregated/*_genebody_mch.tsv + *_lambda.tsv
+# Output: results/03_differential/mch_differential_results.tsv
+#         results/03_differential/mch_sample_matrix.tsv
+#         results/03_differential/mch_analysis_summary.txt
+#         results/plots/03_mch_qq_plot/{pdf,svg,jpg}
+#         results/plots/03_mch_bcv_plot/{pdf,svg,jpg}
+#
+# Usage: sbatch run_mch_differential.sb
+
+echo "========================================="
+echo "EM-seq: Gene-body mCH differential testing"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+SCRIPT_DIR="${BASEDIR}/scripts"
+AGG_DIR="${BASEDIR}/results/02_aggregate/aggregated"
+OUTDIR="${BASEDIR}/results/03_differential"
+PLOT_DIR="${BASEDIR}/results/plots"
+
+mkdir -p "$OUTDIR" "$PLOT_DIR"
+
+echo "Aggregated dir: $AGG_DIR"
+echo "Output dir:     $OUTDIR"
+echo "Plot dir:       $PLOT_DIR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/03_mch_differential.R" \
+    --agg-dir "$AGG_DIR" \
+    --out-dir "$OUTDIR" \
+    --plot-dir "$PLOT_DIR" \
+    --threads "$SLURM_CPUS_PER_TASK"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE
