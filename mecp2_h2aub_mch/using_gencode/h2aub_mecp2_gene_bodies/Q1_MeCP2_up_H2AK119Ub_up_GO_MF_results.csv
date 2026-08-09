@@ -1,0 +1,2 @@
+"ID","Description","GeneRatio","BgRatio","RichFactor","FoldEnrichment","zScore","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0050839","cell adhesion molecule binding","37/639","165/6408",0.224242424242424,2.24874093043107,5.408105725242,1.44741474933955e-06,0.000874238508601088,0.000874238508601088,"Ank3/Cd47/Cdh13/Cdh18/Cdh20/Cdh7/Cdh8/Cntn5/Cntn6/Ctnna2/Ctnna3/Dmd/Dscaml1/Fgf1/Frmd5/Grin2b/Itga4/Itga7/Itgb3/Itgb5/Lrrc4c/Lyn/Nlgn1/Ntng1/Prom1/Ptprb/Ptprd/Ptprm/Ptpro/Ptprt/Slc14a2/Svep1/Tenm2/Tenm4/Tnc/Tnr/Utrn",37
