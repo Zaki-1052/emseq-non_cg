@@ -1,0 +1,307 @@
+here() starts at /Users/zakiralibhai/emseq
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: generics
+
+Attaching package: ‘generics’
+
+The following object is masked from ‘package:dplyr’:
+
+    explain
+
+The following objects are masked from ‘package:base’:
+
+    as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,
+    setequal, union
+
+
+Attaching package: ‘BiocGenerics’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, saveRDS, table, tapply, unique,
+    unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:tidyr’:
+
+    expand
+
+The following objects are masked from ‘package:dplyr’:
+
+    first, rename
+
+The following object is masked from ‘package:utils’:
+
+    findMatches
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+
+Attaching package: ‘IRanges’
+
+The following objects are masked from ‘package:dplyr’:
+
+    collapse, desc, slice
+
+Loading required package: Seqinfo
+Loading required package: AnnotationDbi
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘AnnotationDbi’
+
+The following object is masked from ‘package:dplyr’:
+
+    select
+
+
+
+clusterProfiler v4.16.0 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan,
+X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal
+enrichment tool for interpreting omics data. The Innovation. 2021,
+2(3):100141
+
+Attaching package: ‘clusterProfiler’
+
+The following object is masked from ‘package:AnnotationDbi’:
+
+    select
+
+The following object is masked from ‘package:IRanges’:
+
+    slice
+
+The following object is masked from ‘package:S4Vectors’:
+
+    rename
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+enrichplot v1.28.4 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+Guangchuang Yu, Qing-Yu He. ReactomePA: an R/Bioconductor package for
+reactome pathway analysis and visualization. Molecular BioSystems.
+2016, 12(2):477-479
+DOSE v4.2.0 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+
+Please cite:
+
+Guangchuang Yu, Li-Gen Wang, Guang-Rong Yan, Qing-Yu He. DOSE: an
+R/Bioconductor package for Disease Ontology Semantic and Enrichment
+analysis. Bioinformatics. 2015, 31(4):608-609
+Loading required package: BiasedUrn
+Loading required package: geneLenDataBase
+
+Attaching package: ‘geneLenDataBase’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    unfactor
+
+Upstream v2 gene-level results loaded: 7371 genes
+  Significant (both marks): 1403 
+
+mCH edgeR results loaded: 21097 genes
+  Duplicate gene_names: 23 
+  Genes: 4933434E20Rik, Aldoa, Arhgap26, Atp5o, Ddit3, Dpep2, Fam220a, Gcat, Gm28040, Jakmip1, Lim2, Ndor1, Nnt, Olfr290, Pakap, Pcdha11, Ptp4a1, Septin2, St6galnac2, Tmigd3, Vmn1r216, Zc3h11a, Zfp91 
+  After dedup: 21072 genes
+Gencode gene bodies loaded: 21650 genes
+
+Merged genes (all three modalities): 6351 
+  Of which v2-significant (both ChIP marks): 1139 
+  Of which mCH-significant (FDR < 0.05): 2743 
+
+mCH direction breakdown:
+
+mCH not sig    mCH down      mCH up 
+       3608        2286         457 
+
+Spearman correlation: mCH vs MeCP2
+
+	Spearman's rank correlation rho
+
+data:  merged$mecp2_Fold and merged$edger_logFC
+S = 2.6354e+10, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+     rho 
+0.382729 
+
+
+Spearman correlation: mCH vs H2AK119Ub
+
+	Spearman's rank correlation rho
+
+data:  merged$h2a_Fold and merged$edger_logFC
+S = 2.6798e+10, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.3723247 
+
+
+mCH vs MeCP2 quadrant counts:
+# A tibble: 4 × 6
+  quadrant_mecp2 n_total_genes percent_total_genes n_sig_genes percent_sig_genes
+  <chr>                  <int>               <dbl>       <int>             <dbl>
+1 Q1 (up / up)             812                12.8         336              42.2
+2 Q2 (down / up)           548                 8.6           1               0.1
+3 Q3 (down / do…          3779                59.5         287              36.1
+4 Q4 (up / down)          1212                19.1         172              21.6
+# ℹ 1 more variable: label <chr>
+
+mCH vs H2AK119Ub quadrant counts:
+# A tibble: 4 × 6
+  quadrant_h2a   n_total_genes percent_total_genes n_sig_genes percent_sig_genes
+  <chr>                  <int>               <dbl>       <int>             <dbl>
+1 Q1 (up / up)            1140                17.9         435              19.9
+2 Q2 (down / up)           220                 3.5           8               0.4
+3 Q3 (down / do…          2222                35           838              38.4
+4 Q4 (up / down)          2769                43.6         902              41.3
+# ℹ 1 more variable: label <chr>
+
+Three-way quadrant summary:
+# A tibble: 4 × 5
+  quadrant                   n_total n_mch_sig n_mch_down n_mch_up
+  <chr>                        <int>     <int>      <int>    <int>
+1 Q1 (MeCP2 up / H2A up)        1620       745        347      398
+2 Q2 (MeCP2 down / H2A up)      2289       865        817       48
+3 Q3 (MeCP2 down / H2A down)    2038       992        990        2
+4 Q4 (MeCP2 up / H2A down)       404       141        132        9
+
+Gene length vs mCH significance (Wilcoxon):
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  mch_gene_length by mch_sig_label
+W = 2027139, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+
+Coverage vs mCH significance (Wilcoxon):
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  total_coverage_mean by mch_sig_label
+W = 2018228, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+'select()' returned 1:1 mapping between keys and columns
+
+GO universe size (merged genes with Entrez IDs): 6351 
+
+Q1: 467 three-way significant genes (ChIP sig + mCH sig)
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 467 
+  enrichGO BP: 0 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 14 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q2: 71 three-way significant genes (ChIP sig + mCH sig)
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 71 
+  enrichGO BP: 6 terms
+  enrichGO MF: 3 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 14 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q3: 192 three-way significant genes (ChIP sig + mCH sig)
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 192 
+  enrichGO BP: 0 terms
+  enrichGO MF: 3 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 14 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+
+Q4: 25 three-way significant genes (ChIP sig + mCH sig)
+'select()' returned 1:1 mapping between keys and columns
+  Converted to Entrez: 25 
+  enrichGO BP: 0 terms
+  enrichGO MF: 0 terms
+  enrichGO CC: 0 terms
+Fetching GO annotations...
+For 14 genes, we could not find any categories. These genes will be excluded.
+To force their use, please run with use_genes_without_cat=TRUE (see documentation).
+This was the default behavior for version 1.15.1 and earlier.
+Calculating the p-values...
+'select()' returned 1:1 mapping between keys and columns
+  goseq: 0 significant terms (length-corrected)
+Warning messages:
+1: In pcls(G) : initial point very close to some inequality constraints
+2: In pcls(G) : initial point very close to some inequality constraints
+3: In pcls(G) : initial point very close to some inequality constraints
+4: In pcls(G) : initial point very close to some inequality constraints
+
+--- Saving outputs ---
+  Saved: mch_vs_mecp2_v2/{pdf,svg,png,jpg}
+  Saved: mch_vs_h2aub_v2/{pdf,svg,png,jpg}
+  Saved: three_way_scatter_v2/{pdf,svg,png,jpg}
+  Saved: diagnostic_mch_genelength/{pdf,svg,png,jpg}
+  Saved: diagnostic_mch_coverage/{pdf,svg,png,jpg}
+  Saved: GO_three_way_Q2_BP_dotplot/{pdf,svg,png,jpg}
+  Saved: GO_three_way_Q2_MF_dotplot/{pdf,svg,png,jpg}
+  Saved: GO_three_way_Q3_MF_dotplot/{pdf,svg,png,jpg}
+
+Done.

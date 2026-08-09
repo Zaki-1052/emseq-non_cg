@@ -1,0 +1,4 @@
+"ID","Description","GeneRatio","BgRatio","RichFactor","FoldEnrichment","zScore","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0005085","guanyl-nucleotide exchange factor activity","7/68","106/6148",0.0660377358490566,5.97058823529412,5.45889364416593,0.000151671028935872,0.0177248716250892,0.0175813503973556,"Dennd1b/Dock4/Farp1/Ngef/Rapgef2/Trio/Vav3",7
+"GO:0030695","GTPase regulator activity","10/68","232/6148",0.0431034482758621,3.89705882352941,4.75687234091535,0.00020451774952026,0.0177248716250892,0.0175813503973556,"Dennd1b/Dock4/Farp1/Iqgap2/Ngef/Rapgef2/Rgs7/Sipa1l1/Trio/Vav3",10
+"GO:0060589","nucleoside-triphosphatase regulator activity","10/68","232/6148",0.0431034482758621,3.89705882352941,4.75687234091535,0.00020451774952026,0.0177248716250892,0.0175813503973556,"Dennd1b/Dock4/Farp1/Iqgap2/Ngef/Rapgef2/Rgs7/Sipa1l1/Trio/Vav3",10

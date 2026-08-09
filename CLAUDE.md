@@ -74,10 +74,31 @@ Local copies of K119ub and MeCP2 data files live in `data/`.
 - `docs/` — project aims, abstract, handoff context
 - `plans/` — analysis plans
 - `logs/` — SLURM log files (organized by step)
-- `adult_mecp2_vs_h2aub/` — separate MeCP2 vs H2AK119ub quadrant analysis (standalone R scripts)
+- `adult_mecp2_vs_h2aub/` — MeCP2 vs H2AK119Ub gene-level quadrant analysis (see below)
+- `mecp2_h2aub_mch/` — three-way mCH + MeCP2 + H2AK119Ub integration (see below)
 - `archive/` — superseded scripts and prior results
 - `txt/` — meeting notes, preliminary results text
 
+## MeCP2 vs H2AK119Ub Quadrant Analysis (`adult_mecp2_vs_h2aub/`)
+
+Gene-level scatter of MeCP2 vs H2AK119Ub DiffBind fold changes in BAP1-KO. The active script is `adult_MeCP2vsH2AUb_v2.R` (the originals are kept for reference). Key methodology:
+
+- DiffBind peaks annotated to genes via ChIPseeker/TxDb, filtered to gene body (Promoter, Exon, Intron, 5'/3' UTR).
+- Multiple peaks per gene collapsed via median FC of significant peaks (FDR < 0.05). FDR is a binary gatekeeper, not a continuous weight.
+- GO enrichment with corrected background (genes-with-peaks-in-both-marks) and goseq gene-length correction alongside enrichGO on all four quadrants.
+- Physical overlap analysis (>= 50% reciprocal overlap) integrated.
+- Produces `gene_level_results_v2.csv` which is read by the mCH integration script.
+
+## Three-Way mCH Integration (`mecp2_h2aub_mch/`)
+
+Merges the v2 MeCP2/H2AK119Ub gene-level results with mCH edgeR differential output. The active script is `mecp2_h2aub_mch_v2.R` (the originals are kept for reference). Depends on `adult_mecp2_vs_h2aub/gene_level_results_v2.csv` — the v2 quadrant analysis must be run first.
+
+- Reads v2 upstream output (no code duplication of the ChIP gene-level analysis).
+- Deduplicates 23 mCH genes with multiple ENSMUSG IDs by keeping highest |logFC|.
+- Three scatter plots: mCH vs MeCP2, mCH vs H2AK119Ub, MeCP2 vs H2AK119Ub colored by mCH direction (blue = mCH down, red = mCH up).
+- Three-way GO enrichment: per MeCP2/H2AK119Ub quadrant, restricted to genes significant in both ChIP marks AND mCH. Both enrichGO and goseq.
+- Diagnostics: gene length and coverage vs mCH significance.
+
 ## R Dependencies
 
-All packages listed in `scripts/00_install_r_packages.R`. Key packages: edgeR, GenomicRanges, data.table, bsseq, dmrseq, fgsea, clusterProfiler, ggplot2, patchwork, svglite. Python: pysam (CA-filter step only).
+All packages listed in `scripts/00_install_r_packages.R`. Key packages: edgeR, GenomicRanges, data.table, bsseq, dmrseq, fgsea, clusterProfiler, ggplot2, patchwork, svglite, goseq. Python: pysam (CA-filter step only).
