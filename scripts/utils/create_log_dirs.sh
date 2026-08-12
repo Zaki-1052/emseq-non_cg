@@ -1,34 +1,36 @@
 #!/bin/bash
 # scripts/utils/create_log_dirs.sh
 #
-# Create the log directory tree that the SLURM wrappers write to.
-# SLURM does not create directories, so missing directories cause logs
-# to vanish silently. Run this once before submitting any jobs.
+# Create the log directory tree that the SLURM wrappers write to, and place a
+# .gitkeep in each leaf so git tracks the empty directories. Run once from
+# anywhere; the script finds the repo root from its own location.
 #
 # Usage:
 #   bash scripts/utils/create_log_dirs.sh
 
 set -euo pipefail
 
-CODEDIR="${EMSEQ_CODE_DIR:-$(cd "$(dirname "$0")/../.." && pwd)}"
+CODEDIR="$(cd "$(dirname "$0")/../.." && pwd)"
 
 dirs=(
-    "$CODEDIR/logs"
-    "$CODEDIR/logs/02b_features"
-    "$CODEDIR/logs/sections"
-    "$CODEDIR/logs/sections/10_chromatin"
-    "$CODEDIR/logs/sections/20_chip_integration"
-    "$CODEDIR/logs/sections/30_hic"
-    "$CODEDIR/logs/sections/40_permutation"
-    "$CODEDIR/logs/sections/50_features"
-    "$CODEDIR/logs/sections/60_mecp2"
-    "$CODEDIR/logs/sections/70_neuronal"
+    logs
+    logs/02b_features
+    logs/sections
+    logs/sections/10_chromatin
+    logs/sections/20_chip_integration
+    logs/sections/30_hic
+    logs/sections/40_permutation
+    logs/sections/50_features
+    logs/sections/60_mecp2
+    logs/sections/70_neuronal
 )
 
 for d in "${dirs[@]}"; do
-    mkdir -p "$d"
-    echo "  $d"
+    full="$CODEDIR/$d"
+    mkdir -p "$full"
+    touch "$full/.gitkeep"
+    echo "  $d/"
 done
 
 echo ""
-echo "Log directories ready."
+echo "Log directories ready (with .gitkeep files)."

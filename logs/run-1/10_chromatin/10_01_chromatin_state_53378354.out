@@ -1,0 +1,99 @@
+=========================================
+EM-seq section 10_01: chromatin state
+=========================================
+Job ID: 53378354
+Node: exp-9-21
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378354
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_01_chromatin_state.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 10_01: PROMOTER AND GENE-BODY CHROMATIN STATE WITH DIFFERENTIAL mCH
+================================================================================
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Promoter window: TSS +/- 2000 bp
+
+Loading histone mark peak sets...
+  CTCF: 32487 peaks
+  H3K27ac: 15105 peaks
+  H3K27me3: 15809 peaks
+  H3K4me1: 113781 peaks
+  H3K4me3: 6581 peaks
+  Bivalent: 318 peaks
+
+Computing histone mark overlaps over promoter windows...
+  CTCF      4,064 genes (19.3%)
+  H3K27ac   5,763 genes (27.3%)
+  H3K27me3  3,085 genes (14.6%)
+  H3K4me1   13,066 genes (61.9%)
+  H3K4me3   6,476 genes (30.7%)
+  Bivalent  267 genes (1.3%)
+
+Computing histone mark overlaps over gene bodies...
+  CTCF      8,639 genes (40.9%)
+  H3K27ac   7,086 genes (33.6%)
+  H3K27me3  3,844 genes (18.2%)
+  H3K4me1   15,118 genes (71.7%)
+  H3K4me3   7,073 genes (33.5%)
+  Bivalent  313 genes (1.5%)
+
+Classifying promoter and gene-body chromatin states...
+
+  Promoter state of all tested genes:
+    Active_Promoter       6,190 ( 29.3%)
+    Bivalent_Promoter       286 (  1.4%)
+    Repressed_Promoter    2,775 ( 13.2%)
+    Unmarked_Promoter    11,846 ( 56.2%)
+
+  Gene-body state of all tested genes:
+    Active                6,566 ( 31.1%)
+    Mixed                   520 (  2.5%)
+    Polycomb              3,324 ( 15.8%)
+    Enhancer_Marked       5,477 ( 26.0%)
+    Unmarked              5,210 ( 24.7%)
+
+Building summary tables...
+
+Running gene-level Fisher tests...
+  Wrote: 10_01_promoter_Active_Promoter_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_promoter_Active_Promoter.tsv (1 rows, 12 cols)
+Error in as.character(function (x)  : 
+  cannot coerce type 'closure' to vector of type 'character'
+Calls: main ... run_state_fisher_tests -> register_fisher_test -> cat -> sprintf
+Execution halted
+
+=========================================
+Complete: section 10_01
+Time: 18s
+Exit code: 1
+End time: Wed Aug 12 13:40:51 PDT 2026
+=========================================

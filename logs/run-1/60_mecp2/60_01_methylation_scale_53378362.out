@@ -1,0 +1,85 @@
+=========================================
+EM-seq section 60_01: methylation scale
+=========================================
+Job ID: 53378362
+Node: exp-4-01
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378362
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/60_mecp2/60_01_methylation_scale.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+Attaching package: ‘ggVennDiagram’
+
+The following object is masked from ‘package:ChIPseeker’:
+
+    overlap
+
+The following object is masked from ‘package:tidyr’:
+
+    unite
+
+================================================================================
+SECTION 60_01: mCH SCALE vs MeCP2 BINDING SCALE
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+FDR threshold: 0.05
+
+--- Loading MeCP2 peak annotation ---
+  MeCP2 annotated peaks: 202,650 total, 202,542 with a gene symbol
+  Peak-level significance at FDR<0.05: 7,683 up, 1,200 down
+
+--- Aggregating MeCP2 peaks to genes (nearest TSS) ---
+  Genes with a MeCP2 annotated peak: 21,195
+
+--- Building the gene table ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Gene table: 21,072 genes, 17,096 carry a MeCP2 peak
+  MeCP2 gene-level change at FDR<0.05: 96 gained, 59 lost
+  Wrote: 60_01_gene_level_mch_mecp2.tsv (21,072 rows, 26 cols)
+
+--- Analysis 1: the cascade ---
+  Genes tested                             21,072 genes  (100.00% of previous, 100.00% of tested)
+  mCH significant                           5,551 genes  ( 26.34% of previous,  26.34% of tested)
+  mCH hypermethylated                       1,399 genes  ( 25.20% of previous,   6.64% of tested)
+  Hypermethylated with a MeCP2 peak         1,293 genes  ( 92.42% of previous,   6.14% of tested)
+  Hypermethylated with a MeCP2 change          59 genes  (  4.56% of previous,   0.28% of tested)
+Error in write_section_table(cascade, file.path(OUT_DIR, "60_01_cascade.tsv")) : 
+  Cannot write 60_01_cascade.tsv: column(s) short_label contain a newline, so each row would break across physical lines. That column is figure text. Build it at the plot with group_label() and drop it before writing.
+Calls: main -> write_section_table
+Execution halted
+
+=========================================
+Complete: section 60_01
+Time: 30s
+Exit code: 1
+End time: Wed Aug 12 13:41:02 PDT 2026
+=========================================

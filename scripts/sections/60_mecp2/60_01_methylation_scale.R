@@ -890,7 +890,8 @@ main <- function() {
   cat("\n--- Analysis 1: the cascade ---\n")
   cascade <- build_cascade_table(gene_tbl)
   print_cascade(cascade)
-  write_section_table(cascade, file.path(OUT_DIR, "60_01_cascade.tsv"))
+  write_section_table(cascade[, setdiff(colnames(cascade), "short_label")],
+                      file.path(OUT_DIR, "60_01_cascade.tsv"))
 
   cat("\n--- Analysis 2: scale comparison ---\n")
   scale_tbl <- build_scale_comparison(gene_tbl, mecp2_diffbind, fdr_threshold)

@@ -662,8 +662,9 @@ run_go_enrichment <- function(gene_entrez, universe_entrez) {
   )
 
   if (is.null(ego) || nrow(as.data.frame(ego)) == 0) {
-    stop("GO BP enrichment returned no term at q < 0.05 for the ",
-         "mutant-specific aging genes against the peak-carrying universe.")
+    cat("  WARNING: GO BP enrichment returned no term at q < 0.05 for the ",
+        "mutant-specific aging genes against the peak-carrying universe.\n")
+    return(NULL)
   }
 
   cat(sprintf("  Significant GO BP terms: %s\n",
@@ -977,18 +978,25 @@ main <- function() {
   universe_entrez <- map_symbols_to_entrez(universe$gene_name,
                                            "Peak-carrying universe")
   ego <- run_go_enrichment(gene_entrez, universe_entrez)
-  go_df <- as.data.frame(ego)
 
-  n_terms_drawn <- min(go_top_terms, nrow(go_df))
-  p_go <- plot_go_dotplot(ego, n_terms_drawn, nrow(mut_specific), nrow(universe))
-  save_multiformat_ggplot(p_go,
-                          file.path(out_dir, "60_04d_mut_specific_go_bp"),
-                          width = 11, height = 11)
+  if (is.null(ego)) {
+    go_df <- data.frame(ID = character(0), Description = character(0),
+                        GeneRatio = character(0), pvalue = numeric(0),
+                        qvalue = numeric(0), stringsAsFactors = FALSE)
+    cat("  Skipping GO dot plot (no significant terms).\n")
+  } else {
+    go_df <- as.data.frame(ego)
+    n_terms_drawn <- min(go_top_terms, nrow(go_df))
+    p_go <- plot_go_dotplot(ego, n_terms_drawn, nrow(mut_specific), nrow(universe))
+    save_multiformat_ggplot(p_go,
+                            file.path(out_dir, "60_04d_mut_specific_go_bp"),
+                            width = 11, height = 11)
 
-  for (i in seq_len(min(10, nrow(go_df)))) {
-    cat(sprintf("  %-58s %s genes, q = %.3g\n",
-                substr(go_df$Description[i], 1, 58), go_df$GeneRatio[i],
-                go_df$qvalue[i]))
+    for (i in seq_len(min(10, nrow(go_df)))) {
+      cat(sprintf("  %-58s %s genes, q = %.3g\n",
+                  substr(go_df$Description[i], 1, 58), go_df$GeneRatio[i],
+                  go_df$qvalue[i]))
+    }
   }
 
   # --- Analysis 6: overlap with the adult mCH result ------------------------

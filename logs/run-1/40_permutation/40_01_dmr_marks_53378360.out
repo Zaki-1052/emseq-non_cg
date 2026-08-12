@@ -1,0 +1,109 @@
+=========================================
+EM-seq section 40_01: gene body x mark permutation
+=========================================
+Job ID: 53378360
+Node: exp-2-13
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378360
+Code dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:       /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/40_permutation/40_01_dmr_marks.R
+Output dir:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Cores:          32
+Randomisations: 5000
+FORCE_RERUN not set: an existing permutation cache is reused.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Loading required package: BSgenome
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘XVector’
+
+The following object is masked from ‘package:purrr’:
+
+    compact
+
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:grid’:
+
+    pattern
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: BiocIO
+
+Attaching package: ‘BiocIO’
+
+The following object is masked from ‘package:rtracklayer’:
+
+    FileForFormat
+
+  Patched regioneReloaded::chooseHclustMet for small-matrix safety.
+
+================================================================================
+SECTION 40_01: mCH GENE BODY x CHROMATIN MARK GENOMIC PERMUTATION
+================================================================================
+Output directory:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Randomisations:     5,000
+Cores:              32
+Randomisation:      randomizeRegions (per chromosome = TRUE)
+Evaluation:         numOverlaps
+Seed:               42
+regioneR:           1.34.0
+regioneReloaded:    1.4.0
+
+STEP 1: Genome and region sets
+Constructing the mm10 genome object...
+The masked version of 'mm10' is not installed. Using the unmasked version. This means that no automatic masking will be available.
+  Genome: 20 chromosomes, 2.63 Gb total
+
+Constructing Alist (mCH direction gene body sets)...
+  mCH Hyper gene bodies       1402 regions (0 dropped off chr1-19/X), median width 100993 bp
+  mCH Hypo gene bodies        4155 regions (0 dropped off chr1-19/X), median width 54710 bp
+
+Constructing Blist (chromatin mark peak sets)...
+  ATAC Up: 7620 peaks
+  ATAC Down: 3744 peaks
+  MeCP2 Up: 7686 peaks
+  MeCP2 Down: 1200 peaks
+Error in .new_IRanges_from_start_end(start, end) : 
+  'start' or 'end' cannot contain NAs
+Calls: main ... IRanges -> .new_IRanges -> .new_IRanges_from_start_end
+Execution halted
+
+=========================================
+Complete: section 40_01
+Time: 20s
+Exit code: 1
+End time: Wed Aug 12 13:40:53 PDT 2026
+=========================================

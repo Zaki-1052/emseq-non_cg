@@ -1,0 +1,77 @@
+=========================================
+EM-seq section 10_02: A/B compartment
+=========================================
+Job ID: 53378355
+Node: exp-1-24
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378355
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_02_ab_compartment.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+================================================================================
+SECTION 10_02: A/B COMPARTMENT ASYMMETRY OF mCH CHANGE
+================================================================================
+Output dir:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Shift FDR:   0.05
+Shift |diff|:0.3
+
+STEP 1: Load HOMER compartment bins
+  Loaded 104,071 bins from diffcompartments.txt
+  Control PC1 columns: ctrl_M1, ctrl_M2, ctrl_M3
+  Mutant PC1 columns:  mut_M1, mut_M2, mut_M3
+  Difference column:   ctrl vs. mut Difference
+  Adjusted p column:   ctrl vs. mut adj. p-value
+  Bins on canonical chromosomes: 104,071 of 104,071
+  Compartment A: 48,207 bins (46.3%), B: 55,864 bins (53.7%)
+  Shift (adj p < 0.05, |difference| > 0.30): B to A 5,485, A to B 2,704, Stable 95,882
+
+STEP 2: Assign genes to compartment bins
+  mCH genes: 21,097 tested, 25 duplicate symbols collapsed, 21,072 kept
+  Genes on canonical chromosomes: 21,072 of 21,072
+  Genes assigned to a bin: 21,034 of 21,072 (99.8%)
+  Assigned genes by compartment: A 15,350, B 5,684
+  Assigned genes by shift: B to A 467, A to B 272, Stable 20,295
+
+STEP 3: Gene-level Fisher tests
+  Wrote: 10_02_hyper_in_compartment_a_genes.tsv (21,034 rows, 4 cols)
+  Wrote: 10_02_hyper_in_compartment_a.tsv (1 rows, 12 cols)
+Error in as.character(function (x)  : 
+  cannot coerce type 'closure' to vector of type 'character'
+Calls: main ... lapply -> FUN -> register_fisher_test -> cat -> sprintf
+Execution halted
+
+=========================================
+Complete: section 10_02
+Time: 25s
+Exit code: 1
+End time: Wed Aug 12 13:40:58 PDT 2026
+=========================================

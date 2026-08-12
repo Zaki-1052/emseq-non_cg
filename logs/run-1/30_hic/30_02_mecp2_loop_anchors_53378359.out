@@ -1,0 +1,126 @@
+=========================================
+EM-seq section 30_02: MeCP2 loop anchors
+=========================================
+Job ID: 53378359
+Node: exp-3-33
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378359
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/30_hic/30_02_mecp2_loop_anchors.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 30_02: MeCP2 DIFFERENTIAL BINDING AT HI-C LOOP ANCHORS
+================================================================================
+Output dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+FDR threshold:     0.05
+Background offset: 1000000 bp
+
+Loading Hi-C loops...
+  Loop table: 2,910 rows, 2,910 significant
+  Significant loops: 2,910 (1,723 up_in_mutant, 1,187 down_in_mutant)
+  Anchor occurrences: 5,820 (2 per loop)
+  Unique anchor intervals: 4,853
+    Gained anchor    2,908
+    Lost anchor      1,859
+    Mixed anchor     86
+  Matched background intervals: 4,637 (from 4,853 anchors, offset 1,000,000 bp)
+
+Preparing MeCP2 peak sets...
+  MeCP2 peaks: 36,804 total, 5,675 gained, 1,107 lost at FDR < 0.050
+  MeCP2 consensus peaks: 36,804
+
+Analysis 1: MeCP2 peak density at anchors against matched background...
+  Gained anchor      All MeCP2 peaks    38.8 peaks/Mb (1,353 peaks over 34.91 Mb)
+  Gained anchor      MeCP2 gained        5.7 peaks/Mb (200 peaks over 34.91 Mb)
+  Gained anchor      MeCP2 lost          0.7 peaks/Mb (26 peaks over 34.91 Mb)
+  Lost anchor        All MeCP2 peaks    51.4 peaks/Mb (1,291 peaks over 25.12 Mb)
+  Lost anchor        MeCP2 gained       22.1 peaks/Mb (555 peaks over 25.12 Mb)
+  Lost anchor        MeCP2 lost          0.7 peaks/Mb (17 peaks over 25.12 Mb)
+  Mixed anchor       All MeCP2 peaks    59.6 peaks/Mb (82 peaks over 1.38 Mb)
+  Mixed anchor       MeCP2 gained        9.5 peaks/Mb (13 peaks over 1.38 Mb)
+  Mixed anchor       MeCP2 lost          0.7 peaks/Mb (1 peaks over 1.38 Mb)
+  Matched background All MeCP2 peaks    16.6 peaks/Mb (952 peaks over 57.28 Mb)
+  Matched background MeCP2 gained        2.7 peaks/Mb (157 peaks over 57.28 Mb)
+  Matched background MeCP2 lost          0.5 peaks/Mb (27 peaks over 57.28 Mb)
+  Fisher anchor vs background, All MeCP2 peaks: OR = 3.69, p < 2.2e-16
+  Fisher anchor vs background, MeCP2 gained: OR = 4.85, p < 2.2e-16
+  Fisher anchor vs background, MeCP2 lost: OR = 1.40, p = 0.21
+  Saved: 30_02a_mecp2_peak_density_at_anchors/{pdf,svg,png,jpg}
+
+Analysis 2: MeCP2 peak fold change by anchor class...
+  Gained anchor      1,298 peaks
+  Lost anchor        1,237 peaks
+  Mixed anchor       120 peaks
+  Matched background 946 peaks
+  Other genome       33,203 peaks
+  Wilcoxon Gained anchor vs Matched background: median -0.0034 vs -0.0163, p = 0.148
+  Wilcoxon Lost anchor vs Matched background: median 0.2412 vs -0.0163, p < 2.2e-16
+  Wilcoxon Mixed anchor vs Matched background: median 0.0004 vs -0.0163, p = 0.294
+  Wilcoxon Gained anchor vs Lost anchor: median -0.0034 vs 0.2412, p < 2.2e-16
+  Wilcoxon Gained anchor vs Other genome: median -0.0034 vs -0.0136, p = 0.00676
+  Wilcoxon Lost anchor vs Other genome: median 0.2412 vs -0.0136, p < 2.2e-16
+  Saved: 30_02b_mecp2_peak_fold_by_anchor_class/{pdf,svg,png,jpg}
+
+Analysis 3: distance from MeCP2 peaks to the nearest anchor...
+  2 MeCP2 peaks lie on chromosomes with no loop anchor and have no distance
+  Gained     n = 5,675, median = 175,502 bp, inside anchor = 13.3%
+  Lost       n = 1,107, median = 235,098 bp, inside anchor = 3.8%
+  Unchanged  n = 30,020, median = 261,668 bp, inside anchor = 6.2%
+  Wilcoxon distance Gained vs Unchanged: p < 2.2e-16
+  Wilcoxon distance Lost vs Unchanged: p = 0.222
+  Wilcoxon distance Gained vs Lost: p = 1.02e-08
+  Saved: 30_02d_mecp2_distance_to_nearest_anchor/{pdf,svg,png,jpg}
+
+Aggregating MeCP2 peaks to genes...
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  11,229 genes carry a MeCP2 peak
+  11,229 genes have a concentration-weighted MeCP2 fold
+
+Assigning genes to loop anchors...
+  Genes assigned to anchors: 1,935 of 21,072
+  9,517 genes with a MeCP2 peak, 412 MeCP2-gained, 96 MeCP2-lost
+
+Analysis 4: gene-level Fisher tests (registered for section 40_04)...
+  Fisher gene universe: 9,517 genes with both mCH testing and a MeCP2 peak
+  Wrote: 30_02_mecp2_gained_at_gained_anchor_genes.tsv (9,517 rows, 4 cols)
+  Wrote: 30_02_mecp2_gained_at_gained_anchor.tsv (1 rows, 12 cols)
+Error in as.character(function (x)  : 
+  cannot coerce type 'closure' to vector of type 'character'
+Calls: main -> register_fisher_test -> cat -> sprintf
+Execution halted
+
+=========================================
+Complete: section 30_02
+Time: 50s
+Exit code: 1
+End time: Wed Aug 12 13:41:23 PDT 2026
+=========================================

@@ -1,0 +1,31 @@
+=========================================
+EM-seq: Sub-gene feature mCH aggregation
+=========================================
+Job ID: 53378343_7
+Node: exp-12-36
+Start time: Wed Aug 12 13:39:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378343_7
+Sample:      mut_F2
+CH file:     /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F2_CH.methylKit.gz
+Feature dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features
+Output:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+
+Sample: mut_F2 
+data.table threads: 64 
+
+Loading feature intervals from: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features 
+  5UTR                   46,033 intervals
+  Exon                  226,407 intervals
+  SpliceSite_Donor      204,583 intervals
+  SpliceSite_Acceptor   204,578 intervals
+  Intron                204,586 intervals
+  3UTR                   52,898 intervals
+  Total: 939,085 intervals across 21,820 genes
+
+Reading: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_F2_CH.methylKit.gz 
+  Total sites: 981,846,125
+  Canonical chr sites: 981,076,575
+Building GRanges...
+slurmstepd: error: *** JOB 53378343 ON exp-12-36 CANCELLED AT 2026-08-12T13:44:52 ***

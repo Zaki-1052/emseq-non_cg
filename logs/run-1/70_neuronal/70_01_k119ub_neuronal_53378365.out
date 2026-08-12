@@ -1,0 +1,99 @@
+=========================================
+EM-seq section 70_01: K119ub neuronal
+=========================================
+Job ID: 53378365
+Node: exp-9-05
+Start time: Wed Aug 12 13:40:31 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378365
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/70_neuronal/70_01_k119ub_neuronal.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+===========================================================================
+  SECTION 70_01: H2AK119ub AT NEURONAL GENES
+===========================================================================
+  Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  GO and GSEA FDR threshold: 0.05
+  Signal used: absolute gene-body K119ub, not fold change
+
+--- Step 1: K119ub gene signal ---
+  23,150 genes in the table
+    no_signal      767
+    one_condition  779
+    quantifiable   21,604
+  Working universe: 21,604 quantifiable genes
+  Ctrl gene-body signal range: 0.220 to 44.998
+
+--- Step 2a: deriving the neuronal gene set from GO ---
+  Term name pattern: synap|neuron|axon|dendrit|nervous
+'select()' returned 1:1 mapping between keys and columns
+  1,021 of 27,597 GO BP terms match
+  Examples: acetylcholine catabolic process in synaptic cleft; neuron migration; immunological synapse formation; myeloid dendritic cell activation
+'select()' returned 1:many mapping between keys and columns
+  Wrote: 70_01_neuronal_go_terms.tsv (1,021 rows, 3 cols)
+  Derived neuronal gene set: 5,327 symbols
+
+--- Loading the external neuronal gene set ---
+  External neuronal gene set: 5614 genes
+
+--- Step 2b: derived against external neuronal gene set ---
+  Derived only: 60 | External only: 347 | Both: 5,267
+  Union: 5,674 genes, Jaccard index = 0.928
+  In the K119ub universe: derived 4,797, external 5,077, both 4,757
+
+  Wrote: 70_01a_gene_set_overlap.tsv (3 rows, 7 cols)
+  Saved: 70_01a_gene_set_overlap/{pdf,svg,png,jpg}
+
+--- Step 3: annotating the K119ub universe ---
+  Neuronal (derived):  4,797 of 21,604 genes (22.2%)
+  Neuronal (external): 5,077 of 21,604 genes (23.5%)
+  Ctrl signal thresholds: Q3 = 1.6133, D9 = 2.5946
+  Mut  signal thresholds: Q3 = 1.7968, D9 = 3.0312
+  Wrote: 70_01_signal_thresholds.tsv (4 rows, 5 cols)
+  Wrote: 70_01_decile_bounds.tsv (10 rows, 4 cols)
+
+--- Figure 70_01b: K119ub signal, neuronal against other ---
+  Saved: 70_01b_k119ub_signal_neuronal_vs_other/{pdf,svg,png,jpg}
+  Wrote: 70_01b_signal_distribution.tsv (4 rows, 7 cols)
+
+--- Figure 70_01c: neuronal enrichment among K119ub-high genes ---
+  Wrote: 70_01_neuronal_ctrl_top_quartile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_neuronal_ctrl_top_quartile.tsv (1 rows, 12 cols)
+Error in as.character(function (x)  : 
+  cannot coerce type 'closure' to vector of type 'character'
+Calls: main ... test_high_signal_enrichment -> register_fisher_test -> cat -> sprintf
+Execution halted
+
+=========================================
+Complete: section 70_01
+Time: 28s
+Exit code: 1
+End time: Wed Aug 12 13:41:03 PDT 2026
+=========================================

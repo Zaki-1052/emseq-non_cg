@@ -1,0 +1,114 @@
+=========================================
+EM-seq section 30_01: loop anchor methylation
+=========================================
+Job ID: 53378358
+Node: exp-2-18
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378358
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/30_hic/30_01_loop_anchor_methylation.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 30_01: mCH DIRECTION AT DIFFERENTIAL Hi-C LOOP ANCHORS
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+K119ub peak FDR:  0.05
+
+--- Loading section inputs ---
+  Loop table: 2910 rows
+  Significant loops: 2910 (1723 gained, 1187 lost)
+  K119ub gene signal: 23150 genes, 22383 with a gene-body log2FC
+  Wrote: 30_01_loop_summary.tsv (17 rows, 6 cols)
+
+--- Building loop anchors ---
+  Anchors: 5820 (3446 gained, 2374 lost)
+  Wrote: 30_01_anchor_table.tsv (5,820 rows, 21 cols)
+
+--- Marking K119ub differential peaks at anchors ---
+  K119ub peaks: 17078 gained, 6304 lost at FDR < 0.05
+  Anchors overlapping a gained K119ub peak: 1620 of 5820
+  Anchors overlapping a lost K119ub peak:   557 of 5820
+
+--- Associating anchors with genes ---
+  mCH universe: 21072 genes after collapsing 25 duplicate symbols
+  66 genes were dropped because they have exons located on both strands
+  of the same reference sequence or on more than one reference sequence,
+  so cannot be represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a
+  GRangesList object, or use suppressMessages() to suppress this message.
+  TxDb regulatory domains: 24515 genes (5 kb up, 1 kb down, 100 kb max extension)
+'select()' returned 1:1 mapping between keys and columns
+  Domains with a gene symbol: 24498 (24498 unique symbols)
+  GREAT domain: 6797 anchor-gene pairs, 3695 unique genes
+  Direct overlap: 3718 anchor-gene pairs, 1935 unique genes
+  Wrote: 30_01_anchor_gene_associations.tsv (10,515 rows, 11 cols)
+  GREAT universe: 18648 of 21072 mCH genes have a TxDb regulatory domain
+
+--- Building gene-level anchor tables ---
+  GREAT domain gene table: 18648 genes (1589 gained, 1079 lost, 249 both, 15731 none)
+  Direct overlap gene table: 21072 genes (1025 gained, 765 lost, 145 both, 19137 none)
+  Wrote: 30_01_gene_anchor_class.tsv (39,720 rows, 30 cols)
+
+--- Hypermethylation rate by anchor class ---
+          method  anchor_class n_genes n_sig n_hyper n_hypo  pct_sig pct_hyper
+1   GREAT domain Gained anchor    1589   575     152    423 36.18628  9.565765
+2   GREAT domain   Lost anchor    1079   410     152    258 37.99815 14.087118
+3   GREAT domain  Both anchors     249    82      28     54 32.93173 11.244980
+4   GREAT domain     No anchor   15731  4237    1000   3237 26.93408  6.356875
+5 Direct overlap Gained anchor    1025   489     164    325 47.70732 16.000000
+6 Direct overlap   Lost anchor     765   334     149    185 43.66013 19.477124
+7 Direct overlap  Both anchors     145    73      33     40 50.34483 22.758621
+8 Direct overlap     No anchor   19137  4655    1053   3602 24.32461  5.502430
+  pct_hypo median_mch_diff mean_mch_diff
+1 26.62052    0.0001348822  7.101478e-05
+2 23.91103    0.0003067601  1.003103e-03
+3 21.68675    0.0005744928  6.041182e-04
+4 20.57720    0.0002264299  2.732630e-04
+5 31.70732    0.0002057819  2.690568e-04
+6 24.18301    0.0004682058  1.187396e-03
+7 27.58621    0.0007208789  1.001684e-03
+8 18.82218    0.0002642787  3.246791e-04
+  Wrote: 30_01_hyper_rate_by_anchor_class.tsv (8 rows, 11 cols)
+
+--- Gene-level Fisher tests ---
+  Wrote: 30_01_hyper_x_gained_anchor_great_genes.tsv (18,648 rows, 4 cols)
+  Wrote: 30_01_hyper_x_gained_anchor_great.tsv (1 rows, 12 cols)
+Error in h(simpleError(msg, call)) : 
+  error in evaluating the argument 'args' in selecting a method for function 'do.call': cannot coerce type 'closure' to vector of type 'character'
+Calls: main ... register_fisher_test -> cat -> sprintf -> .handleSimpleError -> h
+Execution halted
+
+=========================================
+Complete: section 30_01
+Time: 21s
+Exit code: 1
+End time: Wed Aug 12 13:40:54 PDT 2026
+=========================================

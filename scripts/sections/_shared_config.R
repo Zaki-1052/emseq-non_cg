@@ -413,6 +413,14 @@ load_diffbind_flex <- function(filepath, mark_name = "Mark", fdr_threshold = Q_T
   }
 
   df$Chr <- as.character(df$Chr)
+
+  na_coords <- is.na(df$Chr) | is.na(df$Start) | is.na(df$End)
+  if (any(na_coords)) {
+    cat(sprintf("  %s: dropping %d peaks with NA coordinates\n",
+                mark_name, sum(na_coords)))
+    df <- df[!na_coords, , drop = FALSE]
+  }
+
   needs_prefix <- !grepl("^chr", df$Chr)
   df$Chr[needs_prefix] <- paste0("chr", df$Chr[needs_prefix])
 
@@ -711,8 +719,8 @@ register_fisher_test <- function(section, test_id, description,
                           sprintf("%s_%s.tsv", section, test_id))
   write_section_table(row, shard_path)
 
-  cat(sprintf("  Fisher %s: OR=%.3f, p=%.3g (n=%s genes) [registered]\n",
-              key, unname(ft$estimate), ft$p.value,
+  cat(sprintf("  Fisher %s:%s: OR=%.3f, p=%.3g (n=%s genes) [registered]\n",
+              section, test_id, unname(ft$estimate), ft$p.value,
               format(nrow(gene_df), big.mark = ",")))
   ft
 }

@@ -1,0 +1,18 @@
+Reading GTF: /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c/abc/reference/gencode.vM25.annotation.gtf.gz 
+  1,872,052 records
+  1,711,818 protein-coding records on canonical chromosomes
+  21,820 protein-coding genes
+
+Building feature intervals...
+  GTF uses a single UTR type; splitting by position relative to CDS.
+  185,601 UTR records: 95,093 5' and 90,508 3' across 64,509 transcripts
+
+Writing BED files to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features 
+  5UTR                   46,033 intervals  20,946 genes     7,710,455 bp  -> utr5_protein_coding.bed
+  Exon                  226,407 intervals  21,820 genes    97,522,851 bp  -> exons_protein_coding.bed
+  SpliceSite_Donor      204,583 intervals  20,474 genes     4,296,290 bp  -> splice_donor_protein_coding.bed
+  SpliceSite_Acceptor   204,578 intervals  20,474 genes     4,296,222 bp  -> splice_acceptor_protein_coding.bed
+  Intron                204,586 intervals  20,474 genes   979,895,428 bp  -> introns_protein_coding.bed
+  3UTR                   52,898 intervals  21,665 genes    38,015,561 bp  -> utr3_protein_coding.bed
+
+Feature BED generation complete.

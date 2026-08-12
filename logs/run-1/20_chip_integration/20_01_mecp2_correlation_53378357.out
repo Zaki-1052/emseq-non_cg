@@ -1,0 +1,105 @@
+=========================================
+EM-seq section 20_01: MeCP2 correlation
+=========================================
+Job ID: 53378357
+Node: exp-1-56
+Start time: Wed Aug 12 13:40:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53378357
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/20_chip_integration/20_01_mecp2_correlation.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
+  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
+  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 20_01: mCH DIRECTION vs MeCP2 BINDING CHANGE
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+FDR threshold: 0.05
+
+--- Loading MeCP2 peak data ---
+  MeCP2 annotated peaks: 202,650 total, 202,542 with a gene symbol
+  Peak-level significance at FDR<0.05: 7,683 up, 1,200 down
+  MeCP2 up: 7686 peaks
+  MeCP2 down: 1200 peaks
+
+--- Aggregating MeCP2 peaks to genes ---
+  Genes with a MeCP2 annotated peak: 21,195
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  Genes from the DiffBind route: 11,229
+
+--- Cross-checking the two aggregation routes ---
+  Cross-check on 11,042 shared genes: Spearman rho = 0.384 (p = 0)
+  Sign agreement between routes: 69.4%
+  Wrote: mecp2_aggregation_crosscheck_genes.tsv (11,042 rows, 7 cols)
+  Wrote: mecp2_aggregation_crosscheck_summary.tsv (1 rows, 10 cols)
+  Saved: 20_01f_aggregation_crosscheck/{pdf,svg,png,jpg}
+
+--- Building the gene table ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Gene table: 21,072 genes, 17,096 with a gene-level MeCP2 fold change
+  Wrote: mecp2_mch_gene_level.tsv (21,072 rows, 33 cols)
+
+--- Analysis 1: gene-body overlap with MeCP2 peaks ---
+  Hypermethylated  x MeCP2 Up   : 445/1,399 genes (31.8%)
+  Hypermethylated  x MeCP2 Down : 32/1,399 genes (2.3%)
+  Hypomethylated   x MeCP2 Up   : 98/4,152 genes (2.4%)
+  Hypomethylated   x MeCP2 Down : 341/4,152 genes (8.2%)
+  Not Significant  x MeCP2 Up   : 305/15,521 genes (2.0%)
+  Not Significant  x MeCP2 Down : 77/15,521 genes (0.5%)
+  Wrote: mecp2_overlap_by_mch_direction.tsv (6 rows, 5 cols)
+  Saved: 20_01a_mecp2_overlap_by_mch_direction/{pdf,svg,png,jpg}
+
+--- Analysis 2: directional Fisher tests ---
+  Wrote: 20_01_hyper_vs_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 20_01_hyper_vs_mecp2_up.tsv (1 rows, 12 cols)
+Error in as.character(function (x)  : 
+  cannot coerce type 'closure' to vector of type 'character'
+Calls: main ... run_direction_fisher_tests -> register_fisher_test -> cat -> sprintf
+In addition: Warning messages:
+1: In grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <cf>
+2: In grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <81>
+3: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <cf>
+4: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <81>
+5: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <cf>
+6: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+  conversion failure on 'Spearman ρ = 0.384, p = 0.00e+00 | sign agreement 69.4% | n = 11,042 genes' in 'mbcsToSbcs': dot substituted for <81>
+Execution halted
+
+=========================================
+Complete: section 20_01
+Time: 55s
+Exit code: 1
+End time: Wed Aug 12 13:41:28 PDT 2026
+=========================================
