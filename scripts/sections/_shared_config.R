@@ -24,7 +24,12 @@
 
 suppressPackageStartupMessages({
   library(yaml)
-  library(tidyverse)
+  library(dplyr)
+  library(tidyr)
+  library(readr)
+  library(purrr)
+  library(tibble)
+  library(stringr)
   library(ggplot2)
   library(patchwork)
   library(RColorBrewer)

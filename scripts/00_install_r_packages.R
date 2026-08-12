@@ -22,7 +22,9 @@ pkgs <- c(
 
   # --- Section pipeline: shared config ---
   "yaml",             # paths.yaml parsing
-  "tidyverse",        # loaded as a whole by _shared_config.R
+  "purrr",            # loaded by _shared_config.R
+  "tibble",           # loaded by _shared_config.R
+  "stringr",          # loaded by _shared_config.R
   "RColorBrewer",     # colour palettes
   "scales",           # axis formatting
   "pheatmap",         # correlation heatmaps (section 20_02)
