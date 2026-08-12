@@ -8,7 +8,7 @@
 #SBATCH --mem=128G
 #SBATCH --time=24:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/40_04_gene_level_%j.out
+#SBATCH --output=logs/sections/40_permutation/40_04_gene_level_%j.out
 
 # Section 40_04: label-shuffle validation of every registered Fisher test.
 #

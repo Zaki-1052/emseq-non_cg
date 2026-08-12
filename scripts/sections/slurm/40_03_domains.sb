@@ -8,7 +8,7 @@
 #SBATCH --mem=128G
 #SBATCH --time=48:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/40_03_domains_%j.out
+#SBATCH --output=logs/sections/40_permutation/40_03_domains_%j.out
 
 # Section 40_03: permutation of compartments and Polycomb domains.
 #

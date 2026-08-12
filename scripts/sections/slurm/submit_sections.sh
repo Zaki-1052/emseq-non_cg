@@ -88,6 +88,7 @@ DRY_RUN=0
 FORCE_RERUN=0
 NTIMES=""
 TARGET_SECTION=""
+AFTER_02B=""
 
 usage() {
     cat <<'USAGE'
@@ -103,6 +104,9 @@ Options
                      (5000 for 40_01, 40_02, 40_03; 10000 for 40_04).
   --force-rerun      Export FORCE_RERUN=1 to the 40_* sections, which makes
                      them ignore their RDS caches and recompute.
+  --after-02b JOBID  Chain 50_01_feature_methylation to wait on this step 02b
+                     job. Without it 50_01 runs immediately and fails if the
+                     feature tables are not ready.
   -h, --help         Print this text.
 
 Arguments
@@ -130,6 +134,15 @@ while [[ $# -gt 0 ]]; do
             ;;
         --force-rerun)
             FORCE_RERUN=1
+            shift
+            ;;
+        --after-02b)
+            [[ $# -ge 2 ]] || die "--after-02b needs a SLURM job id."
+            AFTER_02B="$2"
+            shift 2
+            ;;
+        --after-02b=*)
+            AFTER_02B="${1#--after-02b=}"
             shift
             ;;
         --ntimes)
@@ -413,7 +426,16 @@ submit_section 20_01_mecp2_correlation
 submit_section 30_01_loop_anchor_methylation
 submit_section 30_02_mecp2_loop_anchors
 submit_section 40_01_dmr_marks
-submit_section 50_01_feature_methylation
+if [[ -n "$AFTER_02B" ]]; then
+    # 50_01 reads the feature tables step 02b writes. Chain it.
+    SUMMARY_SECTION[$N_ROWS]="step_02b"
+    SUMMARY_JOBID[$N_ROWS]="$AFTER_02B"
+    SUMMARY_WAIT[$N_ROWS]="(external)"
+    N_ROWS=$(( N_ROWS + 1 ))
+    submit_section 50_01_feature_methylation step_02b
+else
+    submit_section 50_01_feature_methylation
+fi
 submit_section 60_01_methylation_scale
 submit_section 60_03_reconciliation
 submit_section 60_04_aging
@@ -452,8 +474,10 @@ echo "Wave 4: Fisher registry permutation"
 submit_section 40_04_gene_level "${FISHER_SECTIONS[@]}"
 echo ""
 
-if [[ $N_ROWS -ne $N_ALL_SECTIONS ]]; then
-    die "Submitted ${N_ROWS} sections, expected ${N_ALL_SECTIONS}."
+EXPECTED_ROWS=$N_ALL_SECTIONS
+[[ -n "$AFTER_02B" ]] && EXPECTED_ROWS=$(( EXPECTED_ROWS + 1 ))
+if [[ $N_ROWS -ne $EXPECTED_ROWS ]]; then
+    die "Submitted ${N_ROWS} sections, expected ${EXPECTED_ROWS}."
 fi
 
 print_summary

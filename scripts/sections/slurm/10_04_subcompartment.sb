@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=04:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/10_04_subcompartment_%j.out
+#SBATCH --output=logs/sections/10_chromatin/10_04_subcompartment_%j.out
 
 # Section 10_04: subcompartment.
 #

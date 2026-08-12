@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=04:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/60_03_reconciliation_%j.out
+#SBATCH --output=logs/sections/60_mecp2/60_03_reconciliation_%j.out
 
 # Section 60_03: MeCP2 reconciliation.
 #

@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=08:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/30_01_loop_anchor_methylation_%j.out
+#SBATCH --output=logs/sections/30_hic/30_01_loop_anchor_methylation_%j.out
 
 # Section 30_01: loop anchor methylation.
 #

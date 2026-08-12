@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=04:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/20_03_quadrant_scatters_%j.out
+#SBATCH --output=logs/sections/20_chip_integration/20_03_quadrant_scatters_%j.out
 
 # Section 20_03: quadrant scatters.
 #

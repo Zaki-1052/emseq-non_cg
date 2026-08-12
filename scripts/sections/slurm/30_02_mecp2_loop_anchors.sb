@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=08:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/30_02_mecp2_loop_anchors_%j.out
+#SBATCH --output=logs/sections/30_hic/30_02_mecp2_loop_anchors_%j.out
 
 # Section 30_02: MeCP2 loop anchors.
 #

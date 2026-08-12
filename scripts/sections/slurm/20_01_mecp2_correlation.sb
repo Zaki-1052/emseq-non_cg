@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=04:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/20_01_mecp2_correlation_%j.out
+#SBATCH --output=logs/sections/20_chip_integration/20_01_mecp2_correlation_%j.out
 
 # Section 20_01: MeCP2 correlation.
 #

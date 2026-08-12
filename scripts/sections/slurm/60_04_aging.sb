@@ -8,7 +8,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=08:00:00
 #SBATCH --account=csd940
-#SBATCH --output=logs/sections/60_04_aging_%j.out
+#SBATCH --output=logs/sections/60_mecp2/60_04_aging_%j.out
 
 # Section 60_04: MeCP2 aging.
 #

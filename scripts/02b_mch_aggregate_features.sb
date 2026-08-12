@@ -4,12 +4,12 @@
 #SBATCH --partition=shared
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=64G
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=200G
 #SBATCH --time=24:00:00
 #SBATCH --account=csd940
 #SBATCH --array=0-7
-#SBATCH --output=logs/mch_aggregate_features_%A_%a.out
+#SBATCH --output=logs/02b_features/mch_aggregate_features_%A_%a.out
 
 # Per-sample sub-gene feature CH methylation aggregation, one array task per
 # sample. Runs in parallel with step 02, not after it.
