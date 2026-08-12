@@ -260,8 +260,8 @@ build_splice_windows <- function(exons, gene_strand, half_width) {
   dt[, donor_pos    := ifelse(strand == "-", start, end)]
   dt[, acceptor_pos := ifelse(strand == "-", end, start)]
 
-  donor_dt <- dt[!is_last_in_tx]
-  acceptor_dt <- dt[!is_first_in_tx]
+  donor_dt <- dt[is_last_in_tx == FALSE]
+  acceptor_dt <- dt[is_first_in_tx == FALSE]
 
   make_windows <- function(d, pos_col) {
     gr <- GRanges(

@@ -39,8 +39,8 @@ if [[ ! -d "$HIC_DIR" ]]; then
     echo "ERROR: mariner_hi-c directory not found: $HIC_DIR" >&2
     exit 1
 fi
-if [[ ! -d "$DATA_DIR" ]]; then
-    echo "ERROR: data directory not found: $DATA_DIR" >&2
+if [[ ! -d "$REPO_DIR" ]]; then
+    echo "ERROR: repo directory not found: $REPO_DIR" >&2
     exit 1
 fi
 
@@ -48,7 +48,7 @@ echo "========================================="
 echo "Copying section pipeline reference data"
 echo "========================================="
 echo "Source (mariner_hi-c): $HIC_DIR"
-echo "Target (emseq data):   $DATA_DIR"
+echo "Target (repo):          $REPO_DIR"
 echo ""
 
 for sub in chip_peaks chromatin diffbind hic mecp2 neuronal features; do
