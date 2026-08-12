@@ -46,8 +46,8 @@ echo "TMPDIR=$TMPDIR"
 SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
 SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
 CH_FILE="${DATADIR}/combined_ch/${SAMPLE}_CH.methylKit.gz"
-FEATURE_DIR="${DATADIR}/data/features"
-OUTDIR="${DATADIR}/results/02b_features"
+FEATURE_DIR="${CODEDIR}/data/features"
+OUTDIR="${CODEDIR}/results/02b_features"
 
 mkdir -p "$OUTDIR"
 

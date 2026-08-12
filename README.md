@@ -51,11 +51,33 @@ Exists for comparison with published mCA atlases. Secondary to the all-CH pipeli
 3. `ca/03_ca_aggregate.sb` -- reuses `02_mch_aggregate_sample.R` on CA-only input
 4. `ca/04_ca_differential.sb` -- reuses `03_mch_differential.R` on CA-only aggregates
 
+### Downstream section pipeline (`scripts/sections/`)
+
+23 section scripts ported from the companion Biomodal CG methylation pipeline, rewritten for single-modality mCH. Each sources a shared config (`scripts/sections/_shared_config.R`) that loads the mCH differential results, all DiffBind tables, consensus peak sets, and shared helper functions. Path resolution uses `paths.yaml` at the repo root, which maps `local` and `expanse` environments to the correct root directories.
+
+Sections are grouped by theme:
+
+| Group | Scripts | What they test |
+|-------|---------|----------------|
+| `10_chromatin/` | 10_01 through 10_04 | Chromatin state classification, A/B compartments, Polycomb enrichment, subcompartments |
+| `20_chip_integration/` | 20_01 through 20_04 | MeCP2 correlation, multi-mark DiffBind integration, quadrant scatters, mCH-MeCP2 by mark |
+| `30_hic/` | 30_01, 30_02 | Hi-C loop anchor methylation, MeCP2 at loop anchors |
+| `40_permutation/` | 40_01 through 40_04 | Spatial permutation (DMR x marks, ATAC x loops, domains) and gene-level label-shuffle validation |
+| `50_features/` | 50_01 | Sub-gene feature methylation (exon, intron, UTR, splice sites) |
+| `60_mecp2/` | 60_01 through 60_04 | MeCP2 cascade, K119ub at unmethylated genes, peak reconciliation, aging trajectory |
+| `70_neuronal/` | 70_01 through 70_04 | K119ub neuronal enrichment, chromatin remodeling, gene set overlap, synapse chromatin |
+
+Step `02b_mch_aggregate_features.R` aggregates mCH over sub-gene feature intervals (exons, introns, UTRs, splice sites) for section 50_01. It runs in parallel with step 02, not after it.
+
+SLURM wrappers live in `scripts/sections/slurm/`. `submit_sections.sh` chains all jobs with `--dependency=afterok` following the inter-section dependency graph. See `docs/sections_setup.md` for the full Expanse setup procedure.
+
+The section pipeline was ported from the Biomodal analysis of CG 5mC/5hmC. Sections that required separated 5mC and 5hmC (coordinated changes, demethylation ratio, stoichiometry) were not ported. See `docs/biomodal-deviations.md` for the complete list of differences between the plan and the implementation.
+
 ### Shared components
 
-`02_mch_aggregate_sample.R` and `03_mch_differential.R` are shared between both pipelines. The CA pipeline passes different input/output paths but uses the same R scripts.
+`02_mch_aggregate_sample.R` and `03_mch_differential.R` are shared between the all-CH and CA-only pipelines. The CA pipeline passes different input/output paths but uses the same R scripts.
 
-`scripts/utils/multi_format_output.R` saves every plot in 4 formats (PDF, SVG, PNG, JPEG) into per-figure subdirectories. All R scripts that produce plots source this utility.
+`scripts/utils/multi_format_output.R` saves every plot in 4 formats (PDF, SVG, PNG, JPEG) into per-figure subdirectories. All R scripts that produce plots source this utility. Provides `save_multiformat_ggplot()`, `save_multiformat_base()`, and `save_multiformat_pheatmap()`.
 
 ## Key methodological decisions
 
@@ -105,37 +127,51 @@ Three-way GO enrichment (genes significant in both ChIP marks AND mCH) also does
 
 ## Reference files and cross-project dependencies
 
-Step 04 (`04_mch_integration.R`) pulls reference files from both this project and the companion Hi-C project at `/expanse/lustre/projects/csd940/zalibhai/mariner_hi-c`:
+The core pipeline (steps 01-08) and the section pipeline both pull reference files from the companion mariner_hi-c project at `/expanse/lustre/projects/csd940/zalibhai/mariner_hi-c`.
 
-- Gene body BED: `references/gene_bodies.protein_coding.bed`
-- K119ub consensus peaks: `references/K119ub_consensus_v3.bed`
-- K119ub DiffBind: from `mariner_hi-c/peaks/diffbind/`
-- MeCP2 consensus and DiffBind: `references/mecp2-peaks/`
-- Neuronal gene set: from `mariner_hi-c/biomodal/downstream/`
-- CG mC/hmC DMRs: from `mariner_hi-c/biomodal/downstream/modality/outputs/`
+The section pipeline copies its reference files into `data/` subdirectories during setup (`scripts/utils/copy_reference_data.sh`), so it does not depend on the Hi-C repo at runtime. 31 files are copied: histone mark consensus peaks, chromHMM segmentations, DiffBind tables for 4 marks, ATAC and condition-specific peak BEDs, MeCP2 peaks and aging DiffBind, Hi-C characterized loops, HOMER compartments, CALDER2 subcompartment labels, K119ub gene-body signal, and neuronal gene sets.
 
-Local copies of K119ub and MeCP2 data files live in `data/`.
+BigWig signal tracks are large and are read in place from `/expanse/lustre/projects/csd940/zalibhai/bigwigs/` via the `bigwigs_dir` root in `paths.yaml`.
 
 ## Directory layout
 
 ```
-scripts/              Pipeline scripts (numbered order)
-  01-06               mCH pipeline (combine, aggregate, edgeR, integration, volcano, DMR)
-  07_mecp2_h2aub_quadrant.R      MeCP2 vs H2AK119Ub gene-level analysis
-  08_mch_mecp2_h2aub_integration.R  Three-way mCH + ChIP integration
-  ca/                 CA-only pipeline variant
-  utils/              Shared R utilities (multi_format_output.R)
-results/              Pipeline output (numbered to match scripts)
-  02_aggregate/       Gene-body aggregated counts
-  03_differential/    edgeR differential results
-  04_integration/     K119ub/MeCP2 integration
-  07_quadrant/        MeCP2 vs H2AK119Ub quadrant analysis output
-  08_three_way/       Three-way mCH + ChIP integration output
-  ca/                 CA-only pipeline output
-data/                 DiffBind peak files, reference BEDs, gencode gene bodies
-docs/                 Project aims, abstract, context
-logs/                 SLURM log files
-archive/              Superseded scripts and prior results
+scripts/
+  01-08                        Core mCH pipeline (combine, aggregate, edgeR, integration, volcano, DMR, quadrant, three-way)
+  02b_mch_aggregate_features.R Sub-gene feature aggregation (for section 50_01)
+  ca/                          CA-only pipeline variant
+  sections/
+    _shared_config.R           Shared config for the section pipeline
+    10_chromatin/              Chromatin state and compartment context (4 scripts)
+    20_chip_integration/       ChIP mark quantitative integration (4 scripts)
+    30_hic/                    Hi-C 3D genome integration (2 scripts)
+    40_permutation/            Spatial and gene-level permutation validation (4 scripts)
+    50_features/               Sub-gene feature analysis (1 script)
+    60_mecp2/                  MeCP2 function and binding (4 scripts)
+    70_neuronal/               Neuronal gene characterization (4 scripts)
+    slurm/                     SLURM wrappers + submit_sections.sh
+  utils/                       multi_format_output.R, generate_feature_beds.R, copy_reference_data.sh
+results/
+  02_aggregate/                Gene-body aggregated counts
+  02b_features/                Sub-gene feature aggregated counts
+  03_differential/             edgeR differential results
+  04_integration/              K119ub/MeCP2 integration
+  07_quadrant/                 MeCP2 vs H2AK119Ub quadrant analysis
+  08_three_way/                Three-way mCH + ChIP integration
+  sections/                    Section pipeline output (mirrors script groups)
+  ca/                          CA-only pipeline output
+data/
+  chip_peaks/                  Histone mark consensus peak BEDs (from mariner_hi-c)
+  chromatin/                   chromHMM emission state segmentations
+  diffbind/                    ATAC, K27ac, K27me3 DiffBind results + condition-specific peaks
+  features/                    Pre-made exon/intron/UTR/splice BEDs (from GENCODE vM25)
+  hic/                         Hi-C loops, HOMER compartments, CALDER2 subcompartments
+  mecp2/                       MeCP2 annotated peaks, up/down BEDs, aging DiffBind
+  neuronal/                    Neuronal and synapse gene sets
+docs/                          Project aims, abstract, context, setup guides
+logs/                          SLURM log files
+paths.yaml                     Environment-specific root directories (local/expanse)
+archive/                       Superseded scripts and prior results
 ```
 
 ## Compute environment
@@ -146,7 +182,9 @@ Scripts are developed locally and transferred to Expanse. This local directory m
 
 ## Dependencies
 
-R: edgeR, GenomicRanges, data.table, bsseq, dmrseq, clusterProfiler, goseq, ggplot2, patchwork, svglite, ChIPseeker.
+R (core pipeline): edgeR, GenomicRanges, data.table, bsseq, dmrseq, clusterProfiler, goseq, ggplot2, patchwork, svglite, ChIPseeker.
+
+R (section pipeline, additional): yaml, tidyverse, pheatmap, RColorBrewer, scales, pROC, ggVennDiagram, regioneR, regioneReloaded, BSgenome.Mmusculus.UCSC.mm10, dunn.test, GenomicFeatures.
 
 Python: pysam (CA-filter step only).
 

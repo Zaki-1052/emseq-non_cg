@@ -102,62 +102,65 @@ for (.root_name in c("data_dir", "hic_dir", "bigwigs_dir")) {
 }
 
 # --- Core pipeline outputs ---------------------------------------------------
+# Everything under data/ and results/ lives in CODE_DIR (the repo). DATA_DIR
+# holds only the large raw inputs (combined CH methylKit files) that are too
+# big to sync to the laptop.
 
 DATA_PATHS <- list(
-  mch_results   = file.path(DATA_DIR, "results", "03_differential", "mch_differential_results.tsv"),
-  sample_matrix = file.path(DATA_DIR, "results", "03_differential", "mch_sample_matrix.tsv"),
-  feature_dir   = file.path(DATA_DIR, "results", "02b_features"),
-  gene_bed      = file.path(DATA_DIR, "data", "gencode.vM25.mouse.genes.annotation.bed")
+  mch_results   = file.path(CODE_DIR, "results", "03_differential", "mch_differential_results.tsv"),
+  sample_matrix = file.path(CODE_DIR, "results", "03_differential", "mch_sample_matrix.tsv"),
+  feature_dir   = file.path(CODE_DIR, "results", "02b_features"),
+  gene_bed      = file.path(CODE_DIR, "data", "gencode.vM25.mouse.genes.annotation.bed")
 )
 
 # --- Histone mark consensus peaks (data/chip_peaks/) -------------------------
 
 CHIP_PATHS <- list(
-  ctcf     = file.path(DATA_DIR, "data", "chip_peaks", "CTCF.bed"),
-  h3k27ac  = file.path(DATA_DIR, "data", "chip_peaks", "H3K27ac.bed"),
-  h3k27me3 = file.path(DATA_DIR, "data", "chip_peaks", "H3K27me3.bed"),
-  h3k4me1  = file.path(DATA_DIR, "data", "chip_peaks", "H3K4me1.bed"),
-  h3k4me3  = file.path(DATA_DIR, "data", "chip_peaks", "H3K4me3.bed"),
-  bivalent = file.path(DATA_DIR, "data", "chip_peaks", "Bivalent.bed")
+  ctcf     = file.path(CODE_DIR, "data", "chip_peaks", "CTCF.bed"),
+  h3k27ac  = file.path(CODE_DIR, "data", "chip_peaks", "H3K27ac.bed"),
+  h3k27me3 = file.path(CODE_DIR, "data", "chip_peaks", "H3K27me3.bed"),
+  h3k4me1  = file.path(CODE_DIR, "data", "chip_peaks", "H3K4me1.bed"),
+  h3k4me3  = file.path(CODE_DIR, "data", "chip_peaks", "H3K4me3.bed"),
+  bivalent = file.path(CODE_DIR, "data", "chip_peaks", "Bivalent.bed")
 )
 
 # --- chromHMM emission state segmentations (data/chromatin/) -----------------
 
 CHROMATIN_PATHS <- list(
-  active_enhancer = file.path(DATA_DIR, "data", "chromatin", "activeenhancer.bed"),
-  active_promoter = file.path(DATA_DIR, "data", "chromatin", "activepromoter.bed"),
-  bivalent        = file.path(DATA_DIR, "data", "chromatin", "bivalent.bed")
+  active_enhancer = file.path(CODE_DIR, "data", "chromatin", "activeenhancer.bed"),
+  active_promoter = file.path(CODE_DIR, "data", "chromatin", "activepromoter.bed"),
+  bivalent        = file.path(CODE_DIR, "data", "chromatin", "bivalent.bed")
 )
 
 # --- Quantitative differential binding (data/diffbind/ and data/) ------------
 
 DIFFBIND_PATHS <- list(
-  atac            = file.path(DATA_DIR, "data", "diffbind", "ATAC_diffbind.txt"),
-  k27ac           = file.path(DATA_DIR, "data", "diffbind", "K27ac_diffbind.txt"),
-  k27me3          = file.path(DATA_DIR, "data", "diffbind", "K27me3_diffbind.txt"),
-  k119ub          = file.path(DATA_DIR, "data", "h2aub_diffbind.txt"),
-  mecp2           = file.path(DATA_DIR, "data", "mecp2_diffbind.txt"),
-  k119ub_consensus = file.path(DATA_DIR, "data", "K119ub_consensus_v3.bed"),
-  mecp2_consensus  = file.path(DATA_DIR, "data", "MeCP2_adult_concensus_peakset_Conc4.txt"),
-  atac_up         = file.path(DATA_DIR, "data", "diffbind", "ATAC_up.bed"),
-  atac_down       = file.path(DATA_DIR, "data", "diffbind", "ATAC_down.bed"),
-  atac_cons_ctrl  = file.path(DATA_DIR, "data", "diffbind", "ATAC_consensus_ctrl.bed"),
-  atac_cons_mut   = file.path(DATA_DIR, "data", "diffbind", "ATAC_consensus_mut.bed"),
-  k119ub_ctrl     = file.path(DATA_DIR, "data", "diffbind", "K119ub_ctrl.bed"),
-  k119ub_mut      = file.path(DATA_DIR, "data", "diffbind", "K119ub_mut.bed"),
-  k27ac_ctrl      = file.path(DATA_DIR, "data", "diffbind", "K27ac_ctrl.bed"),
-  k27ac_mut       = file.path(DATA_DIR, "data", "diffbind", "K27ac_mut.bed"),
-  k119ub_gene_signal = file.path(DATA_DIR, "data", "k119ub_gene_signal.tsv")
+  atac            = file.path(CODE_DIR, "data", "diffbind", "ATAC_diffbind.txt"),
+  k27ac           = file.path(CODE_DIR, "data", "diffbind", "K27ac_diffbind.txt"),
+  k27me3          = file.path(CODE_DIR, "data", "diffbind", "K27me3_diffbind.txt"),
+  k119ub          = file.path(CODE_DIR, "data", "h2aub_diffbind.txt"),
+  mecp2           = file.path(CODE_DIR, "data", "mecp2_diffbind.txt"),
+  k119ub_consensus = file.path(CODE_DIR, "data", "K119ub_consensus_v3.bed"),
+  mecp2_consensus  = file.path(CODE_DIR, "data", "MeCP2_adult_concensus_peakset_Conc4.txt"),
+  atac_up         = file.path(CODE_DIR, "data", "diffbind", "ATAC_up.bed"),
+  atac_down       = file.path(CODE_DIR, "data", "diffbind", "ATAC_down.bed"),
+  atac_cons_ctrl  = file.path(CODE_DIR, "data", "diffbind", "ATAC_consensus_ctrl.bed"),
+  atac_cons_mut   = file.path(CODE_DIR, "data", "diffbind", "ATAC_consensus_mut.bed"),
+  k119ub_ctrl     = file.path(CODE_DIR, "data", "diffbind", "K119ub_ctrl.bed"),
+  k119ub_mut      = file.path(CODE_DIR, "data", "diffbind", "K119ub_mut.bed"),
+  k27ac_ctrl      = file.path(CODE_DIR, "data", "diffbind", "K27ac_ctrl.bed"),
+  k27ac_mut       = file.path(CODE_DIR, "data", "diffbind", "K27ac_mut.bed"),
+  k119ub_gene_signal = file.path(CODE_DIR, "data", "k119ub_gene_signal.tsv")
 )
 
 # --- MeCP2 peak-level and aging data (data/mecp2/) ---------------------------
 
 MECP2_PATHS <- list(
-  annotated  = file.path(DATA_DIR, "data", "mecp2", "MeCP2_annotated.txt"),
-  up         = file.path(DATA_DIR, "data", "mecp2", "MeCP2_up.bed"),
-  down       = file.path(DATA_DIR, "data", "mecp2", "MeCP2_down.bed"),
-  ctrl_aging = file.path(DATA_DIR, "data", "mecp2", "MeCP2_ctrl_aging_diffbind.txt"),
-  mut_aging  = file.path(DATA_DIR, "data", "mecp2", "MeCP2_mut_aging_diffbind.txt")
+  annotated  = file.path(CODE_DIR, "data", "mecp2", "MeCP2_annotated.txt"),
+  up         = file.path(CODE_DIR, "data", "mecp2", "MeCP2_up.bed"),
+  down       = file.path(CODE_DIR, "data", "mecp2", "MeCP2_down.bed"),
+  ctrl_aging = file.path(CODE_DIR, "data", "mecp2", "MeCP2_ctrl_aging_diffbind.txt"),
+  mut_aging  = file.path(CODE_DIR, "data", "mecp2", "MeCP2_mut_aging_diffbind.txt")
 )
 
 # --- Hi-C loops, compartments, subcompartments (data/hic/) -------------------
@@ -170,9 +173,9 @@ MECP2_PATHS <- list(
 #   bin_end, ctrl_label, mut_label, continous_rank_ctrl, continous_rank_mut,
 #   label_changed. Bin starts are 1-based.
 HIC_PATHS <- list(
-  loops           = file.path(DATA_DIR, "data", "hic", "characterized_loops.tsv"),
-  compartments    = file.path(DATA_DIR, "data", "hic", "diffcompartments.txt"),
-  subcompartments = file.path(DATA_DIR, "data", "hic", "calder2_subcompartments_100kb.tsv")
+  loops           = file.path(CODE_DIR, "data", "hic", "characterized_loops.tsv"),
+  compartments    = file.path(CODE_DIR, "data", "hic", "diffcompartments.txt"),
+  subcompartments = file.path(CODE_DIR, "data", "hic", "calder2_subcompartments_100kb.tsv")
 )
 
 SUBCOMPARTMENT_ORDER <- c("A.1", "A.2", "B.1", "B.2")
@@ -187,8 +190,8 @@ SUBCOMPARTMENT_COLORS <- c(
 # --- Neuronal gene sets (data/neuronal/) -------------------------------------
 
 GENESET_PATHS <- list(
-  neuronal = file.path(DATA_DIR, "data", "neuronal", "neuronal_gene_set_go_derived.tsv"),
-  synapse  = file.path(DATA_DIR, "data", "neuronal", "synapse_axon_gene_set.tsv")
+  neuronal = file.path(CODE_DIR, "data", "neuronal", "neuronal_gene_set_go_derived.tsv"),
+  synapse  = file.path(CODE_DIR, "data", "neuronal", "synapse_axon_gene_set.tsv")
 )
 
 # --- Sub-gene feature intervals (data/features/) -----------------------------
@@ -197,12 +200,12 @@ FEATURE_TYPES <- c("5UTR", "Exon", "SpliceSite_Donor", "SpliceSite_Acceptor",
                    "Intron", "3UTR")
 
 FEATURE_PATHS <- list(
-  `5UTR`                = file.path(DATA_DIR, "data", "features", "utr5_protein_coding.bed"),
-  Exon                  = file.path(DATA_DIR, "data", "features", "exons_protein_coding.bed"),
-  SpliceSite_Donor      = file.path(DATA_DIR, "data", "features", "splice_donor_protein_coding.bed"),
-  SpliceSite_Acceptor   = file.path(DATA_DIR, "data", "features", "splice_acceptor_protein_coding.bed"),
-  Intron                = file.path(DATA_DIR, "data", "features", "introns_protein_coding.bed"),
-  `3UTR`                = file.path(DATA_DIR, "data", "features", "utr3_protein_coding.bed")
+  `5UTR`                = file.path(CODE_DIR, "data", "features", "utr5_protein_coding.bed"),
+  Exon                  = file.path(CODE_DIR, "data", "features", "exons_protein_coding.bed"),
+  SpliceSite_Donor      = file.path(CODE_DIR, "data", "features", "splice_donor_protein_coding.bed"),
+  SpliceSite_Acceptor   = file.path(CODE_DIR, "data", "features", "splice_acceptor_protein_coding.bed"),
+  Intron                = file.path(CODE_DIR, "data", "features", "introns_protein_coding.bed"),
+  `3UTR`                = file.path(CODE_DIR, "data", "features", "utr3_protein_coding.bed")
 )
 
 # --- BigWig signal tracks ----------------------------------------------------
@@ -224,7 +227,7 @@ BIGWIG_PATHS <- list(
 
 # --- Section output roots ----------------------------------------------------
 
-RESULTS_ROOT <- file.path(DATA_DIR, "results", "sections")
+RESULTS_ROOT <- file.path(CODE_DIR, "results", "sections")
 
 OUTPUT_PATHS <- list(
   chromatin  = file.path(RESULTS_ROOT, "10_chromatin"),
