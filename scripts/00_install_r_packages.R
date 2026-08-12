@@ -9,6 +9,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 pkgs <- c(
+  # --- Core pipeline (steps 01-08) ---
   "edgeR", "limma", "GenomicRanges", "IRanges", "rtracklayer",
   "bsseq", "dmrseq", "BiocParallel",
   "clusterProfiler", "enrichplot", "DOSE", "fgsea", "goseq",
@@ -17,7 +18,27 @@ pkgs <- c(
   "data.table", "optparse",
   "here", "readr", "dplyr", "tidyr",
   "ggplot2", "patchwork", "ggrepel", "svglite",
-  "clinfun"
+  "clinfun",
+
+  # --- Section pipeline: shared config ---
+  "yaml",             # paths.yaml parsing
+  "tidyverse",        # loaded as a whole by _shared_config.R
+  "RColorBrewer",     # colour palettes
+  "scales",           # axis formatting
+  "pheatmap",         # correlation heatmaps (section 20_02)
+
+  # --- Section pipeline: sub-gene features ---
+  "GenomicFeatures",  # GTF parsing in generate_feature_beds.R
+  "dunn.test",        # post-hoc pairwise tests (section 50_01)
+
+  # --- Section pipeline: permutation tests (sections 40_01-40_04) ---
+  "regioneR",
+  "regioneReloaded",
+  "BSgenome.Mmusculus.UCSC.mm10",
+
+  # --- Section pipeline: models and set overlap ---
+  "pROC",             # AUC for logistic models (section 20_02)
+  "ggVennDiagram"     # gene set overlap (sections 60_01, 70_03)
 )
 
 for (pkg in pkgs) {

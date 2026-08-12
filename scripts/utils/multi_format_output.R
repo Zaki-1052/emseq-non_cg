@@ -17,11 +17,14 @@
 #   # For base R graphics:
 #   save_multiformat_base(quote({ plot(x, y); lines(x, y) }), "path/to/output/filename", width = 10, height = 8)
 #
+#   # For pheatmap (draws to the device and returns a grob):
+#   save_multiformat_pheatmap(quote(pheatmap(mat, ...)), "path/to/output/filename", width = 10, height = 8)
+#
 # Note: Requires svglite package for high-quality SVG output
-#   install.packages("svglite")
 
 
 library(svglite)
+library(grid)
 
 save_multiformat_ggplot <- function(plot, base_path, width = 10, height = 8, dpi = 300, verbose = TRUE, use_subfolders = TRUE) {
   figure_name <- basename(base_path)
@@ -60,6 +63,60 @@ save_multiformat_ggplot <- function(plot, base_path, width = 10, height = 8, dpi
   }
 
   invisible(plot)
+}
+
+
+save_multiformat_pheatmap <- function(pheatmap_call, base_path, width = 10, height = 8, dpi = 300, verbose = TRUE, use_subfolders = TRUE) {
+  figure_name <- basename(base_path)
+  parent_dir <- dirname(base_path)
+
+  if (use_subfolders) {
+    output_dir <- file.path(parent_dir, figure_name)
+    file_prefix <- file.path(output_dir, figure_name)
+  } else {
+    output_dir <- parent_dir
+    file_prefix <- base_path
+  }
+
+  if (!dir.exists(output_dir) && output_dir != ".") {
+    dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+  }
+
+  # pheatmap draws to the active device as a side effect and returns an object
+  # holding the assembled grob. Evaluate once, then draw the grob to each device.
+  heatmap_obj <- eval(pheatmap_call)
+  heatmap_grob <- heatmap_obj$gtable
+
+  draw_grob <- function() {
+    grid::grid.newpage()
+    grid::grid.draw(heatmap_grob)
+  }
+
+  pdf_path <- paste0(file_prefix, ".pdf")
+  pdf(pdf_path, width = width, height = height)
+  tryCatch(draw_grob(), finally = dev.off())
+
+  svg_path <- paste0(file_prefix, ".svg")
+  svglite::svglite(svg_path, width = width, height = height)
+  tryCatch(draw_grob(), finally = dev.off())
+
+  png_path <- paste0(file_prefix, ".png")
+  png(png_path, width = width * dpi, height = height * dpi, res = dpi)
+  tryCatch(draw_grob(), finally = dev.off())
+
+  jpg_path <- paste0(file_prefix, ".jpg")
+  jpeg(jpg_path, width = width * dpi, height = height * dpi, res = dpi, quality = 95)
+  tryCatch(draw_grob(), finally = dev.off())
+
+  if (verbose) {
+    if (use_subfolders) {
+      cat(sprintf("  Saved: %s/{pdf,svg,png,jpg}\n", figure_name))
+    } else {
+      cat(sprintf("  Saved: %s.{pdf,svg,png,jpg}\n", figure_name))
+    }
+  }
+
+  invisible(heatmap_obj)
 }
 
 

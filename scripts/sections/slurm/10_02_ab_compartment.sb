@@ -1,0 +1,71 @@
+#!/bin/bash
+# scripts/sections/slurm/10_02_ab_compartment.sb
+#SBATCH --job-name=sec_10_02
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/sections/10_02_ab_compartment_%j.out
+
+# Section 10_02: A/B compartment.
+#
+# Runs scripts/sections/10_chromatin/10_02_ab_compartment.R.
+# Writes into results/sections/10_chromatin/.
+#
+# Usage: sbatch scripts/sections/slurm/10_02_ab_compartment.sb
+
+echo "========================================="
+echo "EM-seq section 10_02: A/B compartment"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+# Environment variables do not persist across jobs, so activate every time.
+source ~/.bashrc
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+export EMSEQ_ENV=expanse
+
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+DATADIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+
+# Lustre scratch inside the data directory. System temp directories are
+# unreliable here.
+export TMPDIR="${DATADIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+LOGDIR="${CODEDIR}/logs/sections"
+OUTDIR="${DATADIR}/results/sections/10_chromatin"
+mkdir -p "$LOGDIR" "$OUTDIR"
+
+SECTION_SCRIPT="${CODEDIR}/scripts/sections/10_chromatin/10_02_ab_compartment.R"
+
+echo "Code dir:   $CODEDIR"
+echo "Data dir:   $DATADIR"
+echo "Script:     $SECTION_SCRIPT"
+echo "Output dir: $OUTDIR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "$SECTION_SCRIPT" --output-dir "$OUTDIR"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: section 10_02"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

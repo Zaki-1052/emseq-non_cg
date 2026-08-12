@@ -1,0 +1,28 @@
+# paths.yaml
+#
+# Environment-specific root directories for the mCH section pipeline.
+# scripts/sections/_shared_config.R reads this file and selects the block
+# named by the EMSEQ_ENV environment variable (default: "local").
+#
+# Only ROOT directories belong here. _shared_config.R composes every
+# individual file path from these roots, so the directory layout lives in
+# one place.
+#
+# Roots:
+#   code_dir     Repository with scripts, paths.yaml, docs.
+#   data_dir     Pipeline data and results (mch_differential_results.tsv,
+#                aggregated counts, reference BEDs under data/).
+#   hic_dir      Companion mariner_hi-c repository (source of reference data).
+#   bigwigs_dir  Merged histone and methylation BigWig signal tracks.
+
+local:
+  code_dir: /Users/zakiralibhai/emseq
+  data_dir: /Users/zakiralibhai/emseq
+  hic_dir: /Users/zakiralibhai/Documents/GitHub/mariner_hi-c
+  bigwigs_dir: /Users/zakiralibhai/sdsc/bigwigs
+
+expanse:
+  code_dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+  data_dir: /expanse/lustre/projects/csd940/zalibhai/emseq
+  hic_dir: /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c
+  bigwigs_dir: /expanse/lustre/projects/csd940/zalibhai/bigwigs

@@ -1,0 +1,90 @@
+#!/bin/bash
+# scripts/02b_mch_aggregate_features.sb
+#SBATCH --job-name=mch_feat
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-7
+#SBATCH --output=logs/mch_aggregate_features_%A_%a.out
+
+# Per-sample sub-gene feature CH methylation aggregation, one array task per
+# sample. Runs in parallel with step 02, not after it.
+#
+# Input:  combined_ch/{sample}_CH.methylKit.gz
+#         data/features/*.bed   (from scripts/utils/generate_feature_beds.R)
+# Output: results/02b_features/{sample}_feature_mch.tsv
+#
+# Usage: sbatch scripts/02b_mch_aggregate_features.sb
+
+echo "========================================="
+echo "EM-seq: Sub-gene feature mCH aggregation"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+# Environment variables do not persist across jobs, so activate every time.
+source ~/.bashrc
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+DATADIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+
+# Lustre scratch inside the data directory. System temp directories are
+# unreliable here.
+export TMPDIR="${DATADIR}/.scratch/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
+SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
+CH_FILE="${DATADIR}/combined_ch/${SAMPLE}_CH.methylKit.gz"
+FEATURE_DIR="${DATADIR}/data/features"
+OUTDIR="${DATADIR}/results/02b_features"
+
+mkdir -p "$OUTDIR"
+
+echo "Sample:      $SAMPLE"
+echo "CH file:     $CH_FILE"
+echo "Feature dir: $FEATURE_DIR"
+echo "Output:      $OUTDIR"
+echo ""
+
+if [[ ! -s "$CH_FILE" ]]; then
+    echo "ERROR: Combined CH file not found: $CH_FILE"
+    exit 1
+fi
+
+if [[ ! -d "$FEATURE_DIR" ]]; then
+    echo "ERROR: Feature directory not found: $FEATURE_DIR"
+    echo "Run scripts/utils/generate_feature_beds.R first."
+    exit 1
+fi
+
+START=$(date +%s)
+
+Rscript "${CODEDIR}/scripts/02b_mch_aggregate_features.R" \
+    --sample-id "$SAMPLE" \
+    --ch-file "$CH_FILE" \
+    --feature-dir "$FEATURE_DIR" \
+    --out-dir "$OUTDIR" \
+    --threads "$SLURM_CPUS_PER_TASK"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: $SAMPLE"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE
