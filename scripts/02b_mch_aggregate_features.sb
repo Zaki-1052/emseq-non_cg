@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --time=48:00:00
+#SBATCH --time=24:00:00
 #SBATCH --account=csd940
 #SBATCH --array=0-7
 #SBATCH --output=logs/mch_aggregate_features_%A_%a.out
