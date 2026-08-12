@@ -91,9 +91,9 @@ The section pipeline was ported from the Biomodal analysis of CG 5mC/5hmC. Secti
 
 ## Key results
 
-8,767 genes are differentially methylated at FDR < 0.05. The shift is genome-wide: lambda_GC = 8.457. This is expected biology in a BAP1-KO, not a confounding artifact.
+5,557 genes are differentially methylated at FDR < 0.05. The shift is genome-wide: lambda_GC = 4.962. This is expected biology in a BAP1-KO, not a confounding artifact.
 
-Direction: 7,466 genes lose mCH in the mutant. 1,301 gain it. The loss is 5.7x more common.
+Direction by model-adjusted logFC: 4,915 genes lose mCH in the mutant, 642 gain it. The loss is 7.7x more common. By raw arithmetic difference (mch_diff): 4,155 lose, 1,402 gain. The discrepancy arises because the edgeR model adjusts for sex and lambda conversion noise, so 760 genes whose raw rate is higher in the mutant have a negative covariate-adjusted fold change.
 
 ## Downstream analyses
 

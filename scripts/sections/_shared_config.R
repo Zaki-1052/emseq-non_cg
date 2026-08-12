@@ -915,10 +915,12 @@ if (length(.missing_mch) > 0) {
 }
 
 mch_results$mch_sig <- as.logical(mch_results$sig_fdr005)
-mch_results$mch_direction <- ifelse(mch_results$mch_diff > 0,
+# Direction comes from the model-adjusted logFC, not the raw mch_diff, so the
+# direction label is consistent with the model that determined significance.
+mch_results$mch_direction <- ifelse(mch_results$edger_logFC > 0,
                                     "Hypermethylated", "Hypomethylated")
-mch_results$mch_hyper <- mch_results$mch_sig & mch_results$mch_diff > 0
-mch_results$mch_hypo  <- mch_results$mch_sig & mch_results$mch_diff < 0
+mch_results$mch_hyper <- mch_results$mch_sig & mch_results$edger_logFC > 0
+mch_results$mch_hypo  <- mch_results$mch_sig & mch_results$edger_logFC < 0
 mch_results$neg_log10_fdr <- -log10(pmax(mch_results$edger_fdr, 1e-300))
 
 cat(sprintf("  %s genes tested, %s significant (%s hyper, %s hypo) at FDR<%.2f\n",
