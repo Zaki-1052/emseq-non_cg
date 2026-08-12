@@ -45,11 +45,11 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/50_features"
+OUTDIR="${CODEDIR}/results/sections/50_features"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/50_features/50_01_feature_methylation.R"
-FEATURE_DIR="${DATADIR}/results/02b_features"
+FEATURE_DIR="${CODEDIR}/results/02b_features"
 SAMPLES=(ctrl_M1 ctrl_M2 ctrl_F1 ctrl_F2 mut_M1 mut_M2 mut_F1 mut_F2)
 
 echo "Code dir:    $CODEDIR"

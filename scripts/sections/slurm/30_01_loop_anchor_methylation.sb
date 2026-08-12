@@ -44,7 +44,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/30_hic"
+OUTDIR="${CODEDIR}/results/sections/30_hic"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/30_hic/30_01_loop_anchor_methylation.R"

@@ -52,11 +52,11 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/40_permutation"
+OUTDIR="${CODEDIR}/results/sections/40_permutation"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/40_permutation/40_02_atac_loops.R"
-CHROMATIN_STATE="${DATADIR}/results/sections/10_chromatin/gene_chromatin_state.tsv"
+CHROMATIN_STATE="${CODEDIR}/results/sections/10_chromatin/gene_chromatin_state.tsv"
 NTIMES="${NTIMES:-5000}"
 
 echo "Code dir:        $CODEDIR"

@@ -46,7 +46,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/70_neuronal"
+OUTDIR="${CODEDIR}/results/sections/70_neuronal"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/70_neuronal/70_01_k119ub_neuronal.R"

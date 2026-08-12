@@ -44,7 +44,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/20_chip_integration"
+OUTDIR="${CODEDIR}/results/sections/20_chip_integration"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/20_chip_integration/20_01_mecp2_correlation.R"

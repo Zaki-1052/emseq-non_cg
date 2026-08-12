@@ -46,11 +46,11 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/20_chip_integration"
+OUTDIR="${CODEDIR}/results/sections/20_chip_integration"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/20_chip_integration/20_02_multi_mark_diffbind.R"
-CHROMATIN_STATE="${DATADIR}/results/sections/10_chromatin/gene_chromatin_state.tsv"
+CHROMATIN_STATE="${CODEDIR}/results/sections/10_chromatin/gene_chromatin_state.tsv"
 
 echo "Code dir:        $CODEDIR"
 echo "Data dir:        $DATADIR"

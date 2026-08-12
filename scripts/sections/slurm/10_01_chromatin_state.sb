@@ -44,7 +44,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/10_chromatin"
+OUTDIR="${CODEDIR}/results/sections/10_chromatin"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/10_chromatin/10_01_chromatin_state.R"

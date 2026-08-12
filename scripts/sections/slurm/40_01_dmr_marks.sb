@@ -51,7 +51,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/40_permutation"
+OUTDIR="${CODEDIR}/results/sections/40_permutation"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/40_permutation/40_01_dmr_marks.R"

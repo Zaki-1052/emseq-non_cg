@@ -43,7 +43,7 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/60_mecp2"
+OUTDIR="${CODEDIR}/results/sections/60_mecp2"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/60_mecp2/60_03_reconciliation.R"

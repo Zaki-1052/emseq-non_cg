@@ -44,11 +44,11 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/20_chip_integration"
+OUTDIR="${CODEDIR}/results/sections/20_chip_integration"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/20_chip_integration/20_04_mch_mecp2_by_mark.R"
-GENE_LEVEL_MARKS="${DATADIR}/results/sections/20_chip_integration/gene_level_all_marks.tsv"
+GENE_LEVEL_MARKS="${CODEDIR}/results/sections/20_chip_integration/gene_level_all_marks.tsv"
 
 echo "Code dir:         $CODEDIR"
 echo "Data dir:         $DATADIR"

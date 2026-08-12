@@ -45,12 +45,12 @@ mkdir -p "$TMPDIR"
 echo "TMPDIR=$TMPDIR"
 
 LOGDIR="${CODEDIR}/logs/sections"
-OUTDIR="${DATADIR}/results/sections/70_neuronal"
+OUTDIR="${CODEDIR}/results/sections/70_neuronal"
 mkdir -p "$LOGDIR" "$OUTDIR"
 
 SECTION_SCRIPT="${CODEDIR}/scripts/sections/70_neuronal/70_02_chromatin_remodeling.R"
-NEURONAL_GENES="${DATADIR}/results/sections/70_neuronal/neuronal_gene_set.tsv"
-GENE_LEVEL_MARKS="${DATADIR}/results/sections/20_chip_integration/gene_level_all_marks.tsv"
+NEURONAL_GENES="${CODEDIR}/results/sections/70_neuronal/neuronal_gene_set.tsv"
+GENE_LEVEL_MARKS="${CODEDIR}/results/sections/20_chip_integration/gene_level_all_marks.tsv"
 
 echo "Code dir:         $CODEDIR"
 echo "Data dir:         $DATADIR"
