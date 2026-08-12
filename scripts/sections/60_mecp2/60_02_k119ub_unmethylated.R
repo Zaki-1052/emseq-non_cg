@@ -308,8 +308,18 @@ load_k119ub_gene_signal <- function(path) {
          paste(missing, collapse = ", "), " (", path, ")")
   }
 
+  coerce_numeric <- function(df, col, filepath) {
+    before <- sum(is.na(df[[col]]))
+    df[[col]] <- as.numeric(df[[col]])
+    after <- sum(is.na(df[[col]]))
+    if (after > before) {
+      stop(col, " in ", basename(filepath), ": ", after - before,
+           " values could not be coerced to numeric.")
+    }
+    df
+  }
   for (col in c("width", "gb_ctrl_signal", "gb_mut_signal", "gb_log2fc")) {
-    df[[col]] <- suppressWarnings(as.numeric(df[[col]]))
+    df <- coerce_numeric(df, col, path)
   }
 
   n_all <- nrow(df)

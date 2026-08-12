@@ -117,26 +117,25 @@ format_p <- function(p) {
 
 #' Summarise n, median and mean for every combination of two grouping columns.
 #'
-#' summarise_groups() with group_label() covers the one-column case. Faceted
-#' distribution figures need one label per facet and group, which this builds in
-#' the same format. The label column is figure text: keep it out of every table
-#' write.
-summarise_groups_by <- function(df, facet_col, group_col, value_col, digits = 3) {
-  df %>%
+#' Two-column version of summarise_groups(). Returns data only. Call
+#' group_label() on the result at the plot site to build the annotation text.
+summarise_groups_by <- function(df, facet_col, group_col, value_col) {
+  out <- df %>%
     dplyr::filter(!is.na(.data[[value_col]])) %>%
     dplyr::group_by(.data[[facet_col]], .data[[group_col]]) %>%
     dplyr::summarise(
       n = dplyr::n(),
       median = median(.data[[value_col]]),
       mean = mean(.data[[value_col]]),
+      q25 = unname(quantile(.data[[value_col]], 0.25)),
+      q75 = unname(quantile(.data[[value_col]], 0.75)),
       .groups = "drop"
     ) %>%
-    dplyr::mutate(
-      label = sprintf("n = %s\nmed = %s",
-                      format(n, big.mark = ","),
-                      format(round(median, digits), nsmall = digits))
-    ) %>%
     as.data.frame()
+
+  colnames(out)[1] <- facet_col
+  colnames(out)[2] <- group_col
+  out
 }
 
 #' Cut a numeric vector into equal-count bins, stopping when the quantile
@@ -460,7 +459,8 @@ plot_signal_distribution <- function(universe, out_dir) {
   long$condition <- factor(long$condition, levels = CONDITION_ORDER)
   long$group <- factor(long$group, levels = GROUP_ORDER)
 
-  labels <- summarise_groups_by(long, "condition", "group", "signal", digits = 3)
+  labels <- summarise_groups_by(long, "condition", "group", "signal")
+  labels$label <- group_label(labels, digits = 3)
   labels$label_y <- max(long$signal) * 1.9
 
   figure <- ggplot(long, aes(x = group, y = signal, fill = group)) +
@@ -1192,7 +1192,8 @@ plot_length_stratified <- function(universe, out_dir) {
                                   levels = stratum_names)
 
   labels <- summarise_groups_by(plot_df, "stratum_label", "group",
-                                "gb_ctrl_signal", digits = 3)
+                                "gb_ctrl_signal")
+  labels$label <- group_label(labels, digits = 3)
   labels$label_y <- max(plot_df$gb_ctrl_signal) * 1.9
 
   p_violin <- ggplot(plot_df, aes(x = group, y = gb_ctrl_signal, fill = group)) +

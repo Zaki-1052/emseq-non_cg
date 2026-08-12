@@ -105,11 +105,6 @@ format_n <- function(x) {
   format(x, big.mark = ",", trim = TRUE)
 }
 
-#' Write a data.frame as a TSV in the section output directory.
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 # =============================================================================
 # SUBCOMPARTMENT LOADING AND GENE ASSIGNMENT
 # =============================================================================
@@ -888,33 +883,33 @@ main <- function() {
                           "mch_ctrl", "mch_mut", "mch_diff", "edger_logFC",
                           "edger_fdr", "mch_sig", "mch_direction",
                           "mch_hyper", "mch_hypo")]
-  write_tsv_table(gene_table, out_dir, "10_04_gene_subcompartment_assignment.tsv")
+  write_section_table(gene_table, file.path(out_dir, "10_04_gene_subcompartment_assignment.tsv"))
 
-  write_tsv_table(summary_df, out_dir, "10_04_subcompartment_summary.tsv")
-  write_tsv_table(rbind(sig_chisq$table, dir_chisq$table), out_dir,
-                  "10_04_subcompartment_chisq.tsv")
-  write_tsv_table(paired_tests, out_dir,
-                  "10_04_mch_level_paired_wilcoxon.tsv")
-  write_tsv_table(rbind(ctrl_tests$omnibus, diff_tests$omnibus), out_dir,
-                  "10_04_across_subcompartment_kruskal.tsv")
-  write_tsv_table(rbind(ctrl_tests$pairwise, diff_tests$pairwise), out_dir,
-                  "10_04_across_subcompartment_pairwise_wilcoxon.tsv")
-  write_tsv_table(changed_test, out_dir,
-                  "10_04_label_changed_wilcoxon.tsv")
-  write_tsv_table(histone_df, out_dir,
-                  "10_04_histone_overlap_by_subcompartment.tsv")
-  write_tsv_table(mark_summary, out_dir,
-                  "10_04_histone_mark_category_summary.tsv")
+  write_section_table(summary_df, file.path(out_dir, "10_04_subcompartment_summary.tsv"))
+  write_section_table(rbind(sig_chisq$table, dir_chisq$table),
+                  file.path(out_dir, "10_04_subcompartment_chisq.tsv"))
+  write_section_table(paired_tests,
+                  file.path(out_dir, "10_04_mch_level_paired_wilcoxon.tsv"))
+  write_section_table(rbind(ctrl_tests$omnibus, diff_tests$omnibus),
+                  file.path(out_dir, "10_04_across_subcompartment_kruskal.tsv"))
+  write_section_table(rbind(ctrl_tests$pairwise, diff_tests$pairwise),
+                  file.path(out_dir, "10_04_across_subcompartment_pairwise_wilcoxon.tsv"))
+  write_section_table(changed_test,
+                  file.path(out_dir, "10_04_label_changed_wilcoxon.tsv"))
+  write_section_table(histone_df,
+                  file.path(out_dir, "10_04_histone_overlap_by_subcompartment.tsv"))
+  write_section_table(mark_summary,
+                  file.path(out_dir, "10_04_histone_mark_category_summary.tsv"))
 
   level_summary$measure <- "mch_level_pct"
   diff_summary$measure <- "mch_diff_pct"
   changed_summary$measure <- "mch_diff_pct"
-  write_tsv_table(level_summary, out_dir,
-                  "10_04_violin_group_summary_mch_level.tsv")
-  write_tsv_table(diff_summary, out_dir,
-                  "10_04_violin_group_summary_mch_diff.tsv")
-  write_tsv_table(changed_summary, out_dir,
-                  "10_04_violin_group_summary_label_changed.tsv")
+  write_section_table(level_summary,
+                  file.path(out_dir, "10_04_violin_group_summary_mch_level.tsv"))
+  write_section_table(diff_summary,
+                  file.path(out_dir, "10_04_violin_group_summary_mch_diff.tsv"))
+  write_section_table(changed_summary,
+                  file.path(out_dir, "10_04_violin_group_summary_label_changed.tsv"))
 
   cat("\n================================================================================\n")
   cat("SECTION 10_04 COMPLETE\n")

@@ -94,10 +94,6 @@ fmt_p <- function(p) {
   sprintf("p = %.2e", p)
 }
 
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 # =============================================================================
 # STEP 1: LOAD HOMER COMPARTMENT BINS
 # =============================================================================
@@ -758,16 +754,16 @@ main <- function() {
     "compartment", "shift",
     "mch_ctrl", "mch_mut", "mch_diff", "edger_logFC", "edger_fdr",
     "mch_sig", "mch_direction", "mch_hyper", "mch_hypo")]
-  write_tsv_table(gene_export, OUT_DIR, "gene_compartment_assignment.tsv")
-  write_tsv_table(bin_summary, OUT_DIR, "compartment_bin_summary.tsv")
-  write_tsv_table(gene_summary, OUT_DIR, "compartment_gene_summary.tsv")
-  write_tsv_table(proportions, OUT_DIR, "compartment_direction_proportions.tsv")
-  write_tsv_table(oe_table, OUT_DIR, "shift_direction_observed_expected.tsv")
-  write_tsv_table(fisher_table, OUT_DIR, "compartment_fisher_tests.tsv")
-  write_tsv_table(wilcoxon_table, OUT_DIR, "compartment_wilcoxon_tests.tsv")
-  write_tsv_table(spearman_table, OUT_DIR, "compartment_pc1_spearman.tsv")
-  write_tsv_table(stats_compartment, OUT_DIR, "violin_stats_compartment.tsv")
-  write_tsv_table(stats_shift, OUT_DIR, "violin_stats_shift.tsv")
+  write_section_table(gene_export, file.path(OUT_DIR, "gene_compartment_assignment.tsv"))
+  write_section_table(bin_summary, file.path(OUT_DIR, "compartment_bin_summary.tsv"))
+  write_section_table(gene_summary, file.path(OUT_DIR, "compartment_gene_summary.tsv"))
+  write_section_table(proportions, file.path(OUT_DIR, "compartment_direction_proportions.tsv"))
+  write_section_table(oe_table, file.path(OUT_DIR, "shift_direction_observed_expected.tsv"))
+  write_section_table(fisher_table, file.path(OUT_DIR, "compartment_fisher_tests.tsv"))
+  write_section_table(wilcoxon_table, file.path(OUT_DIR, "compartment_wilcoxon_tests.tsv"))
+  write_section_table(spearman_table, file.path(OUT_DIR, "compartment_pc1_spearman.tsv"))
+  write_section_table(stats_compartment, file.path(OUT_DIR, "violin_stats_compartment.tsv"))
+  write_section_table(stats_shift, file.path(OUT_DIR, "violin_stats_shift.tsv"))
   cat("\n")
 
   cat("================================================================================\n")

@@ -139,10 +139,6 @@ sig_stars <- function(q) {
   }, character(1))
 }
 
-write_table_tsv <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 # =============================================================================
 # INPUT LOADING
 # =============================================================================
@@ -1091,8 +1087,8 @@ main <- function() {
   definitions <- polycomb_definitions(opt$k119ub_top_fraction)
 
   def_tables <- build_definition_tables(genes, definitions)
-  write_table_tsv(def_tables$sizes, OUT_DIR, "10_03_polycomb_definition_sizes.tsv")
-  write_table_tsv(def_tables$overlap, OUT_DIR, "10_03_polycomb_definition_overlap.tsv")
+  write_section_table(def_tables$sizes, file.path(OUT_DIR, "10_03_polycomb_definition_sizes.tsv"))
+  write_section_table(def_tables$overlap, file.path(OUT_DIR, "10_03_polycomb_definition_overlap.tsv"))
 
   # --- Step 3: Fisher tests --------------------------------------------------
   cat("\nSTEP 3: Fisher exact tests through the shared registry\n")
@@ -1105,7 +1101,7 @@ main <- function() {
   fisher_all$test_family <- c(rep("polycomb_definition", nrow(definition_fisher)),
                               rep("chromatin_state", nrow(state_fisher)))
 
-  write_table_tsv(fisher_all, OUT_DIR, "10_03_polycomb_fisher_tests.tsv")
+  write_section_table(fisher_all, file.path(OUT_DIR, "10_03_polycomb_fisher_tests.tsv"))
 
   definition_fisher <- fisher_all[fisher_all$test_family == "polycomb_definition", ]
   state_fisher <- fisher_all[fisher_all$test_family == "chromatin_state", ]
@@ -1113,7 +1109,7 @@ main <- function() {
   # --- Step 4: rate and magnitude tables -------------------------------------
   cat("\nSTEP 4: Rate and magnitude tables\n")
   rate_table <- build_significance_rate_table(genes, definitions)
-  write_table_tsv(rate_table, OUT_DIR, "10_03_significance_rate_by_definition.tsv")
+  write_section_table(rate_table, file.path(OUT_DIR, "10_03_significance_rate_by_definition.tsv"))
 
   state_rates <- build_state_rate_table(genes)
   state_rates <- dplyr::left_join(
@@ -1125,10 +1121,10 @@ main <- function() {
                          values_from = c(odds_ratio, ci_lower, ci_upper,
                                          p_value, q_value)),
     by = c("state_family", "state"))
-  write_table_tsv(state_rates, OUT_DIR, "10_03_chromatin_state_enrichment.tsv")
+  write_section_table(state_rates, file.path(OUT_DIR, "10_03_chromatin_state_enrichment.tsv"))
 
   magnitude_tests <- run_magnitude_tests(genes, definitions)
-  write_table_tsv(magnitude_tests, OUT_DIR, "10_03_polycomb_magnitude_wilcoxon.tsv")
+  write_section_table(magnitude_tests, file.path(OUT_DIR, "10_03_polycomb_magnitude_wilcoxon.tsv"))
 
   classification_cols <- c("gene_name", "gene_id", "chr", "start", "end",
                            "gene_length", "promoter_state", "body_state",
@@ -1140,8 +1136,8 @@ main <- function() {
                            "pc_k119ub_top",
                            "gb_ctrl_signal", "gb_mut_signal", "gb_log2fc",
                            "gb_signal_class", "k119ub_cutoff")
-  write_table_tsv(genes[, classification_cols, drop = FALSE], OUT_DIR,
-                  "10_03_polycomb_gene_classification.tsv")
+  write_section_table(genes[, classification_cols, drop = FALSE],
+                  file.path(OUT_DIR, "10_03_polycomb_gene_classification.tsv"))
 
   # --- Step 5: figures -------------------------------------------------------
   # The widest gene-body definition (Polycomb or Mixed) carries the stacked bar

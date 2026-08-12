@@ -258,14 +258,6 @@ region_set_slug <- function(x) {
   gsub("^_+|_+$", "", slug)
 }
 
-#' Write a section table into out_dir under filename.
-#'
-#' Joins the path and hands the frame to write_section_table(), which rejects
-#' any column holding figure text.
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 #' Interval count, total bp, and median width of a region set.
 region_set_stats <- function(gr, set_name, sub_analysis, role) {
   data.frame(
@@ -735,6 +727,7 @@ run_crosswise <- function(Alist, Blist, genome, opt, cache_path, label) {
                   fmt_int(opt$ntimes), opt$cores, PERM_RANFUN, PERM_EVFUN,
                   PERM_PER_CHROMOSOME, PERM_SEED))
 
+      options(mc.cores = opt$cores)
       set.seed(PERM_SEED)
       cw <- crosswisePermTest(
         Alist          = Alist,
@@ -743,7 +736,7 @@ run_crosswise <- function(Alist, Blist, genome, opt, cache_path, label) {
         ranFUN         = PERM_RANFUN,
         evFUN          = PERM_EVFUN,
         ntimes         = opt$ntimes,
-        mc.cores       = opt$cores,
+        force.parallel = TRUE,
         per.chromosome = PERM_PER_CHROMOSOME
       )
 
@@ -807,6 +800,7 @@ run_local_zscore <- function(a_gr, Blist, genome, opt, cache_path, label) {
                   label, fmt_int(opt$lz_window), fmt_int(opt$lz_step),
                   fmt_int(opt$ntimes)))
 
+      options(mc.cores = opt$cores)
       set.seed(PERM_SEED)
       mlz <- multiLocalZscore(
         A        = a_gr,
@@ -816,7 +810,7 @@ run_local_zscore <- function(a_gr, Blist, genome, opt, cache_path, label) {
         genome   = genome,
         window   = opt$lz_window,
         step     = opt$lz_step,
-        mc.cores = opt$cores,
+        force.parallel = TRUE,
         ntimes   = opt$ntimes
       )
       makeLZMatrix(mlz)
@@ -1285,23 +1279,23 @@ main <- function() {
 
   # --- Step 7: tables --------------------------------------------------------
   cat("STEP 7: Tables\n")
-  write_tsv_table(build_region_set_summary(direction_sets, compartment_sets,
+  write_section_table(build_region_set_summary(direction_sets, compartment_sets,
                                            polycomb_sets),
-                  out_dir, "40_03_region_set_summary.tsv")
-  write_tsv_table(bin_summary, out_dir, "40_03_compartment_bin_summary.tsv")
-  write_tsv_table(polycomb$summary, out_dir, "40_03_polycomb_domain_summary.tsv")
-  write_tsv_table(perm_compartment, out_dir, "40_03_association_compartment.tsv")
-  write_tsv_table(perm_polycomb, out_dir, "40_03_association_polycomb.tsv")
-  write_tsv_table(fisher_all, out_dir, "40_03_fisher_tests.tsv")
-  write_tsv_table(merged, out_dir, "40_03_fisher_vs_permutation.tsv")
-  write_tsv_table(local_zscore_table(mlz_compartment, "Compartment"),
-                  out_dir, "40_03_local_zscore_compartment.tsv")
-  write_tsv_table(local_zscore_table(mlz_polycomb, "Polycomb"),
-                  out_dir, "40_03_local_zscore_polycomb.tsv")
-  write_tsv_table(build_key_gene_membership(genes, membership),
-                  out_dir, "40_03_key_genes_domain_membership.tsv")
-  write_tsv_table(build_parameter_table(opt),
-                  out_dir, "40_03_permutation_parameters.tsv")
+                  file.path(out_dir, "40_03_region_set_summary.tsv"))
+  write_section_table(bin_summary, file.path(out_dir, "40_03_compartment_bin_summary.tsv"))
+  write_section_table(polycomb$summary, file.path(out_dir, "40_03_polycomb_domain_summary.tsv"))
+  write_section_table(perm_compartment, file.path(out_dir, "40_03_association_compartment.tsv"))
+  write_section_table(perm_polycomb, file.path(out_dir, "40_03_association_polycomb.tsv"))
+  write_section_table(fisher_all, file.path(out_dir, "40_03_fisher_tests.tsv"))
+  write_section_table(merged, file.path(out_dir, "40_03_fisher_vs_permutation.tsv"))
+  write_section_table(local_zscore_table(mlz_compartment, "Compartment"),
+                  file.path(out_dir, "40_03_local_zscore_compartment.tsv"))
+  write_section_table(local_zscore_table(mlz_polycomb, "Polycomb"),
+                  file.path(out_dir, "40_03_local_zscore_polycomb.tsv"))
+  write_section_table(build_key_gene_membership(genes, membership),
+                  file.path(out_dir, "40_03_key_genes_domain_membership.tsv"))
+  write_section_table(build_parameter_table(opt),
+                  file.path(out_dir, "40_03_permutation_parameters.tsv"))
   cat("\n")
 
   # --- Step 8: figures -------------------------------------------------------

@@ -146,14 +146,6 @@ significance_stars <- function(p) {
         ifelse(p < 0.05, "*", "ns"))))
 }
 
-#' Write a data.frame as a TSV in the section output directory.
-#'
-#' Joins the path and hands the frame to write_section_table(), which rejects
-#' any column holding figure text.
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 #' Stop unless a data.frame carries every named column.
 require_columns <- function(df, required, what) {
   missing <- setdiff(required, colnames(df))
@@ -488,6 +480,7 @@ run_crosswise <- function(Alist, Blist, genome, ntimes, cores, seed,
               label, length(Alist), length(Blist),
               length(Alist) * length(Blist), fmt_int(ntimes)))
 
+  options(mc.cores = cores)
   set.seed(seed)
   cw <- crosswisePermTest(
     Alist          = Alist,
@@ -496,7 +489,7 @@ run_crosswise <- function(Alist, Blist, genome, ntimes, cores, seed,
     ranFUN         = PERM_RANFUN,
     evFUN          = PERM_EVFUN,
     ntimes         = ntimes,
-    mc.cores       = cores,
+    force.parallel = TRUE,
     per.chromosome = PERM_PER_CHROMOSOME
   )
 
@@ -692,7 +685,7 @@ run_local_zscore <- function(A, Blist, genome, ntimes, cores, seed,
     ntimes         = ntimes,
     window         = LZ_WINDOW,
     step           = LZ_STEP,
-    mc.cores       = cores,
+    force.parallel = TRUE,
     per.chromosome = PERM_PER_CHROMOSOME
   )
   mlz <- makeLZMatrix(mlz)
@@ -961,8 +954,8 @@ run_sub_analysis <- function(key, Alist, Blist, genome, opt, out_dir, cache_dir,
                   "norm_zscore", "perm_adj_p_value", "fisher_or", "fisher_p",
                   "concordance")])
 
-  write_tsv_table(assoc, out_dir,
-                  sprintf("40_02%s_association_%s.tsv", key, titles$slug))
+  write_section_table(assoc,
+                  file.path(out_dir, sprintf("40_02%s_association_%s.tsv", key, titles$slug)))
 
   caption <- sprintf("%s, %s permutations, per.chromosome = TRUE",
                      PERM_RANFUN, fmt_int(opt$ntimes))
@@ -1049,7 +1042,7 @@ main <- function() {
     summarise_region_sets(loop_anchors, "query", unname(SUB_ANALYSIS_LABELS["c"])),
     summarise_region_sets(loop_features, "target", unname(SUB_ANALYSIS_LABELS["c"]))
   )
-  write_tsv_table(region_summary, out_dir, "40_02_region_set_summary.tsv")
+  write_section_table(region_summary, file.path(out_dir, "40_02_region_set_summary.tsv"))
 
   parameters <- data.frame(
     parameter = c("section", "ntimes", "cores", "seed", "randomisation_function",
@@ -1062,7 +1055,7 @@ main <- function() {
               LZ_WINDOW, LZ_STEP, force_rerun),
     stringsAsFactors = FALSE
   )
-  write_tsv_table(parameters, out_dir, "40_02_permutation_parameters.tsv")
+  write_section_table(parameters, file.path(out_dir, "40_02_permutation_parameters.tsv"))
 
   # --- Sub-analysis A: ATAC against the six marks ----------------------------
   result_a <- run_sub_analysis(
@@ -1141,7 +1134,7 @@ main <- function() {
 
   assoc_all <- rbind(result_a$association, result_b$association,
                      result_m$association, result_c$association)
-  write_tsv_table(assoc_all, out_dir, "40_02_fisher_vs_permutation.tsv")
+  write_section_table(assoc_all, file.path(out_dir, "40_02_fisher_vs_permutation.tsv"))
 
   concordance_summary <- rbind(
     summarise_concordance(result_a$association),
@@ -1160,7 +1153,7 @@ main <- function() {
     )
   )
   print(concordance_summary)
-  write_tsv_table(concordance_summary, out_dir, "40_02_concordance_summary.tsv")
+  write_section_table(concordance_summary, file.path(out_dir, "40_02_concordance_summary.tsv"))
 
   plot_fisher_vs_permutation(assoc_all, opt$ntimes, out_dir)
 
@@ -1188,14 +1181,14 @@ main <- function() {
   )
 
   lz_table <- extract_local_zscore_table(mlz, strongest$RS1)
-  write_tsv_table(lz_table, out_dir, "40_02_local_zscore_shifts.tsv")
+  write_section_table(lz_table, file.path(out_dir, "40_02_local_zscore_shifts.tsv"))
 
   lz_summary <- getMultiEvaluation(mlz)$resumeTable
   require_columns(lz_summary, c("name", "z_score", "norm_zscore", "p_value",
                                 "adj.p_value"),
                   "Local z-score summary table")
   lz_summary$anchor_set <- strongest$RS1
-  write_tsv_table(lz_summary, out_dir, "40_02_local_zscore_summary.tsv")
+  write_section_table(lz_summary, file.path(out_dir, "40_02_local_zscore_summary.tsv"))
 
   plot_local_zscore(mlz, strongest$RS1, strongest$RS2, opt$ntimes, out_dir)
   plot_local_zscore_all(lz_table, strongest$RS1, opt$ntimes, out_dir)

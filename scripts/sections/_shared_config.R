@@ -243,7 +243,7 @@ HANDOFF_PATHS <- list(
   mecp2_no_meth_genes  = file.path(OUTPUT_PATHS$mecp2, "mecp2_no_meth_genes.tsv"),
   neuronal_gene_set    = file.path(OUTPUT_PATHS$neuronal, "neuronal_gene_set.tsv"),
   chromatin_state      = file.path(OUTPUT_PATHS$chromatin, "gene_chromatin_state.tsv"),
-  fisher_registry      = file.path(RESULTS_ROOT, "fisher_test_registry.tsv")
+  fisher_registry      = file.path(RESULTS_ROOT, "fisher_registry")
 )
 
 # =============================================================================
@@ -696,16 +696,12 @@ register_fisher_test <- function(section, test_id, description,
     stringsAsFactors = FALSE
   )
 
-  key <- paste(section, test_id, sep = ":")
-  if (file.exists(registry_path)) {
-    existing <- read.table(registry_path, header = TRUE, sep = "\t",
-                           stringsAsFactors = FALSE, quote = "")
-    existing <- existing[paste(existing$section, existing$test_id, sep = ":") != key, ,
-                         drop = FALSE]
-    row <- rbind(existing, row)
-  }
-  # A newline in a description would break the registry that 40_04 parses.
-  write_section_table(row, registry_path)
+  # Each test writes its own shard so concurrent SLURM jobs never collide.
+  # Section 40_04 reads every shard with list.files() and rbinds them.
+  dir.create(registry_path, recursive = TRUE, showWarnings = FALSE)
+  shard_path <- file.path(registry_path,
+                          sprintf("%s_%s.tsv", section, test_id))
+  write_section_table(row, shard_path)
 
   cat(sprintf("  Fisher %s: OR=%.3f, p=%.3g (n=%s genes) [registered]\n",
               key, unname(ft$estimate), ft$p.value,
@@ -901,7 +897,7 @@ cat("Loading mCH differential results...\n")
 mch_results <- read.table(DATA_PATHS$mch_results, header = TRUE, sep = "\t",
                           stringsAsFactors = FALSE, quote = "")
 
-.required_mch_cols <- c("gene_name", "gene_id", "chr", "start", "end",
+.required_mch_cols <- c("gene_name", "gene_id", "chr", "start", "end", "strand",
                         "gene_length", "mch_ctrl", "mch_mut", "mch_diff",
                         "edger_logFC", "edger_fdr", "sig_fdr005")
 .missing_mch <- setdiff(.required_mch_cols, colnames(mch_results))

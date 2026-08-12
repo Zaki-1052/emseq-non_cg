@@ -206,14 +206,6 @@ force_rerun_requested <- function() {
 # SMALL UTILITIES
 # =============================================================================
 
-#' Write a section table into out_dir under filename.
-#'
-#' Joins the path and hands the frame to write_section_table(), which rejects
-#' any column holding figure text.
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 fmt_p <- function(p) {
   if (length(p) != 1 || is.na(p)) return("p = NA")
   if (p == 0) return("p < 1/ntimes")
@@ -411,6 +403,7 @@ run_crosswise <- function(alist, blist, genome, ntimes, cores) {
   cat(sprintf("\nRunning crosswisePermTest: %d Alist x %d Blist sets, ntimes=%d, cores=%d\n",
               length(alist), length(blist), ntimes, cores))
 
+  options(mc.cores = cores)
   set.seed(PERM_SEED)
   cw <- crosswisePermTest(
     Alist          = alist,
@@ -419,22 +412,15 @@ run_crosswise <- function(alist, blist, genome, ntimes, cores) {
     ranFUN         = PERM_RANFUN,
     evFUN          = PERM_EVFUN,
     ntimes         = ntimes,
-    mc.cores       = cores,
+    force.parallel = TRUE,
     per.chromosome = PERM_PER_CHR
   )
 
-  # Alist has two entries, so the association matrix has two rows. The patched
-  # chooseHclustMet keeps hierarchical clustering defined at that size.
   cat("  Building the crosswise association matrix...\n")
   makeCrosswiseMatrix(cw, pvcut = 1, symm_matrix = FALSE, hc.method = "average")
 }
 
 #' Run one regioneR permTest per Alist set, keeping every permuted count.
-#'
-#' createFunctionsList turns the Blist into one numOverlaps function per peak
-#' set, so a single randomisation of A is scored against all eight sets. This is
-#' the same call shape crosswisePermTest uses internally; the difference is that
-#' the returned object keeps the permuted counts.
 run_null_distributions <- function(alist, blist, genome, ntimes, cores) {
   cat(sprintf("\nRunning regioneR permTest for the null distributions (ntimes=%d, cores=%d)\n",
               ntimes, cores))
@@ -442,6 +428,7 @@ run_null_distributions <- function(alist, blist, genome, ntimes, cores) {
   func_list <- createFunctionsList(FUN = numOverlaps, param.name = "B",
                                    values = blist)
 
+  options(mc.cores = cores)
   set.seed(PERM_SEED)
   out <- lapply(names(alist), function(a_name) {
     cat(sprintf("  %s ...\n", a_name))
@@ -451,8 +438,8 @@ run_null_distributions <- function(alist, blist, genome, ntimes, cores) {
       randomize.function = randomizeRegions,
       genome             = genome,
       ntimes             = ntimes,
-      per.chromosome     = PERM_PER_CHR,
-      mc.cores           = cores
+      force.parallel     = TRUE,
+      per.chromosome     = PERM_PER_CHR
     )
   })
   names(out) <- names(alist)
@@ -1169,7 +1156,7 @@ main <- function() {
   blist <- build_blist(genome)
 
   region_sets <- build_region_set_table(alist, blist)
-  write_tsv_table(region_sets, out_dir, "40_01_region_set_sizes.tsv")
+  write_section_table(region_sets, file.path(out_dir, "40_01_region_set_sizes.tsv"))
 
   # --- Step 2: permutation ---------------------------------------------------
   cat("\nSTEP 2: Permutation\n")
@@ -1185,7 +1172,7 @@ main <- function() {
   }
 
   parameters <- build_parameter_table(genome, alist, blist, ntimes, cores)
-  write_tsv_table(parameters, out_dir, "40_01_permutation_parameters.tsv")
+  write_section_table(parameters, file.path(out_dir, "40_01_permutation_parameters.tsv"))
 
   # --- Step 3: result extraction ---------------------------------------------
   cat("\nSTEP 3: Extracting permutation results\n")
@@ -1195,9 +1182,9 @@ main <- function() {
   check_observed_counts_agree(crosswise, null_summary)
 
   association <- build_association_table(crosswise, null_summary)
-  write_tsv_table(association, out_dir, "40_01_permutation_association.tsv")
-  write_tsv_table(null_summary, out_dir, "40_01_null_distribution_summary.tsv")
-  write_tsv_table(null_draws, out_dir, "40_01_null_draws.tsv")
+  write_section_table(association, file.path(out_dir, "40_01_permutation_association.tsv"))
+  write_section_table(null_summary, file.path(out_dir, "40_01_null_distribution_summary.tsv"))
+  write_section_table(null_draws, file.path(out_dir, "40_01_null_draws.tsv"))
   print_association_summary(association)
   print_replicate_summary(association)
 
@@ -1205,19 +1192,19 @@ main <- function() {
   cat("\nSTEP 4: Gene-level Fisher tests\n")
   genes <- build_gene_overlap_table(mch_results, blist)
   fisher_table <- run_gene_fisher_tests(genes, blist, out_dir)
-  write_tsv_table(fisher_table, out_dir, "40_01_fisher_gene_level.tsv")
+  write_section_table(fisher_table, file.path(out_dir, "40_01_fisher_gene_level.tsv"))
 
   gene_columns <- c("gene_name", "gene_id", "chr", "start", "end", "gene_length",
                     "mch_ctrl", "mch_mut", "mch_diff", "edger_logFC", "edger_fdr",
                     "mch_sig", "mch_hyper", "mch_hypo",
                     vapply(names(blist), overlap_column, character(1)))
-  write_tsv_table(genes[, gene_columns, drop = FALSE], out_dir,
-                  "40_01_gene_peak_overlaps.tsv")
+  write_section_table(genes[, gene_columns, drop = FALSE],
+                  file.path(out_dir, "40_01_gene_peak_overlaps.tsv"))
 
   # --- Step 5: Fisher versus permutation -------------------------------------
   cat("\nSTEP 5: Fisher versus permutation\n")
   comparison <- build_comparison_table(association, fisher_table)
-  write_tsv_table(comparison, out_dir, "40_01_fisher_vs_permutation.tsv")
+  write_section_table(comparison, file.path(out_dir, "40_01_fisher_vs_permutation.tsv"))
   print_concordance_summary(comparison)
 
   # --- Step 6: figures -------------------------------------------------------

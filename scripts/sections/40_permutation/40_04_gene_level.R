@@ -237,14 +237,6 @@ force_rerun_requested <- function() {
 # SMALL UTILITIES
 # =============================================================================
 
-#' Write a section table into out_dir under filename.
-#'
-#' Joins the path and hands the frame to write_section_table(), which rejects
-#' any column holding figure text.
-write_tsv_table <- function(df, out_dir, filename) {
-  write_section_table(df, file.path(out_dir, filename))
-}
-
 fmt_p <- function(p) {
   if (length(p) != 1 || is.na(p)) return("p = NA")
   if (p < 2.2e-16) return("p < 2.2e-16")
@@ -292,29 +284,37 @@ adjust_bh <- function(p) {
 # REGISTRY
 # =============================================================================
 
-#' Read the shared Fisher registry and check every gene table behind it.
+#' Read every shard from the Fisher registry directory and combine them.
+#'
+#' Each section writes one TSV per test into HANDOFF_PATHS$fisher_registry.
+#' This reader globs the directory, rbinds, and validates.
 load_registry <- function(registry_path) {
-  if (!file.exists(registry_path)) {
-    stop("The Fisher test registry does not exist: ", registry_path,
+  if (!dir.exists(registry_path)) {
+    stop("The Fisher registry directory does not exist: ", registry_path,
          "\nSection 40_04 validates tests other sections registered, so those ",
          "sections must run first: ",
          paste(EXPECTED_SECTIONS, collapse = ", "))
   }
 
-  registry <- read.table(registry_path, header = TRUE, sep = "\t",
-                         stringsAsFactors = FALSE, quote = "", comment.char = "")
+  shards <- list.files(registry_path, pattern = "\\.tsv$", full.names = TRUE)
+  if (length(shards) == 0) {
+    stop("The Fisher registry directory is empty: ", registry_path,
+         "\nSection 40_04 validates tests other sections registered, so those ",
+         "sections must run first: ",
+         paste(EXPECTED_SECTIONS, collapse = ", "))
+  }
+
+  parts <- lapply(shards, function(f) {
+    read.table(f, header = TRUE, sep = "\t", stringsAsFactors = FALSE,
+               quote = "", comment.char = "")
+  })
+  registry <- do.call(rbind, parts)
 
   missing_cols <- setdiff(REGISTRY_COLUMNS, colnames(registry))
   if (length(missing_cols) > 0) {
-    stop("The Fisher registry ", registry_path, " is missing columns: ",
-         paste(missing_cols, collapse = ", "))
-  }
-
-  if (nrow(registry) == 0) {
-    stop("The Fisher test registry is empty: ", registry_path,
-         "\nSection 40_04 validates tests other sections registered, so those ",
-         "sections must run first: ",
-         paste(EXPECTED_SECTIONS, collapse = ", "))
+    stop("Fisher registry shards are missing columns: ",
+         paste(missing_cols, collapse = ", "),
+         "\nFirst shard checked: ", shards[1])
   }
 
   registry$key <- test_key(registry$section, registry$test_id)
@@ -335,8 +335,8 @@ load_registry <- function(registry_path) {
   registry <- registry[order(registry$section, registry$test_id), , drop = FALSE]
   rownames(registry) <- NULL
 
-  cat(sprintf("  Registry: %d tests from %d sections\n",
-              nrow(registry), length(unique(registry$section))))
+  cat(sprintf("  Registry: %d tests from %d shards, %d sections\n",
+              nrow(registry), length(shards), length(unique(registry$section))))
   registry
 }
 
@@ -1281,8 +1281,8 @@ main <- function() {
   coverage <- build_coverage_table(registry)
   print_coverage_summary(coverage)
 
-  write_tsv_table(registry, out_dir, "40_04_registry_snapshot.tsv")
-  write_tsv_table(coverage, out_dir, "40_04_registry_coverage.tsv")
+  write_section_table(registry, file.path(out_dir, "40_04_registry_snapshot.tsv"))
+  write_section_table(coverage, file.path(out_dir, "40_04_registry_coverage.tsv"))
 
   # --- Step 2: permutation ---------------------------------------------------
   cat("\nSTEP 2: Chromosome-stratified label shuffle\n")
@@ -1308,10 +1308,10 @@ main <- function() {
   composition <- build_composition_table(results)
   concordance_counts <- build_concordance_counts(summary_df)
 
-  write_tsv_table(summary_df, out_dir, "40_04_permutation_summary.tsv")
-  write_tsv_table(concordance_counts, out_dir, "40_04_concordance_counts.tsv")
-  write_tsv_table(composition, out_dir, "40_04_chromosome_composition.tsv")
-  write_tsv_table(draws, out_dir, "40_04_null_draws.tsv")
+  write_section_table(summary_df, file.path(out_dir, "40_04_permutation_summary.tsv"))
+  write_section_table(concordance_counts, file.path(out_dir, "40_04_concordance_counts.tsv"))
+  write_section_table(composition, file.path(out_dir, "40_04_chromosome_composition.tsv"))
+  write_section_table(draws, file.path(out_dir, "40_04_null_draws.tsv"))
 
   print_concordance_summary(summary_df)
   print_weakened_tests(summary_df)

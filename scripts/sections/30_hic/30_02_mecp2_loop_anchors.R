@@ -118,21 +118,6 @@ fmt_p <- function(p) {
   sprintf("p = %.3g", p)
 }
 
-#' Write a table to the section output directory and report the file.
-#'
-#' Delegates to the shared write_section_table(), which stops when a character
-#' column holds a newline. Every frame passed to this wrapper carries data only:
-#' the two-line figure text is built by group_label() inside the plot functions
-#' and never enters a table.
-#'
-#' The name differs from the shared function because the signature differs: this
-#' one takes a directory and a filename, the shared one takes a full path.
-write_tsv_table <- function(df, out_dir, filename) {
-  path <- file.path(out_dir, filename)
-  write_section_table(df, path)
-  invisible(path)
-}
-
 # =============================================================================
 # LOOP ANCHORS
 # =============================================================================
@@ -1273,23 +1258,23 @@ main <- function() {
     stringsAsFactors = FALSE
   )
 
-  write_tsv_table(anchor_export, out_dir, "30_02_anchor_intervals.tsv")
-  write_tsv_table(background_export, out_dir, "30_02_matched_background_intervals.tsv")
-  write_tsv_table(loop_overlap, out_dir, "30_02_loop_anchor_mecp2_overlap.tsv")
-  write_tsv_table(density_df, out_dir, "30_02_peak_density_by_class.tsv")
-  write_tsv_table(fisher_intervals, out_dir, "30_02_anchor_vs_background_fisher.tsv")
-  write_tsv_table(peak_df, out_dir, "30_02_mecp2_peaks_anchor_class.tsv")
-  write_tsv_table(peak_stats, out_dir, "30_02_peak_fold_by_class_summary.tsv")
-  write_tsv_table(peak_wilcox, out_dir, "30_02_peak_fold_by_class_wilcoxon.tsv")
-  write_tsv_table(distance_stats, out_dir, "30_02_distance_to_anchor_summary.tsv")
-  write_tsv_table(distance_wilcox, out_dir, "30_02_distance_to_anchor_wilcoxon.tsv")
-  write_tsv_table(gene_table, out_dir, "30_02_gene_anchor_table.tsv")
-  write_tsv_table(gene_stats, out_dir, "30_02_gene_fold_by_class_summary.tsv")
-  write_tsv_table(gene_wilcox, out_dir, "30_02_gene_fold_by_class_wilcoxon.tsv")
-  write_tsv_table(conc_stats, out_dir, "30_02_conc_weighted_fold_by_class_summary.tsv")
-  write_tsv_table(conc_wilcox, out_dir, "30_02_conc_weighted_fold_by_class_wilcoxon.tsv")
-  write_tsv_table(gene_fisher_summary, out_dir, "30_02_gene_fisher_summary.tsv")
-  write_tsv_table(scatter_stats, out_dir, "30_02_mecp2_vs_loop_logfc_stats.tsv")
+  write_section_table(anchor_export, file.path(out_dir, "30_02_anchor_intervals.tsv"))
+  write_section_table(background_export, file.path(out_dir, "30_02_matched_background_intervals.tsv"))
+  write_section_table(loop_overlap, file.path(out_dir, "30_02_loop_anchor_mecp2_overlap.tsv"))
+  write_section_table(density_df, file.path(out_dir, "30_02_peak_density_by_class.tsv"))
+  write_section_table(fisher_intervals, file.path(out_dir, "30_02_anchor_vs_background_fisher.tsv"))
+  write_section_table(peak_df, file.path(out_dir, "30_02_mecp2_peaks_anchor_class.tsv"))
+  write_section_table(peak_stats, file.path(out_dir, "30_02_peak_fold_by_class_summary.tsv"))
+  write_section_table(peak_wilcox, file.path(out_dir, "30_02_peak_fold_by_class_wilcoxon.tsv"))
+  write_section_table(distance_stats, file.path(out_dir, "30_02_distance_to_anchor_summary.tsv"))
+  write_section_table(distance_wilcox, file.path(out_dir, "30_02_distance_to_anchor_wilcoxon.tsv"))
+  write_section_table(gene_table, file.path(out_dir, "30_02_gene_anchor_table.tsv"))
+  write_section_table(gene_stats, file.path(out_dir, "30_02_gene_fold_by_class_summary.tsv"))
+  write_section_table(gene_wilcox, file.path(out_dir, "30_02_gene_fold_by_class_wilcoxon.tsv"))
+  write_section_table(conc_stats, file.path(out_dir, "30_02_conc_weighted_fold_by_class_summary.tsv"))
+  write_section_table(conc_wilcox, file.path(out_dir, "30_02_conc_weighted_fold_by_class_wilcoxon.tsv"))
+  write_section_table(gene_fisher_summary, file.path(out_dir, "30_02_gene_fisher_summary.tsv"))
+  write_section_table(scatter_stats, file.path(out_dir, "30_02_mecp2_vs_loop_logfc_stats.tsv"))
 
   # --- Summary --------------------------------------------------------------
   cat("\n")

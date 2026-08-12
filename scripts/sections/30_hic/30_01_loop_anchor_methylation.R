@@ -90,18 +90,6 @@ fmt_p <- function(p) {
 #' Format a vector of p-values.
 fmt_p_vec <- function(p) vapply(p, fmt_p, character(1))
 
-#' Write a data.frame as a TSV in the section output directory.
-#'
-#' Delegates to the shared write_section_table(), which stops when a character
-#' column holds a newline. Every frame passed to this wrapper carries data only:
-#' the two-line figure text is built by group_label() inside the plot functions
-#' and never enters a table.
-write_tsv_table <- function(df, out_dir, filename) {
-  path <- file.path(out_dir, filename)
-  write_section_table(df, path)
-  invisible(path)
-}
-
 #' Summarise a value column for every combination of several group columns.
 #'
 #' Builds one key from the group columns, calls the shared summarise_groups(),
@@ -689,7 +677,11 @@ compute_mch_k119ub_correlation <- function(gene_tbl) {
     sub <- gene_tbl[gene_tbl$anchor_class == cls &
                       !is.na(gene_tbl$k119ub_gb_log2fc) &
                       !is.na(gene_tbl$mch_diff), , drop = FALSE]
-    if (nrow(sub) < 3) return(NULL)
+    if (nrow(sub) < 3) {
+      cat(sprintf("  Anchor class '%s' holds %d usable genes; it gets no correlation.\n",
+                  cls, nrow(sub)))
+      return(NULL)
+    }
     ct <- cor.test(sub$k119ub_gb_log2fc, sub$mch_diff,
                    method = "spearman", exact = FALSE)
     data.frame(
@@ -967,13 +959,13 @@ main <- function() {
                      median_loop_distance = median(loop_distance),
                      .groups = "drop") %>%
     as.data.frame()
-  write_tsv_table(loop_summary, out_dir, "30_01_loop_summary.tsv")
+  write_section_table(loop_summary, file.path(out_dir, "30_01_loop_summary.tsv"))
 
   # --- Anchors --------------------------------------------------------------
   cat("\n--- Building loop anchors ---\n")
   anchors <- build_anchor_table(loops)
   anchor_gr <- anchor_table_to_granges(anchors)
-  write_tsv_table(anchors, out_dir, "30_01_anchor_table.tsv")
+  write_section_table(anchors, file.path(out_dir, "30_01_anchor_table.tsv"))
 
   # --- K119ub peak status at each anchor ------------------------------------
   cat("\n--- Marking K119ub differential peaks at anchors ---\n")
@@ -1018,7 +1010,7 @@ main <- function() {
       stringsAsFactors = FALSE
     )
   }))
-  write_tsv_table(assoc_export, out_dir, "30_01_anchor_gene_associations.tsv")
+  write_section_table(assoc_export, file.path(out_dir, "30_01_anchor_gene_associations.tsv"))
 
   # The GREAT universe holds only genes that have a TxDb regulatory domain,
   # because a gene without one can never be assigned to an anchor by that method.
@@ -1042,20 +1034,20 @@ main <- function() {
   gene_tbl_all <- do.call(rbind, gene_tables)
   gene_tbl_all$method <- factor(gene_tbl_all$method,
                                 levels = unname(ASSOCIATION_METHODS))
-  write_tsv_table(gene_tbl_all, out_dir, "30_01_gene_anchor_class.tsv")
+  write_section_table(gene_tbl_all, file.path(out_dir, "30_01_gene_anchor_class.tsv"))
 
   # --- Hypermethylation rate by anchor class --------------------------------
   cat("\n--- Hypermethylation rate by anchor class ---\n")
   rate_table <- compute_class_rates(gene_tbl_all)
   print(rate_table)
-  write_tsv_table(rate_table, out_dir, "30_01_hyper_rate_by_anchor_class.tsv")
+  write_section_table(rate_table, file.path(out_dir, "30_01_hyper_rate_by_anchor_class.tsv"))
 
   # --- Registered gene-level Fisher tests -----------------------------------
   cat("\n--- Gene-level Fisher tests ---\n")
   fisher_table <- do.call(rbind, lapply(names(gene_tables), function(key) {
     run_registered_fisher_tests(gene_tables[[key]], key, out_dir)
   }))
-  write_tsv_table(fisher_table, out_dir, "30_01_fisher_anchor_class.tsv")
+  write_section_table(fisher_table, file.path(out_dir, "30_01_fisher_anchor_class.tsv"))
 
   # --- Wilcoxon on mch_diff -------------------------------------------------
   cat("\n--- Wilcoxon tests on mch_diff by anchor class ---\n")
@@ -1064,13 +1056,13 @@ main <- function() {
     cbind(method = unname(ASSOCIATION_METHODS[key]), method_key = key, res)
   }))
   print(wilcoxon_table)
-  write_tsv_table(wilcoxon_table, out_dir, "30_01_wilcoxon_mch_diff.tsv")
+  write_section_table(wilcoxon_table, file.path(out_dir, "30_01_wilcoxon_mch_diff.tsv"))
 
   # --- K119ub convergence ---------------------------------------------------
   cat("\n--- K119ub convergence at anchors ---\n")
   convergence_table <- do.call(rbind, lapply(gene_tables, compute_convergence_table))
   print(convergence_table)
-  write_tsv_table(convergence_table, out_dir, "30_01_k119ub_convergence_counts.tsv")
+  write_section_table(convergence_table, file.path(out_dir, "30_01_k119ub_convergence_counts.tsv"))
 
   signal_df <- gene_tbl_all[!is.na(gene_tbl_all$k119ub_gb_log2fc), , drop = FALSE]
   signal_df$mch_group <- ifelse(signal_df$mch_hyper, "Hypermethylated",
@@ -1078,12 +1070,20 @@ main <- function() {
   signal_stats <- annotate_group_stats(signal_df,
                                        c("method", "anchor_class", "mch_group"),
                                        "k119ub_gb_log2fc")
-  write_tsv_table(signal_stats, out_dir, "30_01_k119ub_signal_by_anchor_class.tsv")
+  write_section_table(signal_stats, file.path(out_dir, "30_01_k119ub_signal_by_anchor_class.tsv"))
 
   correlation_table <- do.call(rbind, lapply(gene_tables,
                                              compute_mch_k119ub_correlation))
+  if (is.null(correlation_table) || nrow(correlation_table) == 0) {
+    missing_classes <- setdiff(
+      ANCHOR_CLASS_ORDER,
+      if (!is.null(correlation_table)) unique(correlation_table$anchor_class) else character(0)
+    )
+    stop("compute_mch_k119ub_correlation(): zero rows returned. ",
+         "Missing anchor classes: ", paste(missing_classes, collapse = ", "))
+  }
   print(correlation_table)
-  write_tsv_table(correlation_table, out_dir, "30_01_mch_k119ub_correlation.tsv")
+  write_section_table(correlation_table, file.path(out_dir, "30_01_mch_k119ub_correlation.tsv"))
 
   # --- Logistic model -------------------------------------------------------
   cat("\n--- Logistic model of mCH hypermethylation ---\n")
@@ -1091,8 +1091,8 @@ main <- function() {
   logistic_coefficients <- do.call(rbind, lapply(logistic_fits, `[[`, "coefficients"))
   logistic_summaries <- do.call(rbind, lapply(logistic_fits, `[[`, "model_summary"))
   print(logistic_coefficients)
-  write_tsv_table(logistic_coefficients, out_dir, "30_01_logistic_coefficients.tsv")
-  write_tsv_table(logistic_summaries, out_dir, "30_01_logistic_model_summary.tsv")
+  write_section_table(logistic_coefficients, file.path(out_dir, "30_01_logistic_coefficients.tsv"))
+  write_section_table(logistic_summaries, file.path(out_dir, "30_01_logistic_model_summary.tsv"))
 
   # --- Figures --------------------------------------------------------------
   cat("\n--- Figures ---\n")
