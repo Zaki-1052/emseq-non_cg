@@ -1,3 +1,0 @@
-group	n_genes	median_width_bp	mean_width_bp	wilcoxon_p	wilcoxon_alternative	length_vs_ctrl_signal_rho	length_vs_ctrl_signal_p
-Neuronal	4797	18901	73342.8200958933	0.5082171629914	neuronal longer	-0.148525709211747	8.40866130820469e-107
-Other	16807	17368	46851.6641875409	0.5082171629914	neuronal longer	-0.148525709211747	8.40866130820469e-107

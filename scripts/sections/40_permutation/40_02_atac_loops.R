@@ -322,8 +322,8 @@ build_mch_sets <- function() {
   cat("\nBuilding mCH gene body sets...\n")
   # which() keeps a gene with a missing mch_sig or mch_diff out of both sets
   # instead of turning it into an NA-valued range.
-  hyper <- gene_bodies[which(gene_bodies$mch_sig & gene_bodies$mch_diff > 0)]
-  hypo  <- gene_bodies[which(gene_bodies$mch_sig & gene_bodies$mch_diff < 0)]
+  hyper <- gene_bodies[which(gene_bodies$mch_sig & gene_bodies$edger_logFC > 0)]
+  hypo  <- gene_bodies[which(gene_bodies$mch_sig & gene_bodies$edger_logFC < 0)]
 
   list(
     "mCH Hyper genes" = restrict_to_analysis_chrs(hyper, "mCH Hyper genes"),
@@ -340,6 +340,11 @@ build_loop_anchor_sets <- function(path) {
   cat("\nLoading Hi-C loop anchors...\n")
   loops <- read.table(path, header = TRUE, sep = "\t", stringsAsFactors = FALSE,
                       quote = "", comment.char = "")
+
+  col_map <- c(chr1 = "anchor1_chr", start1 = "anchor1_start", end1 = "anchor1_end",
+               chr2 = "anchor2_chr", start2 = "anchor2_start", end2 = "anchor2_end")
+  hit <- names(col_map) %in% colnames(loops)
+  if (any(hit)) colnames(loops)[match(names(col_map)[hit], colnames(loops))] <- col_map[hit]
 
   require_columns(
     loops,

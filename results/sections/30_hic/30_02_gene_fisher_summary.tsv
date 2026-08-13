@@ -1,3 +1,0 @@
-test_id	anchor_class	n_genes	n_mecp2_gained	n_at_anchor	n_both	odds_ratio	conf_low	conf_high	p_value
-mecp2_gained_at_gained_anchor	Gained anchor	9517	412	805	54	1.6777809802055	1.22414324061589	2.26293000837224	0.00105543549270251
-mecp2_gained_at_lost_anchor	Lost anchor	9517	412	563	72	3.71470047709836	2.79392238395182	4.88662217928395	2.30179177720879e-17

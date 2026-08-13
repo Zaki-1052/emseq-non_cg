@@ -370,14 +370,14 @@ add_enhancer_overlap <- function(intervals) {
 feature_type_summary <- function(all_intervals, kept_intervals) {
   total <- all_intervals[, .(
     n_intervals_total = .N,
-    total_bases_all = sum(as.numeric(feature_length))
+    total_bases_all = sum(as.double(feature_length))
   ), by = feature_type]
 
   kept <- kept_intervals[, .(
     n_intervals_pass = .N,
     n_genes = uniqueN(gene_name),
-    total_bases_pass = sum(as.numeric(feature_length)),
-    median_interval_length = median(feature_length),
+    total_bases_pass = sum(as.double(feature_length)),
+    median_interval_length = median(as.double(feature_length)),
     total_ch_sites = sum(ctrl_ch_sites + mut_ch_sites),
     pooled_mch_ctrl = sum(ctrl_methylated) / sum(ctrl_coverage),
     pooled_mch_mut = sum(mut_methylated) / sum(mut_coverage),
@@ -400,7 +400,7 @@ gene_feature_summary <- function(intervals) {
     chr = chr[1],
     strand = strand[1],
     n_intervals = .N,
-    total_bases = sum(as.numeric(feature_length)),
+    total_bases = sum(as.double(feature_length)),
     n_enhancer_intervals = sum(enhancer_overlap),
     ctrl_coverage = sum(ctrl_coverage),
     ctrl_methylated = sum(ctrl_methylated),
@@ -580,7 +580,7 @@ enhancer_overlap_summary <- function(intervals) {
   out <- intervals[, .(
     n_intervals = .N,
     n_genes = uniqueN(gene_name),
-    total_bases = sum(as.numeric(feature_length)),
+    total_bases = sum(as.double(feature_length)),
     pooled_mch_ctrl = sum(ctrl_methylated) / sum(ctrl_coverage),
     pooled_mch_mut = sum(mut_methylated) / sum(mut_coverage),
     mean_delta_mch = mean(delta_mch),
@@ -605,7 +605,7 @@ exon_intron_rank_profile <- function(intervals, max_rank) {
   out <- sub[, .(
     n_intervals = .N,
     n_genes = uniqueN(gene_name),
-    median_interval_length = median(feature_length),
+    median_interval_length = median(as.double(feature_length)),
     pooled_mch_ctrl = sum(ctrl_methylated) / sum(ctrl_coverage),
     pooled_mch_mut = sum(mut_methylated) / sum(mut_coverage),
     mean_delta_mch = mean(delta_mch),

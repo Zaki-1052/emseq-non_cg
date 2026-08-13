@@ -51,7 +51,7 @@ echo "Source (mariner_hi-c): $HIC_DIR"
 echo "Target (repo):          $REPO_DIR"
 echo ""
 
-for sub in chip_peaks chromatin diffbind hic mecp2 neuronal features; do
+for sub in chip_peaks chromatin diffbind hic mecp2 neuronal features biomodal; do
     mkdir -p "${REPO_DIR}/data/${sub}"
 done
 
@@ -125,6 +125,11 @@ echo ""
 
 echo "--- Per-gene K119ub signal -> data/ ---"
 copy_one "${BIO_DIR}/data/k119ub_gene_signal.tsv" "${REPO_DIR}/data/k119ub_gene_signal.tsv"
+echo ""
+
+echo "--- Biomodal CG DMR gene-level tables -> data/biomodal/ ---"
+copy_one "${BIO_DIR}/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_mc_control__mutant_20260402_191818.bed"  "${REPO_DIR}/data/biomodal/cg_mc_dmr_genes.bed"
+copy_one "${BIO_DIR}/modality/outputs/run-5/outputs_CG/Results/gencode.vM25.mouse.genes.annotation/DMR_20260402_191818/DMR_hmc_control__mutant_20260402_191818.bed" "${REPO_DIR}/data/biomodal/cg_hmc_dmr_genes.bed"
 echo ""
 
 echo "--- Neuronal gene sets -> data/neuronal/ ---"

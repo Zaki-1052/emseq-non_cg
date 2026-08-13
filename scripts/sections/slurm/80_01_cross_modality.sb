@@ -1,0 +1,69 @@
+#!/bin/bash
+# scripts/sections/slurm/80_01_cross_modality.sb
+#SBATCH --job-name=sec_80_01
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/sections/80_cross_modality/80_01_cross_modality_%j.out
+
+# Section 80_01: Cross-modality CG/hmC/mCH comparison.
+#
+# Runs scripts/sections/80_cross_modality/80_01_cross_modality.R.
+# Writes into results/sections/80_cross_modality/ and registers Fisher tests
+# in results/sections/fisher_registry/.
+#
+# Usage: sbatch scripts/sections/slurm/80_01_cross_modality.sb
+
+echo "========================================="
+echo "EM-seq section 80_01: Cross-modality comparison"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+source ~/.bashrc
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+export EMSEQ_ENV=expanse
+
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+DATADIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+
+export TMPDIR="${DATADIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+LOGDIR="${CODEDIR}/logs/sections"
+OUTDIR="${CODEDIR}/results/sections/80_cross_modality"
+mkdir -p "$LOGDIR" "$OUTDIR"
+
+SECTION_SCRIPT="${CODEDIR}/scripts/sections/80_cross_modality/80_01_cross_modality.R"
+
+echo "Code dir:   $CODEDIR"
+echo "Data dir:   $DATADIR"
+echo "Script:     $SECTION_SCRIPT"
+echo "Output dir: $OUTDIR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "$SECTION_SCRIPT" --output-dir "$OUTDIR"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: section 80_01"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

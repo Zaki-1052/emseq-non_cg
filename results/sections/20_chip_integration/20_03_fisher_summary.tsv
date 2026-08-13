@@ -1,8 +1,0 @@
-test_id	pair_id	gene_set	row_var	col_var	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	ci_low	ci_high	p_value
-k119ub_up_vs_mecp2_up	k119ub_vs_mecp2	genes with quantifiable H2AK119ub bigwig signal	K119ub_up	MeCP2_up	9399	4988	2558	1632	1.83007172514736	1.66504020027432	2.01209921232157	1.47315087051515e-37
-mecp2_up_vs_k27ac_up_euchromatin	mecp2_vs_k27ac	euchromatic genes (gene-body state Active or Enhancer_Marked)	MeCP2_up	K27ac_up	5180	1352	2887	605	0.548746221834645	0.48316989482659	0.62308553017176	4.36288159327012e-21
-mecp2_up_vs_k27me3_up_heterochromatin	mecp2_vs_k27me3	heterochromatic genes (gene-body state Polycomb or Mixed)	MeCP2_up	K27me3_up	2178	616	602	178	1.09069606008012	0.881132172867032	1.34737469801981	0.425028141033077
-k119ub_up_vs_mch_hyper	k119ub_vs_mch	genes with quantifiable H2AK119ub bigwig signal	K119ub_up	mCH_up	17535	8499	9465	5342	2.0162655628236	1.89717966003014	2.14278966827181	2.2214230340479e-116
-mecp2_up_vs_mch_hyper	mecp2_vs_mch	every gene with a MeCP2 peak	MeCP2_up	mCH_up	9517	2586	4837	1614	1.91026060715865	1.7397824581875	2.09817868735941	1.22909259282951e-43
-k119ub_up_vs_mch_hyper_sig	k119ub_vs_mch	mCH-significant genes only	K119ub_up	mch_hyper	5119	2200	1247	826	3.56619649271987	3.11117679763046	4.09124601777123	7.95194923052491e-81
-mecp2_up_vs_mch_hyper_sig	mecp2_vs_mch	mCH-significant genes only	MeCP2_up	mch_hyper	3527	977	867	414	3.40265007361355	2.88285795751189	4.01754959470256	6.31802051854769e-49

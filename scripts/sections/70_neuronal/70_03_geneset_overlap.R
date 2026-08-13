@@ -760,8 +760,8 @@ run_paired_condition_tests <- function(universe) {
       median_paired_delta = median(sub$mch_mut - sub$mch_ctrl),
       median_mch_diff = median(sub$mch_diff),
       n_mch_significant = sum(sub$mch_sig),
-      n_hypermethylated = sum(sub$mch_sig & sub$mch_diff > 0),
-      n_hypomethylated = sum(sub$mch_sig & sub$mch_diff < 0),
+      n_hypermethylated = sum(sub$mch_sig & sub$edger_logFC > 0),
+      n_hypomethylated = sum(sub$mch_sig & sub$edger_logFC < 0),
       V = unname(wt$statistic),
       p_value = wt$p.value,
       stringsAsFactors = FALSE

@@ -1,4 +1,0 @@
-ranking	n_genes_ranked	n_terms_tested	n_significant	n_significant_neuronal	n_significant_other	n_neuronal_positive_nes	n_neuronal_negative_nes	pct_significant_neuronal
-MeCP2 fold (nearest TSS)	21098	5129	0	0	0	0	0	0
-MeCP2 fold (median significant)	21098	5116	2	0	2	0	0	0
-K119ub gene-body log2FC	21490	5170	204	3	201	3	0	1.47058823529412

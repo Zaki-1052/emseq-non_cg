@@ -312,8 +312,8 @@ restrict_to_standard <- function(gr, genome, set_name) {
 build_alist <- function(genome) {
   cat("\nConstructing Alist (mCH direction gene body sets)...\n")
 
-  is_hyper <- gene_bodies$mch_sig & gene_bodies$mch_diff > 0
-  is_hypo  <- gene_bodies$mch_sig & gene_bodies$mch_diff < 0
+  is_hyper <- gene_bodies$mch_sig & gene_bodies$edger_logFC > 0
+  is_hypo  <- gene_bodies$mch_sig & gene_bodies$edger_logFC < 0
 
   if (sum(is_hyper) != sum(mch_results$mch_hyper) ||
       sum(is_hypo) != sum(mch_results$mch_hypo)) {

@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-20_04	mch_gain_vs_mecp2_gain_bivalent	Among genes in the Bivalent mark category, gene-body mCH gain against MeCP2 binding gain.	mch_gain	mecp2_gain	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_04_mch_gain_vs_mecp2_gain_bivalent_genes.tsv	555	276	167	113	2.88290038594683	3.72374074424776e-08

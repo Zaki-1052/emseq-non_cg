@@ -1,7 +1,0 @@
-genotype	aging_status	n_peaks	n_peaks_total	pct_of_peaks
-Control	Aging up	10930	397170	2.7519701890878
-Control	Aging down	2822	397170	0.710526978371982
-Control	Not significant	383418	397170	96.5375028325402
-Mutant	Aging up	23117	395715	5.84183061041406
-Mutant	Aging down	10646	395715	2.69032005357391
-Mutant	Not significant	361952	395715	91.467849336012

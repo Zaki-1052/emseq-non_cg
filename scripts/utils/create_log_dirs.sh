@@ -23,6 +23,7 @@ dirs=(
     logs/sections/50_features
     logs/sections/60_mecp2
     logs/sections/70_neuronal
+    logs/sections/80_cross_modality
 )
 
 for d in "${dirs[@]}"; do

@@ -1,9 +1,0 @@
-method	method_key	anchor_class	n_genes	spearman_rho	p_value
-GREAT domain	great	Gained anchor	1578	0.305008354288079	2.50798327554904e-35
-GREAT domain	great	Lost anchor	1063	0.392140199483384	2.11277184002113e-40
-GREAT domain	great	Both anchors	248	0.243203714688977	0.000109338689468055
-GREAT domain	great	No anchor	15123	0.226788591979026	1.19803585231014e-175
-Direct overlap	direct	Gained anchor	979	0.359568756325356	2.99541993865486e-31
-Direct overlap	direct	Lost anchor	732	0.452215334259971	3.51909486752095e-38
-Direct overlap	direct	Both anchors	141	0.395963012115245	1.17330294345291e-06
-Direct overlap	direct	No anchor	16162	0.225020113742228	1.28494658915876e-184

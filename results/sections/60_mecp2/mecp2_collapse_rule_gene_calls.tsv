@@ -1,7 +1,0 @@
-rule	call	n_genes	percentage
-nearest_tss	Gained	163	0.769049304081151
-nearest_tss	Lost	80	0.377447511205473
-nearest_tss	Unchanged	20952	98.8535031847134
-median_significant	Gained	2015	9.50695918848785
-median_significant	Lost	555	2.61854210898797
-median_significant	Unchanged	18625	87.8744987025242

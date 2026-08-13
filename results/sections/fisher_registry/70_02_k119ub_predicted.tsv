@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-70_02	k119ub_predicted	Among genes with a H2AK119ub peak, the predicted up log2 fold change is more common at neuronal genes.	is_neuronal	k119ub_predicted	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_02_k119ub_predicted_genes.tsv	8846	2676	5317	1417	0.655152429048303	2.38120592389788e-19

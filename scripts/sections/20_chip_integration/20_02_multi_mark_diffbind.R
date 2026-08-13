@@ -616,7 +616,7 @@ test_mark_direction <- function(master, mark, fdr_threshold, out_dir) {
   gene_df <- data.frame(
     gene_name = df$gene_name,
     chr = df$chr,
-    mch_hyper = df$mch_diff > 0,
+    mch_hyper = df$edger_logFC > 0,
     stringsAsFactors = FALSE
   )
   gene_df[[gained_col]] <- df[[fold_col]] > 0
@@ -1041,7 +1041,7 @@ test_convergence_direction <- function(master, out_dir) {
   gene_df <- data.frame(
     gene_name = df$gene_name,
     chr = df$chr,
-    mch_hyper = df$mch_diff > 0,
+    mch_hyper = df$edger_logFC > 0,
     convergent_2plus = df$n_concordant >= 2,
     stringsAsFactors = FALSE
   )

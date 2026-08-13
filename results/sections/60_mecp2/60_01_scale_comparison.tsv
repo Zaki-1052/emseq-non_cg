@@ -1,2 +1,0 @@
-n_genes_tested	n_genes_with_mecp2_peak	n_mch_sig_all_genes	n_mch_sig_with_peak	n_mecp2_sig_with_peak	n_both_sig	ratio_mch_to_mecp2	pct_mch_sig_that_change_mecp2	pct_mecp2_changed_that_change_mch	n_mecp2_peaks_total	n_mecp2_peaks_gained	n_mecp2_peaks_lost
-21072	17096	5551	5146	155	96	33.2	1.86552662261951	61.9354838709677	36804	5675	1107

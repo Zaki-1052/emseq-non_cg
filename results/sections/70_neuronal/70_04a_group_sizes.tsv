@@ -1,9 +1,0 @@
-set_label	group	n_genes	frac_of_universe	n_with_atac	n_with_k27ac	n_with_k27me3	n_with_k119ub
-Neuronal gene set	Both	129	0.00612186788154897	127	98	56	119
-Neuronal gene set	Gene set only	4080	0.193621867881549	3596	2155	1372	2558
-Neuronal gene set	MeCP2-up only	283	0.0134301442672741	280	211	86	258
-Neuronal gene set	Neither	16580	0.786826119969628	10727	6135	2730	5950
-Synapse gene set	Both	74	0.00351176917236143	74	58	32	68
-Synapse gene set	Gene set only	2047	0.0971431283219438	1888	1228	666	1355
-Synapse gene set	MeCP2-up only	338	0.0160402429764617	333	251	110	309
-Synapse gene set	Neither	18613	0.883304859529233	12435	7062	3436	7153

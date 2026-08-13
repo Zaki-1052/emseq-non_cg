@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-10_04	k27ac_sig	Genes whose body overlaps an H3K27ac consensus peak, against significant mCH change.	h3k27ac_overlap	mch_sig	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_04_k27ac_sig_genes.tsv	20105	6784	5391	2587	2.31181083519137	4.1967527202346e-143

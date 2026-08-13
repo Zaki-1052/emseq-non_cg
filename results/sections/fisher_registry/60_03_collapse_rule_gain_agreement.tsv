@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-60_03	collapse_rule_gain_agreement	Do the nearest-TSS and median-significant collapse rules call the same genes MeCP2 gained?	gained_nearest_tss	gained_median_sig	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2/fisher_tables/60_03_collapse_rule_gain_agreement_genes.tsv	21195	163	2015	163	Inf	5.84283722612397e-170

@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-20_02	k27ac_direction	Among mCH-significant genes with a significant H3K27ac peak, mCH hypermethylation against H3K27ac gain.	mch_hyper	k27ac_gained	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_02_k27ac_direction_genes.tsv	1062	410	537	89	0.126543481761473	2.69197811558782e-52

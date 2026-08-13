@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-10_03	body_state_Unmarked_hyper	Are genes with the Unmarked gene-body state enriched among mCH hypermethylated genes?	body_state_Unmarked	mch_hyper	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_03_body_state_Unmarked_hyper_genes.tsv	21072	5206	1399	92	0.200392359040753	3.79828678484031e-75

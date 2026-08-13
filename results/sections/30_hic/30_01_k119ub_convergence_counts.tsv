@@ -1,9 +1,0 @@
-method	method_key	k119ub_state	mch_state	observed	expected	observed_over_expected	n_anchor_genes
-GREAT domain	great	K119ub gained	Hypermethylated	121	43.7627699691464	2.76490725073635	2917
-GREAT domain	great	K119ub not gained	Hypermethylated	76	153.237230030854	0.495963024029459	2917
-GREAT domain	great	K119ub gained	Not hypermethylated	527	604.237230030854	0.87217399691358	2917
-GREAT domain	great	K119ub not gained	Not hypermethylated	2193	2115.76276996915	1.03650561921551	2917
-Direct overlap	direct	K119ub gained	Hypermethylated	138	52.3023255813954	2.63850600266785	1935
-Direct overlap	direct	K119ub not gained	Hypermethylated	57	142.697674418605	0.399445893089961	1935
-Direct overlap	direct	K119ub gained	Not hypermethylated	381	466.697674418605	0.816374327287223	1935
-Direct overlap	direct	K119ub not gained	Not hypermethylated	1359	1273.3023255814	1.06730347749854	1935

@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-70_01	decile_02	Derived neuronal genes are enriched in decile 2 of control H2AK119ub signal against the other nine deciles.	is_neuronal	in_decile	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_01_decile_02_genes.tsv	21604	4797	2160	445	0.899821961972319	0.0597485632196994

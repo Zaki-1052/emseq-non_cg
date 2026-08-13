@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-10_04	a_compartment_sig	Genes in A subcompartments (A.1 or A.2) versus B subcompartments, against significant mCH change.	in_a_compartment	mch_sig	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_04_a_compartment_sig_genes.tsv	20105	14016	5391	4194	1.74504990959014	2.35905810307071e-53

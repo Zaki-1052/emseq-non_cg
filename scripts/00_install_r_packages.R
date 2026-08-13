@@ -40,7 +40,8 @@ pkgs <- c(
 
   # --- Section pipeline: models and set overlap ---
   "pROC",             # AUC for logistic models (section 20_02)
-  "ggVennDiagram"     # gene set overlap (sections 60_01, 70_03)
+  "ggVennDiagram",    # gene set overlap (sections 60_01, 70_03)
+  "effsize"           # Cliff's delta effect size (section 60_02)
 )
 
 for (pkg in pkgs) {

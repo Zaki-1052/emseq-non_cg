@@ -352,9 +352,9 @@ build_gene_universe <- function(mch, fdr_threshold) {
               length(PERM_CHRS), fmt_int(nrow(genes)), fmt_int(n_before)))
 
   genes$mch_sig <- genes$edger_fdr < fdr_threshold
-  genes$mch_hyper <- genes$mch_sig & genes$mch_diff > 0
-  genes$mch_hypo <- genes$mch_sig & genes$mch_diff < 0
-  genes$mch_direction <- ifelse(genes$mch_diff > 0,
+  genes$mch_hyper <- genes$mch_sig & genes$edger_logFC > 0
+  genes$mch_hypo <- genes$mch_sig & genes$edger_logFC < 0
+  genes$mch_direction <- ifelse(genes$edger_logFC > 0,
                                 "Hypermethylated", "Hypomethylated")
 
   if (sum(genes$mch_hyper) == 0 || sum(genes$mch_hypo) == 0) {

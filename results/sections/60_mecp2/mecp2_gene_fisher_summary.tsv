@@ -1,3 +1,0 @@
-test_id	row_var	col_var	n_genes	odds_ratio	ci_low	ci_high	p_value
-collapse_rule_gain_agreement	gained_nearest_tss	gained_median_sig	21195	Inf	455.672696027782	Inf	5.84283722612397e-170
-many_peaks_vs_gain	many_peaks	gained_nearest_tss	21195	3.20699385295898	2.22544271604254	4.70914542552861	7.78497886237681e-12

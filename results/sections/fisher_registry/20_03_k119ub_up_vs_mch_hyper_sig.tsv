@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-20_03	k119ub_up_vs_mch_hyper_sig	Among mCH-significant genes with quantifiable H2AK119ub signal, does an H2AK119ub gain occur with mCH hypermethylation?	K119ub_up	mch_hyper	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_03_k119ub_up_vs_mch_hyper_sig_genes.tsv	5119	2200	1247	826	3.56619649271987	7.95194923052491e-81

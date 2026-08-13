@@ -247,8 +247,8 @@ deduplicate_mch_results <- function(mch, fdr_threshold) {
   df <- df[!duplicated(df$gene_name), , drop = FALSE]
 
   df$mch_sig   <- df$edger_fdr < fdr_threshold
-  df$mch_hyper <- df$mch_sig & df$mch_diff > 0
-  df$mch_hypo  <- df$mch_sig & df$mch_diff < 0
+  df$mch_hyper <- df$mch_sig & df$edger_logFC > 0
+  df$mch_hypo  <- df$mch_sig & df$edger_logFC < 0
 
   cat(sprintf("  mCH results: %s rows, %s unique genes at FDR < %.3f (%s hyper, %s hypo)\n",
               format(n_before, big.mark = ","),

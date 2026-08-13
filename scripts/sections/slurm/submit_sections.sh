@@ -56,6 +56,8 @@ ALL_SECTIONS=(
     70_02_chromatin_remodeling
     70_03_geneset_overlap
     70_04_synapse_chromatin
+    80_01_cross_modality
+    80_02_k119ub_stratification
 )
 N_ALL_SECTIONS=${#ALL_SECTIONS[@]}
 
@@ -75,6 +77,8 @@ FISHER_SECTIONS=(
     60_04_aging
     70_01_k119ub_neuronal
     70_03_geneset_overlap
+    80_01_cross_modality
+    80_02_k119ub_stratification
 )
 
 # Sections that read NTIMES and FORCE_RERUN from the environment.
@@ -440,6 +444,7 @@ submit_section 60_01_methylation_scale
 submit_section 60_03_reconciliation
 submit_section 60_04_aging
 submit_section 70_01_k119ub_neuronal
+submit_section 80_01_cross_modality
 echo ""
 
 # ---------------------------------------------------------------------------
@@ -464,6 +469,7 @@ submit_section 20_03_quadrant_scatters      20_02_multi_mark_diffbind
 submit_section 20_04_mch_mecp2_by_mark      20_02_multi_mark_diffbind
 submit_section 70_02_chromatin_remodeling   70_01_k119ub_neuronal 20_02_multi_mark_diffbind
 submit_section 70_04_synapse_chromatin      70_01_k119ub_neuronal 20_02_multi_mark_diffbind
+submit_section 80_02_k119ub_stratification  10_01_chromatin_state 20_02_multi_mark_diffbind
 echo ""
 
 # ---------------------------------------------------------------------------

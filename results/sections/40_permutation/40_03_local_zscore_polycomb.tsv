@@ -1,3 +1,0 @@
-name	p_value	z_score	mean_perm_test	sd_perm_test	n_overlaps	norm_zscore	adj.p_value	sub_analysis
-H3K27me3 Domains	0.361927614477105	-0.3659	375.6572	15.4600352748026	370	-0.00978258324541827	0.3619	Polycomb
-Polycomb State Intervals	0.154169166166767	-1.0657	310.0506	15.0615606682028	294	-0.0284922081569889	0.3083	Polycomb

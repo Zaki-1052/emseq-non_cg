@@ -943,7 +943,7 @@ register_mch_significant_fisher <- function(results, out_dir) {
     gene_df <- data.frame(
       gene_name = sig$gene_name,
       chr = sig$chr,
-      mch_hyper = sig$mch_diff > 0,
+      mch_hyper = sig$edger_logFC > 0,
       stringsAsFactors = FALSE
     )
     gene_df[[spec$mark_flag]] <- sig[[spec$value_col]] > 0

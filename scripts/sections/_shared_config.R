@@ -241,7 +241,8 @@ OUTPUT_PATHS <- list(
   permutation = file.path(RESULTS_ROOT, "40_permutation"),
   features   = file.path(RESULTS_ROOT, "50_features"),
   mecp2      = file.path(RESULTS_ROOT, "60_mecp2"),
-  neuronal   = file.path(RESULTS_ROOT, "70_neuronal")
+  neuronal        = file.path(RESULTS_ROOT, "70_neuronal"),
+  cross_modality  = file.path(RESULTS_ROOT, "80_cross_modality")
 )
 
 # Cross-section handoff files. Sections that produce these write them here;

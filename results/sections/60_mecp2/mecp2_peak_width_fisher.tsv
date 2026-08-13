@@ -1,3 +1,0 @@
-peakset	median_width_all_peaks	n_significant_peaks	n_wide_gained	n_wide_lost	n_narrow_gained	n_narrow_lost	odds_ratio	ci_low	ci_high	p_value
-Annotated peakset	401	8886	3	2	7683	1198	0.233933834413239	0.0267849603965511	2.80375635055865	0.137876852976616
-DiffBind Conc4 peakset	1547	6782	2680	507	2995	600	1.05898003589306	0.928684982547705	1.20778504027775	0.392204199519162

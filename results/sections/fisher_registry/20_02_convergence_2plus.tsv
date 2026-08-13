@@ -1,2 +1,0 @@
-section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
-20_02	convergence_2plus	Among mCH-significant genes with at least one mark peak, mCH hypermethylation against two or more concordant marks.	mch_hyper	convergent_2plus	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_02_convergence_2plus_genes.tsv	4965	1249	473	302	6.6081556192811	4.374500727558e-79

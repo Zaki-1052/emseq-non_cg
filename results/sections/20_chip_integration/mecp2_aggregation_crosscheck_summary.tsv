@@ -1,2 +1,0 @@
-n_genes_annotated_route	n_genes_diffbind_route	n_genes_shared	spearman_rho	spearman_p	pearson_r	pearson_p	pct_same_sign	median_fold_annotated	median_fold_diffbind
-21195	11229	11042	0.383683537777038	0	0.44477059413255	0	69.3533780112299	-0.0179826894189213	-0.0339989555

@@ -1,3 +1,0 @@
-n_neuronal	n_other	median_neuronal	median_other	mean_neuronal	mean_other	delta_median	rank_biserial	location_shift	shift_ci_lower	shift_ci_upper	wilcoxon_w	p_value	count_type
-493	867	2	2	1.69574036511156	1.92272202998847	0	-0.110001380339751	NA	NA	NA	190206.5	0.000524398218964842	Direction of the fold change
-493	867	1	1	0.987829614604463	1.04152249134948	0	-0.0451581658794051	NA	NA	NA	204064.5	0.143954772090681	Direction and FDR < 0.05
