@@ -1,0 +1,3 @@
+method	method_key	formula	n_genes_available	n_genes_in_model	n_dropped_missing_k119ub	n_hyper_in_model	aic	null_deviance	residual_deviance	df_null	df_residual
+GREAT domain	great	mch_hyper ~ anchor_class + k119ub_gb_log2fc	18648	18012	636	603	3482.06130203148	5282.21663731892	3472.06130203148	18011	18007
+Direct overlap	direct	mch_hyper ~ anchor_class + k119ub_gb_log2fc	21072	18014	3058	603	3389.10798475517	5282.35283318172	3379.10798475517	18013	18009

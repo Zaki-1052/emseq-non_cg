@@ -1,0 +1,281 @@
+=========================================
+EM-seq section 40_01: gene body x mark permutation
+=========================================
+Job ID: 53392489
+Node: exp-1-54
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392489
+Code dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:       /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/40_permutation/40_01_dmr_marks.R
+Output dir:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Cores:          32
+Randomisations: 5000
+FORCE_RERUN not set: an existing permutation cache is reused.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Loading required package: BSgenome
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘XVector’
+
+The following object is masked from ‘package:purrr’:
+
+    compact
+
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:grid’:
+
+    pattern
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: BiocIO
+
+Attaching package: ‘BiocIO’
+
+The following object is masked from ‘package:rtracklayer’:
+
+    FileForFormat
+
+  Patched regioneReloaded::chooseHclustMet for small-matrix safety.
+
+================================================================================
+SECTION 40_01: mCH GENE BODY x CHROMATIN MARK GENOMIC PERMUTATION
+================================================================================
+Output directory:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Randomisations:     5,000
+Cores:              32
+Randomisation:      randomizeRegions (per chromosome = TRUE)
+Evaluation:         numOverlaps
+Seed:               42
+regioneR:           1.34.0
+regioneReloaded:    1.4.0
+
+STEP 1: Genome and region sets
+Constructing the mm10 genome object...
+The masked version of 'mm10' is not installed. Using the unmasked version. This means that no automatic masking will be available.
+  Genome: 20 chromosomes, 2.63 Gb total
+
+Constructing Alist (mCH direction gene body sets)...
+  mCH Hyper gene bodies        642 regions (0 dropped off chr1-19/X), median width 69923 bp
+  mCH Hypo gene bodies        4915 regions (0 dropped off chr1-19/X), median width 63546 bp
+
+Constructing Blist (chromatin mark peak sets)...
+  ATAC Up: 7620 peaks
+  ATAC Down: 3744 peaks
+  MeCP2 Up: 7686 peaks
+  MeCP2 Down: 1200 peaks
+
+  Restricting Blist to chr1-19 and chrX...
+  ATAC Up                     7618 regions (2 dropped off chr1-19/X), median width 400 bp
+  ATAC Down                   3744 regions (0 dropped off chr1-19/X), median width 400 bp
+  K119ub Gained              17078 regions (0 dropped off chr1-19/X), median width 401 bp
+  K119ub Lost                 6304 regions (0 dropped off chr1-19/X), median width 401 bp
+  K27ac Gained                5076 regions (0 dropped off chr1-19/X), median width 401 bp
+  K27ac Lost                  6706 regions (0 dropped off chr1-19/X), median width 401 bp
+  MeCP2 Up                    7686 regions (0 dropped off chr1-19/X), median width 400 bp
+  MeCP2 Down                  1200 regions (0 dropped off chr1-19/X), median width 400 bp
+  Wrote: 40_01_region_set_sizes.tsv (10 rows, 7 cols)
+
+STEP 2: Permutation
+
+Running crosswisePermTest: 2 Alist x 8 Blist sets, ntimes=5000, cores=32
+[1] "Performing permutation tests for mCH Hyper gene bodies (1 of 2)"
+[1] "Performing permutation tests for mCH Hypo gene bodies (2 of 2)"
+  Building the crosswise association matrix...
+[1] "method selected for hclustering: average"
+  average 
+0.9549208 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+
+Running regioneR permTest for the null distributions (ntimes=5000, cores=32)
+  mCH Hyper gene bodies ...
+  mCH Hypo gene bodies ...
+  Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_01_permutation_objects.rds
+  Wrote: 40_01_permutation_parameters.tsv (1 rows, 14 cols)
+
+STEP 3: Extracting permutation results
+  Extracted 16 pairwise permutation results
+  z-score range: [-13.01, 35.72]
+  Observed overlap counts agree across both runs for all 16 cells.
+  Wrote: 40_01_permutation_association.tsv (16 rows, 40 cols)
+  Wrote: 40_01_null_distribution_summary.tsv (16 rows, 21 cols)
+  Wrote: 40_01_null_draws.tsv (80,000 rows, 5 cols)
+
+--- Permutation results ---
+  mCH set                  Peak set           observed  null mean        z              p      O/E
+  mCH Hyper gene bodies    ATAC Up                 538      328.2     6.65         0.0002     1.64
+  mCH Hyper gene bodies    ATAC Down               781      160.7    26.60         0.0002     4.86
+  mCH Hyper gene bodies    K119ub Gained         3,034      737.6    31.16         0.0002     4.11
+  mCH Hyper gene bodies    K119ub Lost              87      270.4    -3.93         0.0002     0.32
+  mCH Hyper gene bodies    K27ac Gained            144      218.4    -1.74         0.0272     0.66
+  mCH Hyper gene bodies    K27ac Lost            1,558      288.7    33.14         0.0002     5.40
+  mCH Hyper gene bodies    MeCP2 Up              2,120      331.9    34.83         0.0002     6.39
+  mCH Hyper gene bodies    MeCP2 Down               21       51.7    -2.05         0.0028     0.41
+  mCH Hypo gene bodies     ATAC Up               2,528     1521.4    17.22         0.0002     1.66
+  mCH Hypo gene bodies     ATAC Down               733      748.2    -0.34           0.38     0.98
+  mCH Hypo gene bodies     K119ub Gained         2,498     3413.5    -6.98         0.0002     0.73
+  mCH Hypo gene bodies     K119ub Lost           3,166     1258.7    22.74         0.0002     2.52
+  mCH Hypo gene bodies     K27ac Gained          3,830     1013.8    35.72         0.0002     3.78
+  mCH Hypo gene bodies     K27ac Lost            1,336     1340.8    -0.07          0.486     1.00
+  mCH Hypo gene bodies     MeCP2 Up                287     1537.4   -13.01         0.0002     0.19
+  mCH Hypo gene bodies     MeCP2 Down              801      239.4    19.05         0.0002     3.35
+
+--- Agreement between the two permutation runs ---
+  Largest z-score difference: 2.157
+  Median absolute difference: 0.702
+
+STEP 4: Gene-level Fisher tests
+  mCH universe: 21,072 genes after collapsing 25 duplicate symbols
+  On chr1-19 and chrX: 21,072 genes (641 hyper, 4,910 hypo)
+    ATAC Up          overlaps 2,713 of 21,072 gene bodies
+    ATAC Down        overlaps 1,288 of 21,072 gene bodies
+    K119ub Gained    overlaps 3,816 of 21,072 gene bodies
+    K119ub Lost      overlaps 2,367 of 21,072 gene bodies
+    K27ac Gained     overlaps 1,768 of 21,072 gene bodies
+    K27ac Lost       overlaps 1,961 of 21,072 gene bodies
+    MeCP2 Up         overlaps 848 of 21,072 gene bodies
+    MeCP2 Down       overlaps 450 of 21,072 gene bodies
+  Wrote: 40_01_hyper_x_atac_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_atac_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_atac_up: OR=2.990, p=5.99e-30 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_atac_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_atac_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_atac_up: OR=3.431, p=1.42e-174 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_atac_up_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_atac_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_atac_up: OR=1.234, p=0.0244 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_atac_down_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_atac_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_atac_down: OR=11.323, p=2.3e-131 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_atac_down_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_atac_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_atac_down: OR=1.914, p=2.76e-25 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_atac_down_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_atac_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_atac_down: OR=5.903, p=3.69e-70 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_k119ub_gained_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_k119ub_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_k119ub_gained: OR=19.759, p=8.47e-260 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_k119ub_gained_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_k119ub_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_k119ub_gained: OR=1.568, p=1.28e-28 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_k119ub_gained_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_k119ub_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_k119ub_gained: OR=12.364, p=5.27e-168 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_k119ub_lost_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_k119ub_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_k119ub_lost: OR=0.589, p=0.000359 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_k119ub_lost_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_k119ub_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_k119ub_lost: OR=4.106, p=4.62e-208 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_k119ub_lost_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_k119ub_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_k119ub_lost: OR=0.235, p=6.6e-28 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_k27ac_gained_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_k27ac_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_k27ac_gained: OR=0.963, p=0.885 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_k27ac_gained_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_k27ac_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_k27ac_gained: OR=5.374, p=2.88e-233 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_k27ac_gained_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_k27ac_gained.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_k27ac_gained: OR=0.338, p=1.66e-16 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_k27ac_lost_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_k27ac_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_k27ac_lost: OR=15.060, p=2.02e-206 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_k27ac_lost_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_k27ac_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_k27ac_lost: OR=1.387, p=1.09e-09 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_k27ac_lost_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_k27ac_lost.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_k27ac_lost: OR=9.789, p=1.57e-135 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_mecp2_up: OR=72.549, p=0 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_mecp2_up: OR=0.669, p=8.72e-06 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_mecp2_up_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_mecp2_up: OR=53.652, p=1.92e-305 (n=5,551 genes) [registered]
+  Wrote: 40_01_hyper_x_mecp2_down_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hyper_x_mecp2_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_x_mecp2_down: OR=1.180, p=0.487 (n=21,072 genes) [registered]
+  Wrote: 40_01_hypo_x_mecp2_down_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_01_hypo_x_mecp2_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hypo_x_mecp2_down: OR=13.545, p=8.56e-143 (n=21,072 genes) [registered]
+  Wrote: 40_01_hyper_vs_hypo_x_mecp2_down_genes.tsv (5,551 rows, 4 cols)
+  Wrote: 40_01_hyper_vs_hypo_x_mecp2_down.tsv (1 rows, 12 cols)
+  Fisher 40_01:hyper_vs_hypo_x_mecp2_down: OR=0.327, p=5.79e-07 (n=5,551 genes) [registered]
+  Wrote: 40_01_fisher_gene_level.tsv (24 rows, 20 cols)
+  Wrote: 40_01_gene_peak_overlaps.tsv (21,072 rows, 22 cols)
+
+STEP 5: Fisher versus permutation
+  Wrote: 40_01_fisher_vs_permutation.tsv (16 rows, 53 cols)
+
+--- Fisher versus permutation concordance ---
+  Confirmed:       12 / 16 (75%)
+  Weakened:         2 / 16 (12%)
+  Strengthened:     2 / 16 (12%)
+  Concordant NS:    0 / 16 (0%)
+
+STEP 6: Figures
+  Saved: 40_01a_crosswise_zscore_heatmap/{pdf,svg,png,jpg}
+  Saved: 40_01b_zscore_forest/{pdf,svg,png,jpg}
+  Saved: 40_01c_null_distributions/{pdf,svg,png,jpg}
+  Saved: 40_01d_fisher_vs_permutation/{pdf,svg,png,jpg}
+  Saved: 40_01e_observed_vs_expected/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 40_01 SUMMARY
+================================================================================
+Pairwise permutation tests: 16
+Significant at p < 0.05:     14
+Strongest association:      mCH Hypo gene bodies x K27ac Gained (z = 35.72, p = 2.00e-04, O/E = 3.78)
+Gene-level Fisher tests registered: 24
+Registry: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+Cache:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_01_permutation_objects.rds
+Figures and tables written to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Section 40_01 complete.
+
+=========================================
+Complete: section 40_01
+Time: 1048s
+Exit code: 0
+End time: Thu Aug 13 10:40:13 PDT 2026
+=========================================

@@ -1,0 +1,2 @@
+test_id	row_var	col_var	n_genes	n_mch_sig	n_mecp2_sig	n_both	n_mch_only	n_mecp2_only	n_neither	odds_ratio	ci_low	ci_high	p_value
+mch_sig_vs_mecp2_sig	mch_sig	mecp2_sig	17096	5146	155	96	5050	59	11891	3.83052754491586	2.73674443033757	5.40140248870471	2.72022938418937e-16

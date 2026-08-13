@@ -1,0 +1,3 @@
+comparison	test_id	set_label	n_universe	n_set	n_mecp2_up	n_both	odds_ratio	ci_lower	ci_upper	p_value	p_adj	log2_odds_ratio
+Neuronal x MeCP2 up	neuronal_vs_mecp2_up	Neuronal	21072	4209	412	129	1.8522564849984	1.48798292495396	2.29580755971518	3.49376187482076e-08	6.98752374964152e-08	0.889283884783231
+Synapse and axon x MeCP2 up	synapse_vs_mecp2_up	Synapse and axon	21072	2121	412	74	1.99068213868853	1.52006499021551	2.57837965961903	7.96943855491325e-07	7.96943855491325e-07	0.993262877739811

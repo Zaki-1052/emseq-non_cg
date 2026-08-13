@@ -1,0 +1,152 @@
+=========================================
+EM-seq section 10_04: subcompartment
+=========================================
+Job ID: 53392485
+Node: exp-1-08
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392485
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_04_subcompartment.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 10_04: mCH CHANGE BY CALDER2 SUBCOMPARTMENT
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+Loading CALDER2 subcompartment labels...
+  23,874 of 24,639 bins carry a control label
+    A.1: 7,297 bins
+    A.2: 3,359 bins
+    B.1: 3,285 bins
+    B.2: 9,933 bins
+    label changed in mutant: 3,659 bins, stable: 20,215 bins
+
+Assigning genes to subcompartments by gene midpoint...
+  20,105 of 21,097 genes fall in a labelled 100 kb bin (95.3%)
+  25 assigned gene bodies share a gene symbol with another row
+
+Computing histone consensus peak overlap...
+  H3K27me3: 15809 peaks
+  H3K27ac: 15105 peaks
+  Gene bodies overlapping H3K27me3: 3,689, H3K27ac: 6,784
+
+Summarising genes per subcompartment...
+    A.1: 10,933 genes, 3,280 significant (30.0%), 387 hyper, 2,893 hypo
+    A.2: 3,083 genes, 914 significant (29.6%), 74 hyper, 840 hypo
+    B.1: 1,926 genes, 550 significant (28.6%), 68 hyper, 482 hypo
+    B.2: 4,163 genes, 647 significant (15.5%), 89 hyper, 558 hypo
+
+Categorical tests...
+  Chi-squared (subcompartment x mCH significance): X2 = 341.7, df = 3, p = < 2.2e-16
+  Chi-squared (subcompartment x direction): X2 = 14.4, df = 3, p = 2.45e-03
+
+Gene-level Fisher tests...
+  Wrote: 10_04_a_compartment_sig_genes.tsv (20,105 rows, 4 cols)
+  Wrote: 10_04_a_compartment_sig.tsv (1 rows, 12 cols)
+  Fisher 10_04:a_compartment_sig: OR=1.745, p=2.36e-53 (n=20,105 genes) [registered]
+  Wrote: 10_04_b2_sig_genes.tsv (20,105 rows, 4 cols)
+  Wrote: 10_04_b2_sig.tsv (1 rows, 12 cols)
+  Fisher 10_04:b2_sig: OR=0.434, p=2.04e-82 (n=20,105 genes) [registered]
+  Wrote: 10_04_label_changed_sig_genes.tsv (20,105 rows, 4 cols)
+  Wrote: 10_04_label_changed_sig.tsv (1 rows, 12 cols)
+  Fisher 10_04:label_changed_sig: OR=1.372, p=6.87e-11 (n=20,105 genes) [registered]
+  Wrote: 10_04_k27me3_sig_genes.tsv (20,105 rows, 4 cols)
+  Wrote: 10_04_k27me3_sig.tsv (1 rows, 12 cols)
+  Fisher 10_04:k27me3_sig: OR=1.876, p=5.83e-58 (n=20,105 genes) [registered]
+  Wrote: 10_04_k27ac_sig_genes.tsv (20,105 rows, 4 cols)
+  Wrote: 10_04_k27ac_sig.tsv (1 rows, 12 cols)
+  Fisher 10_04:k27ac_sig: OR=2.312, p=4.2e-143 (n=20,105 genes) [registered]
+  Wrote: 10_04_a_compartment_hyper_genes.tsv (5,391 rows, 4 cols)
+  Wrote: 10_04_a_compartment_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_04:a_compartment_hyper: OR=0.818, p=0.0448 (n=5,391 genes) [registered]
+
+Paired Wilcoxon of control vs mutant mCH per subcompartment...
+    A.1: n = 10,933, ctrl median = 0.0168, mut median = 0.0168, paired p = 1.83e-07
+    A.2: n = 3,083, ctrl median = 0.0166, mut median = 0.0167, paired p = 1.66e-01
+    B.1: n = 1,926, ctrl median = 0.0165, mut median = 0.0166, paired p = 4.89e-09
+    B.2: n = 4,163, ctrl median = 0.0131, mut median = 0.0138, paired p = < 2.2e-16
+
+Control mCH level across subcompartments...
+  mch_ctrl: Kruskal-Wallis chi2 = 2686.2, df = 3, p = < 2.2e-16
+    A.2 vs A.1: median difference = -0.00019, BH p = 8.73e-02
+    B.1 vs A.1: median difference = -0.00030, BH p = 1.04e-02
+    B.2 vs A.1: median difference = -0.00370, BH p = < 2.2e-16
+    B.1 vs A.2: median difference = -0.00011, BH p = 3.08e-01
+    B.2 vs A.2: median difference = -0.00351, BH p = < 2.2e-16
+    B.2 vs B.1: median difference = -0.00340, BH p = < 2.2e-16
+
+mCH difference across subcompartments...
+  mch_diff: Kruskal-Wallis chi2 = 370.9, df = 3, p = < 2.2e-16
+    A.2 vs A.1: median difference = 0.00004, BH p = 1.58e-01
+    B.1 vs A.1: median difference = 0.00017, BH p = 1.56e-03
+    B.2 vs A.1: median difference = 0.00071, BH p = < 2.2e-16
+    B.1 vs A.2: median difference = 0.00014, BH p = 1.80e-04
+    B.2 vs A.2: median difference = 0.00068, BH p = < 2.2e-16
+    B.2 vs B.1: median difference = 0.00054, BH p = < 2.2e-16
+
+mCH difference in changed versus stable bins...
+  Label changed (n = 2,291, median = 0.00022) vs stable (n = 17,814, median = 0.00027): p = 1.80e-01
+
+Building figures...
+  Saved: 10_04a_significance_rate_by_subcompartment/{pdf,svg,png,jpg}
+  Saved: 10_04b_direction_split_by_subcompartment/{pdf,svg,png,jpg}
+  Saved: 10_04c_mch_level_by_subcompartment/{pdf,svg,png,jpg}
+  Saved: 10_04d_mch_diff_by_subcompartment/{pdf,svg,png,jpg}
+  Saved: 10_04e_histone_overlap_by_subcompartment/{pdf,svg,png,jpg}
+  Saved: 10_04_subcompartment_composite/{pdf,svg,png,jpg}
+
+Writing tables...
+  Wrote: 10_04_gene_subcompartment_assignment.tsv (20,105 rows, 26 cols)
+  Wrote: 10_04_subcompartment_summary.tsv (4 rows, 11 cols)
+  Wrote: 10_04_subcompartment_chisq.tsv (2 rows, 4 cols)
+  Wrote: 10_04_mch_level_paired_wilcoxon.tsv (4 rows, 7 cols)
+  Wrote: 10_04_across_subcompartment_kruskal.tsv (2 rows, 7 cols)
+  Wrote: 10_04_across_subcompartment_pairwise_wilcoxon.tsv (12 rows, 9 cols)
+  Wrote: 10_04_label_changed_wilcoxon.tsv (1 rows, 9 cols)
+  Wrote: 10_04_histone_overlap_by_subcompartment.tsv (8 rows, 5 cols)
+  Wrote: 10_04_histone_mark_category_summary.tsv (4 rows, 8 cols)
+  Wrote: 10_04_violin_group_summary_mch_level.tsv (8 rows, 8 cols)
+  Wrote: 10_04_violin_group_summary_mch_diff.tsv (4 rows, 7 cols)
+  Wrote: 10_04_violin_group_summary_label_changed.tsv (2 rows, 7 cols)
+
+================================================================================
+SECTION 10_04 COMPLETE
+================================================================================
+
+=========================================
+Complete: section 10_04
+Time: 59s
+Exit code: 0
+End time: Thu Aug 13 10:23:45 PDT 2026
+=========================================

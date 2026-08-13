@@ -1,0 +1,199 @@
+=========================================
+EM-seq section 70_02: chromatin remodeling
+=========================================
+Job ID: 53392504
+Node: exp-1-08
+Start time: Thu Aug 13 10:25:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392504
+Code dir:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:         /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:           /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/70_neuronal/70_02_chromatin_remodeling.R
+Output dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+Neuronal genes:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/neuronal_gene_set.tsv
+Gene-level marks: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/gene_level_all_marks.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+===========================================================================
+  SECTION 70_02: CHROMATIN REMODELING AT NEURONAL GENES
+===========================================================================
+  Output directory:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  Peak FDR threshold: 0.05
+  Minimum group size: 10
+  Predicted directions: ATAC-seq down, H3K27ac down, H3K27me3 up, H2AK119ub up
+
+--- Step 1: reading the input tables ---
+  Gene-level marks: 21,097 rows
+    ATAC-seq   14,747 genes with a peak (69.9%)
+    H3K27ac    8,606 genes with a peak (40.8%)
+    H3K27me3   4,248 genes with a peak (20.1%)
+    H2AK119ub  8,894 genes with a peak (42.2%)
+  23 gene symbols repeat; kept the longest gene body of each, 25 rows dropped
+  Neuronal gene set: 5,674 genes (60 derived, 347 external, 5,267 both)
+  K119ub signal: 23,150 genes, 21,604 quantifiable
+
+--- Step 2: building the analysis universe ---
+  17,535 of 21,072 marks-table genes also carry a K119ub level (83.2%)
+  Control K119ub level agrees with the 70_01 handoff for 4,117 shared genes (largest difference 0)
+  Neuronal: 4,117 of 17,535 genes (23.5%); 3,811 of them are in the GO-derived set
+  Genes with all 4 marks: 1,360 (7.8%)
+  Key genes present: 10 of 10 (Arhgap26, Cdh8, Cntnap2, Dlgap1, Epha3, Lpp, Mcu, Syt1, Trpm3, Zbtb20)
+  Wrote: 70_02c_decile_bounds.tsv (10 rows, 6 cols)
+  Wrote: 70_02d_quintile_bounds.tsv (5 rows, 6 cols)
+
+  Wrote: 70_02_universe_per_gene.tsv (17,535 rows, 36 cols)
+
+--- Figure 70_02a: mark fold change, neuronal against other ---
+  Wrote: 70_02a_mark_wilcoxon.tsv (8 rows, 20 cols)
+  ATAC-seq   predicted down | neuronal med +0.1213 (n=3,680) vs other +0.0922 (n=10,693) | r = +0.113, p < 2.2e-16, opposite
+  H3K27ac    predicted down | neuronal med +0.0534 (n=2,225) vs other +0.0386 (n=6,198) | r = +0.060, p = 2.29e-05, opposite
+  H3K27me3   predicted up   | neuronal med -0.0993 (n=1,426) vs other -0.0612 (n=2,798) | r = -0.056, p = 2.77e-03, opposite
+  H2AK119ub  predicted up   | neuronal med +0.0332 (n=2,676) vs other +0.1508 (n=6,170) | r = -0.139, p < 2.2e-16, opposite
+  Saved: 70_02a_mark_fold_neuronal_vs_other/{pdf,svg,png,jpg}
+  Wrote: 70_02a_mark_fold_group_summary.tsv (8 rows, 7 cols)
+
+--- Adjusted models: mark fold ~ K119ub level + gene length + neuronal ---
+  Wrote: 70_02b_adjusted_models.tsv (4 rows, 22 cols)
+  ATAC-seq   adjusted neuronal beta = +0.0248 [+0.0131, +0.0365], p = 3.35e-05 (opposite)
+             K119ub level beta = +0.1595, gene length beta = +0.0857, interaction beta = +0.0983 (p = 9.33e-08)
+  H3K27ac    adjusted neuronal beta = +0.0654 [+0.0415, +0.0893], p = 8.16e-08 (opposite)
+             K119ub level beta = -0.1597, gene length beta = -0.0009, interaction beta = +0.1754 (p = 2.08e-05)
+  H3K27me3   adjusted neuronal beta = -0.0374 [-0.0831, +0.0082], p = 1.08e-01 (opposite)
+             K119ub level beta = -0.0457, gene length beta = -0.0152, interaction beta = +0.0133 (p = 8.51e-01)
+  H2AK119ub  adjusted neuronal beta = -0.0632 [-0.0834, -0.0430], p = 9.02e-10 (opposite)
+             K119ub level beta = -0.5479, gene length beta = -0.0215, interaction beta = +0.0387 (p = 2.54e-01)
+
+--- Figure 70_02b: effect sizes across marks ---
+  Saved: 70_02b_effect_size_forest/{pdf,svg,png,jpg}
+  Wrote: 70_02b_effect_size_forest.tsv (8 rows, 9 cols)
+
+--- Figure 70_02c: the comparison inside K119ub signal deciles ---
+  Wrote: 70_02c_decile_tests.tsv (40 rows, 21 cols)
+  Wrote: 70_02c_decile_group_summary.tsv (80 rows, 8 cols)
+  Saved: 70_02c_decile_stratified/{pdf,svg,png,jpg}
+  ATAC-seq   0 of 10 deciles consistent with the prediction at q < 0.05 | D1 delta +0.0074, D10 delta +0.0817
+  H3K27ac    0 of 10 deciles consistent with the prediction at q < 0.05 | D1 delta +0.0059, D10 delta +0.0677
+  H3K27me3   0 of 10 deciles consistent with the prediction at q < 0.05 | D1 delta -0.4031, D10 delta -0.0006
+  H2AK119ub  0 of 10 deciles consistent with the prediction at q < 0.05 | D1 delta +0.0677, D10 delta -0.0718
+
+--- Figure 70_02d: the comparison inside gene-length quintiles ---
+  Wrote: 70_02d_quintile_tests.tsv (20 rows, 21 cols)
+  Wrote: 70_02d_quintile_survival.tsv (4 rows, 10 cols)
+  Wrote: 70_02d_quintile_group_summary.tsv (40 rows, 8 cols)
+  Saved: 70_02d_length_quintile_stratified/{pdf,svg,png,jpg}
+  ATAC-seq   0 of 5 quintiles consistent and significant | survives: no
+  H3K27ac    0 of 5 quintiles consistent and significant | survives: no
+  H3K27me3   0 of 5 quintiles consistent and significant | survives: no
+  H2AK119ub  0 of 5 quintiles consistent and significant | survives: no
+
+--- Figure 70_02e: marks moving in the predicted direction per gene ---
+  1,360 genes carry all four marks (493 neuronal)
+  Wrote: 70_02e_concordance_wilcoxon.tsv (2 rows, 14 cols)
+  Direction only: neuronal median 2.00 (mean 1.696) vs other 2.00 (mean 1.923), p = 5.24e-04
+  Direction and FDR: neuronal median 1.00 (mean 0.988) vs other 1.00 (mean 1.042), p = 1.44e-01
+  Wrote: 70_02_all_four_predicted_genes.tsv (1,360 rows, 4 cols)
+  Wrote: 70_02_all_four_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:all_four_predicted: OR=0.940, p=0.793 (n=1,360 genes) [registered]
+  Wrote: 70_02_three_plus_predicted_genes.tsv (1,360 rows, 4 cols)
+  Wrote: 70_02_three_plus_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:three_plus_predicted: OR=0.796, p=0.0737 (n=1,360 genes) [registered]
+  Wrote: 70_02_two_plus_predicted_sig_genes.tsv (1,360 rows, 4 cols)
+  Wrote: 70_02_two_plus_predicted_sig.tsv (1 rows, 12 cols)
+  Fisher 70_02:two_plus_predicted_sig: OR=0.892, p=0.381 (n=1,360 genes) [registered]
+  Wrote: 70_02e_concordance_fisher.tsv (3 rows, 12 cols)
+  Wrote: 70_02e_concordance_distribution.tsv (20 rows, 6 cols)
+  Saved: 70_02e_concordant_mark_counts/{pdf,svg,png,jpg}
+
+--- Fisher tests: mark direction against neuronal identity ---
+  Wrote: 70_02_atac_predicted_genes.tsv (14,373 rows, 4 cols)
+  Wrote: 70_02_atac_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:atac_predicted: OR=0.881, p=0.0114 (n=14,373 genes) [registered]
+  Wrote: 70_02_k27ac_predicted_genes.tsv (8,423 rows, 4 cols)
+  Wrote: 70_02_k27ac_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:k27ac_predicted: OR=0.887, p=0.0174 (n=8,423 genes) [registered]
+  Wrote: 70_02_k27me3_predicted_genes.tsv (4,224 rows, 4 cols)
+  Wrote: 70_02_k27me3_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:k27me3_predicted: OR=0.723, p=1.6e-06 (n=4,224 genes) [registered]
+  Wrote: 70_02_k119ub_predicted_genes.tsv (8,846 rows, 4 cols)
+  Wrote: 70_02_k119ub_predicted.tsv (1 rows, 12 cols)
+  Fisher 70_02:k119ub_predicted: OR=0.655, p=2.38e-19 (n=8,846 genes) [registered]
+  Wrote: 70_02_mark_direction_fisher.tsv (4 rows, 16 cols)
+
+--- Figure 70_02f: K119ub level against mark fold change ---
+  Wrote: 70_02f_signal_vs_fold_correlation.tsv (8 rows, 6 cols)
+  Saved: 70_02f_k119ub_signal_vs_fold/{pdf,svg,png,jpg}
+  Wrote: 70_02f_key_genes.tsv (35 rows, 7 cols)
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  Universe: 17,535 genes with mark folds and a K119ub level, 4,117 neuronal (23.5%)
+  Unadjusted Wilcoxon per mark (union neuronal set):
+    ATAC-seq   predicted down | shift +0.0333 [+0.0269, +0.0399] | r +0.113 | p < 2.2e-16 | opposite
+    H3K27ac    predicted down | shift +0.0303 [+0.0163, +0.0446] | r +0.060 | p = 3.06e-05 | opposite
+    H3K27me3   predicted up   | shift -0.0368 [-0.0608, -0.0127] | r -0.056 | p = 2.77e-03 | opposite
+    H2AK119ub  predicted up   | shift -0.1098 [-0.1303, -0.0892] | r -0.139 | p < 2.2e-16 | opposite
+  Adjusted for K119ub level and gene length:
+    ATAC-seq   beta +0.0248 [+0.0131, +0.0365] | p = 4.47e-05 | opposite
+    H3K27ac    beta +0.0654 [+0.0415, +0.0893] | p = 1.63e-07 | opposite
+    H3K27me3   beta -0.0374 [-0.0831, +0.0082] | p = 1.08e-01 | opposite
+    H2AK119ub  beta -0.0632 [-0.0834, -0.0430] | p = 3.61e-09 | opposite
+  K119ub decile control (deciles consistent and significant, of 10):
+    ATAC-seq   0
+    H3K27ac    0
+    H3K27me3   0
+    H2AK119ub  0
+  Gene-length control (quintiles consistent and significant, of 5):
+    ATAC-seq   0 | survives: no
+    H3K27ac    0 | survives: no
+    H3K27me3   0 | survives: no
+    H2AK119ub  0 | survives: no
+  Fisher odds ratios, neuronal against the predicted mark direction:
+    ATAC-seq   OR = 0.881 [0.798, 0.972], p = 1.52e-02
+    H3K27ac    OR = 0.887 [0.802, 0.980], p = 1.74e-02
+    H3K27me3   OR = 0.723 [0.632, 0.827], p = 3.20e-06
+    H2AK119ub  OR = 0.655 [0.597, 0.719], p < 2.2e-16
+  Concordance count Fisher odds ratios:
+    all_four_predicted       OR = 0.940 [0.653, 1.343], p = 7.93e-01 (11.4% neuronal vs 12.0% other)
+    three_plus_predicted     OR = 0.796 [0.617, 1.024], p = 7.37e-02 (26.8% neuronal vs 31.5% other)
+    two_plus_predicted_sig   OR = 0.892 [0.691, 1.151], p = 3.81e-01 (26.8% neuronal vs 29.1% other)
+
+  Figures and tables: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  Fisher registry:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+
+=== Section 70_02 complete ===
+
+
+=========================================
+Complete: section 70_02
+Time: 68s
+Exit code: 0
+End time: Thu Aug 13 10:26:52 PDT 2026
+=========================================

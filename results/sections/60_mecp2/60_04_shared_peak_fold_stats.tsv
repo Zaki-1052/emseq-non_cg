@@ -1,0 +1,2 @@
+n_pairs	median_ctrl_fold	median_mut_fold	median_fold_difference	mean_fold_difference	n_mut_above_identity	pct_mut_above_identity	spearman_rho	spearman_p	pearson_r	pearson_p	wilcoxon_V	wilcoxon_p
+201032	-0.0861103205342666	-0.183050471331453	-0.0813488204924755	-0.0352763645178155	80686	40.1358987623861	0.348977788637281	0	0.714540527345739	0	7817573081	0

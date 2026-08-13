@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_04	synapse_x_mecp2_up	Genes of the synapse gene set are enriched among genes that gain MeCP2 binding in BAP1-KO.	is_synapse	is_mecp2_up	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_04_synapse_x_mecp2_up_genes.tsv	21072	2121	412	74	1.99068213868853	7.96943855491325e-07

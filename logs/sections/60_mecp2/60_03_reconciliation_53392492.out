@@ -1,0 +1,238 @@
+=========================================
+EM-seq section 60_03: reconciliation
+=========================================
+Job ID: 53392492
+Node: exp-6-03
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392492
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/60_mecp2/60_03_reconciliation.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 60_03: MeCP2 PEAK GAINS vs GENE-LEVEL MeCP2 LOSS
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+FDR threshold: 0.05
+GSEA set size: 15 to 500
+Seed:          42
+
+--- Loading inputs ---
+  Annotated peak file: 202,650 peaks, 202,542 carry a gene symbol
+  Annotated peakset        202,650 peaks: 7,686 gained, 1,200 lost, 193,764 unchanged at FDR<0.050
+  Annotated peakset        Conc range 0.000 to 9.045, width median 401 bp, 76 peaks off the canonical chromosomes
+  DiffBind Conc4 peakset   36,804 peaks: 5,675 gained, 1,107 lost, 30,022 unchanged at FDR<0.050
+  DiffBind Conc4 peakset   Conc range 4.000 to 10.284, width median 1547 bp, 0 peaks off the canonical chromosomes
+  MeCP2 up: 7686 peaks
+  MeCP2 down: 1200 peaks
+  K119ub gene signal: 23,150 rows, 21,604 quantifiable genes
+  Wrote: mecp2_peak_level_classified.tsv (239,454 rows, 16 cols)
+
+--- Analysis 1: peak counts by direction ---
+  Wrote: mecp2_peak_direction_counts.tsv (6 rows, 4 cols)
+  Annotated peakset        Gained     7,686 peaks (3.8%)
+  Annotated peakset        Lost       1,200 peaks (0.6%)
+  Annotated peakset        Unchanged  193,764 peaks (95.6%)
+  DiffBind Conc4 peakset   Gained     5,675 peaks (15.4%)
+  DiffBind Conc4 peakset   Lost       1,107 peaks (3.0%)
+  DiffBind Conc4 peakset   Unchanged  30,022 peaks (81.6%)
+  Annotated peakset        gained-to-lost ratio 6.41
+  DiffBind Conc4 peakset   gained-to-lost ratio 5.13
+  Saved: 60_03a_peak_direction_counts/{pdf,svg,png,jpg}
+
+--- Analysis 2: peak fold, width, and concentration by direction ---
+  Saved: 60_03b_peak_fold_by_direction/{pdf,svg,png,jpg}
+  Saved: 60_03c_peak_width_by_direction/{pdf,svg,png,jpg}
+  Saved: 60_03d_peak_concentration_by_direction/{pdf,svg,png,jpg}
+  Wrote: mecp2_peak_property_summary.tsv (36 rows, 12 cols)
+  Wrote: mecp2_peak_property_wilcoxon.tsv (8 rows, 11 cols)
+  Annotated peakset        Wilcoxon Fold         gained median =  1.51, lost median = -0.9848, W = 9223200, p = 0
+  DiffBind Conc4 peakset   Wilcoxon Fold         gained median = 1.337, lost median = -0.8116, W = 6282225, p = 0
+  Annotated peakset        Wilcoxon width        gained median =   401, lost median =   401, W = 4605711, p = 0.0828
+  DiffBind Conc4 peakset   Wilcoxon width        gained median = 1,493, lost median = 1,479, W = 3285440, p = 0.0154
+  Annotated peakset        Wilcoxon Conc         gained median =  3.62, lost median = 3.725, W = 4413583, p = 0.0166
+  DiffBind Conc4 peakset   Wilcoxon Conc         gained median = 4.992, lost median = 5.136, W = 2877761, p = 9.9e-06
+  Annotated peakset        Wilcoxon signal_mass  gained median = 4,932, lost median = 5,328, W = 4408206, p = 0.0139
+  DiffBind Conc4 peakset   Wilcoxon signal_mass  gained median = 47,116, lost median = 51,982, W = 3067959, p = 0.22
+  Wrote: mecp2_peak_width_fisher.tsv (2 rows, 11 cols)
+  Annotated peakset        Fisher (wide peak x gained): OR = 0.234 (95% CI 0.027 to 2.804), p = 0.138
+  DiffBind Conc4 peakset   Fisher (wide peak x gained): OR = 1.059 (95% CI 0.929 to 1.208), p = 0.392
+
+--- Analysis 3: weighted gained against lost ---
+  Wrote: mecp2_weighted_gained_vs_lost_long.tsv (16 rows, 5 cols)
+  Wrote: mecp2_weighted_gained_vs_lost.tsv (8 rows, 6 cols)
+  Annotated peakset        peak_count                 gained = 7,686, lost = 1,200, ratio = 6.41, gained share = 86.5%
+  Annotated peakset        total_width_bp             gained = 3,082,946, lost = 481,926, ratio = 6.40, gained share = 86.5%
+  Annotated peakset        sum_linear_concentration   gained = 128,319, lost = 22,309, ratio = 5.75, gained share = 85.2%
+  Annotated peakset        sum_signal_mass            gained = 51,465,078, lost = 8,951,358, ratio = 5.75, gained share = 85.2%
+  DiffBind Conc4 peakset   peak_count                 gained = 5,675, lost = 1,107, ratio = 5.13, gained share = 83.7%
+  DiffBind Conc4 peakset   total_width_bp             gained = 9,321,146, lost = 1,757,390, ratio = 5.30, gained share = 84.1%
+  DiffBind Conc4 peakset   sum_linear_concentration   gained = 257,177, lost = 55,800, ratio = 4.61, gained share = 82.2%
+  DiffBind Conc4 peakset   sum_signal_mass            gained = 518,655,433, lost = 109,671,692, ratio = 4.73, gained share = 82.5%
+  Saved: 60_03e_weighted_gained_vs_lost/{pdf,svg,png,jpg}
+
+--- Analysis 4: signal mass balance ---
+  Wrote: mecp2_signal_mass_balance.tsv (8 rows, 7 cols)
+  Annotated peakset        Gained           n = 7,686, mass change = 60,802,452 (288.63% of control mass)
+  Annotated peakset        Lost             n = 1,200, mass change = -7,997,091 (-61.75% of control mass)
+  Annotated peakset        Unchanged        n = 193,764, mass change = -21,096,346 (-3.89% of control mass)
+  Annotated peakset        Net (all peaks)  n = 202,650, mass change = 31,709,015 (5.50% of control mass)
+  DiffBind Conc4 peakset   Gained           n = 5,675, mass change = 542,927,865 (219.64% of control mass)
+  DiffBind Conc4 peakset   Lost             n = 1,107, mass change = -83,388,263 (-55.09% of control mass)
+  DiffBind Conc4 peakset   Unchanged        n = 30,022, mass change = -51,880,299 (-2.82% of control mass)
+  DiffBind Conc4 peakset   Net (all peaks)  n = 36,804, mass change = 407,659,303 (18.19% of control mass)
+  Saved: 60_03f_signal_mass_balance/{pdf,svg,png,jpg}
+
+--- Analysis 5: peakset interval overlap ---
+  Wrote: mecp2_interval_overlap.tsv (6 rows, 9 cols)
+  Wrote: mecp2_interval_set_sizes.tsv (3 rows, 2 cols)
+  MeCP2_up.bed     7,686 intervals
+  MeCP2_down.bed   1,200 intervals
+  MeCP2 consensus  36,804 intervals
+  Annotated peakset        Gained     up.bed 100.0%, down.bed 0.0%, consensus 64.5% of 7,686 peaks
+  Annotated peakset        Lost       up.bed 0.0%, down.bed 100.0%, consensus 65.8% of 1,200 peaks
+  Annotated peakset        Unchanged  up.bed 0.0%, down.bed 0.0%, consensus 16.1% of 193,764 peaks
+  DiffBind Conc4 peakset   Gained     up.bed 82.6%, down.bed 0.0%, consensus 100.0% of 5,675 peaks
+  DiffBind Conc4 peakset   Lost       up.bed 0.0%, down.bed 58.5%, consensus 100.0% of 1,107 peaks
+  DiffBind Conc4 peakset   Unchanged  up.bed 0.9%, down.bed 0.5%, consensus 100.0% of 30,022 peaks
+
+--- Analysis 6: gene-level collapse rules ---
+  Genes with an annotated MeCP2 peak: 21,195
+  Peaks per gene: median 4, mean 9.56, max 281
+  Wrote: mecp2_gene_level_collapse_rules.tsv (21,195 rows, 23 cols)
+  Wrote: mecp2_collapse_rule_summary.tsv (1 rows, 11 cols)
+  Collapse rules on 21,195 genes: Spearman rho = 0.496 (p = 0), sign differs for 25.1%
+  Median gene-level fold: nearest_tss = -0.0169, median_significant = -0.0112
+  Saved: 60_03g_collapse_rule_scatter/{pdf,svg,png,jpg}
+  Wrote: mecp2_collapse_rule_gene_calls.tsv (6 rows, 4 cols)
+  nearest_tss         Gained     163 genes (0.8%)
+  nearest_tss         Lost       80 genes (0.4%)
+  nearest_tss         Unchanged  20,952 genes (98.9%)
+  median_significant  Gained     2,015 genes (9.5%)
+  median_significant  Lost       555 genes (2.6%)
+  median_significant  Unchanged  18,625 genes (87.9%)
+  Saved: 60_03h_collapse_rule_gene_calls/{pdf,svg,png,jpg}
+
+--- Analysis 7: gene-level Fisher tests ---
+  Wrote: 60_03_collapse_rule_gain_agreement_genes.tsv (21,195 rows, 4 cols)
+  Wrote: 60_03_collapse_rule_gain_agreement.tsv (1 rows, 12 cols)
+  Fisher 60_03:collapse_rule_gain_agreement: OR=Inf, p=5.84e-170 (n=21,195 genes) [registered]
+  Wrote: 60_03_many_peaks_vs_gain_genes.tsv (21,195 rows, 4 cols)
+  Wrote: 60_03_many_peaks_vs_gain.tsv (1 rows, 12 cols)
+  Fisher 60_03:many_peaks_vs_gain: OR=3.207, p=7.78e-12 (n=21,195 genes) [registered]
+  Wrote: mecp2_gene_fisher_summary.tsv (2 rows, 8 cols)
+
+--- Analysis 8: peaks per gene ---
+  Wrote: mecp2_peaks_per_gene_distribution.tsv (152 rows, 3 cols)
+  Wrote: mecp2_peaks_per_gene_summary.tsv (1 rows, 10 cols)
+  Peaks per gene: n = 21,195 genes, median = 4, mean = 9.56, max = 281
+  Genes with exactly one peak: 17.6%
+  Saved: 60_03i_peaks_per_gene/{pdf,svg,png,jpg}
+
+--- Analysis 9: GSEA term recovery ---
+'select()' returned 1:1 mapping between keys and columns
+  MeCP2 fold (nearest TSS)         21,098 genes ranked (3.699 to -2.247)
+'select()' returned 1:1 mapping between keys and columns
+  MeCP2 fold (median significant)  21,098 genes ranked (3.910 to -2.197)
+'select()' returned 1:1 mapping between keys and columns
+  K119ub gene-body log2FC          21,490 genes ranked (1.920 to -1.362)
+
+  GSEA on MeCP2 fold (nearest TSS) (21,098 genes)...
+    5,129 terms tested, 0 significant at q < 0.050, 0 of those neuronal
+  Wrote: gsea_mecp2_nearest_tss_go_bp.tsv (5,129 rows, 15 cols)
+
+  GSEA on MeCP2 fold (median significant) (21,098 genes)...
+    5,116 terms tested, 2 significant at q < 0.050, 0 of those neuronal
+  Wrote: gsea_mecp2_median_significant_go_bp.tsv (5,116 rows, 15 cols)
+
+  GSEA on K119ub gene-body log2FC (21,490 genes)...
+    5,170 terms tested, 204 significant at q < 0.050, 3 of those neuronal
+  Wrote: gsea_k119ub_gene_signal_go_bp.tsv (5,170 rows, 15 cols)
+  Wrote: gsea_term_comparison.tsv (3 rows, 9 cols)
+  MeCP2 fold (nearest TSS)         0 significant terms, 0 neuronal (0.0%)
+  MeCP2 fold (median significant)  2 significant terms, 0 neuronal (0.0%)
+  K119ub gene-body log2FC          204 significant terms, 3 neuronal (1.5%)
+  Wrote: gsea_neuronal_terms.tsv (3 rows, 7 cols)
+  Significant neuronal terms across all rankings: 3
+  Wrote: gsea_neuronal_share_fisher.tsv (3 rows, 10 cols)
+  Fisher neuronal share, MeCP2 fold (nearest TSS) vs MeCP2 fold (median significant): OR = 0.000, p = 1
+  Fisher neuronal share, MeCP2 fold (nearest TSS) vs K119ub gene-body log2FC: OR = 0.000, p = 1
+  Fisher neuronal share, MeCP2 fold (median significant) vs K119ub gene-body log2FC: OR = 0.000, p = 1
+  Saved: 60_03j_gsea_term_comparison/{pdf,svg,png,jpg}
+
+--- Composite figure ---
+  Saved: 60_03k_composite/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 60_03 SUMMARY
+================================================================================
+Annotated peakset        gained 7,686 / lost 1,200 (ratio 6.41)
+DiffBind Conc4 peakset   gained 5,675 / lost 1,107 (ratio 5.13)
+Annotated peakset        gained share, peak_count                 86.5%
+Annotated peakset        gained share, total_width_bp             86.5%
+Annotated peakset        gained share, sum_linear_concentration   85.2%
+Annotated peakset        gained share, sum_signal_mass            85.2%
+DiffBind Conc4 peakset   gained share, peak_count                 83.7%
+DiffBind Conc4 peakset   gained share, total_width_bp             84.1%
+DiffBind Conc4 peakset   gained share, sum_linear_concentration   82.2%
+DiffBind Conc4 peakset   gained share, sum_signal_mass            82.5%
+Annotated peakset        net signal mass change 31,709,015 (5.50% of control mass)
+DiffBind Conc4 peakset   net signal mass change 407,659,303 (18.19% of control mass)
+Annotated peakset        peak width gained vs lost: median   401 vs   401, p = 0.0828
+DiffBind Conc4 peakset   peak width gained vs lost: median 1,493 vs 1,479, p = 0.0154
+Annotated peakset        wide-peak Fisher: OR = 0.234, p = 0.138
+DiffBind Conc4 peakset   wide-peak Fisher: OR = 1.059, p = 0.392
+Genes with MeCP2 peaks:           21,195
+Collapse-rule Spearman rho:       0.496 (sign differs for 25.1% of genes)
+Gene calls, nearest_tss         Gained     163
+Gene calls, nearest_tss         Lost       80
+Gene calls, nearest_tss         Unchanged  20,952
+Gene calls, median_significant  Gained     2,015
+Gene calls, median_significant  Lost       555
+Gene calls, median_significant  Unchanged  18,625
+Fisher collapse_rule_gain_agreement   OR = Inf (95% CI 455.673 to Inf), p = 5.84e-170
+Fisher many_peaks_vs_gain             OR = 3.207 (95% CI 2.225 to 4.709), p = 7.78e-12
+GSEA MeCP2 fold (nearest TSS)         0 significant, 0 neuronal
+GSEA MeCP2 fold (median significant)  2 significant, 0 neuronal
+GSEA K119ub gene-body log2FC          204 significant, 3 neuronal
+
+Section 60_03 complete.
+
+There were 30 warnings (use warnings() to see them)
+
+=========================================
+Complete: section 60_03
+Time: 195s
+Exit code: 0
+End time: Thu Aug 13 10:26:00 PDT 2026
+=========================================

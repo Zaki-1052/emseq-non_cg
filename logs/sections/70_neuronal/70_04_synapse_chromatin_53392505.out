@@ -1,0 +1,314 @@
+=========================================
+EM-seq section 70_04: synapse chromatin
+=========================================
+Job ID: 53392505
+Node: exp-1-09
+Start time: Thu Aug 13 10:25:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392505
+Code dir:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:         /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:           /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/70_neuronal/70_04_synapse_chromatin.R
+Output dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+Neuronal genes:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/neuronal_gene_set.tsv
+Gene-level marks: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/gene_level_all_marks.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+===========================================================================
+  SECTION 70_04: SYNAPSE AND NEURONAL CHROMATIN AT MeCP2-UP GENES
+===========================================================================
+  Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  FDR threshold:    0.05
+  Overlap:          double (gene set AND MeCP2-up)
+
+--- Step 1: inputs ---
+  Gene-level all-marks table: 21,097 genes
+    ATAC-seq   14,747 genes carry a peak (69.9%)
+    H3K27ac    8,606 genes carry a peak (40.8%)
+    H3K27me3   4,248 genes carry a peak (20.1%)
+    H2AK119ub  8,894 genes carry a peak (42.2%)
+  Neuronal gene set: 5,674 genes
+  Synapse and axon gene set: 2321 genes
+
+--- Step 1d: MeCP2 peaks to gene-level fold changes ---
+  36,804 MeCP2 peaks in, 36,804 kept on canonical chromosomes
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  36,791 of 36,804 annotated peaks carry a gene symbol
+  11,229 genes carry a MeCP2 peak: 615 up, 127 down at FDR < 0.05
+
+--- Step 2: building the gene universe ---
+  21,097 genes in, 21,072 kept after collapsing 25 duplicate symbols
+  Universe: 21,072 genes
+  MeCP2-up:    412 genes (2.0%)
+  Neuronal:    4,209 genes (20.0%)
+  Synapse:     2,121 genes (10.1%)
+  With a K119ub decile: 8,885 genes
+
+--- Figure 70_04a: group sizes ---
+  Neuronal gene set  Both           129 genes (0.6%)
+  Neuronal gene set  Gene set only  4,080 genes (19.4%)
+  Neuronal gene set  MeCP2-up only  283 genes (1.3%)
+  Neuronal gene set  Neither        16,580 genes (78.7%)
+  Synapse gene set   Both           74 genes (0.4%)
+  Synapse gene set   Gene set only  2,047 genes (9.7%)
+  Synapse gene set   MeCP2-up only  338 genes (1.6%)
+  Synapse gene set   Neither        18,613 genes (88.3%)
+  Saved: 70_04a_group_sizes/{pdf,svg,png,jpg}
+  Wrote: 70_04a_group_sizes.tsv (8 rows, 8 cols)
+
+--- Figure 70_04b: mark fold change across the four groups ---
+  Saved: 70_04b_mark_folds_by_group/{pdf,svg,png,jpg}
+  Wrote: 70_04b_mark_fold_summary.tsv (32 rows, 6 cols)
+  Wrote: 70_04b_kruskal_wallis.tsv (8 rows, 7 cols)
+  Neuronal gene set  ATAC-seq   Kruskal-Wallis chi-squared = 123.9, df = 3, p < 2.2e-16
+  Neuronal gene set  H3K27ac    Kruskal-Wallis chi-squared = 198.4, df = 3, p < 2.2e-16
+  Neuronal gene set  H3K27me3   Kruskal-Wallis chi-squared = 35.8, df = 3, p = 8.25e-08
+  Neuronal gene set  H2AK119ub  Kruskal-Wallis chi-squared = 456.1, df = 3, p < 2.2e-16
+  Synapse gene set   ATAC-seq   Kruskal-Wallis chi-squared = 70.9, df = 3, p = 2.78e-15
+  Synapse gene set   H3K27ac    Kruskal-Wallis chi-squared = 188.8, df = 3, p < 2.2e-16
+  Synapse gene set   H3K27me3   Kruskal-Wallis chi-squared = 43.8, df = 3, p = 1.68e-09
+  Synapse gene set   H2AK119ub  Kruskal-Wallis chi-squared = 373.7, df = 3, p < 2.2e-16
+
+--- Figure 70_04c: effect size against the Neither group ---
+  Neuronal gene set  ATAC-seq   Both           shift = -0.0186 [-0.0571, +0.0229], p = 3.68e-01
+  Neuronal gene set  ATAC-seq   Gene set only  shift = +0.0333 [+0.0269, +0.0397], p < 2.2e-16
+  Neuronal gene set  ATAC-seq   MeCP2-up only  shift = -0.0452 [-0.0716, -0.0191], p = 6.95e-04
+  Neuronal gene set  H3K27ac    Both           shift = -0.2104 [-0.3214, -0.1161], p = 4.54e-06
+  Neuronal gene set  H3K27ac    Gene set only  shift = +0.0267 [+0.0130, +0.0405], p = 1.28e-04
+  Neuronal gene set  H3K27ac    MeCP2-up only  shift = -0.5067 [-0.6006, -0.4154], p < 2.2e-16
+  Neuronal gene set  H3K27me3   Both           shift = +0.2003 [+0.0298, +0.4105], p = 2.05e-02
+  Neuronal gene set  H3K27me3   Gene set only  shift = -0.0364 [-0.0602, -0.0125], p = 2.87e-03
+  Neuronal gene set  H3K27me3   MeCP2-up only  shift = +0.3388 [+0.1782, +0.5497], p = 9.20e-06
+  Neuronal gene set  H2AK119ub  Both           shift = +0.3762 [+0.2903, +0.4613], p = 1.05e-15
+  Neuronal gene set  H2AK119ub  Gene set only  shift = -0.1093 [-0.1298, -0.0889], p < 2.2e-16
+  Neuronal gene set  H2AK119ub  MeCP2-up only  shift = +0.5301 [+0.4723, +0.5874], p < 2.2e-16
+  Synapse gene set   ATAC-seq   Both           shift = -0.0290 [-0.0792, +0.0250], p = 2.77e-01
+  Synapse gene set   ATAC-seq   Gene set only  shift = +0.0309 [+0.0227, +0.0392], p = 1.19e-13
+  Synapse gene set   ATAC-seq   MeCP2-up only  shift = -0.0447 [-0.0691, -0.0203], p = 3.47e-04
+  Synapse gene set   H3K27ac    Both           shift = -0.1883 [-0.3135, -0.0774], p = 8.48e-04
+  Synapse gene set   H3K27ac    Gene set only  shift = +0.0267 [+0.0093, +0.0442], p = 2.50e-03
+  Synapse gene set   H3K27ac    MeCP2-up only  shift = -0.4779 [-0.5678, -0.3918], p < 2.2e-16
+  Synapse gene set   H3K27me3   Both           shift = +0.0834 [-0.0954, +0.2945], p = 3.58e-01
+  Synapse gene set   H3K27me3   Gene set only  shift = -0.0622 [-0.0933, -0.0312], p = 8.95e-05
+  Synapse gene set   H3K27me3   MeCP2-up only  shift = +0.3574 [+0.2069, +0.5480], p = 3.56e-07
+  Synapse gene set   H2AK119ub  Both           shift = +0.4513 [+0.3407, +0.5614], p = 1.83e-13
+  Synapse gene set   H2AK119ub  Gene set only  shift = -0.0700 [-0.0954, -0.0446], p = 6.67e-08
+  Synapse gene set   H2AK119ub  MeCP2-up only  shift = +0.5155 [+0.4619, +0.5688], p < 2.2e-16
+  Saved: 70_04c_effect_size_forest/{pdf,svg,png,jpg}
+  Wrote: 70_04c_wilcoxon_vs_neither.tsv (24 rows, 15 cols)
+
+  Wrote: 70_04_neuronal_both_x_k119ub_top_decile_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_k119ub_top_decile.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_k119ub_top_decile: OR=3.394, p=1.16e-07 (n=8,885 genes) [registered]
+  Wrote: 70_04_neuronal_both_x_k119ub_bottom_decile_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_k119ub_bottom_decile.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_k119ub_bottom_decile: OR=0.230, p=0.00306 (n=8,885 genes) [registered]
+  Wrote: 70_04_synapse_both_x_k119ub_top_decile_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_k119ub_top_decile.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_k119ub_top_decile: OR=3.810, p=6.31e-06 (n=8,885 genes) [registered]
+  Wrote: 70_04_synapse_both_x_k119ub_bottom_decile_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_k119ub_bottom_decile.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_k119ub_bottom_decile: OR=0.000, p=0.00162 (n=8,885 genes) [registered]
+--- Figure 70_04d: K119ub decile analysis ---
+  Neuronal gene set  D1  n = 889    Both = 3     (0.3%)  fold -1.323 to -0.394
+  Neuronal gene set  D2  n = 888    Both = 4     (0.5%)  fold -0.393 to -0.240
+  Neuronal gene set  D3  n = 889    Both = 4     (0.4%)  fold -0.239 to -0.114
+  Neuronal gene set  D4  n = 888    Both = 5     (0.6%)  fold -0.114 to +0.001
+  Neuronal gene set  D5  n = 889    Both = 7     (0.8%)  fold +0.001 to +0.112
+  Neuronal gene set  D6  n = 888    Both = 8     (0.9%)  fold +0.112 to +0.235
+  Neuronal gene set  D7  n = 888    Both = 8     (0.9%)  fold +0.235 to +0.370
+  Neuronal gene set  D8  n = 889    Both = 20    (2.2%)  fold +0.371 to +0.544
+  Neuronal gene set  D9  n = 888    Both = 28    (3.2%)  fold +0.544 to +0.775
+  Neuronal gene set  D10 n = 889    Both = 32    (3.6%)  fold +0.775 to +2.220
+  Synapse gene set   D1  n = 889    Both = 0     (0.0%)  fold -1.323 to -0.394
+  Synapse gene set   D2  n = 888    Both = 1     (0.1%)  fold -0.393 to -0.240
+  Synapse gene set   D3  n = 889    Both = 3     (0.3%)  fold -0.239 to -0.114
+  Synapse gene set   D4  n = 888    Both = 2     (0.2%)  fold -0.114 to +0.001
+  Synapse gene set   D5  n = 889    Both = 5     (0.6%)  fold +0.001 to +0.112
+  Synapse gene set   D6  n = 888    Both = 3     (0.3%)  fold +0.112 to +0.235
+  Synapse gene set   D7  n = 888    Both = 6     (0.7%)  fold +0.235 to +0.370
+  Synapse gene set   D8  n = 889    Both = 11    (1.2%)  fold +0.371 to +0.544
+  Synapse gene set   D9  n = 888    Both = 17    (1.9%)  fold +0.544 to +0.775
+  Synapse gene set   D10 n = 889    Both = 20    (2.2%)  fold +0.775 to +2.220
+  Saved: 70_04d_k119ub_decile/{pdf,svg,png,jpg}
+  Wrote: 70_04d_k119ub_decile_summary.tsv (20 rows, 13 cols)
+  Wrote: 70_04d_k119ub_decile_composition.tsv (80 rows, 5 cols)
+  Wrote: 70_04d_extreme_decile_fisher.tsv (4 rows, 15 cols)
+
+  Wrote: 70_04e_length_quintile_bounds.tsv (5 rows, 5 cols)
+--- Figure 70_04e: gene-length quintiles, Neuronal gene set ---
+  Saved: 70_04e_length_quintile_violins_neuronal/{pdf,svg,png,jpg}
+
+--- Figure 70_04e: gene-length quintiles, Synapse gene set ---
+  Saved: 70_04e_length_quintile_violins_synapse/{pdf,svg,png,jpg}
+
+--- Figure 70_04f: effect size inside gene-length quintiles ---
+  90 of 120 quintile cells were tested; 30 were too small
+    untested: Neuronal gene set / ATAC-seq / Q1 / Both: fewer than 10 genes in an arm (group n = 6, reference n = 1589)
+    untested: Neuronal gene set / ATAC-seq / Q2 / Both: fewer than 10 genes in an arm (group n = 6, reference n = 1872)
+    untested: Neuronal gene set / ATAC-seq / Q3 / Both: fewer than 10 genes in an arm (group n = 7, reference n = 2428)
+    untested: Neuronal gene set / H3K27ac / Q1 / Both: fewer than 10 genes in an arm (group n = 5, reference n = 797)
+    untested: Neuronal gene set / H3K27ac / Q2 / Both: fewer than 10 genes in an arm (group n = 6, reference n = 989)
+    untested: Neuronal gene set / H3K27ac / Q3 / Both: fewer than 10 genes in an arm (group n = 4, reference n = 1378)
+    untested: Neuronal gene set / H3K27me3 / Q1 / Both: fewer than 10 genes in an arm (group n = 4, reference n = 373)
+    untested: Neuronal gene set / H3K27me3 / Q2 / Both: fewer than 10 genes in an arm (group n = 1, reference n = 386)
+    untested: Neuronal gene set / H3K27me3 / Q2 / MeCP2-up only: fewer than 10 genes in an arm (group n = 6, reference n = 386)
+    untested: Neuronal gene set / H3K27me3 / Q3 / Both: fewer than 10 genes in an arm (group n = 2, reference n = 485)
+    untested: Neuronal gene set / H3K27me3 / Q3 / MeCP2-up only: fewer than 10 genes in an arm (group n = 8, reference n = 485)
+    untested: Neuronal gene set / H3K27me3 / Q4 / Both: fewer than 10 genes in an arm (group n = 6, reference n = 623)
+    untested: Neuronal gene set / H2AK119ub / Q1 / Both: fewer than 10 genes in an arm (group n = 7, reference n = 824)
+    untested: Neuronal gene set / H2AK119ub / Q2 / Both: fewer than 10 genes in an arm (group n = 6, reference n = 909)
+    untested: Neuronal gene set / H2AK119ub / Q3 / Both: fewer than 10 genes in an arm (group n = 5, reference n = 1176)
+    untested: Synapse gene set / ATAC-seq / Q1 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 1800)
+    untested: Synapse gene set / ATAC-seq / Q2 / Both: fewer than 10 genes in an arm (group n = 2, reference n = 2148)
+    untested: Synapse gene set / ATAC-seq / Q3 / Both: fewer than 10 genes in an arm (group n = 4, reference n = 2776)
+    untested: Synapse gene set / H3K27ac / Q1 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 880)
+    untested: Synapse gene set / H3K27ac / Q2 / Both: fewer than 10 genes in an arm (group n = 2, reference n = 1123)
+    untested: Synapse gene set / H3K27ac / Q3 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 1552)
+    untested: Synapse gene set / H3K27me3 / Q1 / Both: fewer than 10 genes in an arm (group n = 2, reference n = 482)
+    untested: Synapse gene set / H3K27me3 / Q2 / Both: fewer than 10 genes in an arm (group n = 0, reference n = 514)
+    untested: Synapse gene set / H3K27me3 / Q2 / MeCP2-up only: fewer than 10 genes in an arm (group n = 7, reference n = 514)
+    untested: Synapse gene set / H3K27me3 / Q3 / Both: fewer than 10 genes in an arm (group n = 1, reference n = 613)
+    untested: Synapse gene set / H3K27me3 / Q3 / MeCP2-up only: fewer than 10 genes in an arm (group n = 9, reference n = 613)
+    untested: Synapse gene set / H3K27me3 / Q4 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 739)
+    untested: Synapse gene set / H2AK119ub / Q1 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 985)
+    untested: Synapse gene set / H2AK119ub / Q2 / Both: fewer than 10 genes in an arm (group n = 2, reference n = 1098)
+    untested: Synapse gene set / H2AK119ub / Q3 / Both: fewer than 10 genes in an arm (group n = 3, reference n = 1404)
+  Saved: 70_04f_length_quintile_effects/{pdf,svg,png,jpg}
+  Wrote: 70_04f_length_quintile_wilcoxon.tsv (120 rows, 15 cols)
+
+--- Figure 70_04g: MeCP2 against H2AK119ub fold change ---
+  6,889 genes with both folds, Spearman rho = 0.212, p < 2.2e-16
+  Key genes on the scatter: 10 of 10
+  Saved: 70_04g_mecp2_vs_k119ub/{pdf,svg,png,jpg}
+  Wrote: 70_04g_key_genes.tsv (20 rows, 13 cols)
+
+--- Fisher: gene set against MeCP2-up ---
+  Wrote: 70_04_neuronal_x_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 70_04_neuronal_x_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_x_mecp2_up: OR=1.852, p=3.49e-08 (n=21,072 genes) [registered]
+  Wrote: 70_04_synapse_x_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 70_04_synapse_x_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_x_mecp2_up: OR=1.991, p=7.97e-07 (n=21,072 genes) [registered]
+  Wrote: 70_04_overlap_fisher.tsv (2 rows, 11 cols)
+
+--- Fisher: double overlap against a significantly changed peak ---
+  Wrote: 70_04_neuronal_both_x_atac_remodeled_genes.tsv (14,730 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_atac_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_atac_remodeled: OR=2.583, p=6.76e-06 (n=14,730 genes) [registered]
+  Wrote: 70_04_neuronal_both_x_k27ac_remodeled_genes.tsv (8,599 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_k27ac_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_k27ac_remodeled: OR=2.972, p=1.54e-07 (n=8,599 genes) [registered]
+  Wrote: 70_04_neuronal_both_x_k27me3_remodeled_genes.tsv (4,244 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_k27me3_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_k27me3_remodeled: OR=2.453, p=0.000953 (n=4,244 genes) [registered]
+  Wrote: 70_04_neuronal_both_x_k119ub_remodeled_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_neuronal_both_x_k119ub_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:neuronal_both_x_k119ub_remodeled: OR=2.924, p=3.22e-07 (n=8,885 genes) [registered]
+  Wrote: 70_04_synapse_both_x_atac_remodeled_genes.tsv (14,730 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_atac_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_atac_remodeled: OR=1.720, p=0.0623 (n=14,730 genes) [registered]
+  Wrote: 70_04_synapse_both_x_k27ac_remodeled_genes.tsv (8,599 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_k27ac_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_k27ac_remodeled: OR=2.436, p=0.00101 (n=8,599 genes) [registered]
+  Wrote: 70_04_synapse_both_x_k27me3_remodeled_genes.tsv (4,244 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_k27me3_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_k27me3_remodeled: OR=1.964, p=0.061 (n=4,244 genes) [registered]
+  Wrote: 70_04_synapse_both_x_k119ub_remodeled_genes.tsv (8,885 rows, 4 cols)
+  Wrote: 70_04_synapse_both_x_k119ub_remodeled.tsv (1 rows, 12 cols)
+  Fisher 70_04:synapse_both_x_k119ub_remodeled: OR=2.984, p=0.000109 (n=8,885 genes) [registered]
+  Wrote: 70_04_remodeling_fisher.tsv (8 rows, 14 cols)
+
+--- Figure 70_04h: composite ---
+  Saved: 70_04h_composite/{pdf,svg,png,jpg}
+
+  Wrote: 70_04_per_gene_groups.tsv (21,072 rows, 33 cols)
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  Universe: 21,072 genes, 412 MeCP2-up
+  Neuronal gene set  in set 4,209, double overlap 129
+  Synapse gene set   in set 2,121, double overlap 74
+  Gene set against MeCP2-up:
+    Neuronal gene set  OR = 1.85 [1.49, 2.30], p = 3.49e-08
+    Synapse gene set   OR = 1.99 [1.52, 2.58], p = 7.97e-07
+  Double overlap against Neither, location shift:
+    Neuronal gene set  ATAC-seq   -0.0186 [-0.0571, +0.0229], p = 3.68e-01 (q = 0.368)
+    Neuronal gene set  H3K27ac    -0.2104 [-0.3214, -0.1161], p = 4.54e-06 (q = 9.08e-06)
+    Neuronal gene set  H3K27me3   +0.2003 [+0.0298, +0.4105], p = 2.05e-02 (q = 0.0234)
+    Neuronal gene set  H2AK119ub  +0.3762 [+0.2903, +0.4613], p = 1.05e-15 (q = 3.61e-15)
+    Synapse gene set   ATAC-seq   -0.0290 [-0.0792, +0.0250], p = 2.77e-01 (q = 0.303)
+    Synapse gene set   H3K27ac    -0.1883 [-0.3135, -0.0774], p = 8.48e-04 (q = 0.00113)
+    Synapse gene set   H3K27me3   +0.0834 [-0.0954, +0.2945], p = 3.58e-01 (q = 0.368)
+    Synapse gene set   H2AK119ub  +0.4513 [+0.3407, +0.5614], p = 1.83e-13 (q = 4.89e-13)
+  Double overlap against a significantly changed peak:
+    Neuronal gene set  ATAC-seq   OR = 2.58 [1.71, 3.84], p = 6.76e-06
+    Neuronal gene set  H3K27ac    OR = 2.97 [1.95, 4.53], p = 1.54e-07
+    Neuronal gene set  H3K27me3   OR = 2.45 [1.40, 4.35], p = 9.53e-04
+    Neuronal gene set  H2AK119ub  OR = 2.92 [1.86, 4.76], p = 3.22e-07
+    Synapse gene set   ATAC-seq   OR = 1.72 [0.92, 3.04], p = 6.23e-02
+    Synapse gene set   H3K27ac    OR = 2.44 [1.40, 4.23], p = 1.01e-03
+    Synapse gene set   H3K27me3   OR = 1.96 [0.92, 4.21], p = 6.10e-02
+    Synapse gene set   H2AK119ub  OR = 2.98 [1.63, 5.83], p = 1.09e-04
+  K119ub extreme deciles:
+    Neuronal gene set  Top decile (D10, strongest K119ub gain)    OR = 3.39, p = 1.16e-07
+    Neuronal gene set  Bottom decile (D1, strongest K119ub loss)  OR = 0.23, p = 3.06e-03
+    Synapse gene set   Top decile (D10, strongest K119ub gain)    OR = 3.81, p = 6.31e-06
+    Synapse gene set   Bottom decile (D1, strongest K119ub loss)  OR = 0.00, p = 1.62e-03
+  Gene-length quintiles: 90 of 120 cells tested, 30 too small
+
+=== Section 70_04 complete ===
+
+Warning messages:
+1: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+2: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+3: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+4: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+5: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+6: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+7: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+8: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes. 
+
+=========================================
+Complete: section 70_04
+Time: 118s
+Exit code: 0
+End time: Thu Aug 13 10:27:42 PDT 2026
+=========================================

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='792.00pt' height='576.00pt' viewBox='0 0 792.00 576.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3OTIuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='792.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3OTIuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='-0.000000000000064' y='0.00' width='792.00' height='576.00' style='stroke-width: 1.16; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpNTYuMTR8Nzg2LjAyfDQyLjI5fDUzMi4yNg=='>
+    <rect x='56.14' y='42.29' width='729.88' height='489.97' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTYuMTR8Nzg2LjAyfDQyLjI5fDUzMi4yNg==)'>
+<rect x='56.14' y='42.29' width='729.88' height='489.97' style='stroke-width: 1.16; stroke: none; fill: #FFFFFF;' />
+<polyline points='56.14,532.26 786.02,532.26 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='56.14,439.25 786.02,439.25 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='56.14,346.24 786.02,346.24 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='56.14,253.23 786.02,253.23 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='56.14,160.22 786.02,160.22 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='56.14,67.22 786.02,67.22 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='140.36,532.26 140.36,42.29 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='280.72,532.26 280.72,42.29 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='421.08,532.26 421.08,42.29 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='561.44,532.26 561.44,42.29 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='701.81,532.26 701.81,42.29 ' style='stroke-width: 1.16; stroke: #EBEBEB; stroke-linecap: butt;' />
+<rect x='91.23' y='140.28' width='98.25' height='391.97' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FEE5D9;' />
+<rect x='231.59' y='429.00' width='98.25' height='103.26' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FCAE91;' />
+<rect x='371.95' y='520.33' width='98.25' height='11.92' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FB6A4A;' />
+<rect x='512.32' y='521.23' width='98.25' height='11.03' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DE2D26;' />
+<rect x='652.68' y='531.21' width='98.25' height='1.04' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A50F15;' />
+<text x='140.36' y='108.58' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='31.80px' lengthAdjust='spacingAndGlyphs'>21,072</text>
+<text x='140.36' y='120.60' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='83.80px' lengthAdjust='spacingAndGlyphs'>100.00% of tested</text>
+<text x='140.36' y='132.62' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='88.06px' lengthAdjust='spacingAndGlyphs'>100.0% of previous</text>
+<text x='280.72' y='397.29' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='26.02px' lengthAdjust='spacingAndGlyphs'>5,551</text>
+<text x='280.72' y='409.31' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='78.02px' lengthAdjust='spacingAndGlyphs'>26.34% of tested</text>
+<text x='280.72' y='421.33' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='82.28px' lengthAdjust='spacingAndGlyphs'>26.3% of previous</text>
+<text x='421.08' y='488.63' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>641</text>
+<text x='421.08' y='500.65' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='72.23px' lengthAdjust='spacingAndGlyphs'>3.04% of tested</text>
+<text x='421.08' y='512.67' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='82.28px' lengthAdjust='spacingAndGlyphs'>11.5% of previous</text>
+<text x='561.44' y='489.52' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>593</text>
+<text x='561.44' y='501.54' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='72.23px' lengthAdjust='spacingAndGlyphs'>2.81% of tested</text>
+<text x='561.44' y='513.56' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='82.28px' lengthAdjust='spacingAndGlyphs'>92.5% of previous</text>
+<text x='701.81' y='499.51' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='11.56px' lengthAdjust='spacingAndGlyphs'>56</text>
+<text x='701.81' y='511.53' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='72.23px' lengthAdjust='spacingAndGlyphs'>0.27% of tested</text>
+<text x='701.81' y='523.55' text-anchor='middle' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='76.50px' lengthAdjust='spacingAndGlyphs'>9.4% of previous</text>
+<rect x='56.14' y='42.29' width='729.88' height='489.97' style='stroke-width: 1.16; stroke: #333333;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3OTIuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='50.76' y='535.75' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='6.11px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='50.76' y='442.74' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='24.44px' lengthAdjust='spacingAndGlyphs'>5000</text>
+<text x='50.76' y='349.74' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='30.55px' lengthAdjust='spacingAndGlyphs'>10000</text>
+<text x='50.76' y='256.73' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='30.55px' lengthAdjust='spacingAndGlyphs'>15000</text>
+<text x='50.76' y='163.72' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='30.55px' lengthAdjust='spacingAndGlyphs'>20000</text>
+<text x='50.76' y='70.71' text-anchor='end' style='font-size: 9.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='30.55px' lengthAdjust='spacingAndGlyphs'>25000</text>
+<polyline points='53.15,532.26 56.14,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='53.15,439.25 56.14,439.25 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='53.15,346.24 56.14,346.24 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='53.15,253.23 56.14,253.23 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='53.15,160.22 56.14,160.22 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='53.15,67.22 56.14,67.22 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='140.36,535.24 140.36,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='280.72,535.24 280.72,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='421.08,535.24 421.08,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='561.44,535.24 561.44,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='701.81,535.24 701.81,532.26 ' style='stroke-width: 1.16; stroke: #333333; stroke-linecap: butt;' />
+<text x='140.36' y='544.20' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='28.42px' lengthAdjust='spacingAndGlyphs'>Genes</text>
+<text x='140.36' y='553.92' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='28.53px' lengthAdjust='spacingAndGlyphs'>tested</text>
+<text x='280.72' y='544.20' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='21.81px' lengthAdjust='spacingAndGlyphs'>mCH</text>
+<text x='280.72' y='553.92' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='46.48px' lengthAdjust='spacingAndGlyphs'>significant</text>
+<text x='421.08' y='544.20' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='21.81px' lengthAdjust='spacingAndGlyphs'>mCH</text>
+<text x='421.08' y='553.92' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='77.48px' lengthAdjust='spacingAndGlyphs'>hypermethylated</text>
+<text x='561.44' y='544.20' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='37.45px' lengthAdjust='spacingAndGlyphs'>Hyper +</text>
+<text x='561.44' y='553.92' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='55.56px' lengthAdjust='spacingAndGlyphs'>MeCP2 peak</text>
+<text x='701.81' y='544.20' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='37.45px' lengthAdjust='spacingAndGlyphs'>Hyper +</text>
+<text x='701.81' y='553.92' text-anchor='middle' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='66.70px' lengthAdjust='spacingAndGlyphs'>MeCP2 change</text>
+<text transform='translate(14.73,287.27) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='116.12px' lengthAdjust='spacingAndGlyphs'>Number of genes</text>
+<text x='421.08' y='33.81' text-anchor='middle' style='font-size: 12.00px; font-family: "DejaVu Sans";' textLength='585.95px' lengthAdjust='spacingAndGlyphs'>Each step is a subset of the step before it. 0.27% of tested genes reach the final step (56 genes).</text>
+<text x='421.08' y='16.18' text-anchor='middle' style='font-size: 14.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='354.28px' lengthAdjust='spacingAndGlyphs'>From mCH Change to MeCP2 Binding Change</text>
+</g>
+</g>
+</svg>

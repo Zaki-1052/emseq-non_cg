@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+10_03	k119ub_top_hyper	Are genes in the K119ub top 10% Polycomb set enriched among mCH hypermethylated genes?	pc_k119ub_top	mch_hyper	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_03_k119ub_top_hyper_genes.tsv	18543	1855	603	70	1.18859659580667	0.189464273603908

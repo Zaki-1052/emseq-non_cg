@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_04	neuronal_both_x_k119ub_bottom_decile	Genes in both the neuronal gene set and the MeCP2-up set are enriched in decile 1 of the gene-level H2AK119ub log2 fold change.	is_neuronal_and_mecp2_up	in_k119ub_bottom_decile	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_04_neuronal_both_x_k119ub_bottom_decile_genes.tsv	8885	119	889	3	0.230036574321479	0.00305525873538508

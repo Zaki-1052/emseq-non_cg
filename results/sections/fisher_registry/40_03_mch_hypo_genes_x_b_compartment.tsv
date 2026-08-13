@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+40_03	mch_hypo_genes_x_b_compartment	Are mCH hypomethylated genes enriched among genes overlapping B Compartment?	mch_hypo	in_target	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/fisher_tables/40_03_mch_hypo_genes_x_b_compartment_genes.tsv	21072	4910	6274	1175	0.682563950973644	3.48218296650701e-25

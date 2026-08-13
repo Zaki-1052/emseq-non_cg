@@ -1,0 +1,11 @@
+group_label	mch_direction	n	pct	grouping
+A	Hypermethylated	488	10.9687570240503	By compartment
+A	Hypomethylated	3961	89.0312429759497	By compartment
+B	Hypermethylated	152	13.8812785388128	By compartment
+B	Hypomethylated	943	86.1187214611872	By compartment
+B to A	Hypermethylated	54	31.7647058823529	By compartment shift
+B to A	Hypomethylated	116	68.2352941176471	By compartment shift
+A to B	Hypermethylated	58	45.3125	By compartment shift
+A to B	Hypomethylated	70	54.6875	By compartment shift
+Stable	Hypermethylated	528	10.0648112847884	By compartment shift
+Stable	Hypomethylated	4718	89.9351887152116	By compartment shift

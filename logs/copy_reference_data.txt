@@ -1,0 +1,65 @@
+=========================================
+Copying section pipeline reference data
+=========================================
+Source (mariner_hi-c): /expanse/lustre/projects/csd940/zalibhai/mariner_hi-c
+Target (repo):          /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+
+--- Histone mark consensus peaks -> data/chip_peaks/ ---
+  CTCF.bed                                            2042167 bytes
+  H3K27ac.bed                                          607047 bytes
+  H3K27me3.bed                                         907721 bytes
+  H3K4me1.bed                                         4659214 bytes
+  H3K4me3.bed                                          261386 bytes
+  Bivalent.bed                                          12603 bytes
+
+--- chromHMM emission states -> data/chromatin/ ---
+  activeenhancer.bed                                  1667718 bytes
+  activepromoter.bed                                  1297136 bytes
+  bivalent.bed                                         694791 bytes
+
+--- Quantitative DiffBind results -> data/diffbind/ ---
+  ATAC_diffbind.txt                                  12130755 bytes
+  K27ac_diffbind.txt                                  4162559 bytes
+  K27me3_diffbind.txt                                 2971799 bytes
+
+--- ATAC peak sets -> data/diffbind/ ---
+  ATAC_up.bed                                          182579 bytes
+  ATAC_down.bed                                         89771 bytes
+  ATAC_consensus_ctrl.bed                             1576319 bytes
+  ATAC_consensus_mut.bed                              1619671 bytes
+
+--- Condition-specific peak sets -> data/diffbind/ ---
+  K119ub_ctrl.bed                                     1173828 bytes
+  K119ub_mut.bed                                      1162027 bytes
+  K27ac_ctrl.bed                                       777854 bytes
+  K27ac_mut.bed                                        892647 bytes
+
+--- MeCP2 peak-level and aging data -> data/mecp2/ ---
+  MeCP2_annotated.txt                                58483907 bytes
+  MeCP2_up.bed                                         183365 bytes
+  MeCP2_down.bed                                        28975 bytes
+  MeCP2_ctrl_aging_diffbind.txt                      53736576 bytes
+  MeCP2_mut_aging_diffbind.txt                       53559264 bytes
+
+--- Hi-C loops, compartments, subcompartments -> data/hic/ ---
+  characterized_loops.tsv                             1009470 bytes
+  diffcompartments.txt                               33596599 bytes
+  calder2_subcompartments_100kb.tsv                   1792766 bytes
+
+--- Per-gene K119ub signal -> data/ ---
+  k119ub_gene_signal.tsv                              2847607 bytes
+
+--- Biomodal CG DMR gene-level tables -> data/biomodal/ ---
+  cg_mc_dmr_genes.bed                                 4027557 bytes
+  cg_hmc_dmr_genes.bed                                4079456 bytes
+
+--- Neuronal gene sets -> data/neuronal/ ---
+  neuronal_gene_set_go_derived.tsv                      35962 bytes
+  synapse_axon_gene_set.tsv                             14534 bytes
+
+=========================================
+Copied 33 files.
+
+Still required before section jobs can run:
+  data/features/*.bed  — run scripts/utils/generate_feature_beds.R
+=========================================

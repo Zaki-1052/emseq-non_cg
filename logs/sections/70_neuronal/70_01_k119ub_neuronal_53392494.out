@@ -1,0 +1,279 @@
+=========================================
+EM-seq section 70_01: K119ub neuronal
+=========================================
+Job ID: 53392494
+Node: exp-4-33
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392494
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/70_neuronal/70_01_k119ub_neuronal.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+===========================================================================
+  SECTION 70_01: H2AK119ub AT NEURONAL GENES
+===========================================================================
+  Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  GO and GSEA FDR threshold: 0.05
+  Signal used: absolute gene-body K119ub, not fold change
+
+--- Step 1: K119ub gene signal ---
+  23,150 genes in the table
+    no_signal      767
+    one_condition  779
+    quantifiable   21,604
+  Working universe: 21,604 quantifiable genes
+  Ctrl gene-body signal range: 0.220 to 44.998
+
+--- Step 2a: deriving the neuronal gene set from GO ---
+  Term name pattern: synap|neuron|axon|dendrit|nervous
+'select()' returned 1:1 mapping between keys and columns
+  1,021 of 27,597 GO BP terms match
+  Examples: acetylcholine catabolic process in synaptic cleft; neuron migration; immunological synapse formation; myeloid dendritic cell activation
+'select()' returned 1:many mapping between keys and columns
+  Wrote: 70_01_neuronal_go_terms.tsv (1,021 rows, 3 cols)
+  Derived neuronal gene set: 5,327 symbols
+
+--- Loading the external neuronal gene set ---
+  External neuronal gene set: 5614 genes
+
+--- Step 2b: derived against external neuronal gene set ---
+  Derived only: 60 | External only: 347 | Both: 5,267
+  Union: 5,674 genes, Jaccard index = 0.928
+  In the K119ub universe: derived 4,797, external 5,077, both 4,757
+
+  Wrote: 70_01a_gene_set_overlap.tsv (3 rows, 7 cols)
+  Saved: 70_01a_gene_set_overlap/{pdf,svg,png,jpg}
+
+--- Step 3: annotating the K119ub universe ---
+  Neuronal (derived):  4,797 of 21,604 genes (22.2%)
+  Neuronal (external): 5,077 of 21,604 genes (23.5%)
+  Ctrl signal thresholds: Q3 = 1.6133, D9 = 2.5946
+  Mut  signal thresholds: Q3 = 1.7968, D9 = 3.0312
+  Wrote: 70_01_signal_thresholds.tsv (4 rows, 5 cols)
+  Wrote: 70_01_decile_bounds.tsv (10 rows, 4 cols)
+
+--- Figure 70_01b: K119ub signal, neuronal against other ---
+  Saved: 70_01b_k119ub_signal_neuronal_vs_other/{pdf,svg,png,jpg}
+  Wrote: 70_01b_signal_distribution.tsv (4 rows, 7 cols)
+
+--- Figure 70_01c: neuronal enrichment among K119ub-high genes ---
+  Wrote: 70_01_neuronal_ctrl_top_quartile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_neuronal_ctrl_top_quartile.tsv (1 rows, 12 cols)
+  Fisher 70_01:neuronal_ctrl_top_quartile: OR=1.348, p=6.47e-16 (n=21,604 genes) [registered]
+  Wrote: 70_01_neuronal_ctrl_top_decile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_neuronal_ctrl_top_decile.tsv (1 rows, 12 cols)
+  Fisher 70_01:neuronal_ctrl_top_decile: OR=1.705, p=1.15e-25 (n=21,604 genes) [registered]
+  Wrote: 70_01_neuronal_mut_top_quartile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_neuronal_mut_top_quartile.tsv (1 rows, 12 cols)
+  Fisher 70_01:neuronal_mut_top_quartile: OR=1.176, p=1.37e-05 (n=21,604 genes) [registered]
+  Wrote: 70_01_neuronal_mut_top_decile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_neuronal_mut_top_decile.tsv (1 rows, 12 cols)
+  Fisher 70_01:neuronal_mut_top_decile: OR=1.385, p=4.63e-10 (n=21,604 genes) [registered]
+  Wrote: 70_01_external_ctrl_top_quartile_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_external_ctrl_top_quartile.tsv (1 rows, 12 cols)
+  Fisher 70_01:external_ctrl_top_quartile: OR=1.378, p=7.46e-19 (n=21,604 genes) [registered]
+  Wrote: 70_01c_threshold_fisher.tsv (5 rows, 14 cols)
+  Saved: 70_01c_neuronal_enrichment_fisher/{pdf,svg,png,jpg}
+
+--- Figure 70_01d: neuronal fraction across K119ub deciles ---
+  Wrote: 70_01_decile_01_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_01.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_01: OR=0.871, p=0.0141 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_02_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_02.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_02: OR=0.900, p=0.0597 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_03_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_03.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_03: OR=0.951, p=0.383 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_04_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_04.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_04: OR=1.034, p=0.548 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_05_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_05.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_05: OR=0.995, p=0.956 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_06_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_06.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_06: OR=0.754, p=8.83e-07 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_07_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_07.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_07: OR=0.989, p=0.849 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_08_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_08.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_08: OR=0.916, p=0.12 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_09_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_09.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_09: OR=1.026, p=0.643 (n=21,604 genes) [registered]
+  Wrote: 70_01_decile_10_genes.tsv (21,604 rows, 4 cols)
+  Wrote: 70_01_decile_10.tsv (1 rows, 12 cols)
+  Fisher 70_01:decile_10: OR=1.705, p=1.15e-25 (n=21,604 genes) [registered]
+  Universe neuronal fraction: 22.2%
+  D1 = 20.1% neuronal, D10 = 31.4% neuronal
+  Spearman across deciles: rho = 0.527, p = 1.17e-01
+  Cochran-Armitage trend: chi-squared = 43.2, df = 1, p = 5.05e-11
+  Wrote: 70_01d_decile_summary.tsv (10 rows, 19 cols)
+  Saved: 70_01d_neuronal_fraction_by_decile/{pdf,svg,png,jpg}
+
+--- Figure 70_01e: GO BP enrichment of the K119ub top quartile ---
+  Query: 5,401 top-quartile genes | Background: 21,604 genes
+  Wrote: 70_01e_go_bp_top_quartile.tsv (6,296 rows, 10 cols)
+  1,718 significant GO BP terms, 100 neuronal (5.8%)
+  Neuronal among the top 25: 4
+  Top 10 terms:
+    cell fate commitment                                       q = 2.75e-43
+    pattern specification process                              q = 7.45e-43
+    embryonic organ morphogenesis                              q = 3.49e-40
+    regionalization                                            q = 7.71e-40
+    anterior/posterior pattern specification                   q = 3.81e-35
+    skeletal system morphogenesis                              q = 8.54e-32
+    neuron fate commitment                                     q = 3.60e-30  [neuronal]
+    ossification                                               q = 1.11e-27
+    sensory organ morphogenesis                                q = 8.16e-27
+    embryonic skeletal system development                      q = 1.54e-26
+  Wrote: 70_01e_go_neuronal_term_summary.tsv (1 rows, 9 cols)
+  Saved: 70_01e_go_bp_top_quartile_dotplot/{pdf,svg,png,jpg}
+
+--- Figures 70_01f and 70_01g: GSEA on absolute K119ub signal ---
+  gb_ctrl_signal: 21,604 genes ranked, 44.998 down to 0.220
+  gb_mut_signal: 21,604 genes ranked, 42.734 down to 0.220
+  Wrote: 70_01f_gsea_control.tsv (1,186 rows, 12 cols)
+  Control: 1,186 significant terms, 56 neuronal (4.7%)
+  Control: 11 of the 50 leading terms are neuronal (22.0%)
+  Top 8 leading terms by NES:
+    neuron fate specification                            NES = +2.52  q = 3.52e-15  [neuronal]
+    forebrain regionalization                            NES = +2.50  q = 1.15e-12
+    neuron fate commitment                               NES = +2.48  q = 6.66e-26  [neuronal]
+    proximal/distal pattern formation                    NES = +2.45  q = 1.56e-12
+    diencephalon development                             NES = +2.43  q = 2.02e-18
+    pituitary gland development                          NES = +2.42  q = 1.22e-11
+    cell fate determination                              NES = +2.41  q = 4.26e-11
+    embryonic skeletal system morphogenesis              NES = +2.40  q = 5.21e-23
+  Wrote: 70_01f_gsea_mutant.tsv (970 rows, 12 cols)
+  Mutant: 970 significant terms, 42 neuronal (4.3%)
+  Mutant: 10 of the 50 leading terms are neuronal (20.0%)
+  Top 8 leading terms by NES:
+    forebrain regionalization                            NES = +2.30  q = 5.35e-13
+    telencephalon regionalization                        NES = +2.29  q = 5.39e-12
+    neuron fate specification                            NES = +2.23  q = 1.52e-13  [neuronal]
+    embryonic digestive tract morphogenesis              NES = +2.18  q = 1.12e-08
+    neuron fate commitment                               NES = +2.16  q = 9.56e-20  [neuronal]
+    proximal/distal pattern formation                    NES = +2.15  q = 1.09e-09
+    middle ear morphogenesis                             NES = +2.14  q = 3.67e-08
+    cell fate determination                              NES = +2.12  q = 2.96e-10
+  Saved: 70_01f_gsea_control_dotplot/{pdf,svg,png,jpg}
+  Saved: 70_01f_gsea_mutant_dotplot/{pdf,svg,png,jpg}
+  Running score term: neuron fate specification (NES = +2.52, q = 3.52e-15)
+  Saved: 70_01g_gsea_running_score_control_neuron_fate_specification/{pdf,svg,png,jpg}
+  Running score term: neuron fate specification (NES = +2.23, q = 1.52e-13)
+  Saved: 70_01g_gsea_running_score_mutant_neuron_fate_specification/{pdf,svg,png,jpg}
+  Wrote: 70_01f_gsea_neuronal_summary.tsv (2 rows, 10 cols)
+
+--- Figure 70_01h: gene length, neuronal against other ---
+  Median length: neuronal 18,901 bp, other 17,368 bp, p = 5.08e-01
+  Gene length against ctrl K119ub signal: rho = -0.149, p < 2.2e-16
+  Saved: 70_01h_gene_length_neuronal_vs_other/{pdf,svg,png,jpg}
+  Wrote: 70_01h_gene_length_comparison.tsv (2 rows, 8 cols)
+
+--- Figure 70_01i: K119ub comparison inside gene-length strata ---
+  Wrote: 70_01_length_stratum_1_genes.tsv (4,322 rows, 4 cols)
+  Wrote: 70_01_length_stratum_1.tsv (1 rows, 12 cols)
+  Fisher 70_01:length_stratum_1: OR=0.544, p=6.37e-14 (n=4,322 genes) [registered]
+  Wrote: 70_01_length_stratum_2_genes.tsv (4,320 rows, 4 cols)
+  Wrote: 70_01_length_stratum_2.tsv (1 rows, 12 cols)
+  Fisher 70_01:length_stratum_2: OR=2.729, p=3e-30 (n=4,320 genes) [registered]
+  Wrote: 70_01_length_stratum_3_genes.tsv (4,320 rows, 4 cols)
+  Wrote: 70_01_length_stratum_3.tsv (1 rows, 12 cols)
+  Fisher 70_01:length_stratum_3: OR=2.219, p=1.08e-18 (n=4,320 genes) [registered]
+  Wrote: 70_01_length_stratum_4_genes.tsv (4,321 rows, 4 cols)
+  Wrote: 70_01_length_stratum_4.tsv (1 rows, 12 cols)
+  Fisher 70_01:length_stratum_4: OR=1.883, p=1.31e-13 (n=4,321 genes) [registered]
+  Wrote: 70_01_length_stratum_5_genes.tsv (4,321 rows, 4 cols)
+  Wrote: 70_01_length_stratum_5.tsv (1 rows, 12 cols)
+  Fisher 70_01:length_stratum_5: OR=1.496, p=7.88e-08 (n=4,321 genes) [registered]
+  Wrote: 70_01i_length_stratified.tsv (5 rows, 17 cols)
+  Within-stratum results:
+    L1 [501-4,757 bp]: neuronal median 0.784 against other 1.380, OR = 0.54, p = 6.37e-14
+    L2 [4,759-12,140 bp]: neuronal median 1.573 against other 1.061, OR = 2.73, p < 2.2e-16
+    L3 [12,142-25,482 bp]: neuronal median 1.189 against other 0.867, OR = 2.22, p < 2.2e-16
+    L4 [25,483-59,556 bp]: neuronal median 0.973 against other 0.800, OR = 1.88, p = 1.31e-13
+    L5 [59,561-35,832,227 bp]: neuronal median 1.046 against other 0.914, OR = 1.50, p = 7.88e-08
+  Saved: 70_01i_length_stratified_k119ub/{pdf,svg,png,jpg}
+
+--- Figure 70_01j: constitutive signal against K119ub log2FC ---
+  Ctrl signal against log2FC: rho = 0.202, p < 2.2e-16
+  Key genes in the universe: 10 of 10 (Cdh8, Epha3, Syt1, Lpp, Mcu, Dlgap1, Trpm3, Zbtb20, Cntnap2, Arhgap26)
+  Saved: 70_01j_signal_vs_log2fc/{pdf,svg,png,jpg}
+  Wrote: 70_01j_key_genes.tsv (10 rows, 10 cols)
+
+--- Writing the neuronal gene set handoff ---
+  Union set: 5,674 genes (derived 60, external 347, both 5,267)
+  With a K119ub level: 5,117 (90.2%); the rest carry NA
+  Wrote: neuronal_gene_set.tsv (5,674 rows, 7 cols)
+
+  Wrote: 70_01_per_gene_k119ub_neuronal.tsv (21,604 rows, 20 cols)
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  Universe: 21,604 quantifiable genes, 4,797 neuronal (22.2%)
+  Gene sets: derived 5,327, external 5,614, both 5,267, Jaccard 0.928
+  K119ub signal, control: neuronal median 1.015 against other 0.968, p = 2.19e-12
+  Fisher odds ratios:
+    Ctrl top quartile                OR = 1.35 [1.25, 1.45], p = 6.47e-16
+    Ctrl top decile                  OR = 1.70 [1.54, 1.88], p < 2.2e-16
+    Mut top quartile                 OR = 1.18 [1.09, 1.26], p = 1.37e-05
+    Mut top decile                   OR = 1.39 [1.25, 1.53], p = 4.63e-10
+    Ctrl top quartile (external set) OR = 1.38 [1.28, 1.48], p < 2.2e-16
+  Decile dose-response: D1 20.1% to D10 31.4% neuronal, Spearman rho = 0.527, trend p = 5.05e-11
+  GO BP: 1,718 significant terms, 100 neuronal
+  GSEA Control: 1,186 significant terms, 11 of the 50 leading terms neuronal
+  GSEA Mutant: 970 significant terms, 10 of the 50 leading terms neuronal
+  Gene length: neuronal median 18,901 bp against other 17,368 bp, p = 5.08e-01
+  Length-stratified odds ratios: L1 0.54, L2 2.73, L3 2.22, L4 1.88, L5 1.50
+  Handoff: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/neuronal_gene_set.tsv
+
+=== Section 70_01 complete ===
+
+Warning messages:
+1: In preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam,  :
+  There are ties in the preranked stats (0.62% of the list).
+The order of those tied genes will be arbitrary, which may produce unexpected results.
+2: In preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam,  :
+  There are ties in the preranked stats (0.4% of the list).
+The order of those tied genes will be arbitrary, which may produce unexpected results.
+
+=========================================
+Complete: section 70_01
+Time: 141s
+Exit code: 0
+End time: Thu Aug 13 10:25:06 PDT 2026
+=========================================

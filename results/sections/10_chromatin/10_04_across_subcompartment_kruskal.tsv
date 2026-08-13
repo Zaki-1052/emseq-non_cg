@@ -1,0 +1,3 @@
+measure	test	n	n_groups	statistic	df	p_value
+mch_ctrl	Kruskal-Wallis	20105	4	2686.22281172192	3	0
+mch_diff	Kruskal-Wallis	20105	4	370.899060455777	3	4.44658402276373e-80

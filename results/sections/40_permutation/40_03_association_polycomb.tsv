@@ -1,0 +1,5 @@
+sub_analysis	region_set_a	region_set_b	n_region_a	n_region_b	observed_hits	expected_hits	sd_perm_hits	perm_z_score	perm_norm_zscore	perm_p_value	perm_adj_p_value	test_id	perm_sig_label
+Polycomb	mCH Hyper genes	H3K27me3 Domains	641	10034	410	445.699	45.0686968580998	-0.7921	-0.0312860689816489	0.219356128774245	0.2194	mCH Hyper genes x H3K27me3 Domains	ns
+Polycomb	mCH Hyper genes	Polycomb State Intervals	641	3171	96	195.6826	17.9968395694049	-5.5389	-0.218773396644938	0.0001999600079984	4e-04	mCH Hyper genes x Polycomb State Intervals	***
+Polycomb	mCH Hypo genes	H3K27me3 Domains	4910	10034	2646	2115.744	82.2024690212078	6.4506	0.0920575401837585	0.0001999600079984	4e-04	mCH Hypo genes x H3K27me3 Domains	***
+Polycomb	mCH Hypo genes	Polycomb State Intervals	4910	3171	1122	1087.0014	37.9265854410418	0.9228	0.0131694258024947	0.181163767246551	0.1812	mCH Hypo genes x Polycomb State Intervals	ns

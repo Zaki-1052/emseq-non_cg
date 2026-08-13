@@ -1,0 +1,4 @@
+ranking_1	ranking_2	neuronal_1	other_1	neuronal_2	other_2	odds_ratio	ci_low	ci_high	p_value
+MeCP2 fold (nearest TSS)	MeCP2 fold (median significant)	0	0	0	2	0	0	Inf	1
+MeCP2 fold (nearest TSS)	K119ub gene-body log2FC	0	0	3	201	0	0	Inf	1
+MeCP2 fold (median significant)	K119ub gene-body log2FC	0	2	3	201	0	0	421.609224213339	1

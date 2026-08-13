@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+30_01	hyper_x_lost_anchor_great	mCH hypermethylated genes against membership of lost Hi-C loop anchors (GREAT domain assignment)	mch_hyper	at_lost_anchor	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic/fisher_tables/30_01_hyper_x_lost_anchor_great_genes.tsv	18648	604	1328	119	3.4162080888995	5.93729626301093e-25

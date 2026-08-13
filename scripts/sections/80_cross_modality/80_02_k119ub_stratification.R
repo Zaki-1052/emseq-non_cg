@@ -260,7 +260,7 @@ main <- function() {
 
   cat("STEP 1: Axis-swapped quadrant scatter\n")
 
-  k119ub_signal_path <- file.path(DATA_DIR, "data", "k119ub_gene_signal.tsv")
+  k119ub_signal_path <- file.path(CODE_DIR, "data", "k119ub_gene_signal.tsv")
   k119ub_sig <- load_k119ub_gene_signal(k119ub_signal_path)
 
   mecp2_gene <- aggregate_mecp2_to_genes(mecp2_diffbind, fdr)
@@ -319,7 +319,7 @@ main <- function() {
 
   cat("\nSTEP 2: K119ub peak location classification (full coordinates)\n")
 
-  k119ub_raw_path <- file.path(DATA_DIR, "data", "h2aub_diffbind.txt")
+  k119ub_raw_path <- file.path(CODE_DIR, "data", "h2aub_diffbind.txt")
   k119ub_raw <- load_k119ub_raw(k119ub_raw_path)
   k119ub_anno <- classify_peak_location(k119ub_raw, "K119ub")
 
@@ -456,7 +456,7 @@ main <- function() {
 
   cat("\nSTEP 4: MeCP2 peak location classification\n")
 
-  mecp2_raw_path <- file.path(DATA_DIR, "data", "mecp2_diffbind.txt")
+  mecp2_raw_path <- file.path(CODE_DIR, "data", "mecp2_diffbind.txt")
   mecp2_raw_df <- read.table(mecp2_raw_path, header = TRUE, sep = "\t",
                              stringsAsFactors = FALSE, quote = "", fill = TRUE)
 
@@ -684,7 +684,7 @@ main <- function() {
               100 * length(k119ub_cons_inter) / length(k119ub_cons_gr)))
 
   # Enhancer overlap for intergenic consensus peaks
-  enhancer_path <- file.path(DATA_DIR, "data", "chromatin", "activeenhancer.bed")
+  enhancer_path <- file.path(CODE_DIR, "data", "chromatin", "activeenhancer.bed")
   if (file.exists(enhancer_path)) {
     enhancers <- load_chip_peaks(enhancer_path, "Active enhancer")
     n_enh <- sum(overlapsAny(k119ub_cons_inter, enhancers))

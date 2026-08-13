@@ -1,0 +1,4 @@
+test_id	description	row_var	col_var	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	ci_low	ci_high	p_value
+exon_intron_hypo_concordance	Genes losing mCH across their exons against genes losing mCH across their introns.	exon_hypo	intron_hypo	20279	8107	7293	3906	2.41149535763466	2.27272547349603	2.55894128454814	3.42474163324021e-191
+intron_enhancer_vs_gene_sig	Genes with an intron over an active enhancer against genes with significant gene-body mCH change.	intron_has_enhancer	gene_mch_sig	20046	3957	5526	2284	5.40935531569627	5.02064115638596	5.82866508579894	0
+intron_hypo_vs_gene_hypo	Genes losing mCH across their introns against genes called significantly hypomethylated at the gene level.	intron_hypo	gene_mch_hypo	20046	7193	4893	3327	6.20303404718622	5.77787788065869	6.65798052383655	0

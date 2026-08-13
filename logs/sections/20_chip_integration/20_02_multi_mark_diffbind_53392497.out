@@ -1,0 +1,193 @@
+=========================================
+EM-seq section 20_02: multi-mark DiffBind
+=========================================
+Job ID: 53392497
+Node: exp-1-39
+Start time: Thu Aug 13 10:23:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392497
+Code dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:        /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/20_chip_integration/20_02_multi_mark_diffbind.R
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+Chromatin state: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Type 'citation("pROC")' for a citation.
+
+Attaching package: ‘pROC’
+
+The following objects are masked from ‘package:IRanges’:
+
+    cov, var
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    cov, var
+
+The following object is masked from ‘package:BiocGenerics’:
+
+    var
+
+The following objects are masked from ‘package:stats’:
+
+    cov, smooth, var
+
+===========================================================================
+  SECTION 20_02: MULTI-MARK DIFFBIND INTEGRATION WITH mCH
+===========================================================================
+  Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+  Peak FDR threshold: 0.05
+
+--- Step 1: preparing DiffBind tables ---
+  ATAC-seq   75,658 peaks in, 75,658 kept (9,262 gained, 4,159 lost at FDR<0.05)
+  H3K27ac    25,666 peaks in, 25,647 kept (5,076 gained, 6,706 lost at FDR<0.05)
+  H3K27me3   18,321 peaks in, 18,320 kept (2,293 gained, 4,810 lost at FDR<0.05)
+  H2AK119ub  41,295 peaks in, 41,295 kept (17,078 gained, 6,304 lost at FDR<0.05)
+
+--- Step 2: annotating peaks to genes ---
+  Annotating ATAC-seq peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    75,630 of 75,658 annotated peaks carry a gene symbol
+    17,534 genes carry a ATAC-seq peak
+  Annotating H3K27ac peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    25,644 of 25,647 annotated peaks carry a gene symbol
+    9,757 genes carry a H3K27ac peak
+  Annotating H3K27me3 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    18,312 of 18,320 annotated peaks carry a gene symbol
+    5,201 genes carry a H3K27me3 peak
+  Annotating H2AK119ub peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    41,279 of 41,295 annotated peaks carry a gene symbol
+    10,646 genes carry a H2AK119ub peak
+
+  Chromatin state: 21,097 genes, joined on gene_id
+--- Step 3: building the gene-level master table ---
+  Master table: 21,097 genes (25 share a gene name with another row)
+    ATAC-seq   14,747 genes with a peak (69.9%)
+    H3K27ac    8,606 genes with a peak (40.8%)
+    H3K27me3   4,248 genes with a peak (20.1%)
+    H2AK119ub  8,894 genes with a peak (42.2%)
+    state      21,097 genes with a promoter state (100.0%)
+               21,097 genes with a body state (100.0%)
+      promoter Active_Promoter     6,190 genes (29.3%)
+      promoter Bivalent_Promoter   286 genes (1.4%)
+      promoter Repressed_Promoter  2,775 genes (13.2%)
+      promoter Unmarked_Promoter   11,846 genes (56.2%)
+      body     Active              6,566 genes (31.1%)
+      body     Mixed               520 genes (2.5%)
+      body     Polycomb            3,324 genes (15.8%)
+      body     Enhancer_Marked     5,477 genes (26.0%)
+      body     Unmarked            5,210 genes (24.7%)
+    1,365 genes carry all four marks (6.5%)
+
+  Wrote: gene_level_all_marks.tsv (21,097 rows, 27 cols)
+
+--- Figure 20_02a: per-mark volcano plots ---
+  Saved: 20_02a_mark_volcanoes/{pdf,svg,png,jpg}
+  Wrote: 20_02a_peak_summary.tsv (4 rows, 8 cols)
+
+--- Figure 20_02b: cross-mark Spearman correlation matrix ---
+  Saved: 20_02b_cross_mark_correlation/{pdf,svg,png,jpg}
+  Wrote: 20_02b_cross_mark_correlation.tsv (25 rows, 5 cols)
+  Wrote: 20_02b_correlation_matrix_wide.tsv (5 rows, 6 cols)
+
+--- Figure 20_02c: mCH difference versus mark log2FC ---
+  Saved: 20_02c_mch_vs_mark_scatters/{pdf,svg,png,jpg}
+  Wrote: 20_02c_mch_vs_mark_correlations.tsv (4 rows, 5 cols)
+
+--- Figure 20_02d: mCH direction against mark direction ---
+  Wrote: 20_02_atac_direction_genes.tsv (841 rows, 4 cols)
+  Wrote: 20_02_atac_direction.tsv (1 rows, 12 cols)
+  Fisher 20_02:atac_direction: OR=0.156, p=2.47e-19 (n=841 genes) [registered]
+  Wrote: 20_02_k27ac_direction_genes.tsv (1,062 rows, 4 cols)
+  Wrote: 20_02_k27ac_direction.tsv (1 rows, 12 cols)
+  Fisher 20_02:k27ac_direction: OR=0.060, p=4.39e-68 (n=1,062 genes) [registered]
+  Wrote: 20_02_k27me3_direction_genes.tsv (624 rows, 4 cols)
+  Wrote: 20_02_k27me3_direction.tsv (1 rows, 12 cols)
+  Fisher 20_02:k27me3_direction: OR=4.064, p=5.9e-12 (n=624 genes) [registered]
+  Wrote: 20_02_k119ub_direction_genes.tsv (1,957 rows, 4 cols)
+  Wrote: 20_02_k119ub_direction.tsv (1 rows, 12 cols)
+  Fisher 20_02:k119ub_direction: OR=31.128, p=8.27e-72 (n=1,957 genes) [registered]
+  Saved: 20_02d_direction_enrichment/{pdf,svg,png,jpg}
+  Wrote: 20_02d_direction_enrichment.tsv (16 rows, 11 cols)
+
+--- Figures 20_02e and 20_02f: multivariate logistic model ---
+  1,365 genes, 151 hypermethylated (11.1%)
+  AUC = 0.766 [0.725, 0.807], McFadden R2 = 0.1221
+  Saved: 20_02e_logistic_forest/{pdf,svg,png,jpg}
+  Wrote: 20_02e_logistic_coefficients.tsv (4 rows, 10 cols)
+  Saved: 20_02f_logistic_roc/{pdf,svg,png,jpg}
+  Wrote: 20_02f_roc_curve.tsv (1,366 rows, 3 cols)
+  Wrote: 20_02f_logistic_model_fit.tsv (1 rows, 8 cols)
+
+--- Figure 20_02g: convergence count by mCH group ---
+  Saved: 20_02g_convergence_by_group/{pdf,svg,png,jpg}
+  Wrote: 20_02g_convergence_distribution.tsv (15 rows, 5 cols)
+  Wrote: 20_02g_convergence_summary.tsv (3 rows, 7 cols)
+
+--- Figure 20_02h: concordant mark combinations ---
+  Saved: 20_02h_mark_combinations/{pdf,svg,png,jpg}
+  Wrote: 20_02h_mark_combinations.tsv (11 rows, 2 cols)
+
+  Wrote: 20_02_convergence_2plus_genes.tsv (4,965 rows, 4 cols)
+  Wrote: 20_02_convergence_2plus.tsv (1 rows, 12 cols)
+  Fisher 20_02:convergence_2plus: OR=17.955, p=1.49e-150 (n=4,965 genes) [registered]
+  Wrote: 20_02_convergence_per_gene.tsv (21,097 rows, 26 cols)
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  Handoff table: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/gene_level_all_marks.tsv
+  Genes: 21,097 | all four marks: 1,365
+  Logistic model AUC: 0.766 [0.725, 0.807], McFadden R2 = 0.1221
+  Spearman rho against mCH difference:
+    ATAC-seq log2FC    -0.107
+    H3K27ac log2FC     -0.247
+    H3K27me3 log2FC    +0.063
+    H2AK119ub log2FC   +0.356
+  Fisher odds ratios (mCH hyper against mark gain):
+    ATAC-seq   OR = 0.156, p = 2.47e-19 (n = 841 genes)
+    H3K27ac    OR = 0.060, p = 4.39e-68 (n = 1,062 genes)
+    H3K27me3   OR = 4.064, p = 5.9e-12 (n = 624 genes)
+    H2AK119ub  OR = 31.128, p = 8.27e-72 (n = 1,957 genes)
+  Genes with 3 or more concordant marks: 221
+
+=== Section 20_02 complete ===
+
+
+=========================================
+Complete: section 20_02
+Time: 83s
+Exit code: 0
+End time: Thu Aug 13 10:25:07 PDT 2026
+=========================================

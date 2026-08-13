@@ -1,0 +1,156 @@
+=========================================
+EM-seq section 10_01: chromatin state
+=========================================
+Job ID: 53392482
+Node: exp-1-39
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392482
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_01_chromatin_state.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 10_01: PROMOTER AND GENE-BODY CHROMATIN STATE WITH DIFFERENTIAL mCH
+================================================================================
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Promoter window: TSS +/- 2000 bp
+
+Loading histone mark peak sets...
+  CTCF: 32487 peaks
+  H3K27ac: 15105 peaks
+  H3K27me3: 15809 peaks
+  H3K4me1: 113781 peaks
+  H3K4me3: 6581 peaks
+  Bivalent: 318 peaks
+
+Computing histone mark overlaps over promoter windows...
+  CTCF      4,064 genes (19.3%)
+  H3K27ac   5,763 genes (27.3%)
+  H3K27me3  3,085 genes (14.6%)
+  H3K4me1   13,066 genes (61.9%)
+  H3K4me3   6,476 genes (30.7%)
+  Bivalent  267 genes (1.3%)
+
+Computing histone mark overlaps over gene bodies...
+  CTCF      8,639 genes (40.9%)
+  H3K27ac   7,086 genes (33.6%)
+  H3K27me3  3,844 genes (18.2%)
+  H3K4me1   15,118 genes (71.7%)
+  H3K4me3   7,073 genes (33.5%)
+  Bivalent  313 genes (1.5%)
+
+Classifying promoter and gene-body chromatin states...
+
+  Promoter state of all tested genes:
+    Active_Promoter       6,190 ( 29.3%)
+    Bivalent_Promoter       286 (  1.4%)
+    Repressed_Promoter    2,775 ( 13.2%)
+    Unmarked_Promoter    11,846 ( 56.2%)
+
+  Gene-body state of all tested genes:
+    Active                6,566 ( 31.1%)
+    Mixed                   520 (  2.5%)
+    Polycomb              3,324 ( 15.8%)
+    Enhancer_Marked       5,477 ( 26.0%)
+    Unmarked              5,210 ( 24.7%)
+
+Building summary tables...
+
+Running gene-level Fisher tests...
+  Wrote: 10_01_promoter_Active_Promoter_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_promoter_Active_Promoter.tsv (1 rows, 12 cols)
+  Fisher 10_01:promoter_Active_Promoter: OR=1.992, p=2.94e-95 (n=21,097 genes) [registered]
+  Wrote: 10_01_promoter_Bivalent_Promoter_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_promoter_Bivalent_Promoter.tsv (1 rows, 12 cols)
+  Fisher 10_01:promoter_Bivalent_Promoter: OR=2.105, p=1.81e-09 (n=21,097 genes) [registered]
+  Wrote: 10_01_promoter_Repressed_Promoter_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_promoter_Repressed_Promoter.tsv (1 rows, 12 cols)
+  Fisher 10_01:promoter_Repressed_Promoter: OR=1.425, p=1.94e-15 (n=21,097 genes) [registered]
+  Wrote: 10_01_promoter_Unmarked_Promoter_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_promoter_Unmarked_Promoter.tsv (1 rows, 12 cols)
+  Fisher 10_01:promoter_Unmarked_Promoter: OR=0.436, p=3.71e-152 (n=21,097 genes) [registered]
+  Wrote: 10_01_body_Active_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_body_Active.tsv (1 rows, 12 cols)
+  Fisher 10_01:body_Active: OR=2.028, p=7.36e-103 (n=21,097 genes) [registered]
+  Wrote: 10_01_body_Mixed_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_body_Mixed.tsv (1 rows, 12 cols)
+  Fisher 10_01:body_Mixed: OR=3.694, p=3.32e-47 (n=21,097 genes) [registered]
+  Wrote: 10_01_body_Polycomb_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_body_Polycomb.tsv (1 rows, 12 cols)
+  Fisher 10_01:body_Polycomb: OR=1.553, p=1.4e-26 (n=21,097 genes) [registered]
+  Wrote: 10_01_body_Enhancer_Marked_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_body_Enhancer_Marked.tsv (1 rows, 12 cols)
+  Fisher 10_01:body_Enhancer_Marked: OR=0.874, p=0.000181 (n=21,097 genes) [registered]
+  Wrote: 10_01_body_Unmarked_genes.tsv (21,097 rows, 4 cols)
+  Wrote: 10_01_body_Unmarked.tsv (1 rows, 12 cols)
+  Fisher 10_01:body_Unmarked: OR=0.184, p=1.99e-308 (n=21,097 genes) [registered]
+
+Writing tables...
+  Wrote: gene_chromatin_state.tsv (21,097 rows, 19 cols)
+  Handoff path: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+  Wrote: gene_chromatin_state_full.tsv (21,097 rows, 30 cols)
+  Wrote: state_distribution_by_gene_set.tsv (36 rows, 6 cols)
+  Wrote: state_significance_rate.tsv (9 rows, 11 cols)
+  Wrote: state_enrichment_fisher.tsv (9 rows, 13 cols)
+  Wrote: mark_overlap_summary.tsv (48 rows, 6 cols)
+  Wrote: promoter_body_state_crosstab.tsv (20 rows, 9 cols)
+  Wrote: mch_diff_by_state.tsv (9 rows, 5 cols)
+  Wrote: gene_length_by_state.tsv (9 rows, 5 cols)
+  Wrote: key_genes_chromatin_state.tsv (11 rows, 31 cols)
+
+Creating figures...
+  Saved: 10_01a_state_distribution_all_genes/{pdf,svg,png,jpg}
+  Saved: 10_01b_state_distribution_by_direction/{pdf,svg,png,jpg}
+  Saved: 10_01c_state_significant_vs_all_tested/{pdf,svg,png,jpg}
+  Saved: 10_01d_state_stacked_proportion/{pdf,svg,png,jpg}
+  Saved: 10_01e_state_significance_rate/{pdf,svg,png,jpg}
+  Saved: 10_01f_promoter_body_state_crosstab/{pdf,svg,png,jpg}
+  Saved: 10_01g_histone_mark_overlap_heatmap/{pdf,svg,png,jpg}
+  Saved: 10_01h_state_enrichment_odds_ratio/{pdf,svg,png,jpg}
+  Saved: 10_01i_mch_diff_by_state/{pdf,svg,png,jpg}
+  Saved: 10_01j_gene_length_by_state/{pdf,svg,png,jpg}
+  Saved: 10_01k_key_genes_chromatin_state/{pdf,svg,png,jpg}
+  Saved: 10_01l_gene_length_vs_mch_logfc/{pdf,svg,png,jpg}
+
+Section 10_01 complete.
+  Genes classified: 21,097
+  Fisher tests registered: 9
+  Output: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+
+=========================================
+Complete: section 10_01
+Time: 48s
+Exit code: 0
+End time: Thu Aug 13 10:23:33 PDT 2026
+=========================================

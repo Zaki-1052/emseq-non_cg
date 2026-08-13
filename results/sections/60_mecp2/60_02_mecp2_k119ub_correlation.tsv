@@ -1,0 +1,2 @@
+set	x	y	n_genes	spearman_rho	S	p_value
+MeCP2_only	mecp2_fold	k119ub_gb_log2fc	59	0.272355347749854	24900	0.037222223845784

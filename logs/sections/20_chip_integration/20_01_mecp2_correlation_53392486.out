@@ -1,0 +1,154 @@
+=========================================
+EM-seq section 20_01: MeCP2 correlation
+=========================================
+Job ID: 53392486
+Node: exp-1-09
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392486
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/20_chip_integration/20_01_mecp2_correlation.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 20_01: mCH DIRECTION vs MeCP2 BINDING CHANGE
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+FDR threshold: 0.05
+
+--- Loading MeCP2 peak data ---
+  MeCP2 annotated peaks: 202,650 total, 202,542 with a gene symbol
+  Peak-level significance at FDR<0.05: 7,683 up, 1,200 down
+  MeCP2 up: 7686 peaks
+  MeCP2 down: 1200 peaks
+
+--- Aggregating MeCP2 peaks to genes ---
+  Genes with a MeCP2 annotated peak: 21,195
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  Genes from the DiffBind route: 11,229
+
+--- Cross-checking the two aggregation routes ---
+  Cross-check on 11,042 shared genes: Spearman rho = 0.384 (p = 0)
+  Sign agreement between routes: 69.4%
+  Wrote: mecp2_aggregation_crosscheck_genes.tsv (11,042 rows, 7 cols)
+  Wrote: mecp2_aggregation_crosscheck_summary.tsv (1 rows, 10 cols)
+  Saved: 20_01f_aggregation_crosscheck/{pdf,svg,png,jpg}
+
+--- Building the gene table ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Gene table: 21,072 genes, 17,096 with a gene-level MeCP2 fold change
+  Wrote: mecp2_mch_gene_level.tsv (21,072 rows, 33 cols)
+
+--- Analysis 1: gene-body overlap with MeCP2 peaks ---
+  Hypermethylated  x MeCP2 Up   : 398/641 genes (62.1%)
+  Hypermethylated  x MeCP2 Down : 16/641 genes (2.5%)
+  Hypomethylated   x MeCP2 Up   : 145/4,910 genes (3.0%)
+  Hypomethylated   x MeCP2 Down : 357/4,910 genes (7.3%)
+  Not Significant  x MeCP2 Up   : 305/15,521 genes (2.0%)
+  Not Significant  x MeCP2 Down : 77/15,521 genes (0.5%)
+  Wrote: mecp2_overlap_by_mch_direction.tsv (6 rows, 5 cols)
+  Saved: 20_01a_mecp2_overlap_by_mch_direction/{pdf,svg,png,jpg}
+
+--- Analysis 2: directional Fisher tests ---
+  Wrote: 20_01_hyper_vs_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 20_01_hyper_vs_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 20_01:hyper_vs_mecp2_up: OR=72.549, p=0 (n=21,072 genes) [registered]
+  Wrote: 20_01_hypo_vs_mecp2_down_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 20_01_hypo_vs_mecp2_down.tsv (1 rows, 12 cols)
+  Fisher 20_01:hypo_vs_mecp2_down: OR=13.545, p=8.56e-143 (n=21,072 genes) [registered]
+  Wrote: mecp2_direction_fisher_summary.tsv (2 rows, 11 cols)
+
+--- Analysis 3: MeCP2 fold change by mCH direction ---
+  Wrote: mecp2_fold_by_mch_direction_summary.tsv (3 rows, 6 cols)
+  Hypermethylated  n = 593, median MeCP2 fold = 0.0016, mean = 0.1697
+  Hypomethylated   n = 4,553, median MeCP2 fold = -0.0206, mean = -0.0418
+  Not Significant  n = 11,950, median MeCP2 fold = -0.0182, mean = -0.0284
+  Wrote: mecp2_fold_wilcoxon_tests.tsv (3 rows, 9 cols)
+  Wilcoxon Hypermethylated vs Hypomethylated: W = 1734962, p = 1.13e-29
+  Wilcoxon Hypermethylated vs Not Significant: W = 4431975, p = 5.33e-25
+  Wilcoxon Hypomethylated vs Not Significant: W = 26062759, p = 3.01e-05
+  Saved: 20_01b_mecp2_fold_by_mch_direction/{pdf,svg,png,jpg}
+
+--- Analysis 4: mCH change vs MeCP2 fold change ---
+  Wrote: mecp2_mch_spearman_correlation.tsv (2 rows, 6 cols)
+  all_genes_with_mecp2 (n = 17,096): Spearman rho = 0.085, p = 7.65e-29
+  mch_significant (n = 5,146): Spearman rho = 0.177, p = 1.1e-37
+  Wrote: mecp2_mch_quadrant_counts.tsv (4 rows, 3 cols)
+  Saved: 20_01c_mch_diff_vs_mecp2_fold/{pdf,svg,png,jpg}
+
+--- Analysis 5: linear model ---
+  Wrote: mecp2_linear_model_coefficients.tsv (6 rows, 13 cols)
+  Linear model (all genes, n = 17,096): R2 = 0.0509, F p = 1.11e-194
+    (Intercept)          beta = -0.0705 (SE = 0.0105, p = 1.63e-11)
+    mch_diff_pct         beta = +0.1287 (SE = 0.0043, p = 6.45e-193)
+    log10_gene_length    beta = +0.0096 (SE = 0.0024, p = 5.67e-05)
+  Linear model (mCH significant, n = 5,146): R2 = 0.1268, F p = 3.65e-152
+
+--- Analysis 6: logistic model ---
+  MeCP2 significant gain: 96 genes, other: 17,000 genes
+  Wrote: mecp2_logistic_model_odds_ratios.tsv (6 rows, 14 cols)
+  Logistic model (all genes, n = 17,096): AIC = 897.3
+    (Intercept)          OR = 0.0000 (95% CI 0.0000 to 0.0001, p = 2.61e-37)
+    mch_diff_pct         OR = 15.6420 (95% CI 11.4325 to 21.5425, p = 3.96e-65)
+    log10_gene_length    OR = 2.8349 (95% CI 2.0242 to 3.9766, p = 1.42e-09)
+
+--- Model figures ---
+  Saved: 20_01d_mecp2_model_coefficients/{pdf,svg,png,jpg}
+  Wrote: mecp2_gain_predicted_probability.tsv (400 rows, 6 cols)
+  Saved: 20_01e_mecp2_gain_predicted_probability/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 20_01 SUMMARY
+================================================================================
+Genes analysed:                 21,072
+Genes with MeCP2 fold change:   17,096
+mCH hypermethylated:            641
+mCH hypomethylated:             4,910
+Fisher hyper_vs_mecp2_up    OR = 72.549 (95% CI 60.239 to 87.926), p = 0
+Fisher hypo_vs_mecp2_down   OR = 13.545 (95% CI 10.726 to 17.257), p = 8.56e-143
+Spearman (all genes):           rho = 0.085, p = 7.65e-29
+Spearman (mCH significant):     rho = 0.177, p = 1.1e-37
+Wilcoxon hyper vs hypo:         p = 1.13e-29
+Linear model mch_diff_pct:      beta = +0.1287, p = 6.45e-193
+Logistic model mch_diff_pct:    OR = 15.6420, p = 3.96e-65
+
+Section 20_01 complete.
+
+There were 50 or more warnings (use warnings() to see the first 50)
+
+=========================================
+Complete: section 20_01
+Time: 65s
+Exit code: 0
+End time: Thu Aug 13 10:23:50 PDT 2026
+=========================================

@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+50_01	exon_intron_hypo_concordance	Genes losing mCH across their exons against genes losing mCH across their introns.	exon_hypo	intron_hypo	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features/fisher_tables/50_01_exon_intron_hypo_concordance_genes.tsv	20279	8107	7293	3906	2.41149535763466	3.42474163324021e-191

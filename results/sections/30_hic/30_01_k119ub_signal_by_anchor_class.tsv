@@ -1,0 +1,17 @@
+method	anchor_class	mch_group	n	median	mean	q25	q75
+Direct overlap	Both anchors	Hypermethylated	21	0.503329	0.51923819047619	0.290936	0.712106
+Direct overlap	Both anchors	Not hypermethylated	120	0.011547	0.0403512333333333	-0.14456325	0.20239275
+Direct overlap	Gained anchor	Hypermethylated	75	0.507792	0.506187306666667	0.326054	0.6823905
+Direct overlap	Gained anchor	Not hypermethylated	904	-0.029605	-0.00996188163716814	-0.190793	0.1538645
+Direct overlap	Lost anchor	Hypermethylated	92	0.650509	0.673504456521739	0.456981	0.836622
+Direct overlap	Lost anchor	Not hypermethylated	640	0.0533035	0.07988884375	-0.13454225	0.2668495
+Direct overlap	No anchor	Hypermethylated	415	0.610916	0.611646428915663	0.430763	0.8296395
+Direct overlap	No anchor	Not hypermethylated	15747	-0.03916	-0.0146307497936115	-0.226083	0.173737
+GREAT domain	Both anchors	Hypermethylated	17	0.569832	0.574805411764706	0.355616	0.841504
+GREAT domain	Both anchors	Not hypermethylated	231	-0.000222	0.000870030303030303	-0.2184425	0.1784175
+GREAT domain	Gained anchor	Hypermethylated	77	0.501744	0.499826844155844	0.307307	0.682746
+GREAT domain	Gained anchor	Not hypermethylated	1501	-0.043689	-0.0209007175216522	-0.207766	0.145966
+GREAT domain	Lost anchor	Hypermethylated	102	0.6971515	0.692046931372549	0.46415525	0.9083985
+GREAT domain	Lost anchor	Not hypermethylated	961	0.028545	0.056322657648283	-0.162804	0.249672
+GREAT domain	No anchor	Hypermethylated	407	0.59381	0.603971945945946	0.423269	0.7979425
+GREAT domain	No anchor	Not hypermethylated	14716	-0.037748	-0.0140164771677086	-0.225653	0.1746585

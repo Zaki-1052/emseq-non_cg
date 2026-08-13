@@ -1,0 +1,2 @@
+test	n_intervals	n_groups	chi_squared	df	p_value
+Kruskal-Wallis of delta_mch across feature types	928454	6	326.938417907728	5	1.60961238300792e-68

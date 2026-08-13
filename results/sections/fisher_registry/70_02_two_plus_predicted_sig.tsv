@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_02	two_plus_predicted_sig	Among genes with all four marks measured, neuronal genes carry two or more marks moving in the predicted direction at a significant FDR.	is_neuronal	two_plus_predicted_sig	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_02_two_plus_predicted_sig_genes.tsv	1360	493	384	132	0.892446522179292	0.380844620544526

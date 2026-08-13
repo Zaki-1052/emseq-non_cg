@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+60_02	mecp2_no_mch_vs_k119ub_peak_gain	Do genes where MeCP2 binding changes without an mCH change carry a significantly gained H2AK119ub peak more often than other genes with a MeCP2 peak?	in_mecp2_no_mch	k119ub_peak_gain	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2/fisher_tables/60_02_mecp2_no_mch_vs_k119ub_peak_gain_genes.tsv	5445	49	2098	25	1.66955557559086	0.0775416168846151

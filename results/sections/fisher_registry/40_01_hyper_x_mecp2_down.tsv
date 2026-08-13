@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+40_01	hyper_x_mecp2_down	Do mCH hypermethylated gene bodies overlap MeCP2 Down peaks more than other tested genes?	mch_hyper	ov_mecp2_down	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/fisher_tables/40_01_hyper_x_mecp2_down_genes.tsv	21072	641	450	16	1.17953519847575	0.487097410414861

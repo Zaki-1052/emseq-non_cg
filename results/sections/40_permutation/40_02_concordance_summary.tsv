@@ -1,0 +1,21 @@
+sub_analysis	concordance	n_tests	pct_tests
+40_02a  ATAC x marks	Confirmed	12	100
+40_02a  ATAC x marks	Weakened	0	0
+40_02a  ATAC x marks	Strengthened	0	0
+40_02a  ATAC x marks	Concordant NS	0	0
+40_02b  ATAC x body states	Confirmed	8	80
+40_02b  ATAC x body states	Weakened	0	0
+40_02b  ATAC x body states	Strengthened	2	20
+40_02b  ATAC x body states	Concordant NS	0	0
+40_02m  ATAC x promoter states	Confirmed	8	100
+40_02m  ATAC x promoter states	Weakened	0	0
+40_02m  ATAC x promoter states	Strengthened	0	0
+40_02m  ATAC x promoter states	Concordant NS	0	0
+40_02c  Loop anchors x features	Confirmed	18	75
+40_02c  Loop anchors x features	Weakened	2	8.33333333333333
+40_02c  Loop anchors x features	Strengthened	3	12.5
+40_02c  Loop anchors x features	Concordant NS	1	4.16666666666667
+All sub-analyses	Confirmed	46	85.1851851851852
+All sub-analyses	Weakened	2	3.7037037037037
+All sub-analyses	Strengthened	5	9.25925925925926
+All sub-analyses	Concordant NS	1	1.85185185185185

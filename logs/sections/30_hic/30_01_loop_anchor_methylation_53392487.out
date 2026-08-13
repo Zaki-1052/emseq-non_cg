@@ -1,0 +1,252 @@
+=========================================
+EM-seq section 30_01: loop anchor methylation
+=========================================
+Job ID: 53392487
+Node: exp-1-33
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392487
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/30_hic/30_01_loop_anchor_methylation.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 30_01: mCH DIRECTION AT DIFFERENTIAL Hi-C LOOP ANCHORS
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+K119ub peak FDR:  0.05
+
+--- Loading section inputs ---
+  Loop table: 2910 rows
+  Significant loops: 2910 (1723 gained, 1187 lost)
+  K119ub gene signal: 23150 genes, 22383 with a gene-body log2FC
+  Wrote: 30_01_loop_summary.tsv (17 rows, 6 cols)
+
+--- Building loop anchors ---
+  Anchors: 5820 (3446 gained, 2374 lost)
+  Wrote: 30_01_anchor_table.tsv (5,820 rows, 21 cols)
+
+--- Marking K119ub differential peaks at anchors ---
+  K119ub peaks: 17078 gained, 6304 lost at FDR < 0.05
+  Anchors overlapping a gained K119ub peak: 1620 of 5820
+  Anchors overlapping a lost K119ub peak:   557 of 5820
+
+--- Associating anchors with genes ---
+  mCH universe: 21072 genes after collapsing 25 duplicate symbols
+  66 genes were dropped because they have exons located on both strands
+  of the same reference sequence or on more than one reference sequence,
+  so cannot be represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a
+  GRangesList object, or use suppressMessages() to suppress this message.
+  TxDb regulatory domains: 24515 genes (5 kb up, 1 kb down, 100 kb max extension)
+'select()' returned 1:1 mapping between keys and columns
+  Domains with a gene symbol: 24498 (24498 unique symbols)
+  GREAT domain: 6797 anchor-gene pairs, 3695 unique genes
+  Direct overlap: 3718 anchor-gene pairs, 1935 unique genes
+  Wrote: 30_01_anchor_gene_associations.tsv (10,515 rows, 11 cols)
+  GREAT universe: 18648 of 21072 mCH genes have a TxDb regulatory domain
+
+--- Building gene-level anchor tables ---
+  GREAT domain gene table: 18648 genes (1589 gained, 1079 lost, 249 both, 15731 none)
+  Direct overlap gene table: 21072 genes (1025 gained, 765 lost, 145 both, 19137 none)
+  Wrote: 30_01_gene_anchor_class.tsv (39,720 rows, 30 cols)
+
+--- Hypermethylation rate by anchor class ---
+          method  anchor_class n_genes n_sig n_hyper n_hypo  pct_sig pct_hyper
+1   GREAT domain Gained anchor    1589   575      78    497 36.18628  4.908748
+2   GREAT domain   Lost anchor    1079   410     102    308 37.99815  9.453197
+3   GREAT domain  Both anchors     249    82      17     65 32.93173  6.827309
+4   GREAT domain     No anchor   15731  4237     407   3830 26.93408  2.587248
+5 Direct overlap Gained anchor    1025   489      80    409 47.70732  7.804878
+6 Direct overlap   Lost anchor     765   334      93    241 43.66013 12.156863
+7 Direct overlap  Both anchors     145    73      22     51 50.34483 15.172414
+8 Direct overlap     No anchor   19137  4655     446   4209 24.32461  2.330564
+  pct_hypo median_mch_diff mean_mch_diff
+1 31.27753    0.0001348822  7.101478e-05
+2 28.54495    0.0003067601  1.003103e-03
+3 26.10442    0.0005744928  6.041182e-04
+4 24.34683    0.0002264299  2.732630e-04
+5 39.90244    0.0002057819  2.690568e-04
+6 31.50327    0.0004682058  1.187396e-03
+7 35.17241    0.0007208789  1.001684e-03
+8 21.99404    0.0002642787  3.246791e-04
+  Wrote: 30_01_hyper_rate_by_anchor_class.tsv (8 rows, 11 cols)
+
+--- Gene-level Fisher tests ---
+  Wrote: 30_01_hyper_x_gained_anchor_great_genes.tsv (18,648 rows, 4 cols)
+  Wrote: 30_01_hyper_x_gained_anchor_great.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_gained_anchor_great: OR=1.745, p=4.04e-06 (n=18,648 genes) [registered]
+  Wrote: 30_01_hyper_x_lost_anchor_great_genes.tsv (18,648 rows, 4 cols)
+  Wrote: 30_01_hyper_x_lost_anchor_great.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_lost_anchor_great: OR=3.416, p=5.94e-25 (n=18,648 genes) [registered]
+  Wrote: 30_01_hyper_x_k119ub_gained_anchor_great_genes.tsv (2,917 rows, 4 cols)
+  Wrote: 30_01_hyper_x_k119ub_gained_anchor_great.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_k119ub_gained_anchor_great: OR=6.619, p=5.36e-35 (n=2,917 genes) [registered]
+  Wrote: 30_01_hyper_x_gained_anchor_direct_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 30_01_hyper_x_gained_anchor_direct.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_gained_anchor_direct: OR=3.431, p=2.8e-22 (n=21,072 genes) [registered]
+  Wrote: 30_01_hyper_x_lost_anchor_direct_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 30_01_hyper_x_lost_anchor_direct.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_lost_anchor_direct: OR=5.399, p=4.57e-40 (n=21,072 genes) [registered]
+  Wrote: 30_01_hyper_x_k119ub_gained_anchor_direct_genes.tsv (1,935 rows, 4 cols)
+  Wrote: 30_01_hyper_x_k119ub_gained_anchor_direct.tsv (1 rows, 12 cols)
+  Fisher 30_01:hyper_x_k119ub_gained_anchor_direct: OR=8.623, p=3.98e-42 (n=1,935 genes) [registered]
+  Wrote: 30_01_fisher_anchor_class.tsv (6 rows, 14 cols)
+
+--- Wilcoxon tests on mch_diff by anchor class ---
+           method method_key        group1       group2   n1    n2      median1
+1    GREAT domain      great Gained anchor  Lost anchor 1589  1079 0.0001348822
+2    GREAT domain      great Gained anchor Both anchors 1589   249 0.0001348822
+3    GREAT domain      great Gained anchor    No anchor 1589 15731 0.0001348822
+4    GREAT domain      great   Lost anchor Both anchors 1079   249 0.0003067601
+5    GREAT domain      great   Lost anchor    No anchor 1079 15731 0.0003067601
+6    GREAT domain      great  Both anchors    No anchor  249 15731 0.0005744928
+7  Direct overlap     direct Gained anchor  Lost anchor 1025   765 0.0002057819
+8  Direct overlap     direct Gained anchor Both anchors 1025   145 0.0002057819
+9  Direct overlap     direct Gained anchor    No anchor 1025 19137 0.0002057819
+10 Direct overlap     direct   Lost anchor Both anchors  765   145 0.0004682058
+11 Direct overlap     direct   Lost anchor    No anchor  765 19137 0.0004682058
+12 Direct overlap     direct  Both anchors    No anchor  145 19137 0.0007208789
+        median2 median_difference        W      p_value   p_adjusted
+1  0.0003067601     -1.718779e-04   787190 3.326511e-04 1.995907e-03
+2  0.0005744928     -4.396106e-04   177618 9.441006e-03 1.888201e-02
+3  0.0002264299     -9.154772e-05 12233323 1.630511e-01 1.956613e-01
+4  0.0005744928     -2.677327e-04   131940 6.606185e-01 6.606185e-01
+5  0.0002264299      8.033017e-05  9009468 7.015404e-04 2.104621e-03
+6  0.0002264299      3.480629e-04  2117475 2.773879e-02 4.160819e-02
+7  0.0004682058     -2.624239e-04   348774 6.295475e-05 1.888642e-04
+8  0.0007208789     -5.150970e-04    63467 4.403500e-03 7.343644e-03
+9  0.0002642787     -5.849679e-05  9676030 4.682445e-01 4.682445e-01
+10 0.0007208789     -2.526731e-04    53348 4.663156e-01 4.682445e-01
+11 0.0002642787      2.039271e-04  8022926 6.433208e-06 3.859925e-05
+12 0.0002642787      4.566002e-04  1575327 4.895763e-03 7.343644e-03
+  Wrote: 30_01_wilcoxon_mch_diff.tsv (12 rows, 12 cols)
+
+--- K119ub convergence at anchors ---
+                 method method_key      k119ub_state           mch_state
+great.1    GREAT domain      great     K119ub gained     Hypermethylated
+great.2    GREAT domain      great K119ub not gained     Hypermethylated
+great.3    GREAT domain      great     K119ub gained Not hypermethylated
+great.4    GREAT domain      great K119ub not gained Not hypermethylated
+direct.1 Direct overlap     direct     K119ub gained     Hypermethylated
+direct.2 Direct overlap     direct K119ub not gained     Hypermethylated
+direct.3 Direct overlap     direct     K119ub gained Not hypermethylated
+direct.4 Direct overlap     direct K119ub not gained Not hypermethylated
+         observed   expected observed_over_expected n_anchor_genes
+great.1       121   43.76277              2.7649073           2917
+great.2        76  153.23723              0.4959630           2917
+great.3       527  604.23723              0.8721740           2917
+great.4      2193 2115.76277              1.0365056           2917
+direct.1      138   52.30233              2.6385060           1935
+direct.2       57  142.69767              0.3994459           1935
+direct.3      381  466.69767              0.8163743           1935
+direct.4     1359 1273.30233              1.0673035           1935
+  Wrote: 30_01_k119ub_convergence_counts.tsv (8 rows, 8 cols)
+  Wrote: 30_01_k119ub_signal_by_anchor_class.tsv (16 rows, 8 cols)
+                 method method_key  anchor_class n_genes spearman_rho
+great.1    GREAT domain      great Gained anchor    1578    0.3050084
+great.2    GREAT domain      great   Lost anchor    1063    0.3921402
+great.3    GREAT domain      great  Both anchors     248    0.2432037
+great.4    GREAT domain      great     No anchor   15123    0.2267886
+direct.1 Direct overlap     direct Gained anchor     979    0.3595688
+direct.2 Direct overlap     direct   Lost anchor     732    0.4522153
+direct.3 Direct overlap     direct  Both anchors     141    0.3959630
+direct.4 Direct overlap     direct     No anchor   16162    0.2250201
+               p_value
+great.1   2.507983e-35
+great.2   2.112772e-40
+great.3   1.093387e-04
+great.4  1.198036e-175
+direct.1  2.995420e-31
+direct.2  3.519095e-38
+direct.3  1.173303e-06
+direct.4 1.284947e-184
+  Wrote: 30_01_mch_k119ub_correlation.tsv (8 rows, 6 cols)
+
+--- Logistic model of mCH hypermethylation ---
+  GREAT domain logistic model: n=18012 genes, 603 hypermethylated, AIC=3482.1
+  Direct overlap logistic model: n=18014 genes, 603 hypermethylated, AIC=3389.1
+                 method method_key                      term   estimate
+great.1    GREAT domain      great               (Intercept) -4.9487348
+great.2    GREAT domain      great anchor_classGained anchor  0.9298037
+great.3    GREAT domain      great   anchor_classLost anchor  0.9029834
+great.4    GREAT domain      great  anchor_classBoth anchors  1.0766741
+great.5    GREAT domain      great          k119ub_gb_log2fc  5.0249890
+direct.1 Direct overlap     direct               (Intercept) -5.0548581
+direct.2 Direct overlap     direct anchor_classGained anchor  1.5458456
+direct.3 Direct overlap     direct   anchor_classLost anchor  1.2991961
+direct.4 Direct overlap     direct  anchor_classBoth anchors  1.9358067
+direct.5 Direct overlap     direct          k119ub_gb_log2fc  5.0943289
+          std_error    z_value       p_value   odds_ratio     or_lower
+great.1  0.09174261 -53.941509  0.000000e+00 7.092377e-03 5.925164e-03
+great.2  0.14601996   6.367648  1.919488e-10 2.534012e+00 1.903339e+00
+great.3  0.14109674   6.399747  1.556346e-10 2.466952e+00 1.870936e+00
+great.4  0.29912972   3.599355  3.190074e-04 2.934902e+00 1.632954e+00
+great.5  0.14660608  34.275447 1.822413e-257 1.521686e+02 1.141652e+02
+direct.1 0.09432960 -53.587186  0.000000e+00 6.378272e-03 5.301631e-03
+direct.2 0.15072426  10.256117  1.110841e-24 4.691938e+00 3.491849e+00
+direct.3 0.14967554   8.680083  3.954812e-18 3.666348e+00 2.734196e+00
+direct.4 0.29267558   6.614172  3.736361e-11 6.929632e+00 3.904669e+00
+direct.5 0.14920113  34.144037 1.639389e-255 1.630944e+02 1.217415e+02
+             or_upper
+great.1  8.489522e-03
+great.2  3.373658e+00
+great.3  3.252838e+00
+great.4  5.274888e+00
+great.5  2.028226e+02
+direct.1 7.673554e-03
+direct.2 6.304475e+00
+direct.3 4.916293e+00
+direct.4 1.229805e+01
+direct.5 2.184938e+02
+  Wrote: 30_01_logistic_coefficients.tsv (10 rows, 10 cols)
+  Wrote: 30_01_logistic_model_summary.tsv (2 rows, 12 cols)
+
+--- Figures ---
+  Saved: 30_01_hyper_rate_by_anchor_class/{pdf,svg,png,jpg}
+  Saved: 30_01_mch_diff_by_anchor_class/{pdf,svg,png,jpg}
+  Saved: 30_01_logistic_forest/{pdf,svg,png,jpg}
+  Saved: 30_01_k119ub_convergence_heatmap/{pdf,svg,png,jpg}
+  Saved: 30_01_k119ub_signal_by_anchor_class/{pdf,svg,png,jpg}
+  Saved: 30_01_mch_vs_k119ub_scatter/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 30_01 COMPLETE
+================================================================================
+
+
+=========================================
+Complete: section 30_01
+Time: 49s
+Exit code: 0
+End time: Thu Aug 13 10:23:34 PDT 2026
+=========================================

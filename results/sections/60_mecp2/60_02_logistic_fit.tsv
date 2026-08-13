@@ -1,0 +1,2 @@
+n_genes	n_focal	pct_focal	auc	auc_lower	auc_upper	mcfadden_r2	predictors
+671	11	1.63934426229508	0.472865013774105	0.276830737570057	0.668899289978152	0.0049728612565566	k119ub_fold,k27me3_fold,k27ac_fold,atac_fold

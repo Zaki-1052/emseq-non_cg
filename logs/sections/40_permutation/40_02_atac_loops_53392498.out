@@ -1,0 +1,409 @@
+=========================================
+EM-seq section 40_02: ATAC and loop anchor permutation
+=========================================
+Job ID: 53392498
+Node: exp-6-40
+Start time: Thu Aug 13 10:23:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392498
+Code dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:        /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/40_permutation/40_02_atac_loops.R
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Chromatin state: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+Cores:           32
+Randomisations:  5000
+FORCE_RERUN not set: an existing permutation cache is reused.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Loading required package: BSgenome
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘XVector’
+
+The following object is masked from ‘package:purrr’:
+
+    compact
+
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:grid’:
+
+    pattern
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: BiocIO
+
+Attaching package: ‘BiocIO’
+
+The following object is masked from ‘package:rtracklayer’:
+
+    FileForFormat
+
+================================================================================
+SECTION 40_02: PERMUTATION VALIDATION OF ATAC PEAKS AND Hi-C LOOP ANCHORS
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Cache directory:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache
+Permutations:     5,000
+Cores:            32
+Seed:             42
+Randomisation:    randomizeRegions (per.chromosome = TRUE)
+Evaluation:       numOverlaps
+FORCE_RERUN:      not set
+
+  Patched regioneReloaded::chooseHclustMet for small-matrix safety.
+
+--- Building the genome object ---
+The masked version of 'mm10' is not installed. Using the unmasked version. This means that no automatic masking will be available.
+  mm10 genome: 20 chromosomes, 2,633,776,672 bp
+
+--- Loading region sets ---
+
+Loading mark peak sets...
+  CTCF: 32487 peaks
+  CTCF                           32,474 regions kept,     13 dropped off chr1-19 and chrX
+  H3K27ac: 15105 peaks
+  H3K27ac                        15,100 regions kept,      5 dropped off chr1-19 and chrX
+  H3K27me3: 15809 peaks
+  H3K27me3                       15,794 regions kept,     15 dropped off chr1-19 and chrX
+  H3K4me1: 113781 peaks
+  H3K4me1                       113,652 regions kept,    129 dropped off chr1-19 and chrX
+  H3K4me3: 6581 peaks
+  H3K4me3                         6,580 regions kept,      1 dropped off chr1-19 and chrX
+  Bivalent: 318 peaks
+  Bivalent                          318 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading differential ATAC peak sets...
+  ATAC Up: 7620 peaks
+  ATAC Up                         7,618 regions kept,      2 dropped off chr1-19 and chrX
+  ATAC Down: 3744 peaks
+  ATAC Down                       3,744 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading differential MeCP2 peak sets...
+  MeCP2 Up: 7686 peaks
+  MeCP2 Up                        7,686 regions kept,      0 dropped off chr1-19 and chrX
+  MeCP2 Down: 1200 peaks
+  MeCP2 Down                      1,200 regions kept,      0 dropped off chr1-19 and chrX
+
+Building mCH gene body sets...
+  mCH Hyper genes                   642 regions kept,      0 dropped off chr1-19 and chrX
+  mCH Hypo genes                  4,915 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading Hi-C loop anchors...
+  Loop table: 2,910 rows
+  Gained loop anchors             2,327 merged anchors from 1,723 loops
+  Gained loop anchors             2,327 regions kept,      0 dropped off chr1-19 and chrX
+  Lost loop anchors               1,520 merged anchors from 1,187 loops
+  Lost loop anchors               1,520 regions kept,      0 dropped off chr1-19 and chrX
+
+Chromatin state table: 21,097 genes
+
+Building body state region sets from body_state...
+  body state genes               21,097 regions kept,      0 dropped off chr1-19 and chrX
+  Active                          6,566 gene bodies
+  Mixed                             520 gene bodies
+  Polycomb                        3,324 gene bodies
+  Enhancer_Marked                 5,477 gene bodies
+  Unmarked                        5,210 gene bodies
+
+Building promoter state region sets from promoter_state...
+  promoter state genes           21,097 regions kept,      0 dropped off chr1-19 and chrX
+  Active_Promoter                 6,190 gene bodies
+  Bivalent_Promoter                 286 gene bodies
+  Repressed_Promoter              2,775 gene bodies
+  Unmarked_Promoter              11,846 gene bodies
+  Wrote: 40_02_region_set_summary.tsv (35 rows, 10 cols)
+  Wrote: 40_02_permutation_parameters.tsv (12 rows, 2 cols)
+
+--------------------------------------------------------------------------------
+40_02a  ATAC x marks 
+--------------------------------------------------------------------------------
+[40_02a  ATAC x marks] 2 x 6 = 12 pairwise tests, 5,000 permutations each
+[1] "Performing permutation tests for ATAC Up (1 of 2)"
+[1] "Performing permutation tests for ATAC Down (2 of 2)"
+[1] "method selected for hclustering: average"
+  average 
+0.9310648 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+[40_02a  ATAC x marks] Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache/40_02a_crosswise_n5000.rds
+  Permutation rows: 12
+  Interval Fisher tests: 12
+         RS1      RS2 observed_overlaps expected_overlaps norm_zscore
+10 ATAC Down  H3K4me1              3538          230.5970  3.62448930
+8  ATAC Down  H3K27ac              1506           69.3804  2.84959686
+7  ATAC Down     CTCF               227           27.7852  0.62271286
+11 ATAC Down  H3K4me3               158           30.7290  0.37866594
+12 ATAC Down Bivalent                15            1.7092  0.16759431
+9  ATAC Down H3K27me3                39           87.2258 -0.08418612
+4    ATAC Up  H3K4me1              5973          469.1492  2.97794295
+1    ATAC Up     CTCF              1326           56.6336  1.95494434
+3    ATAC Up H3K27me3              1801          177.1668  1.41717648
+6    ATAC Up Bivalent               192            3.5102  1.15496639
+2    ATAC Up  H3K27ac               937          141.0666  0.77587883
+5    ATAC Up  H3K4me3               561           62.5670  0.72031242
+   perm_adj_p_value   fisher_or      fisher_p concordance
+10            2e-04  4.72940893 1.431464e-122   Confirmed
+8             2e-04  4.79729454 2.904733e-241   Confirmed
+7             2e-04  0.30682291  1.644411e-68   Confirmed
+11            2e-04  0.55427440  2.586392e-11   Confirmed
+12            2e-04  0.15558437  6.560988e-19   Confirmed
+9             2e-04  0.03400315 1.438581e-283   Confirmed
+4             2e-04  0.21144291 1.431464e-122   Confirmed
+1             2e-04  3.25920905  1.644411e-68   Confirmed
+3             2e-04 29.40903728 1.438581e-283   Confirmed
+6             2e-04  6.42738104  6.560988e-19   Confirmed
+2             2e-04  0.20845082 2.904733e-241   Confirmed
+5             2e-04  1.80416054  2.586392e-11   Confirmed
+  Wrote: 40_02a_association_atac_x_marks.tsv (12 rows, 28 cols)
+  Saved: 40_02a_crosswise_atac_x_marks/{pdf,svg,png,jpg}
+  Saved: 40_02d_forest_atac_x_marks/{pdf,svg,png,jpg}
+  Saved: 40_02g_observed_expected_atac_x_marks/{pdf,svg,png,jpg}
+
+--------------------------------------------------------------------------------
+40_02b  ATAC x body states 
+--------------------------------------------------------------------------------
+[40_02b  ATAC x body states] 2 x 5 = 10 pairwise tests, 5,000 permutations each
+[1] "Performing permutation tests for ATAC Up (1 of 2)"
+[1] "Performing permutation tests for ATAC Down (2 of 2)"
+[1] "method selected for hclustering: average"
+  average 
+0.7614501 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+[40_02b  ATAC x body states] Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache/40_02b_crosswise_n5000.rds
+  Permutation rows: 10
+  Interval Fisher tests: 10
+         RS1             RS2 observed_overlaps expected_overlaps norm_zscore
+6  ATAC Down          Active              1662          645.2590  0.65290820
+7  ATAC Down           Mixed               378          166.1920  0.26372554
+8  ATAC Down        Polycomb               107          353.3866 -0.22385513
+10 ATAC Down        Unmarked                 2          116.5960 -0.17402038
+9  ATAC Down Enhancer_Marked               185          255.3020 -0.07337849
+3    ATAC Up        Polycomb              1953          718.2108  0.54787084
+2    ATAC Up           Mixed               722          338.4084  0.24134419
+5    ATAC Up        Unmarked                41          237.2560 -0.14799185
+1    ATAC Up          Active              1728         1312.9708  0.12851571
+4    ATAC Up Enhancer_Marked               470          520.5354 -0.02558284
+   perm_adj_p_value   fisher_or      fisher_p  concordance
+6            0.0002  2.65242201 8.631593e-114    Confirmed
+7            0.0002  1.09639673  1.735649e-01 Strengthened
+8            0.0002  0.08543426 1.898286e-239    Confirmed
+10           0.0002  0.09878263  1.173439e-05    Confirmed
+9            0.0002  0.79781745  1.224855e-02    Confirmed
+3            0.0002 11.70490648 1.898286e-239    Confirmed
+2            0.0002  0.91207861  1.735649e-01 Strengthened
+5            0.0002 10.12323731  1.173439e-05    Confirmed
+1            0.0002  0.37701391 8.631593e-114    Confirmed
+4            0.0168  1.25341957  1.224855e-02    Confirmed
+  Wrote: 40_02b_association_atac_x_body_state.tsv (10 rows, 28 cols)
+  Saved: 40_02b_crosswise_atac_x_body_state/{pdf,svg,png,jpg}
+  Saved: 40_02e_forest_atac_x_body_state/{pdf,svg,png,jpg}
+  Saved: 40_02h_observed_expected_atac_x_body_state/{pdf,svg,png,jpg}
+
+--------------------------------------------------------------------------------
+40_02m  ATAC x promoter states 
+--------------------------------------------------------------------------------
+[40_02m  ATAC x promoter states] 2 x 4 = 8 pairwise tests, 5,000 permutations each
+[1] "Performing permutation tests for ATAC Up (1 of 2)"
+[1] "Performing permutation tests for ATAC Down (2 of 2)"
+[1] "method selected for hclustering: average"
+  average 
+0.6891586 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+[40_02m  ATAC x promoter states] Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache/40_02m_crosswise_n5000.rds
+  Permutation rows: 8
+  Interval Fisher tests: 8
+        RS1                RS2 observed_overlaps expected_overlaps norm_zscore
+5 ATAC Down    Active_Promoter              1193          621.6896  0.39962421
+8 ATAC Down  Unmarked_Promoter               863          560.0696  0.19821785
+7 ATAC Down Repressed_Promoter               202          297.7244 -0.09336926
+6 ATAC Down  Bivalent_Promoter                76           57.1948  0.04159460
+3   ATAC Up Repressed_Promoter              1607          606.4170  0.47316056
+2   ATAC Up  Bivalent_Promoter               365          116.1910  0.26338102
+1   ATAC Up    Active_Promoter              1719         1264.1402  0.15749448
+4   ATAC Up  Unmarked_Promoter              1223         1139.7926  0.02621643
+  perm_adj_p_value fisher_or      fisher_p concordance
+5           0.0003 1.5764479  6.408180e-24   Confirmed
+8           0.0003 1.5644807  1.728542e-18   Confirmed
+7           0.0003 0.2144260 1.424874e-117   Confirmed
+6           0.0082 0.4129423  7.606942e-14   Confirmed
+3           0.0003 4.6636146 1.424874e-117   Confirmed
+2           0.0003 2.4216456  7.606942e-14   Confirmed
+1           0.0003 0.6343375  6.408180e-24   Confirmed
+4           0.0158 0.6391897  1.728542e-18   Confirmed
+  Wrote: 40_02m_association_atac_x_promoter_state.tsv (8 rows, 28 cols)
+  Saved: 40_02m_crosswise_atac_x_promoter_state/{pdf,svg,png,jpg}
+  Saved: 40_02n_forest_atac_x_promoter_state/{pdf,svg,png,jpg}
+  Saved: 40_02o_observed_expected_atac_x_promoter_state/{pdf,svg,png,jpg}
+
+--------------------------------------------------------------------------------
+40_02c  Loop anchors x features 
+--------------------------------------------------------------------------------
+[40_02c  Loop anchors x features] 2 x 12 = 24 pairwise tests, 5,000 permutations each
+[1] "Performing permutation tests for Gained loop anchors (1 of 2)"
+[1] "Performing permutation tests for Lost loop anchors (2 of 2)"
+[1] "method selected for hclustering: average"
+  average 
+0.8278588 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+[40_02c  Loop anchors x features] Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache/40_02c_crosswise_n5000.rds
+  Permutation rows: 24
+  Interval Fisher tests: 24
+                   RS1             RS2 observed_overlaps expected_overlaps
+1  Gained loop anchors            CTCF              2343          450.0248
+7  Gained loop anchors         ATAC Up               794          107.1282
+3  Gained loop anchors        H3K27me3              1293          264.5486
+6  Gained loop anchors        Bivalent                41            5.3382
+9  Gained loop anchors        MeCP2 Up               248          108.2586
+5  Gained loop anchors         H3K4me3               198          106.9374
+4  Gained loop anchors         H3K4me1              2167         1658.6546
+11 Gained loop anchors mCH Hyper genes               178          108.2712
+10 Gained loop anchors      MeCP2 Down                40           16.8718
+12 Gained loop anchors  mCH Hypo genes               622          528.8772
+8  Gained loop anchors       ATAC Down                36           52.5820
+2  Gained loop anchors         H3K27ac               234          244.1632
+21   Lost loop anchors        MeCP2 Up               691           78.9682
+20   Lost loop anchors       ATAC Down               353           38.4854
+13   Lost loop anchors            CTCF              1248          328.6978
+14   Lost loop anchors         H3K27ac               778          175.9332
+17   Lost loop anchors         H3K4me3               349           76.9190
+16   Lost loop anchors         H3K4me1              2522         1205.4406
+23   Lost loop anchors mCH Hyper genes               206           71.6394
+19   Lost loop anchors         ATAC Up               186           78.1042
+15   Lost loop anchors        H3K27me3               398          189.9284
+18   Lost loop anchors        Bivalent                21            3.8482
+22   Lost loop anchors      MeCP2 Down                21           12.4068
+24   Lost loop anchors  mCH Hypo genes               344          350.9680
+   norm_zscore perm_adj_p_value   fisher_or      fisher_p   concordance
+1   1.52370318           0.0003  1.96226838  2.208678e-21     Confirmed
+7   1.24185025           0.0003  3.72030700  9.377871e-45     Confirmed
+3   0.90536932           0.0003  2.98256253  9.656639e-40     Confirmed
+6   0.31959004           0.0003  1.34504364  2.943565e-01  Strengthened
+9   0.18380361           0.0003  0.24077585  1.498758e-44     Confirmed
+5   0.18210995           0.0003  0.33394882  3.662567e-30     Confirmed
+4   0.16198308           0.0003  0.38706771  1.090273e-41     Confirmed
+11  0.13949919           0.0003  0.53091574  7.037545e-09     Confirmed
+10  0.08782108           0.0007  1.35457111  3.662046e-01  Strengthened
+12  0.08731941           0.0003  1.22693797  8.978551e-03     Confirmed
+8  -0.04091918           0.0218  0.05453934  1.882747e-80     Confirmed
+2  -0.01057236           0.3237  0.16090619 1.354701e-104      Weakened
+21  1.13631463           0.0002  4.15324040  1.498758e-44     Confirmed
+20  1.09957178           0.0002 18.33538815  1.882747e-80     Confirmed
+13  1.04454087           0.0002  0.50961429  2.208678e-21     Confirmed
+14  0.90096802           0.0002  6.21480115 1.354701e-104     Confirmed
+17  0.78911842           0.0002  2.99447087  3.662567e-30     Confirmed
+16  0.59853525           0.0002  2.58352729  1.090273e-41     Confirmed
+23  0.41061449           0.0002  1.88353804  7.037545e-09     Confirmed
+19  0.28426526           0.0002  0.26879502  9.377871e-45     Confirmed
+15  0.26283000           0.0002  0.33528216  9.656639e-40     Confirmed
+18  0.22202172           0.0002  0.74347030  2.943565e-01  Strengthened
+22  0.04734377           0.0556  0.73824105  3.662046e-01 Concordant NS
+24 -0.01000329           0.3621  0.81503713  8.978551e-03      Weakened
+  Wrote: 40_02c_association_loop_anchors_x_features.tsv (24 rows, 28 cols)
+  Saved: 40_02c_crosswise_loop_anchors_x_features/{pdf,svg,png,jpg}
+  Saved: 40_02f_forest_loop_anchors_x_features/{pdf,svg,png,jpg}
+  Saved: 40_02i_observed_expected_loop_anchors_x_features/{pdf,svg,png,jpg}
+
+--------------------------------------------------------------------------------
+Fisher against permutation, all sub-analyses
+--------------------------------------------------------------------------------
+  Wrote: 40_02_fisher_vs_permutation.tsv (54 rows, 28 cols)
+                      sub_analysis   concordance n_tests  pct_tests
+1             40_02a  ATAC x marks     Confirmed      12 100.000000
+2             40_02a  ATAC x marks      Weakened       0   0.000000
+3             40_02a  ATAC x marks  Strengthened       0   0.000000
+4             40_02a  ATAC x marks Concordant NS       0   0.000000
+5       40_02b  ATAC x body states     Confirmed       8  80.000000
+6       40_02b  ATAC x body states      Weakened       0   0.000000
+7       40_02b  ATAC x body states  Strengthened       2  20.000000
+8       40_02b  ATAC x body states Concordant NS       0   0.000000
+9   40_02m  ATAC x promoter states     Confirmed       8 100.000000
+10  40_02m  ATAC x promoter states      Weakened       0   0.000000
+11  40_02m  ATAC x promoter states  Strengthened       0   0.000000
+12  40_02m  ATAC x promoter states Concordant NS       0   0.000000
+13 40_02c  Loop anchors x features     Confirmed      18  75.000000
+14 40_02c  Loop anchors x features      Weakened       2   8.333333
+15 40_02c  Loop anchors x features  Strengthened       3  12.500000
+16 40_02c  Loop anchors x features Concordant NS       1   4.166667
+17                All sub-analyses     Confirmed      46  85.185185
+18                All sub-analyses      Weakened       2   3.703704
+19                All sub-analyses  Strengthened       5   9.259259
+20                All sub-analyses Concordant NS       1   1.851852
+  Wrote: 40_02_concordance_summary.tsv (20 rows, 4 cols)
+  Saved: 40_02j_fisher_vs_permutation/{pdf,svg,png,jpg}
+
+--------------------------------------------------------------------------------
+Local z-score profile for the strongest loop anchor association
+--------------------------------------------------------------------------------
+  Strongest association: Gained loop anchors x CTCF (normalised z = 1.524, adj p = 0.0003)
+[40_02 LZ] 12 region sets, +/- 50,000 bp window, 1,000 bp step, 5,000 permutations
+[1] "method selected for hclustering: median"
+ complete   average    single   ward.D2    median  centroid  mcquitty 
+0.7747008 0.9283681 0.9242239 0.7585267 0.9309771 0.9224186 0.9230176 
+[1] "method selected for hclustering: average"
+ complete   average    single   ward.D2    median  centroid  mcquitty 
+0.9740118 0.9762963 0.9716112 0.9679319 0.9577723 0.9731542 0.9749037 
+[40_02 LZ] Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache/40_02c_local_zscore_n5000.rds
+  Wrote: 40_02_local_zscore_shifts.tsv (1,212 rows, 4 cols)
+  Wrote: 40_02_local_zscore_summary.tsv (12 rows, 9 cols)
+  Saved: 40_02k_local_zscore_loop_anchors/{pdf,svg,png,jpg}
+  Saved: 40_02l_local_zscore_all_features/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 40_02 SUMMARY
+================================================================================
+Sub-analysis a:  2 x  6 =  12 tests
+Sub-analysis b:  2 x  5 =  10 tests
+Sub-analysis m:  2 x  4 =   8 tests
+Sub-analysis c:  2 x 12 =  24 tests
+Total pairwise permutation tests: 54
+Permutations per test: 5,000
+
+Agreement between the interval Fisher tests and the permutation tests:
+  Confirmed         46 ( 85.2%)
+  Weakened           2 (  3.7%)
+  Strengthened       5 (  9.3%)
+  Concordant NS      1 (  1.9%)
+
+SECTION 40_02 COMPLETE
+================================================================================
+
+
+=========================================
+Complete: section 40_02
+Time: 660s
+Exit code: 0
+End time: Thu Aug 13 10:34:44 PDT 2026
+=========================================

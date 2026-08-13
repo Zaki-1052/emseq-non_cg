@@ -1,0 +1,212 @@
+=========================================
+EM-seq section 50_01: feature methylation
+=========================================
+Job ID: 53392490
+Node: exp-2-44
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392490
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/50_features/50_01_feature_methylation.R
+Output dir:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features
+Feature dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+
+All 8 per-sample feature tables are present.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 50_01: mCH ACROSS SUB-GENE FEATURE TYPES
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features
+Feature dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+Min coverage:  20 pooled reads per genotype
+Max rank:      20
+Metagene bins: 50
+
+Loading per-sample feature tables from:
+  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+  ctrl_M1  939,085 intervals  448,392,497 CH site observations  5,570,063,259 read coverage
+  ctrl_M2  939,085 intervals  451,879,444 CH site observations  7,374,693,056 read coverage
+  ctrl_F1  939,085 intervals  452,044,113 CH site observations  7,981,757,853 read coverage
+  ctrl_F2  939,085 intervals  451,988,115 CH site observations  8,399,907,233 read coverage
+  mut_M1   939,085 intervals  450,863,072 CH site observations  6,151,301,236 read coverage
+  mut_M2   939,085 intervals  453,720,031 CH site observations  17,449,825,935 read coverage
+  mut_F1   939,085 intervals  453,537,488 CH site observations  15,860,234,126 read coverage
+  mut_F2   939,085 intervals  451,324,609 CH site observations  7,288,142,377 read coverage
+
+  939,085 intervals across 21,820 genes and 6 feature types
+
+Coverage threshold sweep:
+  >=      0 reads:    939,085 kept,          0 removed (  0.0%)
+  >=      5 reads:    929,268 kept,      9,817 removed (  1.0%)
+  >=     10 reads:    928,953 kept,     10,132 removed (  1.1%)
+  >=     20 reads:    928,454 kept,     10,631 removed (  1.1%)
+  >=     30 reads:    927,967 kept,     11,118 removed (  1.2%)
+  >=     50 reads:    926,919 kept,     12,166 removed (  1.3%)
+  >=    100 reads:    923,998 kept,     15,087 removed (  1.6%)
+  >=    200 reads:    913,976 kept,     25,109 removed (  2.7%)
+
+Applying the coverage filter (>= 20 pooled reads per genotype):
+  5UTR                     45,110 of     46,033 kept (  2.0% removed)
+  Exon                    223,960 of    226,407 kept (  1.1% removed)
+  SpliceSite_Donor        202,065 of    204,583 kept (  1.2% removed)
+  SpliceSite_Acceptor     202,039 of    204,578 kept (  1.2% removed)
+  Intron                  203,313 of    204,586 kept (  0.6% removed)
+  3UTR                     51,967 of     52,898 kept (  1.8% removed)
+  All                     928,454 of    939,085 kept (  1.1% removed)
+
+Loading the active enhancer segmentation...
+  Active enhancer: 28110 peaks
+  16,435 of 928,454 intervals overlap an active enhancer (1.8%)
+
+Building summary tables...
+
+Gene-level mCH results: 21,097 rows, 21,072 unique gene symbols (25 duplicate symbol rows dropped)
+
+Kruskal-Wallis (delta_mch across feature types): chi-squared = 326.94, df = 5, p = <2e-16
+
+Dunn's post-hoc pairwise tests (BH-adjusted):
+
+                    Dunn's Pairwise Comparison of x by group                    
+                              (Benjamini-Hochberg)                              
+
+List of pairwise comparisons: Z statistic (adjusted p-value)
+───────────────────────────────────────┬────────────────────
+3UTR - 5UTR                            │ -32.11843 (0.0000)*
+3UTR - Exon                            │ -11.19975 (0.0000)*
+5UTR - Exon                            │  29.48303 (0.0000)*
+3UTR - Intron                          │  24.97452 (0.0000)*
+5UTR - Intron                          │  63.30076 (0.0000)*
+Exon - Intron                          │  57.87719 (0.0000)*
+3UTR - SpliceSite_Acceptor             │ -38.29424 (0.0000)*
+5UTR - SpliceSite_Acceptor             │  3.520511 (0.0002)*
+Exon - SpliceSite_Acceptor             │ -43.61369 (0.0000)*
+Intron - SpliceSite_Acceptor           │ -99.03850 (0.0000)*
+3UTR - SpliceSite_Donor                │ -43.85606 (0.0000)*
+5UTR - SpliceSite_Donor                │ -1.732264 (0.0416)
+Exon - SpliceSite_Donor                │ -52.53026 (0.0000)*
+Intron - SpliceSite_Donor              │ -107.7495 (0.0000)*
+SpliceSite_Acceptor - SpliceSite_Donor │ -8.694192 (0.0000)*
+
+FDR = 0.05
+Reject Ho if adjusted p ≤ FDR/2 with stopping rule, where (unadjusted) p = Pr(Z ≥ |z|)
+  15 of 15 pairs reach BH q < 0.05
+    5UTR - Intron                                 Z =   63.301  q = 0
+    Exon - Intron                                 Z =   57.877  q = 0
+    3UTR - SpliceSite_Acceptor                    Z =  -38.294  q = 0
+    Exon - SpliceSite_Acceptor                    Z =  -43.614  q = 0
+    Intron - SpliceSite_Acceptor                  Z =  -99.039  q = 0
+    3UTR - SpliceSite_Donor                       Z =  -43.856  q = 0
+    Exon - SpliceSite_Donor                       Z =  -52.530  q = 0
+    Intron - SpliceSite_Donor                     Z = -107.750  q = 0
+    3UTR - 5UTR                                   Z =  -32.118  q = 2.03e-226
+    5UTR - Exon                                   Z =   29.483  q = 3.56e-191
+    3UTR - Intron                                 Z =   24.975  q = 7.88e-138
+    3UTR - Exon                                   Z =  -11.200  q = 2.56e-29
+    SpliceSite_Acceptor - SpliceSite_Donor        Z =   -8.694  q = 2.02e-18
+    5UTR - SpliceSite_Acceptor                    Z =    3.521  q = 0.000231
+    5UTR - SpliceSite_Donor                       Z =   -1.732  q = 0.0416
+
+Wilcoxon signed rank tests of delta_mch against zero:
+  5UTR                 n =    45,110  median = +0.00122  q = <2e-16
+  Exon                 n =   223,960  median = +0.00081  q = <2e-16
+  SpliceSite_Donor     n =   202,065  median = +0.00110  q = <2e-16
+  SpliceSite_Acceptor  n =   202,039  median = +0.00100  q = <2e-16
+  Intron               n =   203,313  median = +0.00060  q = <2e-16
+  3UTR                 n =    51,967  median = +0.00068  q = <2e-16
+
+Wilcoxon rank sum tests, active enhancer against no enhancer:
+  5UTR                 enhancer median = +0.00135 (n = 437)  unmarked median = +0.00122 (n = 44,673)  q = 0.183
+  Exon                 enhancer median = +0.00168 (n = 2,598)  unmarked median = +0.00080 (n = 221,362)  q = 4.21e-11
+  SpliceSite_Donor     enhancer median = +0.00240 (n = 1,482)  unmarked median = +0.00109 (n = 200,583)  q = 6.66e-06
+  SpliceSite_Acceptor  enhancer median = +0.00220 (n = 1,601)  unmarked median = +0.00099 (n = 200,438)  q = 8.41e-06
+  Intron               enhancer median = +0.00067 (n = 9,670)  unmarked median = +0.00059 (n = 193,643)  q = <2e-16
+  3UTR                 enhancer median = +0.00147 (n = 647)  unmarked median = +0.00067 (n = 51,320)  q = 0.0017
+
+Metagene profile: 50 bins, 21,542 genes, mean 21,493 genes per bin
+
+Running gene-level Fisher tests...
+
+Fisher gene table: 20,279 genes with exon and intron data, 20,046 of them in the gene-level mCH results
+  Wrote: 50_01_exon_intron_hypo_concordance_genes.tsv (20,279 rows, 4 cols)
+  Wrote: 50_01_exon_intron_hypo_concordance.tsv (1 rows, 12 cols)
+  Fisher 50_01:exon_intron_hypo_concordance: OR=2.411, p=3.42e-191 (n=20,279 genes) [registered]
+  Wrote: 50_01_intron_enhancer_vs_gene_sig_genes.tsv (20,046 rows, 4 cols)
+  Wrote: 50_01_intron_enhancer_vs_gene_sig.tsv (1 rows, 12 cols)
+  Fisher 50_01:intron_enhancer_vs_gene_sig: OR=5.409, p=0 (n=20,046 genes) [registered]
+  Wrote: 50_01_intron_hypo_vs_gene_hypo_genes.tsv (20,046 rows, 4 cols)
+  Wrote: 50_01_intron_hypo_vs_gene_hypo.tsv (1 rows, 12 cols)
+  Fisher 50_01:intron_hypo_vs_gene_hypo: OR=6.203, p=0 (n=20,046 genes) [registered]
+
+Key genes: 10 of 10 have intervals passing the filter (940 intervals)
+
+Writing tables...
+  Wrote: 50_01_feature_intervals.tsv (928,454 rows, 19 cols)
+  Wrote: 50_01_gene_feature_delta.tsv (123,901 rows, 15 cols)
+  Wrote: 50_01_feature_type_summary.tsv (6 rows, 16 cols)
+  Wrote: 50_01_coverage_threshold_sweep.tsv (56 rows, 6 cols)
+  Wrote: 50_01_delta_by_feature_stats.tsv (6 rows, 6 cols)
+  Wrote: 50_01_mch_level_by_feature_stats.tsv (12 rows, 7 cols)
+  Wrote: 50_01_kruskal_wallis.tsv (1 rows, 6 cols)
+  Wrote: 50_01_dunn_posthoc.tsv (15 rows, 4 cols)
+  Wrote: 50_01_wilcoxon_vs_zero.tsv (6 rows, 8 cols)
+  Wrote: 50_01_exon_intron_rank_profile.tsv (40 rows, 11 cols)
+  Wrote: 50_01_metagene_profile.tsv (50 rows, 12 cols)
+  Wrote: 50_01_enhancer_overlap_summary.tsv (12 rows, 10 cols)
+  Wrote: 50_01_enhancer_split_stats.tsv (12 rows, 7 cols)
+  Wrote: 50_01_enhancer_wilcoxon.tsv (6 rows, 9 cols)
+  Wrote: 50_01_key_gene_intervals.tsv (940 rows, 27 cols)
+  Wrote: 50_01_gene_fisher_summary.tsv (3 rows, 12 cols)
+
+Creating figures...
+  Saved: 50_01a_feature_distribution/{pdf,svg,png,jpg}
+  Saved: 50_01b_delta_mch_by_feature/{pdf,svg,png,jpg}
+  Saved: 50_01c_dunn_posthoc_heatmap/{pdf,svg,png,jpg}
+  Saved: 50_01d_key_gene_feature_lollipop/{pdf,svg,png,jpg}
+  Saved: 50_01e_metagene_profile/{pdf,svg,png,jpg}
+  Saved: 50_01f_enhancer_split_delta/{pdf,svg,png,jpg}
+  Saved: 50_01g_exon_intron_rank_profile/{pdf,svg,png,jpg}
+  Saved: 50_01h_mch_level_by_feature/{pdf,svg,png,jpg}
+
+Section 50_01 complete.
+  Intervals loaded:  939,085
+  Intervals used:    928,454
+  Genes used:        21,604
+  Fisher tests registered: 3
+  Output: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features
+
+
+=========================================
+Complete: section 50_01
+Time: 2242s
+Exit code: 0
+End time: Thu Aug 13 11:00:07 PDT 2026
+=========================================

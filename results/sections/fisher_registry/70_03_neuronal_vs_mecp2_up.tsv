@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_03	neuronal_vs_mecp2_up	Neuronal genes are enriched among genes that gain MeCP2 binding in the BAP1 mutant.	is_neuronal	is_mecp2_up	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_03_neuronal_vs_mecp2_up_genes.tsv	21072	4209	412	129	1.8522564849984	3.49376187482076e-08

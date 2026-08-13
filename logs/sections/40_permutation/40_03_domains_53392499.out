@@ -1,0 +1,255 @@
+=========================================
+EM-seq section 40_03: domain permutation
+=========================================
+Job ID: 53392499
+Node: exp-7-48
+Start time: Thu Aug 13 10:23:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392499
+Code dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:        /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/40_permutation/40_03_domains.R
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Chromatin state: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+Cores:           32
+Randomisations:  5000
+FORCE_RERUN not set: an existing permutation cache is reused.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Loading required package: BSgenome
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘XVector’
+
+The following object is masked from ‘package:purrr’:
+
+    compact
+
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:grid’:
+
+    pattern
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: BiocIO
+
+Attaching package: ‘BiocIO’
+
+The following object is masked from ‘package:rtracklayer’:
+
+    FileForFormat
+
+  Patched regioneReloaded::chooseHclustMet for small-matrix safety.
+
+================================================================================
+SECTION 40_03: DOMAIN-LEVEL PERMUTATION (COMPARTMENTS AND POLYCOMB)
+================================================================================
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Permutations:    5,000 (seed 42, 32 cores)
+Randomisation:   randomizeRegions, per.chromosome = TRUE, evFUN = numOverlaps
+Chromosomes:     chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chrX
+FORCE_RERUN:     FALSE
+
+STEP 1: Genome and gene universe
+The masked version of 'mm10' is not installed. Using the unmasked version. This means that no automatic masking will be available.
+  mm10 permutation genome: 20 chromosomes, 2,633,776,672 bp
+  mCH genes: 21,097 tested, 25 duplicate symbols collapsed, 21,072 kept
+  Genes on the 20 permutation chromosomes: 21,072 of 21,072
+  Significant at FDR < 0.050: 5,551 genes (641 hyper, 4,910 hypo)
+  Alist (mCH direction sets):
+    mCH Hyper genes                 641 intervals (0 off-target dropped), median width 69,070 bp
+    mCH Hypo genes                4,910 intervals (0 off-target dropped), median width 63,520 bp
+
+STEP 2: A/B compartment domains
+  Loaded 104,071 bins from diffcompartments.txt
+  Control PC1 columns: ctrl_M1, ctrl_M2, ctrl_M3
+  Difference column:   ctrl vs. mut Difference
+  Adjusted p column:   ctrl vs. mut adj. p-value
+  Bins on the permutation chromosomes: 101,721 of 104,071
+  Compartment A: 47,241 bins, B: 54,480 bins
+  Shift (adj p < 0.05, |difference| > 0.30): B to A 5,430, A to B 2,641, Stable 93,650
+  Blist (compartment domains):
+    A Compartment                47,241 bins -> 2,038 domains
+    B Compartment                54,480 bins -> 2,145 domains
+    B to A Shift                  5,430 bins -> 880 domains
+    A to B Shift                  2,641 bins -> 449 domains
+    A Compartment                 2,038 intervals (0 off-target dropped), median width 162,500 bp
+    B Compartment                 2,145 intervals (0 off-target dropped), median width 275,000 bp
+    B to A Shift                    880 intervals (0 off-target dropped), median width 75,000 bp
+    A to B Shift                    449 intervals (0 off-target dropped), median width 75,000 bp
+
+STEP 3: Polycomb domains
+  Blist (Polycomb domains):
+  H3K27me3 consensus: 15809 peaks
+    15,809 peaks merged at a 5,000 bp gap -> 10,045 domains, median width 3,661 bp
+    3,324 Polycomb-body genes -> 3,171 disjoint intervals, median width 27,249 bp
+    H3K27me3 Domains             10,034 intervals (11 off-target dropped), median width 3,662 bp
+    Polycomb State Intervals      3,171 intervals (0 off-target dropped), median width 27,249 bp
+
+STEP 4: Crosswise permutation tests
+  Running crosswisePermTest for Compartment: 2 x 4 = 8 cells
+    ntimes = 5,000, cores = 32, ranFUN = randomizeRegions, evFUN = numOverlaps, per.chromosome = TRUE, seed = 42
+[1] "Performing permutation tests for mCH Hyper genes (1 of 2)"
+[1] "Performing permutation tests for mCH Hypo genes (2 of 2)"
+[1] "method selected for hclustering: average"
+  average 
+0.7975206 
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+  Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_03_perm_compartment.rds
+  Running crosswisePermTest for Polycomb: 2 x 2 = 4 cells
+    ntimes = 5,000, cores = 32, ranFUN = randomizeRegions, evFUN = numOverlaps, per.chromosome = TRUE, seed = 42
+[1] "Performing permutation tests for mCH Hyper genes (1 of 2)"
+[1] "Performing permutation tests for mCH Hypo genes (2 of 2)"
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+[1] "method for hclustering (<=2 elements, skipping cophenetic): average"
+  Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_03_perm_polycomb.rds
+  Extracted 12 permutation cells (8 compartment, 4 Polycomb)
+
+STEP 5: Gene-level Fisher tests on the same intervals
+  Wrote: 40_03_mch_hyper_genes_x_a_compartment_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_a_compartment.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_a_compartment: OR=1.546, p=2.28e-05 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_a_compartment_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_a_compartment.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_a_compartment: OR=2.609, p=1.6e-110 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hyper_genes_x_b_compartment_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_b_compartment.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_b_compartment: OR=1.032, p=0.726 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_b_compartment_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_b_compartment.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_b_compartment: OR=0.683, p=3.48e-25 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hyper_genes_x_b_to_a_shift_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_b_to_a_shift.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_b_to_a_shift: OR=4.733, p=2.45e-26 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_b_to_a_shift_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_b_to_a_shift.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_b_to_a_shift: OR=1.411, p=7.04e-05 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hyper_genes_x_a_to_b_shift_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_a_to_b_shift.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_a_to_b_shift: OR=9.516, p=1.67e-46 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_a_to_b_shift_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_a_to_b_shift.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_a_to_b_shift: OR=1.466, p=0.000587 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hyper_genes_x_h3k27me3_domains_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_h3k27me3_domains.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_h3k27me3_domains: OR=1.373, p=0.00125 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_h3k27me3_domains_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_h3k27me3_domains.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_h3k27me3_domains: OR=1.844, p=5.41e-53 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hyper_genes_x_polycomb_state_intervals_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hyper_genes_x_polycomb_state_intervals.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hyper_genes_x_polycomb_state_intervals: OR=0.830, p=0.11 (n=21,072 genes) [registered]
+  Wrote: 40_03_mch_hypo_genes_x_polycomb_state_intervals_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 40_03_mch_hypo_genes_x_polycomb_state_intervals.tsv (1 rows, 12 cols)
+  Fisher 40_03:mch_hypo_genes_x_polycomb_state_intervals: OR=1.599, p=6.54e-30 (n=21,072 genes) [registered]
+
+STEP 6: Local z-score profiles for the mCH hypermethylated set
+  Running multiLocalZscore for Compartment: window = 50,000 bp, step = 1,000 bp, ntimes = 5,000
+[1] "method selected for hclustering: average"
+ complete   average    single   ward.D2    median  centroid  mcquitty 
+0.8594819 0.8620207 0.8595838 0.8618570 0.8618331 0.8614392 0.8610144 
+[1] "method selected for hclustering: average"
+ complete   average    single   ward.D2    median  centroid  mcquitty 
+0.9210862 0.9212737 0.9198586 0.9207112 0.9203082 0.9203082 0.9212737 
+  Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_03_localz_compartment.rds
+  Running multiLocalZscore for Polycomb: window = 50,000 bp, step = 1,000 bp, ntimes = 5,000
+[1] "method for hclustering (<=2 elements, skipping cophenetic): complete"
+[1] "method for hclustering (<=2 elements, skipping cophenetic): complete"
+  Saved cache: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/40_03_localz_polycomb.rds
+
+STEP 7: Tables
+  Wrote: 40_03_region_set_summary.tsv (8 rows, 8 cols)
+  Wrote: 40_03_compartment_bin_summary.tsv (6 rows, 4 cols)
+  Wrote: 40_03_polycomb_domain_summary.tsv (2 rows, 6 cols)
+  Wrote: 40_03_association_compartment.tsv (8 rows, 14 cols)
+  Wrote: 40_03_association_polycomb.tsv (4 rows, 14 cols)
+  Wrote: 40_03_fisher_tests.tsv (12 rows, 17 cols)
+  Wrote: 40_03_fisher_vs_permutation.tsv (12 rows, 30 cols)
+  Wrote: 40_03_local_zscore_compartment.tsv (4 rows, 9 cols)
+  Wrote: 40_03_local_zscore_polycomb.tsv (2 rows, 9 cols)
+  Key genes in the universe: 10 of 10
+  Wrote: 40_03_key_genes_domain_membership.tsv (10 rows, 17 cols)
+  Wrote: 40_03_permutation_parameters.tsv (1 rows, 15 cols)
+
+STEP 8: Figures
+  Saved: 40_03a_crosswise_mch_x_compartment/{pdf,svg,png,jpg}
+  Saved: 40_03b_forest_mch_x_compartment/{pdf,svg,png,jpg}
+  Saved: 40_03c_crosswise_mch_x_polycomb/{pdf,svg,png,jpg}
+  Saved: 40_03d_forest_mch_x_polycomb/{pdf,svg,png,jpg}
+  Saved: 40_03e_fisher_vs_permutation/{pdf,svg,png,jpg}
+  Saved: 40_03f_observed_vs_expected_overlaps/{pdf,svg,png,jpg}
+  Saved: 40_03g_local_zscore_compartment/{pdf,svg,png,jpg}
+  Saved: 40_03h_local_zscore_polycomb/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 40_03 SUMMARY
+================================================================================
+Gene universe: 21,072 genes (641 hyper, 4,910 hypo) at FDR < 0.050
+Compartment sub-analysis: 2 x 4 = 8 cells
+Polycomb sub-analysis:    2 x 2 = 4 cells
+Fisher tests registered:  12
+
+  mCH set            Region set                     perm z  Fisher OR   perm adj p     Fisher p Concordance   
+  mCH Hypo genes     A Compartment                    0.69      2.609       0.0002     1.6e-110 Confirmed     
+  mCH Hyper genes    A Compartment                    0.52      1.546       0.0003     2.28e-05 Confirmed     
+  mCH Hyper genes    A to B Shift                     0.40      9.516       0.0003     1.67e-46 Confirmed     
+  mCH Hyper genes    B to A Shift                     0.14      4.733        0.001     2.45e-26 Confirmed     
+  mCH Hypo genes     A to B Shift                    -0.07      1.466       0.0002     0.000587 Confirmed     
+  mCH Hypo genes     B to A Shift                    -0.12      1.411       0.0002     7.04e-05 Confirmed     
+  mCH Hyper genes    B Compartment                   -0.51      1.032       0.0003        0.726 Strengthened  
+  mCH Hypo genes     B Compartment                   -0.65      0.683       0.0002     3.48e-25 Confirmed     
+  mCH Hypo genes     H3K27me3 Domains                 0.09      1.844       0.0004     5.41e-53 Confirmed     
+  mCH Hypo genes     Polycomb State Intervals         0.01      1.599        0.181     6.54e-30 Weakened      
+  mCH Hyper genes    H3K27me3 Domains                -0.03      1.373        0.219      0.00125 Weakened      
+  mCH Hyper genes    Polycomb State Intervals        -0.22      0.830       0.0004         0.11 Strengthened  
+
+Concordance between Fisher and permutation:
+  Confirmed         8 of 12 (67%)
+  Weakened          2 of 12 (17%)
+  Strengthened      2 of 12 (17%)
+  Concordant NS     0 of 12 (0%)
+
+Figures and tables written to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Fisher tests registered in:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+Section 40_03 complete.
+
+
+=========================================
+Complete: section 40_03
+Time: 216s
+Exit code: 0
+End time: Thu Aug 13 10:27:20 PDT 2026
+=========================================

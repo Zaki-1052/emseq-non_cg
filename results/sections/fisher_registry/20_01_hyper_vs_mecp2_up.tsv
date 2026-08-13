@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+20_01	hyper_vs_mecp2_up	Do gene bodies that gain mCH in the mutant overlap MeCP2 up peaks more often than other genes?	mch_hyper	mecp2_up_overlap	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_01_hyper_vs_mecp2_up_genes.tsv	21072	641	848	398	72.5489967736366	0

@@ -1,0 +1,4 @@
+test_id	description	n_genes	n_neuronal	n_flagged	n_neuronal_flagged	frac_flagged_neuronal	frac_flagged_other	odds_ratio	ci_lower	ci_upper	p_value
+all_four_predicted	Among genes with all four marks measured, neuronal genes carry all four marks moving in the predicted direction.	1360	493	160	56	0.113590263691684	0.119953863898501	0.940185439990233	0.652680711007626	1.34347100136282	0.792940211209436
+three_plus_predicted	Among genes with all four marks measured, neuronal genes carry three or more marks moving in the predicted direction.	1360	493	405	132	0.267748478701826	0.314878892733564	0.795726011828092	0.616858555398711	1.0236716678153	0.0736640075191256
+two_plus_predicted_sig	Among genes with all four marks measured, neuronal genes carry two or more marks moving in the predicted direction at a significant FDR.	1360	493	384	132	0.267748478701826	0.290657439446367	0.892446522179292	0.690543330863511	1.15056875071482	0.380844620544526

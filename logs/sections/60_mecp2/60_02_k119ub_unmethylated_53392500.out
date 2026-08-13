@@ -1,0 +1,216 @@
+=========================================
+EM-seq section 60_02: K119ub unmethylated
+=========================================
+Job ID: 53392500
+Node: exp-1-33
+Start time: Thu Aug 13 10:23:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392500
+Code dir:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:          /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:            /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/60_mecp2/60_02_k119ub_unmethylated.R
+Output dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+MeCP2 no-meth set: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2/mecp2_no_meth_genes.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Type 'citation("pROC")' for a citation.
+
+Attaching package: ‘pROC’
+
+The following objects are masked from ‘package:IRanges’:
+
+    cov, var
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    cov, var
+
+The following object is masked from ‘package:BiocGenerics’:
+
+    var
+
+The following objects are masked from ‘package:stats’:
+
+    cov, smooth, var
+
+================================================================================
+SECTION 60_02: H2AK119ub AT GENES WHERE MeCP2 MOVES WITHOUT mCH
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+FDR threshold: 0.05
+
+--- Loading section inputs ---
+  MeCP2-without-mCH genes from 60_01: 59
+    MeCP2 gained: 32 | MeCP2 lost: 27
+  MeCP2 annotated peaks: 202,650 total, 202,542 usable
+  H2AK119ub gene signal: 23,150 rows in, 23,150 genes kept (0 duplicate symbols collapsed)
+    Finite gene-body log2FC: 22,383 genes | signal classes: no_signal=767, one_condition=779, quantifiable=21604
+
+--- Aggregating MeCP2 peaks to genes (nearest TSS) ---
+  Genes with a MeCP2 annotated peak: 21,195
+
+--- Aggregating DiffBind marks to genes (nearest TSS) ---
+  Annotating H2AK119ub peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    H2AK119ub  41,279 peaks annotated, 10,646 genes carry a peak
+  Annotating H3K27me3 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    H3K27me3   18,312 peaks annotated, 5,201 genes carry a peak
+  Annotating H3K27ac peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    H3K27ac    25,644 peaks annotated, 9,757 genes carry a peak
+  Annotating ATAC peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    ATAC       75,630 peaks annotated, 17,534 genes carry a peak
+
+--- Building the gene universe ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Universe: 17,096 genes with an mCH test and a MeCP2 peak
+    MeCP2_only           59 genes ( 0.35%)
+    MeCP2_and_mCH        96 genes ( 0.56%)
+    Neither          11,891 genes (69.55%)
+    mCH_only          5,050 genes (29.54%)
+    H2AK119ub peak           measured at 8,795 genes
+    H2AK119ub signal         measured at 16,751 genes
+    H3K27me3                 measured at 4,211 genes
+    H3K27ac                  measured at 8,439 genes
+    ATAC                     measured at 14,366 genes
+    H2AK119ub level          measured at 17,077 genes
+  Handoff check passed: 59 genes match section 60_01 exactly
+  Analysis table: 12,046 genes across the three compared groups
+  H2AK119ub signal gain measured at 11,763 genes, peak gain at 5,445 genes
+  Wrote: 60_02_gene_universe.tsv (17,096 rows, 49 cols)
+  Wrote: 60_02_gene_groups_with_marks.tsv (12,046 rows, 52 cols)
+  Wrote: 60_02_group_metric_counts.tsv (18 rows, 11 cols)
+
+--- Analysis 1: Mann-Whitney U with effect sizes ---
+  H2AK119ub peak         vs MeCP2_and_mCH  med  +0.1867 vs  +0.6056 | delta = -0.074 [-0.258, +0.115] (negligible) | p = 0.474, BH = 0.569
+  H2AK119ub peak         vs Neither        med  +0.1867 vs  +0.1194 | delta = +0.210 [+0.047, +0.363] (small) | p = 0.0111, BH = 0.0333
+  H2AK119ub signal       vs MeCP2_and_mCH  med  +0.2230 vs  +0.4371 | delta = -0.276 [-0.427, -0.110] (small) | p = 0.00398, BH = 0.0159
+  H2AK119ub signal       vs Neither        med  +0.2230 vs  +0.0034 | delta = +0.336 [+0.199, +0.461] (medium) | p = 8.05e-06, BH = 9.66e-05
+  H3K27me3               vs MeCP2_and_mCH  med  -0.0962 vs  -0.0773 | delta = +0.039 [-0.243, +0.314] (negligible) | p = 0.808, BH = 0.881
+  H3K27me3               vs Neither        med  -0.0962 vs  -0.0727 | delta = +0.015 [-0.251, +0.279] (negligible) | p = 0.904, BH = 0.904
+  H3K27ac                vs MeCP2_and_mCH  med  -0.1024 vs  -0.4988 | delta = +0.191 [-0.035, +0.398] (small) | p = 0.11, BH = 0.189
+  H3K27ac                vs Neither        med  -0.1024 vs  +0.0327 | delta = -0.227 [-0.438, +0.009] (small) | p = 0.0189, BH = 0.0455
+  ATAC                   vs MeCP2_and_mCH  med  +0.1209 vs  +0.0553 | delta = +0.167 [-0.022, +0.344] (small) | p = 0.0875, BH = 0.175
+  ATAC                   vs Neither        med  +0.1209 vs  +0.0905 | delta = +0.073 [-0.104, +0.246] (negligible) | p = 0.342, BH = 0.456
+  H2AK119ub level        vs MeCP2_and_mCH  med  +1.3994 vs  +1.6526 | delta = -0.126 [-0.310, +0.068] (negligible) | p = 0.19, BH = 0.285
+  H2AK119ub level        vs Neither        med  +1.3994 vs  +0.9663 | delta = +0.290 [+0.143, +0.424] (small) | p = 0.000119, BH = 0.000716
+  Wrote: 60_02_mann_whitney.tsv (12 rows, 21 cols)
+
+--- Analysis 2: rank of H2AK119ub among the marks ---
+  Ranked against MeCP2_and_mCH:
+    1. H2AK119ub signal       |delta| = 0.276 (small)
+    2. H3K27ac                |delta| = 0.191 (small)
+    3. ATAC                   |delta| = 0.167 (small)
+    4. H2AK119ub peak         |delta| = 0.074 (negligible)
+    5. H3K27me3               |delta| = 0.039 (negligible)
+  Ranked against Neither:
+    1. H2AK119ub signal       |delta| = 0.336 (medium)
+    2. H3K27ac                |delta| = 0.227 (small)
+    3. H2AK119ub peak         |delta| = 0.210 (small)
+    4. ATAC                   |delta| = 0.073 (negligible)
+    5. H3K27me3               |delta| = 0.015 (negligible)
+  Wrote: 60_02_effect_size_ranking.tsv (10 rows, 15 cols)
+
+--- Analysis 3: registered Fisher tests ---
+  Wrote: 60_02_mecp2_no_mch_vs_k119ub_signal_gain_genes.tsv (11,763 rows, 4 cols)
+  Wrote: 60_02_mecp2_no_mch_vs_k119ub_signal_gain.tsv (1 rows, 12 cols)
+  Fisher 60_02:mecp2_no_mch_vs_k119ub_signal_gain: OR=2.628, p=0.000604 (n=11,763 genes) [registered]
+    Focal gained 72.9% (43/59), background gained 50.6% (5,917/11,704)
+  Wrote: 60_02_mecp2_no_mch_vs_k119ub_peak_gain_genes.tsv (5,445 rows, 4 cols)
+  Wrote: 60_02_mecp2_no_mch_vs_k119ub_peak_gain.tsv (1 rows, 12 cols)
+  Fisher 60_02:mecp2_no_mch_vs_k119ub_peak_gain: OR=1.670, p=0.0775 (n=5,445 genes) [registered]
+    Focal gained 51.0% (25/49), background gained 38.4% (2,073/5,396)
+  Wrote: 60_02_fisher_summary.tsv (2 rows, 14 cols)
+
+--- Analysis 4: logistic model of set membership ---
+  671 genes carry all four peak marks, 11 in the focal set (1.64%)
+  AUC = 0.473 [0.277, 0.669], McFadden R2 = 0.0050
+  H3K27ac                OR = 0.845 [0.403, 1.772] per 1 SD, p = 0.655 ns
+  H2AK119ub peak         OR = 0.863 [0.446, 1.672] per 1 SD, p = 0.663 ns
+  H3K27me3               OR = 1.122 [0.567, 2.219] per 1 SD, p = 0.741 ns
+  ATAC                   OR = 1.051 [0.492, 2.246] per 1 SD, p = 0.898 ns
+  Wrote: 60_02_logistic_coefficients.tsv (8 rows, 13 cols)
+  Wrote: 60_02_logistic_fit.tsv (1 rows, 8 cols)
+
+--- Analysis 5: MeCP2 against H2AK119ub inside the focal set ---
+  Spearman rho = +0.272, p = 0.0372 over 59 focal genes
+  Wrote: 60_02_mecp2_k119ub_correlation.tsv (1 rows, 7 cols)
+
+--- Figure 60_02a: mark folds by gene group ---
+  Saved: 60_02a_mark_folds_by_group/{pdf,svg,png,jpg}
+
+--- Figure 60_02b: control H2AK119ub level by gene group ---
+  Saved: 60_02b_k119ub_control_level/{pdf,svg,png,jpg}
+
+--- Figure 60_02c: effect-size forest ---
+  Saved: 60_02c_effect_size_forest/{pdf,svg,png,jpg}
+
+--- Figure 60_02d: logistic coefficient forest ---
+  Saved: 60_02d_logistic_forest/{pdf,svg,png,jpg}
+
+--- Figure 60_02e: H2AK119ub decile distribution ---
+  Saved: 60_02e_k119ub_deciles/{pdf,svg,png,jpg}
+  H2AK119ub signal       focal genes in the top two deciles: 40.7%
+  H2AK119ub level        focal genes in the top two deciles: 42.4%
+  Wrote: 60_02_k119ub_deciles.tsv (60 rows, 11 cols)
+
+--- Figure 60_02f: MeCP2 against H2AK119ub scatter ---
+  Saved: 60_02f_mecp2_vs_k119ub_scatter/{pdf,svg,png,jpg}
+
+--- Figure 60_02g: combined panel ---
+  Saved: 60_02g_combined/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 60_02 SUMMARY
+================================================================================
+Gene universe (mCH tested and a MeCP2 peak): 17,096
+  MeCP2_only           59 genes
+  MeCP2_and_mCH        96 genes
+  Neither          11,891 genes
+Effect-size order against MeCP2_and_mCH: 1) H2AK119ub signal |d|=0.276  2) H3K27ac |d|=0.191  3) ATAC |d|=0.167  4) H2AK119ub peak |d|=0.074  5) H3K27me3 |d|=0.039
+Effect-size order against Neither: 1) H2AK119ub signal |d|=0.336  2) H3K27ac |d|=0.227  3) H2AK119ub peak |d|=0.210  4) ATAC |d|=0.073  5) H3K27me3 |d|=0.015
+Fisher mecp2_no_mch_vs_k119ub_signal_gain   OR = 2.628 (95% CI 1.449 to 5.004), p = 0.000604
+Fisher mecp2_no_mch_vs_k119ub_peak_gain     OR = 1.670 (95% CI 0.912 to 3.062), p = 0.0775
+Logistic model: n = 671 genes, 11 focal, AUC = 0.473, McFadden R2 = 0.0050
+Largest standardised coefficient: H3K27ac (OR = 0.845 per 1 SD, p = 0.655)
+MeCP2 against H2AK119ub in the focal set: rho = +0.272, p = 0.0372
+Fisher tests registered in: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+
+Section 60_02 complete.
+
+
+=========================================
+Complete: section 60_02
+Time: 72s
+Exit code: 0
+End time: Thu Aug 13 10:24:56 PDT 2026
+=========================================

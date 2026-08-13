@@ -1,0 +1,201 @@
+=========================================
+EM-seq section 60_04: MeCP2 aging
+=========================================
+Job ID: 53392493
+Node: exp-2-09
+Start time: Thu Aug 13 10:22:42 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392493
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/60_mecp2/60_04_aging.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+Attaching package: ‘ggVennDiagram’
+
+The following object is masked from ‘package:ChIPseeker’:
+
+    overlap
+
+The following object is masked from ‘package:tidyr’:
+
+    unite
+
+================================================================================
+SECTION 60_04: MeCP2 DEVELOPMENTAL TRAJECTORY (YOUNG vs ADULT)
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+FDR threshold: 0.05
+GO terms drawn: 25 
+
+--- Loading MeCP2 aging DiffBind tables ---
+  Control aging: 397170 peaks (2822 gained, 10930 lost at FDR<0.05)
+  Control aging: the counts above use the file's log2(young/adult) Fold.
+  Control aging aging fold (adult / young): 397,170 peaks, 10,930 up, 2,822 down, 383,418 not significant
+  Control aging orientation check: cor(Fold, Conc_adult - Conc_young) = 0.912
+  Mutant aging: 395715 peaks (10646 gained, 23117 lost at FDR<0.05)
+  Mutant aging: the counts above use the file's log2(young/adult) Fold.
+  Mutant aging aging fold (adult / young): 395,715 peaks, 23,117 up, 10,646 down, 361,952 not significant
+  Mutant aging orientation check: cor(Fold, Conc_adult - Conc_young) = 0.969
+
+--- Analysis 1: aging peak counts by genotype ---
+  Control  Aging up         10,930 peaks (2.75% of the genotype's peaks)
+  Control  Aging down       2,822 peaks (0.71% of the genotype's peaks)
+  Control  Not significant  383,418 peaks (96.54% of the genotype's peaks)
+  Mutant   Aging up         23,117 peaks (5.84% of the genotype's peaks)
+  Mutant   Aging down       10,646 peaks (2.69% of the genotype's peaks)
+  Mutant   Not significant  361,952 peaks (91.47% of the genotype's peaks)
+  Peak-level Fisher, Aging up in mutant vs control: OR = 2.192, p < 2.2e-16
+  Peak-level Fisher, Aging down in mutant vs control: OR = 3.863, p < 2.2e-16
+  Saved: 60_04a_aging_peak_counts/{pdf,svg,png,jpg}
+
+--- Annotating aging peaks to genes ---
+  Annotating Control aging peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  Control aging: 396,843 of 397,041 annotated peaks carry a gene symbol
+  Annotating Mutant aging peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  Mutant aging: 395,415 of 395,590 annotated peaks carry a gene symbol
+
+--- Collapsing aging peaks to genes ---
+  ctrl_aging: 23,062 genes carry a peak, 2,775 have an aging-up peak, 2,361 an aging-down peak
+  mut_aging: 23,013 genes carry a peak, 4,120 have an aging-up peak, 6,382 an aging-down peak
+  Genes with a peak in both genotypes: 22,642 of 23,433 in the union
+  Control only: 420 genes | mutant only: 371 genes
+
+--- Analysis 2: aging-up gene overlap between genotypes ---
+  Genes in universe                                    22,642
+  Control aging-up genes                               2,771
+  Mutant aging-up genes                                4,117
+  Aging-up in both                                     2,501
+  Control-only aging-up                                270
+  Mutant-only aging-up                                 1,616
+  Mutant-specific aging-up (control not significant)   1,309
+  Saved: 60_04b_aging_up_gene_venn/{pdf,svg,png,jpg}
+
+--- Analysis 3: aging fold at peaks shared by both genotypes ---
+  Shared peak pairs: 201,032 (control 397,170 peaks, mutant 395,715 peaks)
+  Pairs aging-up in both genotypes: 7,301
+  Shared pairs with a control gene symbol: 200,854 of 201,032
+  Median aging fold: control -0.0861, mutant -0.1831, difference -0.0813
+  Mutant above the identity line: 80,686 of 201,032 pairs (40.1%)
+  Spearman rho = 0.349, p < 2.2e-16
+  Paired Wilcoxon (mutant vs control fold): p < 2.2e-16
+  Labelling 10 of 10 key genes, at the shared peak with the largest fold difference
+  Saved: 60_04c_shared_peak_aging_fold/{pdf,svg,png,jpg}
+
+--- Analysis 4: mutant-specific aging-up genes ---
+  Mutant-specific aging-up genes: 1,309 of 22,642 in the universe (5.8%)
+  Median mutant aging fold at these genes: 1.0184
+
+--- Analysis 5: GO biological process enrichment ---
+'select()' returned 1:1 mapping between keys and columns
+  Mutant-specific aging genes: 1,309 symbols mapped to 1,309 Entrez identifiers
+'select()' returned 1:1 mapping between keys and columns
+  Peak-carrying universe: 22,642 symbols mapped to 22,642 Entrez identifiers
+  WARNING: GO BP enrichment returned no term at q < 0.05 for the  mutant-specific aging genes against the peak-carrying universe.
+  Skipping GO dot plot (no significant terms).
+
+--- Analysis 6: overlap with the adult mCH result ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Genes with both a MeCP2 aging test and an mCH test: 17,903
+  Of these, 1,027 are mutant-specific aging-up and 5,236 are mCH significant
+  Wrote: 60_04_mut_specific_aging_vs_mch_sig_genes.tsv (17,903 rows, 4 cols)
+  Wrote: 60_04_mut_specific_aging_vs_mch_sig.tsv (1 rows, 12 cols)
+  Fisher 60_04:mut_specific_aging_vs_mch_sig: OR=1.778, p=7.8e-18 (n=17,903 genes) [registered]
+  Wrote: 60_04_mut_specific_aging_vs_mch_hyper_genes.tsv (17,903 rows, 4 cols)
+  Wrote: 60_04_mut_specific_aging_vs_mch_hyper.tsv (1 rows, 12 cols)
+  Fisher 60_04:mut_specific_aging_vs_mch_hyper: OR=8.138, p=8.43e-80 (n=17,903 genes) [registered]
+  Wrote: 60_04_mut_specific_aging_vs_mch_hypo_genes.tsv (17,903 rows, 4 cols)
+  Wrote: 60_04_mut_specific_aging_vs_mch_hypo.tsv (1 rows, 12 cols)
+  Fisher 60_04:mut_specific_aging_vs_mch_hypo: OR=0.911, p=0.226 (n=17,903 genes) [registered]
+  Mutant-specific aging up   n = 1,027, median mCH change = 0.1003 pp, mean = 0.2319 pp
+  Other peak-carrying genes  n = 16,876, median mCH change = 0.0191 pp, mean = 0.0175 pp
+  Wilcoxon mCH change, mutant-specific vs other: W = 10859755, p < 2.2e-16
+  Saved: 60_04e_mch_diff_by_aging_group/{pdf,svg,png,jpg}
+
+--- Writing tables ---
+  Wrote: 60_04_aging_peak_counts.tsv (6 rows, 5 cols)
+  Wrote: 60_04_aging_peak_proportion_fisher.tsv (2 rows, 11 cols)
+  Wrote: 60_04_aging_gene_table.tsv (23,433 rows, 35 cols)
+  Wrote: 60_04_aging_up_gene_overlap.tsv (7 rows, 2 cols)
+  Wrote: 60_04_aging_up_gene_sets.tsv (22,642 rows, 8 cols)
+  Wrote: 60_04_shared_peak_pairs.tsv (201,032 rows, 15 cols)
+  Wrote: 60_04_shared_peak_fold_stats.tsv (1 rows, 13 cols)
+  Wrote: 60_04_mut_specific_aging_genes.tsv (1,309 rows, 35 cols)
+  Wrote: 60_04_mut_specific_go_bp.tsv (0 rows, 5 cols)
+  Wrote: 60_04_aging_mch_gene_level.tsv (17,903 rows, 48 cols)
+  Wrote: 60_04_mch_overlap_fisher_summary.tsv (3 rows, 11 cols)
+  Wrote: 60_04_mch_diff_by_aging_group_summary.tsv (2 rows, 6 cols)
+  Wrote: 60_04_mch_diff_by_aging_group_wilcoxon.tsv (1 rows, 9 cols)
+
+================================================================================
+SECTION 60_04 SUMMARY
+================================================================================
+Control aging peaks:            397,170 (10,930 up, 2,822 down)
+Mutant aging peaks:             395,715 (23,117 up, 10,646 down)
+Peak-level Fisher, aging up:    OR = 2.192, p < 2.2e-16
+Genes with a peak in both:      22,642
+Aging-up genes:                 control 2,771, mutant 4,117, shared 2,501
+Mutant-specific aging-up genes: 1,309
+Shared peak pairs:              201,032, Spearman rho = 0.349, paired Wilcoxon p < 2.2e-16
+Median aging fold difference:   -0.0813 (mutant minus control)
+GO BP terms at q < 0.05:        0
+Fisher mut_specific_aging_vs_mch_sig    OR = 1.778, p < 2.2e-16
+Fisher mut_specific_aging_vs_mch_hyper  OR = 8.138, p < 2.2e-16
+Fisher mut_specific_aging_vs_mch_hypo   OR = 0.911, p = 0.226
+Wilcoxon mCH change by group:   p < 2.2e-16
+
+Section 60_04 complete.
+
+Warning messages:
+1: In geom_label(aes(label = .data[[label]]), data = region_label,  :
+  Ignoring unknown parameters: `linewidth`
+2: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr4_GL456350_random
+  - in 'y': chrUn_GL456366, chrUn_GL456382, chr5_GL456354_random
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+3: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr4_GL456350_random
+  - in 'y': chrUn_GL456366, chrUn_GL456382, chr5_GL456354_random
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+
+=========================================
+Complete: section 60_04
+Time: 130s
+Exit code: 0
+End time: Thu Aug 13 10:24:55 PDT 2026
+=========================================

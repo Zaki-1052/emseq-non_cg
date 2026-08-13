@@ -1,0 +1,271 @@
+=========================================
+EM-seq section 10_03: Polycomb enrichment
+=========================================
+Job ID: 53392496
+Node: exp-4-33
+Start time: Thu Aug 13 10:23:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392496
+Code dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:        /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_03_polycomb_enrichment.R
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Chromatin state: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+================================================================================
+SECTION 10_03: POLYCOMB TARGET ENRICHMENT IN DIFFERENTIAL mCH
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+FDR threshold:    0.050
+K119ub top fraction: 0.100
+
+STEP 1: Loading inputs
+  Chromatin state table: 21,097 genes
+  H2AK119ub gene signal: 23,150 rows, 23,150 unique symbols
+  mCH results: 21,097 rows, 21,072 unique genes at FDR < 0.050 (641 hyper, 4,910 hypo)
+
+STEP 2: Building the analysis universe and Polycomb definitions
+  Analysis universe: 21,072 genes with both an mCH result and a chromatin state
+    0 mCH genes have no chromatin state and are dropped
+  Gene-body state counts:
+    Active                6,555 (31.1%)
+    Mixed                   519 (2.5%)
+    Polycomb              3,322 (15.8%)
+    Enhancer_Marked       5,470 (26.0%)
+    Unmarked              5,206 (24.7%)
+  Promoter state counts:
+    Active_Promoter       6,178 (29.3%)
+    Bivalent_Promoter       286 (1.4%)
+    Repressed_Promoter    2,774 (13.2%)
+    Unmarked_Promoter    11,834 (56.2%)
+  Polycomb gene-body state: 3,322 genes (15.8%)
+  Polycomb or Mixed gene-body state: 3,841 genes (18.2%)
+  Repressed or Bivalent promoter state: 3,060 genes (14.5%)
+  Gene body overlapping an H3K27me3 peak: 3,841 genes (18.2%)
+  H2AK119ub signal matched for 18,543 of 21,072 genes
+  Top 10% control signal cutoff = 2.5543, 1,855 genes flagged
+  Wrote: 10_03_polycomb_definition_sizes.tsv (5 rows, 6 cols)
+  Wrote: 10_03_polycomb_definition_overlap.tsv (10 rows, 8 cols)
+
+STEP 3: Fisher exact tests through the shared registry
+  Wrote: 10_03_body_polycomb_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_polycomb_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_polycomb_hyper: OR=0.801, p=0.0613 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_polycomb_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_polycomb_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_polycomb_hypo: OR=1.646, p=8.17e-32 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_polycomb_mixed_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_polycomb_mixed_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_polycomb_mixed_hyper: OR=1.373, p=0.00125 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_polycomb_mixed_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_polycomb_mixed_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_polycomb_mixed_hypo: OR=1.844, p=3.88e-53 (n=21,072 genes) [registered]
+  Wrote: 10_03_repressed_bivalent_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_repressed_bivalent_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:repressed_bivalent_hyper: OR=1.385, p=0.00207 (n=21,072 genes) [registered]
+  Wrote: 10_03_repressed_bivalent_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_repressed_bivalent_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:repressed_bivalent_hypo: OR=1.471, p=2.89e-18 (n=21,072 genes) [registered]
+  Wrote: 10_03_k27me3_peak_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_k27me3_peak_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:k27me3_peak_hyper: OR=1.373, p=0.00125 (n=21,072 genes) [registered]
+  Wrote: 10_03_k27me3_peak_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_k27me3_peak_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:k27me3_peak_hypo: OR=1.844, p=3.88e-53 (n=21,072 genes) [registered]
+  Wrote: 10_03_k119ub_top_hyper_genes.tsv (18,543 rows, 4 cols)
+  Wrote: 10_03_k119ub_top_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:k119ub_top_hyper: OR=1.189, p=0.189 (n=18,543 genes) [registered]
+  Wrote: 10_03_k119ub_top_hypo_genes.tsv (18,543 rows, 4 cols)
+  Wrote: 10_03_k119ub_top_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:k119ub_top_hypo: OR=0.838, p=0.00235 (n=18,543 genes) [registered]
+  Wrote: 10_03_body_state_Active_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Active_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Active_hyper: OR=3.062, p=2.53e-43 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Active_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Active_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Active_hypo: OR=1.772, p=1.06e-62 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Mixed_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Mixed_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Mixed_hyper: OR=4.965, p=1.97e-22 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Mixed_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Mixed_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Mixed_hypo: OR=2.613, p=6.34e-25 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Polycomb_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Polycomb_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Polycomb_hyper: OR=0.801, p=0.0613 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Polycomb_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Polycomb_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Polycomb_hypo: OR=1.646, p=8.17e-32 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Enhancer_Marked_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Enhancer_Marked_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Enhancer_Marked_hyper: OR=0.569, p=2.76e-08 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Enhancer_Marked_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Enhancer_Marked_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Enhancer_Marked_hypo: OR=0.937, p=0.0839 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Unmarked_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Unmarked_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Unmarked_hyper: OR=0.085, p=1.12e-54 (n=21,072 genes) [registered]
+  Wrote: 10_03_body_state_Unmarked_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_body_state_Unmarked_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:body_state_Unmarked_hypo: OR=0.211, p=4.65e-243 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Active_Promoter_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Active_Promoter_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Active_Promoter_hyper: OR=1.401, p=7.1e-05 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Active_Promoter_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Active_Promoter_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Active_Promoter_hypo: OR=1.992, p=1.14e-88 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Bivalent_Promoter_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Bivalent_Promoter_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Bivalent_Promoter_hyper: OR=4.020, p=1.02e-09 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Bivalent_Promoter_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Bivalent_Promoter_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Bivalent_Promoter_hypo: OR=1.546, p=0.000901 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Repressed_Promoter_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Repressed_Promoter_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Repressed_Promoter_hyper: OR=1.080, p=0.514 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Repressed_Promoter_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Repressed_Promoter_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Repressed_Promoter_hypo: OR=1.443, p=1.95e-15 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Unmarked_Promoter_hyper_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Unmarked_Promoter_hyper.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Unmarked_Promoter_hyper: OR=0.620, p=3.1e-09 (n=21,072 genes) [registered]
+  Wrote: 10_03_promoter_state_Unmarked_Promoter_hypo_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 10_03_promoter_state_Unmarked_Promoter_hypo.tsv (1 rows, 12 cols)
+  Fisher 10_03:promoter_state_Unmarked_Promoter_hypo: OR=0.440, p=1.59e-137 (n=21,072 genes) [registered]
+  Wrote: 10_03_polycomb_fisher_tests.tsv (28 rows, 24 cols)
+
+STEP 4: Rate and magnitude tables
+  Wrote: 10_03_significance_rate_by_definition.tsv (10 rows, 9 cols)
+  Wrote: 10_03_chromatin_state_enrichment.tsv (9 rows, 21 cols)
+  Wrote: 10_03_polycomb_magnitude_wilcoxon.tsv (15 rows, 13 cols)
+  Wrote: 10_03_polycomb_gene_classification.tsv (21,072 rows, 26 cols)
+
+STEP 5: Figures
+  Saved: 10_03a_polycomb_mch_status_stacked_bar/{pdf,svg,png,jpg}
+  Saved: 10_03b_polycomb_fisher_forest/{pdf,svg,png,jpg}
+  Saved: 10_03c_chromatin_state_odds_ratios/{pdf,svg,png,jpg}
+  Saved: 10_03d_chromatin_state_significance_rates/{pdf,svg,png,jpg}
+  Saved: 10_03e_mch_magnitude_violin/{pdf,svg,png,jpg}
+  Saved: 10_03f_mch_magnitude_by_definition/{pdf,svg,png,jpg}
+  Saved: 10_03g_significance_rate_by_definition/{pdf,svg,png,jpg}
+  Saved: 10_03h_composite_summary/{pdf,svg,png,jpg}
+
+================================================================================
+SECTION 10_03 SUMMARY
+================================================================================
+Universe: 21,072 genes with an mCH result and a chromatin state
+mCH hypermethylated: 641 (3.04%) | hypomethylated: 4,910 (23.30%)
+
+--- Polycomb definition sizes ---
+  Polycomb body state              3,322 of  21,072 genes (15.8%), 0 untested
+  Polycomb or Mixed body           3,841 of  21,072 genes (18.2%), 0 untested
+  Repressed/Bivalent promoter      3,060 of  21,072 genes (14.5%), 0 untested
+  H3K27me3 body overlap            3,841 of  21,072 genes (18.2%), 0 untested
+  K119ub top 10%                   1,855 of  18,543 genes (10.0%), 2,529 untested
+
+--- Polycomb definition tests ---
+  Gene set                       Direction                OR             95% CI            p       q (BH)    Sig
+  Polycomb body state            Hypermethylated       0.801    0.627-1.012           0.0613       0.0686     ns
+  Polycomb body state            Hypomethylated        1.646    1.515-1.787         8.17e-32     2.29e-31    ***
+  Polycomb or Mixed body         Hypermethylated       1.373    1.131-1.659          0.00125      0.00166     **
+  Polycomb or Mixed body         Hypomethylated        1.844    1.707-1.992         3.88e-53     1.55e-52    ***
+  Repressed/Bivalent promoter    Hypermethylated       1.385    1.122-1.698          0.00207      0.00264     **
+  Repressed/Bivalent promoter    Hypomethylated        1.471    1.350-1.603         2.89e-18     6.23e-18    ***
+  H3K27me3 body overlap          Hypermethylated       1.373    1.131-1.659          0.00125      0.00166     **
+  H3K27me3 body overlap          Hypomethylated        1.844    1.707-1.992         3.88e-53     1.55e-52    ***
+  K119ub top 10%                 Hypermethylated       1.189    0.908-1.535            0.189        0.196     ns
+  K119ub top 10%                 Hypomethylated        0.838    0.745-0.940          0.00235      0.00286     **
+
+--- Gene-body state tests ---
+  Gene set                       Direction                OR             95% CI            p       q (BH)    Sig
+  Active                         Hypermethylated       3.062    2.604-3.605         2.53e-43     8.86e-43    ***
+  Active                         Hypomethylated        1.772    1.657-1.894         1.06e-62      7.4e-62    ***
+  Mixed                          Hypermethylated       4.965    3.719-6.542         1.97e-22     4.59e-22    ***
+  Mixed                          Hypomethylated        2.613    2.180-3.129         6.34e-25     1.62e-24    ***
+  Polycomb                       Hypermethylated       0.801    0.627-1.012           0.0613       0.0686     ns
+  Polycomb                       Hypomethylated        1.646    1.515-1.787         8.17e-32     2.29e-31    ***
+  Enhancer_Marked                Hypermethylated       0.569    0.458-0.703         2.76e-08     4.54e-08    ***
+  Enhancer_Marked                Hypomethylated        0.937    0.870-1.009           0.0839       0.0904     ns
+  Unmarked                       Hypermethylated       0.085    0.050-0.135         1.12e-54     6.28e-54    ***
+  Unmarked                       Hypomethylated        0.211    0.189-0.235        4.65e-243     1.3e-241    ***
+
+--- Promoter state tests ---
+  Gene set                       Direction                OR             95% CI            p       q (BH)    Sig
+  Active_Promoter                Hypermethylated       1.401    1.185-1.655          7.1e-05      0.00011    ***
+  Active_Promoter                Hypomethylated        1.992    1.862-2.131         1.14e-88     1.07e-87    ***
+  Bivalent_Promoter              Hypermethylated       4.020    2.652-5.909         1.02e-09      1.9e-09    ***
+  Bivalent_Promoter              Hypomethylated        1.546    1.190-1.997         0.000901      0.00133     **
+  Repressed_Promoter             Hypermethylated       1.080    0.851-1.357            0.514        0.514     ns
+  Repressed_Promoter             Hypomethylated        1.443    1.319-1.578         1.95e-15      3.9e-15    ***
+  Unmarked_Promoter              Hypermethylated       0.620    0.527-0.728          3.1e-09     5.42e-09    ***
+  Unmarked_Promoter              Hypomethylated        0.440    0.412-0.470        1.59e-137    2.22e-136    ***
+
+--- Direction of effect at q < 0.05 ---
+  Polycomb body state            Hypermethylated    OR = 0.801, q = 0.0686 -> no significant difference
+  Polycomb body state            Hypomethylated     OR = 1.646, q = 2.29e-31 -> enriched
+  Polycomb or Mixed body         Hypermethylated    OR = 1.373, q = 0.00166 -> enriched
+  Polycomb or Mixed body         Hypomethylated     OR = 1.844, q = 1.55e-52 -> enriched
+  Repressed/Bivalent promoter    Hypermethylated    OR = 1.385, q = 0.00264 -> enriched
+  Repressed/Bivalent promoter    Hypomethylated     OR = 1.471, q = 6.23e-18 -> enriched
+  H3K27me3 body overlap          Hypermethylated    OR = 1.373, q = 0.00166 -> enriched
+  H3K27me3 body overlap          Hypomethylated     OR = 1.844, q = 1.55e-52 -> enriched
+  K119ub top 10%                 Hypermethylated    OR = 1.189, q = 0.196 -> no significant difference
+  K119ub top 10%                 Hypomethylated     OR = 0.838, q = 0.00286 -> depleted
+
+--- |mCH difference| medians, Polycomb vs non-Polycomb ---
+  Polycomb body state            All tested genes               poly 0.00145 (n=3,322) vs non-poly 0.00127 (n=17,750), p = 4.32e-10, q = 4.63e-10
+  Polycomb body state            Hypermethylated (significant)  poly 0.00524 (n=84) vs non-poly 0.00780 (n=557), p = 1.64e-15, q = 1.89e-15
+  Polycomb body state            Hypomethylated (significant)   poly 0.00152 (n=1,044) vs non-poly 0.00101 (n=3,866), p < 2.2e-16, q = 4.48e-22
+  Polycomb or Mixed body         All tested genes               poly 0.00148 (n=3,841) vs non-poly 0.00125 (n=17,231), p < 2.2e-16, q = 8.72e-17
+  Polycomb or Mixed body         Hypermethylated (significant)  poly 0.00528 (n=149) vs non-poly 0.00833 (n=492), p < 2.2e-16, q = 7.43e-22
+  Polycomb or Mixed body         Hypomethylated (significant)   poly 0.00154 (n=1,270) vs non-poly 0.00098 (n=3,640), p < 2.2e-16, q = 3.56e-32
+  Repressed/Bivalent promoter    All tested genes               poly 0.00153 (n=3,060) vs non-poly 0.00125 (n=18,012), p < 2.2e-16, q = 2.18e-20
+  Repressed/Bivalent promoter    Hypermethylated (significant)  poly 0.00547 (n=121) vs non-poly 0.00790 (n=520), p < 2.2e-16, q = 1.2e-17
+  Repressed/Bivalent promoter    Hypomethylated (significant)   poly 0.00166 (n=906) vs non-poly 0.00101 (n=4,004), p < 2.2e-16, q = 1.4e-25
+  H3K27me3 body overlap          All tested genes               poly 0.00148 (n=3,841) vs non-poly 0.00125 (n=17,231), p < 2.2e-16, q = 8.72e-17
+  H3K27me3 body overlap          Hypermethylated (significant)  poly 0.00528 (n=149) vs non-poly 0.00833 (n=492), p < 2.2e-16, q = 7.43e-22
+  H3K27me3 body overlap          Hypomethylated (significant)   poly 0.00154 (n=1,270) vs non-poly 0.00098 (n=3,640), p < 2.2e-16, q = 3.56e-32
+  K119ub top 10%                 All tested genes               poly 0.00292 (n=1,855) vs non-poly 0.00117 (n=16,688), p < 2.2e-16, q = 2.9e-208
+  K119ub top 10%                 Hypermethylated (significant)  poly 0.00975 (n=70) vs non-poly 0.00688 (n=533), p = 3.02e-06, q = 3.02e-06
+  K119ub top 10%                 Hypomethylated (significant)   poly 0.00508 (n=415) vs non-poly 0.00095 (n=4,271), p < 2.2e-16, q = 3.58e-159
+
+Figures and tables written to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Fisher tests registered in: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+Section 10_03 complete.
+There were 18 warnings (use warnings() to see them)
+
+=========================================
+Complete: section 10_03
+Time: 38s
+Exit code: 0
+End time: Thu Aug 13 10:24:22 PDT 2026
+=========================================

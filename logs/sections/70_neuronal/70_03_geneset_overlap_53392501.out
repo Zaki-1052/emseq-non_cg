@@ -1,0 +1,199 @@
+=========================================
+EM-seq section 70_03: gene set overlap
+=========================================
+Job ID: 53392501
+Node: exp-1-39
+Start time: Thu Aug 13 10:25:41 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53392501
+Code dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:       /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/70_neuronal/70_03_geneset_overlap.R
+Output dir:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+Neuronal genes: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/neuronal_gene_set.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+Attaching package: ‘ggVennDiagram’
+
+The following object is masked from ‘package:ChIPseeker’:
+
+    overlap
+
+The following object is masked from ‘package:tidyr’:
+
+    unite
+
+===========================================================================
+  SECTION 70_03: GENE SET OVERLAP WITH MeCP2 GAIN
+===========================================================================
+  Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal
+  MeCP2 FDR threshold: 0.05
+  Universe: every gene tested for mCH, one row per gene symbol
+
+--- Step 1a: neuronal gene set from section 70_01 ---
+  5,674 genes in the handoff, 5,674 unique symbols
+    source both       5,267
+    source derived    60
+    source external   347
+
+--- Step 1b: synapse and axon gene set ---
+  Synapse and axon gene set: 2321 genes
+
+--- Step 1c: MeCP2 differential binding aggregated to genes ---
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  11,229 genes carry a MeCP2 peak: 615 up, 127 down at FDR < 0.05
+
+--- Step 2: gene universe ---
+  mch_results: 21,097 rows, 21,072 after one row per gene symbol
+  Universe: 21,072 genes
+  With a MeCP2 peak: 9,517 (45.2%)
+  Neuronal: 4,209 (20.0%) | Synapse: 2,121 (10.1%) | MeCP2 up: 412 (2.0%)
+    Neuronal + MeCP2 up    129 (0.6%)
+    Neuronal only          4,080 (19.4%)
+    MeCP2 up only          283 (1.3%)
+    Other                  16,580 (78.7%)
+
+  Wrote: 70_03_per_gene_gene_sets.tsv (21,072 rows, 21 cols)
+--- Key gene membership ---
+  Wrote: 70_03_key_gene_membership.tsv (10 rows, 12 cols)
+    Arhgap26   Other                  mCH ctrl = 0.02407, mCH diff = 0.01710
+    Cdh8       Neuronal only          mCH ctrl = 0.02106, mCH diff = 0.00245
+    Cntnap2    Neuronal only          mCH ctrl = 0.02456, mCH diff = -0.00149
+    Dlgap1     Neuronal only          mCH ctrl = 0.02214, mCH diff = 0.00221
+    Epha3      Neuronal + MeCP2 up    mCH ctrl = 0.03172, mCH diff = 0.01119
+    Lpp        MeCP2 up only          mCH ctrl = 0.02596, mCH diff = 0.00670
+    Mcu        Other                  mCH ctrl = 0.02238, mCH diff = 0.00354
+    Syt1       Neuronal only          mCH ctrl = 0.02216, mCH diff = 0.00554
+    Trpm3      Other                  mCH ctrl = 0.02313, mCH diff = 0.01155
+    Zbtb20     MeCP2 up only          mCH ctrl = 0.02737, mCH diff = 0.00855
+
+--- Step 3: overlap counts ---
+  Neuronal x MeCP2 up: both 129, Neuronal only 4,080, MeCP2 up only 283, neither 16,580
+    3.1% of Neuronal genes are MeCP2 up, against 2.0% expected from the universe
+  Synapse and axon x MeCP2 up: both 74, Synapse and axon only 2,047, MeCP2 up only 338, neither 18,613
+    3.5% of Synapse and axon genes are MeCP2 up, against 2.0% expected from the universe
+  Neuronal x Synapse and axon: both 2,121, Neuronal only 2,088, Synapse and axon only 0, neither 16,863
+    50.4% of Neuronal genes are Synapse and axon, against 10.1% expected from the universe
+  Wrote: 70_03a_overlap_counts.tsv (3 rows, 12 cols)
+
+--- Step 4: Fisher enrichment of MeCP2 gain in the gene sets ---
+  Wrote: 70_03_neuronal_vs_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 70_03_neuronal_vs_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 70_03:neuronal_vs_mecp2_up: OR=1.852, p=3.49e-08 (n=21,072 genes) [registered]
+  Wrote: 70_03_synapse_vs_mecp2_up_genes.tsv (21,072 rows, 4 cols)
+  Wrote: 70_03_synapse_vs_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 70_03:synapse_vs_mecp2_up: OR=1.991, p=7.97e-07 (n=21,072 genes) [registered]
+  Neuronal x MeCP2 up          OR = 1.852 [1.488, 2.296], p = 3.49e-08 (BH p = 6.99e-08)
+  Synapse and axon x MeCP2 up  OR = 1.991 [1.520, 2.578], p = 7.97e-07 (BH p = 7.97e-07)
+  Wrote: 70_03d_fisher_enrichment.tsv (2 rows, 13 cols)
+
+--- Figure 70_03a: neuronal against MeCP2 up ---
+  Saved: 70_03a_geneset_venn/{pdf,svg,png,jpg}
+
+--- Figure 70_03d: Fisher odds ratios ---
+  Saved: 70_03d_fisher_forest/{pdf,svg,png,jpg}
+
+--- Figure 70_03b: mCH level per gene set ---
+  Wrote: 70_03b_mch_level_summary.tsv (8 rows, 9 cols)
+  Neuronal + MeCP2 up    n = 129, control mCH median = 0.02038, mutant = 0.02338
+  Neuronal only          n = 4,080, control mCH median = 0.01746, mutant = 0.01749
+  MeCP2 up only          n = 283, control mCH median = 0.02049, mutant = 0.02437
+  Other                  n = 16,580, control mCH median = 0.01533, mutant = 0.01558
+  Neuronal               vs Other genes          n = 4,209 vs 16,863, median 0.01756 vs 0.01540, p < 2.2e-16
+  Synapse and axon       vs Other genes          n = 2,121 vs 18,951, median 0.01780 vs 0.01557, p < 2.2e-16
+  Neuronal + MeCP2 up    vs Neuronal only        n = 129 vs 4,080, median 0.02038 vs 0.01746, p = 2.79e-07
+  Neuronal + MeCP2 up    vs MeCP2 up only        n = 129 vs 283, median 0.02038 vs 0.02049, p = 1.00e+00
+  Wrote: 70_03b_mch_ctrl_wilcoxon.tsv (4 rows, 13 cols)
+  Saved: 70_03b_mch_level_by_set/{pdf,svg,png,jpg}
+
+--- Figure 70_03c: mCH change per gene set ---
+  Wrote: 70_03c_mch_diff_summary.tsv (4 rows, 8 cols)
+  Neuronal + MeCP2 up    n = 129, paired median delta = 0.00233, p = 7.85e-14 | 67 of 129 genes significant
+  Neuronal only          n = 4,080, paired median delta = 0.00001, p = 4.45e-01 | 1,493 of 4,080 genes significant
+  MeCP2 up only          n = 283, paired median delta = 0.00285, p < 2.2e-16 | 141 of 283 genes significant
+  Other                  n = 16,580, paired median delta = 0.00030, p < 2.2e-16 | 3,850 of 16,580 genes significant
+  Wrote: 70_03c_mch_paired_condition_tests.tsv (4 rows, 12 cols)
+  Neuronal               vs Other genes          n = 4,209 vs 16,863, median 0.00004 vs 0.00032, p < 2.2e-16
+  Synapse and axon       vs Other genes          n = 2,121 vs 18,951, median -0.00002 vs 0.00030, p = 4.42e-11
+  Neuronal + MeCP2 up    vs Neuronal only        n = 129 vs 4,080, median 0.00233 vs 0.00001, p < 2.2e-16
+  Neuronal + MeCP2 up    vs MeCP2 up only        n = 129 vs 283, median 0.00233 vs 0.00285, p = 4.34e-02
+  Wrote: 70_03c_mch_diff_wilcoxon.tsv (4 rows, 13 cols)
+  Saved: 70_03c_mch_diff_by_set/{pdf,svg,png,jpg}
+
+--- Figure 70_03e: gene length per gene set ---
+  Wrote: 70_03e_gene_length_summary.tsv (4 rows, 8 cols)
+  Neuronal + MeCP2 up    n = 129, median length = 109,491 bp
+  Neuronal only          n = 4,080, median length = 29,120 bp
+  MeCP2 up only          n = 283, median length = 51,868 bp
+  Other                  n = 16,580, median length = 16,291 bp
+  Neuronal               vs Other genes          n = 4,209 vs 16,863, median 29971 vs 16510, p < 2.2e-16
+  Synapse and axon       vs Other genes          n = 2,121 vs 18,951, median 40693 vs 17189, p < 2.2e-16
+  Neuronal + MeCP2 up    vs Neuronal only        n = 129 vs 4,080, median 109491 vs 29120, p < 2.2e-16
+  Neuronal + MeCP2 up    vs MeCP2 up only        n = 129 vs 283, median 109491 vs 51868, p = 3.51e-05
+  Wrote: 70_03e_gene_length_wilcoxon.tsv (4 rows, 13 cols)
+  Saved: 70_03e_gene_length_by_set/{pdf,svg,png,jpg}
+
+--- Figure 70_03f: composite ---
+  Saved: 70_03f_composite/{pdf,svg,png,jpg}
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  Universe: 21,072 genes, 4,209 neuronal, 2,121 synapse and axon, 412 MeCP2 up
+  Neuronal and MeCP2 up: 129 genes
+  Fisher Neuronal x MeCP2 up          OR = 1.852 [1.488, 2.296], p = 3.49e-08
+  Fisher Synapse and axon x MeCP2 up  OR = 1.991 [1.520, 2.578], p = 7.97e-07
+  Neuronal + MeCP2 up    control mCH median = 0.02038
+  Neuronal only          control mCH median = 0.01746
+  MeCP2 up only          control mCH median = 0.02049
+  Other                  control mCH median = 0.01533
+  Neuronal + MeCP2 up    mCH diff median = 0.00233
+  Neuronal only          mCH diff median = 0.00001
+  MeCP2 up only          mCH diff median = 0.00285
+  Other                  mCH diff median = 0.00030
+  Neuronal + MeCP2 up    median gene length = 109,491 bp
+  Neuronal only          median gene length = 29,120 bp
+  MeCP2 up only          median gene length = 51,868 bp
+  Other                  median gene length = 16,291 bp
+
+=== Section 70_03 complete ===
+
+Warning message:
+In geom_label(aes(label = .data[[label]]), data = region_label,  :
+  Ignoring unknown parameters: `linewidth`
+
+=========================================
+Complete: section 70_03
+Time: 47s
+Exit code: 0
+End time: Thu Aug 13 10:26:31 PDT 2026
+=========================================

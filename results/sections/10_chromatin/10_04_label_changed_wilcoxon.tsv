@@ -1,0 +1,2 @@
+measure	test	n_changed	n_stable	median_changed	median_stable	median_difference	statistic	p_value
+mch_diff	Wilcoxon rank-sum, changed vs stable subcompartment label	2291	17814	0.00021758040923598	0.000267137224847113	-4.9556815611133e-05	20055000	0.179585435593008

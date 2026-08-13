@@ -1,0 +1,1022 @@
+GOID	TERM	n_mouse_genes
+GO:0007399	nervous system development	2567
+GO:0050877	nervous system process	2437
+GO:0048699	generation of neurons	1711
+GO:0030182	neuron differentiation	1622
+GO:0048666	neuron development	1343
+GO:0031175	neuron projection development	1180
+GO:0007417	central nervous system development	993
+GO:0099536	synaptic signaling	978
+GO:0099537	trans-synaptic signaling	935
+GO:0007268	chemical synaptic transmission	928
+GO:0098916	anterograde trans-synaptic signaling	928
+GO:0099177	regulation of trans-synaptic signaling	740
+GO:0050804	modulation of chemical synaptic transmission	739
+GO:0048812	neuron projection morphogenesis	731
+GO:0048667	cell morphogenesis involved in neuron differentiation	677
+GO:0051960	regulation of nervous system development	595
+GO:0010975	regulation of neuron projection development	583
+GO:0061564	axon development	563
+GO:0050808	synapse organization	557
+GO:0007409	axonogenesis	501
+GO:0048167	regulation of synaptic plasticity	393
+GO:0051962	positive regulation of nervous system development	391
+GO:0051402	neuron apoptotic process	369
+GO:0050806	positive regulation of synaptic transmission	348
+GO:0016358	dendrite development	327
+GO:0050803	regulation of synapse structure or activity	317
+GO:0043523	regulation of neuron apoptotic process	310
+GO:0050807	regulation of synapse organization	309
+GO:0099003	vesicle-mediated transport in synapse	270
+GO:0060291	long-term synaptic potentiation	260
+GO:0007411	axon guidance	252
+GO:0097485	neuron projection guidance	252
+GO:0099173	postsynapse organization	252
+GO:0045664	regulation of neuron differentiation	245
+GO:0010976	positive regulation of neuron projection development	239
+GO:0099504	synaptic vesicle cycle	230
+GO:0007416	synapse assembly	222
+GO:0021953	central nervous system neuron differentiation	212
+GO:1990138	neuron projection extension	211
+GO:0043524	negative regulation of neuron apoptotic process	210
+GO:0001764	neuron migration	206
+GO:0007272	ensheathment of neurons	194
+GO:0008366	axon ensheathment	194
+GO:0048813	dendrite morphogenesis	192
+GO:0050770	regulation of axonogenesis	186
+GO:0051961	negative regulation of nervous system development	183
+GO:0099643	signal release from synapse	174
+GO:0031644	regulation of nervous system process	167
+GO:0010977	negative regulation of neuron projection development	165
+GO:0050773	regulation of dendrite development	145
+GO:0051963	regulation of synapse assembly	144
+GO:0048675	axon extension	143
+GO:0099175	regulation of postsynapse organization	139
+GO:0060996	dendritic spine development	134
+GO:0099072	regulation of postsynaptic membrane neurotransmitter receptor levels	133
+GO:0060078	regulation of postsynaptic membrane potential	130
+GO:0035249	synaptic transmission, glutamatergic	129
+GO:0045666	positive regulation of neuron differentiation	118
+GO:0106027	neuron projection organization	118
+GO:0099565	chemical synaptic transmission, postsynaptic	117
+GO:0016079	synaptic vesicle exocytosis	115
+GO:0030516	regulation of axon extension	113
+GO:0097061	dendritic spine organization	108
+GO:0050772	positive regulation of axonogenesis	101
+GO:0035418	protein localization to synapse	100
+GO:0035082	axoneme assembly	99
+GO:0048814	regulation of dendrite morphogenesis	99
+GO:0021954	central nervous system neuron development	98
+GO:0060079	excitatory postsynaptic potential	95
+GO:0043525	positive regulation of neuron apoptotic process	94
+GO:0045665	negative regulation of neuron differentiation	91
+GO:0036465	synaptic vesicle recycling	90
+GO:0048663	neuron fate commitment	90
+GO:0051966	regulation of synaptic transmission, glutamatergic	88
+GO:0008088	axo-dendritic transport	87
+GO:0097120	receptor localization to synapse	87
+GO:0060998	regulation of dendritic spine development	86
+GO:0007422	peripheral nervous system development	83
+GO:0051965	positive regulation of synapse assembly	82
+GO:0140238	presynaptic endocytosis	81
+GO:0048488	synaptic vesicle endocytosis	78
+GO:0060997	dendritic spine morphogenesis	76
+GO:0050805	negative regulation of synaptic transmission	75
+GO:0048168	regulation of neuronal synaptic plasticity	73
+GO:0048678	response to axon injury	73
+GO:0070050	neuron cellular homeostasis	73
+GO:0050771	negative regulation of axonogenesis	71
+GO:0051932	synaptic transmission, GABAergic	69
+GO:0062237	protein localization to postsynapse	68
+GO:0098930	axonal transport	67
+GO:1903539	protein localization to postsynaptic membrane	67
+GO:0042551	neuron maturation	66
+GO:0060999	positive regulation of dendritic spine development	66
+GO:0021872	forebrain generation of neurons	65
+GO:0050775	positive regulation of dendrite morphogenesis	64
+GO:0031102	neuron projection regeneration	63
+GO:0098815	modulation of excitatory postsynaptic potential	63
+GO:0099172	presynapse organization	63
+GO:0097479	synaptic vesicle localization	61
+GO:0098926	postsynaptic signal transduction	61
+GO:0099171	presynaptic modulation of chemical synaptic transmission	61
+GO:0019228	neuronal action potential	60
+GO:0061001	regulation of dendritic spine morphogenesis	59
+GO:1900271	regulation of long-term synaptic potentiation	59
+GO:2000300	regulation of synaptic vesicle exocytosis	59
+GO:2001222	regulation of neuron migration	58
+GO:0099084	postsynaptic specialization organization	56
+GO:0099054	presynapse assembly	55
+GO:0045773	positive regulation of axon extension	54
+GO:0008089	anterograde axonal transport	53
+GO:0021879	forebrain neuron differentiation	53
+GO:0031103	axon regeneration	53
+GO:0031646	positive regulation of nervous system process	51
+GO:0048483	autonomic nervous system development	50
+GO:0099068	postsynapse assembly	50
+GO:0030517	negative regulation of axon extension	49
+GO:0001941	postsynaptic membrane organization	48
+GO:0140241	translation at synapse	48
+GO:0140242	translation at postsynapse	48
+GO:0008038	neuron recognition	47
+GO:0071542	dopaminergic neuron differentiation	47
+GO:0140236	translation at presynapse	47
+GO:0048489	synaptic vesicle transport	46
+GO:0021955	central nervous system neuron axonogenesis	45
+GO:0097106	postsynaptic density organization	45
+GO:0032228	regulation of synaptic transmission, GABAergic	44
+GO:0097484	dendrite extension	44
+GO:0097028	dendritic cell differentiation	43
+GO:0099174	regulation of presynapse organization	43
+GO:0051968	positive regulation of synaptic transmission, glutamatergic	42
+GO:0099563	modification of synaptic structure	42
+GO:0099633	protein localization to postsynaptic specialization membrane	41
+GO:0099645	neurotransmitter receptor localization to postsynaptic specialization membrane	41
+GO:2000463	positive regulation of excitatory postsynaptic potential	41
+GO:0048665	neuron fate specification	40
+GO:0070570	regulation of neuron projection regeneration	40
+GO:0001773	myeloid dendritic cell activation	39
+GO:0021522	spinal cord motor neuron differentiation	39
+GO:0060074	synapse maturation	39
+GO:0060292	long-term synaptic depression	39
+GO:0099170	postsynaptic modulation of chemical synaptic transmission	39
+GO:1905606	regulation of presynapse assembly	39
+GO:0070286	axonemal dynein complex assembly	38
+GO:0098698	postsynaptic specialization assembly	38
+GO:0098884	postsynaptic neurotransmitter receptor internalization	38
+GO:0140239	postsynaptic endocytosis	38
+GO:1904861	excitatory synapse assembly	38
+GO:0048169	regulation of long-term neuronal synaptic plasticity	37
+GO:0048846	axon extension involved in axon guidance	37
+GO:1902284	neuron projection extension involved in neuron projection guidance	37
+GO:1903421	regulation of synaptic vesicle recycling	37
+GO:0099560	synaptic membrane adhesion	36
+GO:0048499	synaptic vesicle membrane organization	35
+GO:0048679	regulation of axon regeneration	35
+GO:0099010	modification of postsynaptic structure	34
+GO:0008045	motor neuron axon guidance	33
+GO:0036336	dendritic cell migration	33
+GO:0048841	regulation of axon extension involved in axon guidance	33
+GO:0140058	neuron projection arborization	33
+GO:1903859	regulation of dendrite extension	33
+GO:0007271	synaptic transmission, cholinergic	32
+GO:0021952	central nervous system projection neuron axonogenesis	32
+GO:0022011	myelination in peripheral nervous system	32
+GO:0032292	peripheral nervous system axon ensheathment	32
+GO:1900273	positive regulation of long-term synaptic potentiation	32
+GO:1902683	regulation of receptor localization to synapse	32
+GO:0001963	synaptic transmission, dopaminergic	31
+GO:0007274	neuromuscular synaptic transmission	31
+GO:0007288	sperm axoneme assembly	31
+GO:0031629	synaptic vesicle fusion to presynaptic active zone membrane	31
+GO:0021884	forebrain neuron development	30
+GO:0022010	central nervous system myelination	30
+GO:0032291	axon ensheathment in central nervous system	30
+GO:0061003	positive regulation of dendritic spine morphogenesis	30
+GO:0070193	synaptonemal complex organization	29
+GO:1902473	regulation of protein localization to synapse	29
+GO:1903861	positive regulation of dendrite extension	29
+GO:0016188	synaptic vesicle maturation	28
+GO:0021895	cerebral cortex neuron differentiation	28
+GO:0097062	dendritic spine maintenance	28
+GO:0099149	regulation of postsynaptic neurotransmitter receptor internalization	28
+GO:0099558	maintenance of synapse structure	28
+GO:1900242	regulation of synaptic vesicle endocytosis	28
+GO:0016082	synaptic vesicle priming	27
+GO:0048843	negative regulation of axon extension involved in axon guidance	27
+GO:0097049	motor neuron apoptotic process	27
+GO:0097107	postsynaptic density assembly	27
+GO:1905962	glutamatergic neuron differentiation	27
+GO:0002407	dendritic cell chemotaxis	26
+GO:0007130	synaptonemal complex assembly	26
+GO:0097150	neuronal stem cell population maintenance	25
+GO:0007413	axonal fasciculation	24
+GO:0008090	retrograde axonal transport	24
+GO:0021889	olfactory bulb interneuron differentiation	24
+GO:0031645	negative regulation of nervous system process	24
+GO:0043011	myeloid dendritic cell differentiation	24
+GO:0048485	sympathetic nervous system development	24
+GO:0060080	inhibitory postsynaptic potential	24
+GO:0106030	neuron projection fasciculation	24
+GO:2001224	positive regulation of neuron migration	24
+GO:0090128	regulation of synapse maturation	23
+GO:0097154	GABAergic neuron differentiation	23
+GO:0098974	postsynaptic actin cytoskeleton organization	23
+GO:0099188	postsynaptic cytoskeleton organization	23
+GO:1903540	establishment of protein localization to postsynaptic membrane	23
+GO:1905244	regulation of modification of synaptic structure	23
+GO:0031290	retinal ganglion cell axon guidance	22
+GO:0048486	parasympathetic nervous system development	22
+GO:0098969	neurotransmitter receptor transport to postsynaptic membrane	22
+GO:1900006	positive regulation of dendrite development	22
+GO:0001976	nervous system process involved in regulation of systemic arterial blood pressure	21
+GO:0048172	regulation of short-term neuronal synaptic plasticity	21
+GO:0099509	regulation of presynaptic cytosolic calcium ion concentration	21
+GO:0032230	positive regulation of synaptic transmission, GABAergic	20
+GO:0036480	neuron intrinsic apoptotic signaling pathway in response to oxidative stress	20
+GO:0048490	anterograde synaptic vesicle transport	20
+GO:0097091	synaptic vesicle clustering	20
+GO:0098885	modification of postsynaptic actin cytoskeleton	20
+GO:0099150	regulation of postsynaptic specialization assembly	20
+GO:0099514	synaptic vesicle cytoskeletal transport	20
+GO:0099517	synaptic vesicle transport along microtubule	20
+GO:1904862	inhibitory synapse assembly	20
+GO:1904889	regulation of excitatory synapse assembly	20
+GO:2000671	regulation of motor neuron apoptotic process	20
+GO:0002371	dendritic cell cytokine production	19
+GO:0016322	neuron remodeling	19
+GO:0031630	regulation of synaptic vesicle fusion to presynaptic active zone membrane	19
+GO:0098696	regulation of neurotransmitter receptor localization to postsynaptic specialization membrane	19
+GO:1900452	regulation of long-term synaptic depression	19
+GO:1901632	regulation of synaptic vesicle membrane organization	19
+GO:1905874	regulation of postsynaptic density organization	19
+GO:0002730	regulation of dendritic cell cytokine production	18
+GO:0014041	regulation of neuron maturation	18
+GO:0021859	pyramidal neuron differentiation	18
+GO:0070571	negative regulation of neuron projection regeneration	18
+GO:0097048	dendritic cell apoptotic process	18
+GO:0097401	synaptic vesicle lumen acidification	18
+GO:0098814	spontaneous synaptic transmission	18
+GO:0098962	regulation of postsynaptic neurotransmitter receptor activity	18
+GO:0099159	regulation of modification of postsynaptic structure	18
+GO:1903376	regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway	18
+GO:1905809	negative regulation of synapse organization	18
+GO:2000668	regulation of dendritic cell apoptotic process	18
+GO:0001771	immunological synapse formation	17
+GO:0019896	axonal transport of mitochondrion	17
+GO:0061000	negative regulation of dendritic spine development	17
+GO:0098693	regulation of synaptic vesicle cycle	17
+GO:1902285	semaphorin-plexin signaling pathway involved in neuron projection guidance	17
+GO:1903423	positive regulation of synaptic vesicle recycling	17
+GO:0032222	regulation of synaptic transmission, cholinergic	16
+GO:0099527	postsynapse to nucleus signaling pathway	16
+GO:1902287	semaphorin-plexin signaling pathway involved in axon guidance	16
+GO:1902950	regulation of dendritic spine maintenance	16
+GO:1904936	interneuron migration	16
+GO:0048681	negative regulation of axon regeneration	15
+GO:0070572	positive regulation of neuron projection regeneration	15
+GO:0097475	motor neuron migration	15
+GO:0099151	regulation of postsynaptic density assembly	15
+GO:0099550	trans-synaptic signaling, modulating synaptic transmission	15
+GO:0016081	synaptic vesicle docking	14
+GO:0021514	ventral spinal cord interneuron differentiation	14
+GO:0045161	neuronal ion channel clustering	14
+GO:0048484	enteric nervous system development	14
+GO:0048680	positive regulation of axon regeneration	14
+GO:0060040	retinal bipolar neuron differentiation	14
+GO:0090394	negative regulation of excitatory postsynaptic potential	14
+GO:0098883	synapse pruning	14
+GO:0098908	regulation of neuronal action potential	14
+GO:0098917	retrograde trans-synaptic signaling	14
+GO:0098935	dendritic transport	14
+GO:0150011	regulation of neuron projection arborization	14
+GO:1904948	midbrain dopaminergic neuron differentiation	14
+GO:2000669	negative regulation of dendritic cell apoptotic process	14
+GO:0002087	regulation of respiratory gaseous exchange by nervous system process	13
+GO:0002408	myeloid dendritic cell chemotaxis	13
+GO:0002468	dendritic cell antigen processing and presentation	13
+GO:0021527	spinal cord association neuron differentiation	13
+GO:0021860	pyramidal neuron development	13
+GO:0031632	positive regulation of synaptic vesicle fusion to presynaptic active zone membrane	13
+GO:0031915	positive regulation of synaptic plasticity	13
+GO:0051967	negative regulation of synaptic transmission, glutamatergic	13
+GO:0071679	commissural neuron axon guidance	13
+GO:0098970	postsynaptic neurotransmitter receptor diffusion trapping	13
+GO:0099502	calcium-dependent activation of synaptic vesicle fusion	13
+GO:0140059	dendrite arborization	13
+GO:0140243	regulation of translation at synapse	13
+GO:1900244	positive regulation of synaptic vesicle endocytosis	13
+GO:1900272	negative regulation of long-term synaptic potentiation	13
+GO:1901634	positive regulation of synaptic vesicle membrane organization	13
+GO:1902667	regulation of axon guidance	13
+GO:1904338	regulation of dopaminergic neuron differentiation	13
+GO:1990535	neuron projection maintenance	13
+GO:2000508	regulation of dendritic cell chemotaxis	13
+GO:2000672	negative regulation of motor neuron apoptotic process	13
+GO:0002732	positive regulation of dendritic cell cytokine production	12
+GO:0032224	positive regulation of synaptic transmission, cholinergic	12
+GO:0048934	peripheral nervous system neuron differentiation	12
+GO:0048935	peripheral nervous system neuron development	12
+GO:0050774	negative regulation of dendrite morphogenesis	12
+GO:0051964	negative regulation of synapse assembly	12
+GO:0060579	ventral spinal cord interneuron fate commitment	12
+GO:0070142	synaptic vesicle budding	12
+GO:0070593	dendrite self-avoidance	12
+GO:0097090	presynaptic membrane organization	12
+GO:0099011	neuronal dense core vesicle exocytosis	12
+GO:0099532	synaptic vesicle endosomal processing	12
+GO:1903377	negative regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway	12
+GO:0010807	regulation of synaptic vesicle priming	11
+GO:0019227	neuronal action potential propagation	11
+GO:0021520	spinal cord motor neuron cell fate specification	11
+GO:0032225	regulation of synaptic transmission, dopaminergic	11
+GO:0048664	neuron fate determination	11
+GO:0051124	synaptic assembly at neuromuscular junction	11
+GO:0060385	axonogenesis involved in innervation	11
+GO:0098887	neurotransmitter receptor transport, endosome to postsynaptic membrane	11
+GO:0098976	excitatory chemical synaptic transmission	11
+GO:0099545	trans-synaptic signaling by trans-synaptic complex	11
+GO:0099612	protein localization to axon	11
+GO:0099640	axo-dendritic protein transport	11
+GO:2000171	negative regulation of dendrite development	11
+GO:2000510	positive regulation of dendritic cell chemotaxis	11
+GO:2001223	negative regulation of neuron migration	11
+GO:0002604	regulation of dendritic cell antigen processing and presentation	10
+GO:0003357	noradrenergic neuron differentiation	10
+GO:0007158	neuron cell-cell adhesion	10
+GO:0016185	synaptic vesicle budding from presynaptic endocytic zone membrane	10
+GO:0021892	cerebral cortex GABAergic interneuron differentiation	10
+GO:0051583	dopamine uptake involved in synaptic transmission	10
+GO:0051823	regulation of synapse structural plasticity	10
+GO:0051934	catecholamine uptake involved in synaptic transmission	10
+GO:0090129	positive regulation of synapse maturation	10
+GO:0097104	postsynaptic membrane assembly	10
+GO:0097119	postsynaptic density protein 95 clustering	10
+GO:0098700	neurotransmitter loading into synaptic vesicle	10
+GO:0098828	modulation of inhibitory postsynaptic potential	10
+GO:0099525	presynaptic dense core vesicle exocytosis	10
+GO:0099538	synaptic signaling via neuropeptide	10
+GO:0140245	regulation of translation at postsynapse	10
+GO:0140250	regulation protein catabolic process at synapse	10
+GO:1900454	positive regulation of long-term synaptic depression	10
+GO:1905274	regulation of modification of postsynaptic actin cytoskeleton	10
+GO:2000807	regulation of synaptic vesicle clustering	10
+GO:0007270	neuron-neuron synaptic transmission	9
+GO:0021626	central nervous system maturation	9
+GO:0021843	substrate-independent telencephalic tangential interneuron migration	9
+GO:0021877	forebrain neuron fate commitment	9
+GO:0021886	hypothalamus gonadotrophin-releasing hormone neuron differentiation	9
+GO:0021888	hypothalamus gonadotrophin-releasing hormone neuron development	9
+GO:0021891	olfactory bulb interneuron development	9
+GO:0032229	negative regulation of synaptic transmission, GABAergic	9
+GO:0032287	peripheral nervous system myelin maintenance	9
+GO:0048170	positive regulation of long-term neuronal synaptic plasticity	9
+GO:0097105	presynaptic membrane assembly	9
+GO:0097376	interneuron axon guidance	9
+GO:0098880	maintenance of postsynaptic specialization structure	9
+GO:0098937	anterograde dendritic transport	9
+GO:0098967	exocytic insertion of neurotransmitter receptor to postsynaptic membrane	9
+GO:0099541	trans-synaptic signaling by lipid	9
+GO:0099542	trans-synaptic signaling by endocannabinoid	9
+GO:0099547	regulation of translation at synapse, modulating synaptic transmission	9
+GO:0099641	anterograde axonal protein transport	9
+GO:1905383	protein localization to presynapse	9
+GO:0021521	ventral spinal cord interneuron specification	8
+GO:0021830	interneuron migration from the subpallium to the cortex	8
+GO:0032289	central nervous system myelin formation	8
+GO:0036466	synaptic vesicle recycling via endosome	8
+GO:0061002	negative regulation of dendritic spine morphogenesis	8
+GO:0097151	positive regulation of inhibitory postsynaptic potential	8
+GO:0110088	hippocampal neuron apoptotic process	8
+GO:1904953	Wnt signaling pathway involved in midbrain dopaminergic neuron differentiation	8
+GO:1905806	regulation of synapse pruning	8
+GO:1990709	presynaptic active zone organization	8
+GO:2000809	positive regulation of synaptic vesicle clustering	8
+GO:0002372	myeloid dendritic cell cytokine production	7
+GO:0002606	positive regulation of dendritic cell antigen processing and presentation	7
+GO:0002733	regulation of myeloid dendritic cell cytokine production	7
+GO:0002735	positive regulation of myeloid dendritic cell cytokine production	7
+GO:0008582	regulation of synaptic assembly at neuromuscular junction	7
+GO:0014042	positive regulation of neuron maturation	7
+GO:0016198	axon choice point recognition	7
+GO:0021828	gonadotrophin-releasing hormone neuronal migration to the hypothalamus	7
+GO:0021856	hypothalamic tangential migration using cell-axon interactions	7
+GO:0021894	cerebral cortex GABAergic interneuron development	7
+GO:0030885	regulation of myeloid dendritic cell activation	7
+GO:0048842	positive regulation of axon extension involved in axon guidance	7
+GO:0098943	neurotransmitter receptor transport, postsynaptic endosome to lysosome	7
+GO:0098977	inhibitory chemical synaptic transmission	7
+GO:0099179	regulation of synaptic membrane adhesion	7
+GO:0099566	regulation of postsynaptic cytosolic calcium ion concentration	7
+GO:0140252	regulation protein catabolic process at postsynapse	7
+GO:0150003	regulation of spontaneous synaptic transmission	7
+GO:0150012	positive regulation of neuron projection arborization	7
+GO:0150037	regulation of calcium-dependent activation of synaptic vesicle fusion	7
+GO:0150052	regulation of postsynapse assembly	7
+GO:1901166	neural crest cell migration involved in autonomic nervous system development	7
+GO:1901626	regulation of postsynaptic membrane organization	7
+GO:1902952	positive regulation of dendritic spine maintenance	7
+GO:1990048	anterograde neuronal dense core vesicle transport	7
+GO:2001198	regulation of dendritic cell differentiation	7
+GO:0014043	negative regulation of neuron maturation	6
+GO:0021785	branchiomotor neuron axon guidance	6
+GO:0021902	commitment of neuronal cell to specific neuron type in forebrain	6
+GO:0031914	negative regulation of synaptic plasticity	6
+GO:0036514	dopaminergic neuron axon guidance	6
+GO:0048682	sprouting of injured axon	6
+GO:0051584	regulation of dopamine uptake involved in synaptic transmission	6
+GO:0051940	regulation of catecholamine uptake involved in synaptic transmission	6
+GO:0060024	rhythmic synaptic transmission	6
+GO:0097490	sympathetic neuron projection extension	6
+GO:0098957	anterograde axonal transport of mitochondrion	6
+GO:0098961	dendritic transport of ribonucleoprotein complex	6
+GO:0098963	dendritic transport of messenger ribonucleoprotein complex	6
+GO:0099191	trans-synaptic signaling by BDNF	6
+GO:0099578	regulation of translation at postsynapse, modulating synaptic transmission	6
+GO:0110089	regulation of hippocampal neuron apoptotic process	6
+GO:0140650	radial glia-guided pyramidal neuron migration	6
+GO:1902951	negative regulation of dendritic spine maintenance	6
+GO:1904158	axonemal central apparatus assembly	6
+GO:1904938	planar cell polarity pathway involved in axon guidance	6
+GO:1990049	retrograde neuronal dense core vesicle transport	6
+GO:2000977	regulation of forebrain neuron differentiation	6
+GO:0002175	protein localization to paranode region of axon	5
+GO:0002270	plasmacytoid dendritic cell activation	5
+GO:0003358	noradrenergic neuron development	5
+GO:0016183	synaptic vesicle coating	5
+GO:0016191	synaptic vesicle uncoating	5
+GO:0016199	axon midline choice point recognition	5
+GO:0021523	somatic motor neuron differentiation	5
+GO:0021853	cerebral cortex GABAergic interneuron migration	5
+GO:0022009	central nervous system vasculogenesis	5
+GO:0023041	neuronal signal transduction	5
+GO:0031133	regulation of axon diameter	5
+GO:0033564	anterior/posterior axon guidance	5
+GO:0035283	central nervous system segmentation	5
+GO:0036483	neuron intrinsic apoptotic signaling pathway in response to endoplasmic reticulum stress	5
+GO:0036515	serotonergic neuron axon guidance	5
+GO:0048677	axon extension involved in regeneration	5
+GO:0048686	regulation of sprouting of injured axon	5
+GO:0048936	peripheral nervous system neuron axonogenesis	5
+GO:0060012	synaptic transmission, glycinergic	5
+GO:0060025	regulation of synaptic activity	5
+GO:0060164	regulation of timing of neuron differentiation	5
+GO:0061643	chemorepulsion of axon	5
+GO:0071205	protein localization to juxtaparanode region of axon	5
+GO:0090259	regulation of retinal ganglion cell axon guidance	5
+GO:0097116	gephyrin clustering involved in postsynaptic density assembly	5
+GO:0097492	sympathetic neuron axon guidance	5
+GO:0098920	retrograde trans-synaptic signaling by lipid	5
+GO:0098921	retrograde trans-synaptic signaling by endocannabinoid	5
+GO:0098942	retrograde trans-synaptic signaling by trans-synaptic protein complex	5
+GO:0098971	anterograde dendritic transport of neurotransmitter receptor complex	5
+GO:0099163	synaptic signaling by nitric oxide	5
+GO:0099183	trans-synaptic signaling by BDNF, modulating synaptic transmission	5
+GO:0099505	regulation of presynaptic membrane potential	5
+GO:0099552	trans-synaptic signaling by lipid, modulating synaptic transmission	5
+GO:0099553	trans-synaptic signaling by endocannabinoid, modulating synaptic transmission	5
+GO:0099576	regulation of protein catabolic process at postsynapse, modulating synaptic transmission	5
+GO:0110091	negative regulation of hippocampal neuron apoptotic process	5
+GO:0150099	neuron-glial cell signaling	5
+GO:1901628	positive regulation of postsynaptic membrane organization	5
+GO:1902474	positive regulation of protein localization to synapse	5
+GO:1902669	positive regulation of axon guidance	5
+GO:1902803	regulation of synaptic vesicle transport	5
+GO:1903860	negative regulation of dendrite extension	5
+GO:1904340	positive regulation of dopaminergic neuron differentiation	5
+GO:1904457	positive regulation of neuronal action potential	5
+GO:1904956	regulation of midbrain dopaminergic neuron differentiation	5
+GO:1905702	regulation of inhibitory synapse assembly	5
+GO:1990926	short-term synaptic potentiation	5
+GO:2000301	negative regulation of synaptic vesicle exocytosis	5
+GO:2000302	positive regulation of synaptic vesicle exocytosis	5
+GO:2000520	regulation of immunological synapse formation	5
+GO:0007412	axon target recognition	4
+GO:0014012	peripheral nervous system axon regeneration	4
+GO:0015842	aminergic neurotransmitter loading into synaptic vesicle	4
+GO:0016080	synaptic vesicle targeting	4
+GO:0016189	synaptic vesicle to endosome fusion	4
+GO:0021773	striatal medium spiny neuron differentiation	4
+GO:0030886	negative regulation of myeloid dendritic cell activation	4
+GO:0032226	positive regulation of synaptic transmission, dopaminergic	4
+GO:0032227	negative regulation of synaptic transmission, dopaminergic	4
+GO:0032286	central nervous system myelin maintenance	4
+GO:0032290	peripheral nervous system myelin formation	4
+GO:0033563	dorsal/ventral axon guidance	4
+GO:0036145	dendritic cell homeostasis	4
+GO:0048690	regulation of axon extension involved in regeneration	4
+GO:0048790	maintenance of presynaptic active zone structure	4
+GO:0051835	positive regulation of synapse structural plasticity	4
+GO:0061642	chemoattraction of axon	4
+GO:0097026	dendritic cell dendrite assembly	4
+GO:0097029	mature conventional dendritic cell differentiation	4
+GO:0097118	neuroligin clustering involved in postsynaptic membrane assembly	4
+GO:0097476	spinal cord motor neuron migration	4
+GO:0097491	sympathetic neuron projection guidance	4
+GO:0098749	cerebellar neuron development	4
+GO:0140246	protein catabolic process at synapse	4
+GO:0150062	complement-mediated synapse pruning	4
+GO:0150098	glial cell-neuron signaling	4
+GO:1902685	positive regulation of receptor localization to synapse	4
+GO:1902897	regulation of postsynaptic density protein 95 clustering	4
+GO:1903381	regulation of endoplasmic reticulum stress-induced neuron intrinsic apoptotic signaling pathway	4
+GO:1904071	presynaptic active zone assembly	4
+GO:1904339	negative regulation of dopaminergic neuron differentiation	4
+GO:1904456	negative regulation of neuronal action potential	4
+GO:2000527	regulation of myeloid dendritic cell chemotaxis	4
+GO:2000529	positive regulation of myeloid dendritic cell chemotaxis	4
+GO:2000670	positive regulation of dendritic cell apoptotic process	4
+GO:2000673	positive regulation of motor neuron apoptotic process	4
+GO:2000978	negative regulation of forebrain neuron differentiation	4
+GO:2001200	positive regulation of dendritic cell differentiation	4
+GO:0002273	plasmacytoid dendritic cell differentiation	3
+GO:0002277	myeloid dendritic cell activation involved in immune response	3
+GO:0002605	negative regulation of dendritic cell antigen processing and presentation	3
+GO:0007529	establishment of synaptic specificity at neuromuscular junction	3
+GO:0008039	synaptic target recognition	3
+GO:0021524	visceral motor neuron differentiation	3
+GO:0021551	central nervous system morphogenesis	3
+GO:0021775	smoothened signaling pathway involved in ventral spinal cord interneuron specification	3
+GO:0021776	smoothened signaling pathway involved in spinal cord motor neuron cell fate specification	3
+GO:0021827	postnatal olfactory bulb interneuron migration	3
+GO:0021852	pyramidal neuron migration to cerebral cortex	3
+GO:0031104	dendrite regeneration	3
+GO:0036445	neuronal stem cell division	3
+GO:0036520	astrocyte-dopaminergic neuron signaling	3
+GO:0044565	dendritic cell proliferation	3
+GO:0045887	positive regulation of synaptic assembly at neuromuscular junction	3
+GO:0048687	positive regulation of sprouting of injured axon	3
+GO:0051586	positive regulation of dopamine uptake involved in synaptic transmission	3
+GO:0051941	regulation of amino acid uptake involved in synaptic transmission	3
+GO:0051944	positive regulation of catecholamine uptake involved in synaptic transmission	3
+GO:0060084	synaptic transmission involved in micturition	3
+GO:0061884	regulation of mini excitatory postsynaptic potential	3
+GO:0061885	positive regulation of mini excitatory postsynaptic potential	3
+GO:0097155	fasciculation of sensory neuron axon	3
+GO:0097374	sensory neuron axon guidance	3
+GO:0097477	lateral motor column neuron migration	3
+GO:0098816	mini excitatory postsynaptic potential	3
+GO:0098928	presynaptic signal transduction	3
+GO:0098958	retrograde axonal transport of mitochondrion	3
+GO:0098964	anterograde dendritic transport of messenger ribonucleoprotein complex	3
+GO:0099152	regulation of neurotransmitter receptor transport, endosome to postsynaptic membrane	3
+GO:0099161	regulation of presynaptic dense core granule exocytosis	3
+GO:0099178	regulation of retrograde trans-synaptic signaling by endocanabinoid	3
+GO:0099526	presynapse to nucleus signaling pathway	3
+GO:0099540	trans-synaptic signaling by neuropeptide	3
+GO:0099543	trans-synaptic signaling by soluble gas	3
+GO:0099548	trans-synaptic signaling by nitric oxide	3
+GO:0099557	trans-synaptic signaling by trans-synaptic complex, modulating synaptic transmission	3
+GO:0099562	maintenance of postsynaptic density structure	3
+GO:0140249	protein catabolic process at postsynapse	3
+GO:0140251	regulation protein catabolic process at presynapse	3
+GO:0150018	basal dendrite development	3
+GO:0150019	basal dendrite morphogenesis	3
+GO:0150020	basal dendrite arborization	3
+GO:0150054	regulation of postsynaptic neurotransmitter receptor diffusion trapping	3
+GO:1900073	regulation of neuromuscular synaptic transmission	3
+GO:1900075	positive regulation of neuromuscular synaptic transmission	3
+GO:1900453	negative regulation of long-term synaptic depression	3
+GO:1901629	regulation of presynaptic membrane organization	3
+GO:1902336	positive regulation of retinal ganglion cell axon guidance	3
+GO:1903378	positive regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway	3
+GO:1903422	negative regulation of synaptic vesicle recycling	3
+GO:1903742	regulation of anterograde synaptic vesicle transport	3
+GO:1904891	positive regulation of excitatory synapse assembly	3
+GO:1904954	canonical Wnt signaling pathway involved in midbrain dopaminergic neuron differentiation	3
+GO:1904958	positive regulation of midbrain dopaminergic neuron differentiation	3
+GO:1905539	regulation of postsynapse to nucleus signaling pathway	3
+GO:1905704	positive regulation of inhibitory synapse assembly	3
+GO:2000297	negative regulation of synapse maturation	3
+GO:2000522	positive regulation of immunological synapse formation	3
+GO:2000547	regulation of dendritic cell dendrite assembly	3
+GO:2001199	negative regulation of dendritic cell differentiation	3
+GO:0002266	follicular dendritic cell activation	2
+GO:0002268	follicular dendritic cell differentiation	2
+GO:0002373	plasmacytoid dendritic cell cytokine production	2
+GO:0002731	negative regulation of dendritic cell cytokine production	2
+GO:0010808	positive regulation of synaptic vesicle priming	2
+GO:0016182	synaptic vesicle budding from endosome	2
+GO:0021526	medial motor column neuron differentiation	2
+GO:0021812	neuronal-glial interaction involved in cerebral cortex radial glia guided migration	2
+GO:0021831	embryonic olfactory bulb interneuron precursor migration	2
+GO:0021836	chemorepulsion involved in postnatal olfactory bulb interneuron migration	2
+GO:0021840	directional guidance of interneurons involved in migration from the subpallium to the cortex	2
+GO:0021842	chemorepulsion involved in interneuron migration from the subpallium to the cortex	2
+GO:0021893	cerebral cortex GABAergic interneuron fate commitment	2
+GO:0021966	corticospinal neuron axon guidance	2
+GO:0030887	positive regulation of myeloid dendritic cell activation	2
+GO:0035545	determination of left/right asymmetry in nervous system	2
+GO:0036482	neuron intrinsic apoptotic signaling pathway in response to hydrogen peroxide	2
+GO:0036518	chemorepulsion of dopaminergic neuron axon	2
+GO:0048688	negative regulation of sprouting of injured axon	2
+GO:0048691	positive regulation of axon extension involved in regeneration	2
+GO:0048692	negative regulation of axon extension involved in regeneration	2
+GO:0051943	positive regulation of amino acid uptake involved in synaptic transmission	2
+GO:0060092	regulation of synaptic transmission, glycinergic	2
+GO:0060163	subpallium neuron fate commitment	2
+GO:0061373	mammillary axonal complex development	2
+GO:0070194	synaptonemal complex disassembly	2
+GO:0090125	cell-cell adhesion involved in synapse maturation	2
+GO:0097156	fasciculation of motor neuron axon	2
+GO:0098886	modification of dendritic spine	2
+GO:0098923	retrograde trans-synaptic signaling by soluble gas	2
+GO:0098924	retrograde trans-synaptic signaling by nitric oxide	2
+GO:0098939	dendritic transport of mitochondrion	2
+GO:0098968	neurotransmitter receptor transport postsynaptic membrane to endosome	2
+GO:0099082	retrograde trans-synaptic signaling by neuropeptide	2
+GO:0099140	presynaptic actin cytoskeleton organization	2
+GO:0099148	regulation of synaptic vesicle docking	2
+GO:0099153	synaptic transmission, serotonergic	2
+GO:0099180	zinc ion import into synaptic vesicle	2
+GO:0099187	presynaptic cytoskeleton organization	2
+GO:0099551	trans-synaptic signaling by neuropeptide, modulating synaptic transmission	2
+GO:0099554	trans-synaptic signaling by soluble gas, modulating synaptic transmission	2
+GO:0099555	trans-synaptic signaling by nitric oxide, modulating synaptic transmission	2
+GO:0099630	postsynaptic neurotransmitter receptor cycle	2
+GO:0099642	retrograde axonal protein transport	2
+GO:0106028	neuron projection retraction	2
+GO:0120006	regulation of glutamatergic neuron differentiation	2
+GO:0150007	clathrin-dependent synaptic vesicle endocytosis	2
+GO:0150036	regulation of trans-synaptic signaling by endocannabinoid, modulating synaptic transmission	2
+GO:0150038	postsynaptic dense core vesicle exocytosis	2
+GO:0150045	regulation of synaptic signaling by nitric oxide	2
+GO:1901631	positive regulation of presynaptic membrane organization	2
+GO:1902805	positive regulation of synaptic vesicle transport	2
+GO:1903382	negative regulation of endoplasmic reticulum stress-induced neuron intrinsic apoptotic signaling pathway	2
+GO:1903383	regulation of hydrogen peroxide-induced neuron intrinsic apoptotic signaling pathway	2
+GO:1903384	negative regulation of hydrogen peroxide-induced neuron intrinsic apoptotic signaling pathway	2
+GO:1903744	positive regulation of anterograde synaptic vesicle transport	2
+GO:1904890	negative regulation of excitatory synapse assembly	2
+GO:1905424	regulation of Wnt-mediated midbrain dopaminergic neuron differentiation	2
+GO:1905426	positive regulation of Wnt-mediated midbrain dopaminergic neuron differentiation	2
+GO:1905608	positive regulation of presynapse assembly	2
+GO:2000521	negative regulation of immunological synapse formation	2
+GO:2001017	regulation of retrograde axon cargo transport	2
+GO:2001019	positive regulation of retrograde axon cargo transport	2
+GO:0002383	immune response in brain or nervous system	1
+GO:0002410	plasmacytoid dendritic cell chemotaxis	1
+GO:0002469	myeloid dendritic cell antigen processing and presentation	1
+GO:0002736	regulation of plasmacytoid dendritic cell cytokine production	1
+GO:0002737	negative regulation of plasmacytoid dendritic cell cytokine production	1
+GO:0003359	noradrenergic neuron fate commitment	1
+GO:0014011	Schwann cell proliferation involved in axon regeneration	1
+GO:0014853	regulation of excitatory postsynaptic membrane potential involved in skeletal muscle contraction	1
+GO:0021528	commissural neuron differentiation in spinal cord	1
+GO:0021556	central nervous system formation	1
+GO:0021793	chemorepulsion of branchiomotor axon	1
+GO:0021813	cell-cell adhesion involved in neuronal-glial interactions involved in cerebral cortex radial glia guided migration	1
+GO:0021837	motogenic signaling involved in postnatal olfactory bulb interneuron migration	1
+GO:0021858	GABAergic neuron differentiation in basal ganglia	1
+GO:0021944	neuronal-glial interaction involved in hindbrain glial-mediated radial cell migration	1
+GO:0021956	central nervous system interneuron axonogenesis	1
+GO:0021972	corticospinal neuron axon guidance through spinal cord	1
+GO:0032223	negative regulation of synaptic transmission, cholinergic	1
+GO:0035750	protein localization to myelin sheath abaxonal region	1
+GO:0036516	chemoattraction of dopaminergic neuron axon	1
+GO:0036517	chemoattraction of serotonergic neuron axon	1
+GO:0045886	negative regulation of synaptic assembly at neuromuscular junction	1
+GO:0048174	negative regulation of short-term neuronal synaptic plasticity	1
+GO:0048673	collateral sprouting of intact axon in response to injury	1
+GO:0048674	collateral sprouting of injured axon	1
+GO:0048683	regulation of collateral sprouting of intact axon in response to injury	1
+GO:0048693	regulation of collateral sprouting of injured axon	1
+GO:0048694	positive regulation of collateral sprouting of injured axon	1
+GO:0048894	efferent axon development in a lateral line nerve	1
+GO:0051585	negative regulation of dopamine uptake involved in synaptic transmission	1
+GO:0051945	negative regulation of catecholamine uptake involved in synaptic transmission	1
+GO:0060094	positive regulation of synaptic transmission, glycinergic	1
+GO:0060165	regulation of timing of subpallium neuron differentiation	1
+GO:0060386	synapse assembly involved in innervation	1
+GO:0060404	axonemal microtubule depolymerization	1
+GO:0060580	ventral spinal cord interneuron fate determination	1
+GO:0060945	cardiac neuron differentiation	1
+GO:0061374	mammillothalamic axonal tract development	1
+GO:0061452	retrotrapezoid nucleus neuron differentiation	1
+GO:0061880	regulation of anterograde axonal transport of mitochondrion	1
+GO:0061881	positive regulation of anterograde axonal transport of mitochondrion	1
+GO:0061938	protein localization to somatodendritic compartment	1
+GO:0071206	establishment of protein localization to juxtaparanode region of axon	1
+GO:0071678	olfactory bulb axon guidance	1
+GO:0090126	protein-containing complex assembly involved in synapse maturation	1
+GO:0090260	negative regulation of retinal ganglion cell axon guidance	1
+GO:0097115	neurexin clustering involved in presynaptic membrane assembly	1
+GO:0097377	spinal cord interneuron axon guidance	1
+GO:0097432	hippocampal pyramidal neuron differentiation	1
+GO:0098694	regulation of synaptic vesicle budding from presynaptic endocytic zone membrane	1
+GO:0098817	evoked excitatory postsynaptic potential	1
+GO:0098925	retrograde trans-synaptic signaling by nitric oxide, modulating synaptic transmission	1
+GO:0098972	anterograde dendritic transport of mitochondrion	1
+GO:0099083	retrograde trans-synaptic signaling by neuropeptide, modulating synaptic transmission	1
+GO:0099088	axonal transport of messenger ribonucleoprotein complex	1
+GO:0099089	establishment of endoplasmic reticulum localization to postsynapse	1
+GO:0099123	somato-dendritic dopamine secretion	1
+GO:0099145	regulation of exocytic insertion of neurotransmitter receptor to postsynaptic membrane	1
+GO:0099158	regulation of recycling endosome localization within postsynapse	1
+GO:0099162	regulation of neurotransmitter loading into synaptic vesicle	1
+GO:0099533	positive regulation of presynaptic cytosolic calcium concentration	1
+GO:0099546	protein catabolic process, modulating synaptic transmission	1
+GO:0099575	regulation of protein catabolic process at presynapse, modulating synaptic transmission	1
+GO:0099577	regulation of translation at presynapse, modulating synaptic transmission	1
+GO:0101027	optical nerve axon regeneration	1
+GO:0110090	positive regulation of hippocampal neuron apoptotic process	1
+GO:0120007	negative regulation of glutamatergic neuron differentiation	1
+GO:0120008	positive regulation of glutamatergic neuron differentiation	1
+GO:0140060	axon arborization	1
+GO:0140231	anterograde axonal transport of neurotransmitter receptor complex	1
+GO:0140235	RNA polyadenylation at postsynapse	1
+GO:0140244	regulation of translation at presynapse	1
+GO:0150013	negative regulation of neuron projection arborization	1
+GO:0150035	regulation of trans-synaptic signaling by BDNF, modulating synaptic transmission	1
+GO:0150044	regulation of postsynaptic dense core vesicle exocytosis	1
+GO:0150089	multiple spine synapse organization	1
+GO:0150090	multiple spine synapse organization, single dendrite	1
+GO:0150092	regulation of synaptic scaling	1
+GO:1900243	negative regulation of synaptic vesicle endocytosis	1
+GO:1900383	regulation of synaptic plasticity by receptor localization to synapse	1
+GO:1901627	negative regulation of postsynaptic membrane organization	1
+GO:1902076	regulation of lateral motor column neuron migration	1
+GO:1902078	positive regulation of lateral motor column neuron migration	1
+GO:1902378	VEGF-activated neuropilin signaling pathway involved in axon guidance	1
+GO:1902668	negative regulation of axon guidance	1
+GO:1902684	negative regulation of receptor localization to synapse	1
+GO:1902804	negative regulation of synaptic vesicle transport	1
+GO:1902847	regulation of neuronal signal transduction	1
+GO:1903045	neural crest cell migration involved in sympathetic nervous system development	1
+GO:1903743	negative regulation of anterograde synaptic vesicle transport	1
+GO:1904799	regulation of neuron remodeling	1
+GO:1904800	negative regulation of neuron remodeling	1
+GO:1904937	sensory neuron migration	1
+GO:1905044	regulation of Schwann cell proliferation involved in axon regeneration	1
+GO:1905045	negative regulation of Schwann cell proliferation involved in axon regeneration	1
+GO:1905126	regulation of axo-dendritic protein transport	1
+GO:1905128	positive regulation of axo-dendritic protein transport	1
+GO:1905432	regulation of retrograde trans-synaptic signaling by neuropeptide	1
+GO:1905433	negative regulation of retrograde trans-synaptic signaling by neuropeptide	1
+GO:1905438	non-canonical Wnt signaling pathway involved in midbrain dopaminergic neuron differentiation	1
+GO:1905483	regulation of motor neuron migration	1
+GO:1905485	positive regulation of motor neuron migration	1
+GO:1905512	regulation of short-term synaptic potentiation	1
+GO:1905513	negative regulation of short-term synaptic potentiation	1
+GO:1905518	regulation of presynaptic active zone assembly	1
+GO:1905520	positive regulation of presynaptic active zone assembly	1
+GO:1905591	regulation of optical nerve axon regeneration	1
+GO:1905592	negative regulation of optical nerve axon regeneration	1
+GO:1905607	negative regulation of presynapse assembly	1
+GO:1905703	negative regulation of inhibitory synapse assembly	1
+GO:1905805	excitatory synapse pruning	1
+GO:1905808	positive regulation of synapse pruning	1
+GO:1905875	negative regulation of postsynaptic density organization	1
+GO:1990832	slow axonal transport	1
+GO:2000509	negative regulation of dendritic cell chemotaxis	1
+GO:2000526	positive regulation of glycoprotein biosynthetic process involved in immunological synapse formation	1
+GO:2000548	negative regulation of dendritic cell dendrite assembly	1
+GO:2000549	positive regulation of dendritic cell dendrite assembly	1
+GO:2000808	negative regulation of synaptic vesicle clustering	1
+GO:2000979	positive regulation of forebrain neuron differentiation	1
+GO:0001507	acetylcholine catabolic process in synaptic cleft	0
+GO:0002267	follicular dendritic cell activation involved in immune response	0
+GO:0002271	plasmacytoid dendritic cell activation involved in immune response	0
+GO:0002272	plasmacytoid dendritic cell differentiation involved in immune response	0
+GO:0002284	myeloid dendritic cell differentiation involved in immune response	0
+GO:0002405	antigen sampling by dendritic cells in mucosal-associated lymphoid tissue	0
+GO:0002470	plasmacytoid dendritic cell antigen processing and presentation	0
+GO:0002607	regulation of myeloid dendritic cell antigen processing and presentation	0
+GO:0002608	negative regulation of myeloid dendritic cell antigen processing and presentation	0
+GO:0002609	positive regulation of myeloid dendritic cell antigen processing and presentation	0
+GO:0002610	regulation of plasmacytoid dendritic cell antigen processing and presentation	0
+GO:0002611	negative regulation of plasmacytoid dendritic cell antigen processing and presentation	0
+GO:0002612	positive regulation of plasmacytoid dendritic cell antigen processing and presentation	0
+GO:0002734	negative regulation of myeloid dendritic cell cytokine production	0
+GO:0002738	positive regulation of plasmacytoid dendritic cell cytokine production	0
+GO:0003019	central nervous system control of baroreceptor feedback	0
+GO:0003087	positive regulation of the force of heart contraction by neuronal epinephrine	0
+GO:0003090	positive regulation of the force of heart contraction by neuronal epinephrine-norepinephrine	0
+GO:0003110	positive regulation of the force of heart contraction by neuronal norepinephrine	0
+GO:0003112	positive regulation of heart rate by neuronal epinephrine	0
+GO:0003113	positive regulation of heart rate by neuronal norepinephrine	0
+GO:0003118	regulation of vasoconstriction by neuronal norepinephrine	0
+GO:0003119	regulation of vasoconstriction by neuronal epinephrine	0
+GO:0003361	noradrenergic neuron differentiation involved in brainstem development	0
+GO:0003362	noradrenergic neuron fate commitment involved in brainstem development	0
+GO:0003387	neuron differentiation involved in amphid sensory organ development	0
+GO:0003388	neuron development involved in amphid sensory organ development	0
+GO:0003390	dendrite development by retrograde extension	0
+GO:0003391	amphid sensory organ dendrite retrograde extension	0
+GO:0003393	neuron migration involved in retrograde extension	0
+GO:0003394	cell adhesion involved in dendrite retrograde extension	0
+GO:0003395	neuron migration involved in dendrite retrograde extension	0
+GO:0003396	cell adhesion involved in amphid sensory organ dendrite retrograde extension	0
+GO:0003397	neuron migration involved in amphid sensory organ dendrite retrograde extension	0
+GO:0007027	negative regulation of axonemal microtubule depolymerization	0
+GO:0007414	axonal defasciculation	0
+GO:0007415	defasciculation of motor neuron axon	0
+GO:0007421	stomatogastric nervous system development	0
+GO:0010809	negative regulation of synaptic vesicle priming	0
+GO:0014814	axon regeneration at neuromuscular junction	0
+GO:0016200	synaptic target attraction	0
+GO:0016201	synaptic target inhibition	0
+GO:0021518	spinal cord commissural neuron specification	0
+GO:0021519	spinal cord association neuron specification	0
+GO:0021525	lateral motor column neuron differentiation	0
+GO:0021597	central nervous system structural organization	0
+GO:0021774	retinoic acid receptor signaling pathway involved in ventral spinal cord interneuron specification	0
+GO:0021786	branchiomotor neuron axon guidance in neural tube	0
+GO:0021787	chemorepulsion of branchiomotor neuron axon in neural tube	0
+GO:0021788	chemoattraction of branchiomotor neuron axon in neural tube	0
+GO:0021789	branchiomotor neuron axon guidance in branchial arch mesenchyme	0
+GO:0021790	chemorepulsion of branchiomotor neuron axon in branchial arch mesenchyme	0
+GO:0021791	chemoattraction of branchiomotor neuron axon in branchial arch mesenchyme	0
+GO:0021792	chemoattraction of branchiomotor axon	0
+GO:0021824	cerebral cortex tangential migration using cell-axon interactions	0
+GO:0021834	chemorepulsion involved in embryonic olfactory bulb interneuron precursor migration	0
+GO:0021835	chemoattraction involved in embryonic olfactory bulb interneuron precursor migration	0
+GO:0021838	motogenic signaling involved in interneuron migration from the subpallium to the cortex	0
+GO:0021839	interneuron-substratum interaction involved in interneuron migration from the subpallium to the cortex	0
+GO:0021841	chemoattraction involved in interneuron migration from the subpallium to the cortex	0
+GO:0021844	interneuron sorting involved in substrate-independent cerebral cortex tangential migration	0
+GO:0021845	neurotransmitter-mediated guidance of interneurons involved in substrate-independent cerebral cortex tangential migration	0
+GO:0021862	early neuron differentiation in forebrain	0
+GO:0021880	Notch signaling pathway involved in forebrain neuron fate commitment	0
+GO:0021881	Wnt-activated signaling pathway involved in forebrain neuron fate commitment	0
+GO:0021887	hypothalamus gonadotrophin-releasing hormone neuron fate commitment	0
+GO:0021890	olfactory bulb interneuron fate commitment	0
+GO:0021898	commitment of multipotent stem cells to neuronal lineage in forebrain	0
+GO:0021899	fibroblast growth factor receptor signaling pathway involved in forebrain neuron fate commitment	0
+GO:0021901	early neuron fate commitment in forebrain	0
+GO:0021916	inductive cell-cell signaling between paraxial mesoderm and motor neuron precursors	0
+GO:0021917	somatic motor neuron fate commitment	0
+GO:0021927	deep nuclear neuron precursor proliferation	0
+GO:0021931	rostral hindbrain neuronal precursor cell proliferation	0
+GO:0021946	deep nuclear neuron cell migration	0
+GO:0021947	outward migration of deep nuclear neurons	0
+GO:0021948	inward migration of deep nuclear neurons	0
+GO:0021949	brainstem precerebellar neuron precursor migration	0
+GO:0021950	chemorepulsion involved in precerebellar neuron migration	0
+GO:0021951	chemoattraction involved in precerebellar neuron migration	0
+GO:0021967	corticospinal neuron axon guidance through the cerebral cortex	0
+GO:0021968	corticospinal neuron axon guidance through the internal capsule	0
+GO:0021969	corticospinal neuron axon guidance through the cerebral peduncle	0
+GO:0021970	corticospinal neuron axon guidance through the basilar pons	0
+GO:0021971	corticospinal neuron axon guidance through the medullary pyramid	0
+GO:0021973	corticospinal neuron axon decussation	0
+GO:0022025	leukemia inhibitory factor signaling pathway involved in forebrain neuron fate commitment	0
+GO:0022026	epidermal growth factor signaling pathway involved in forebrain neuron fate commitment	0
+GO:0031631	negative regulation of synaptic vesicle fusion to presynaptic active zone membrane	0
+GO:0031637	regulation of neuronal synaptic plasticity in response to neurotrophin	0
+GO:0031916	regulation of synaptic metaplasticity	0
+GO:0031917	negative regulation of synaptic metaplasticity	0
+GO:0031918	positive regulation of synaptic metaplasticity	0
+GO:0032285	non-myelinated axon ensheathment	0
+GO:0032293	non-myelinated axon ensheathment in central nervous system	0
+GO:0032294	peripheral nervous system non-myelinated axon ensheathment	0
+GO:0032295	ensheathment of neuronal cell bodies	0
+GO:0032598	B cell receptor transport into immunological synapse	0
+GO:0035193	larval central nervous system remodeling	0
+GO:0035765	motor neuron precursor migration involved in dorsal motor nucleus of vagus nerve formation	0
+GO:0036519	chemorepulsion of serotonergic neuron axon	0
+GO:0039673	evasion by virus of host dendritic cell activity	0
+GO:0044758	modulation by symbiont of host synaptic transmission	0
+GO:0044759	negative regulation by symbiont of host synaptic transmission	0
+GO:0044760	modulation by symbiont of host cholinergic synaptic transmission	0
+GO:0044761	negative regulation by symbiont of host cholinergic synaptic transmission	0
+GO:0048171	negative regulation of long-term neuronal synaptic plasticity	0
+GO:0048173	positive regulation of short-term neuronal synaptic plasticity	0
+GO:0048491	retrograde synaptic vesicle transport	0
+GO:0048684	positive regulation of collateral sprouting of intact axon in response to injury	0
+GO:0048685	negative regulation of collateral sprouting of intact axon in response to injury	0
+GO:0048689	formation of growth cone in injured axon	0
+GO:0048695	negative regulation of collateral sprouting of injured axon	0
+GO:0048891	lateral line ganglion neuron differentiation	0
+GO:0048893	afferent axon development in lateral line nerve	0
+GO:0048897	myelination of lateral line nerve axons	0
+GO:0048908	anterior lateral line ganglion neuron differentiation	0
+GO:0048910	afferent axon development in anterior lateral line nerve	0
+GO:0048911	efferent axon development in anterior lateral line nerve	0
+GO:0048914	myelination of anterior lateral line nerve axons	0
+GO:0048928	posterior lateral line ganglion neuron differentiation	0
+GO:0048929	efferent axon development in posterior lateral line nerve	0
+GO:0048932	myelination of posterior lateral line nerve axons	0
+GO:0048933	afferent axon development in posterior lateral line nerve	0
+GO:0051587	inhibition of dopamine uptake involved in synaptic transmission	0
+GO:0051826	negative regulation of synapse structural plasticity	0
+GO:0051913	regulation of synaptic plasticity by chemical substance	0
+GO:0051914	positive regulation of synaptic plasticity by chemical substance	0
+GO:0051915	induction of synaptic plasticity by chemical substance	0
+GO:0051942	negative regulation of amino acid uptake involved in synaptic transmission	0
+GO:0060093	negative regulation of synaptic transmission, glycinergic	0
+GO:0060095	zinc potentiation of synaptic transmission, glycinergic	0
+GO:0060705	neuron differentiation involved in salivary gland development	0
+GO:0060959	cardiac neuron development	0
+GO:0060960	cardiac neuron fate commitment	0
+GO:0061375	mammillotectal axonal tract development	0
+GO:0061376	mammillotegmental axonal tract development	0
+GO:0061882	negative regulation of anterograde axonal transport of mitochondrion	0
+GO:0061886	negative regulation of mini excitatory postsynaptic potential	0
+GO:0062235	axonemal basal plate assembly	0
+GO:0070983	dendrite guidance	0
+GO:0072499	photoreceptor cell axon guidance	0
+GO:0090127	positive regulation of synapse maturation by synaptic transmission	0
+GO:0090173	regulation of synaptonemal complex assembly	0
+GO:0090507	phenylethylamine metabolic process involved in synaptic transmission	0
+GO:0090508	phenylethylamine biosynthetic process involved in synaptic transmission	0
+GO:0097375	spinal sensory neuron axon guidance	0
+GO:0097378	dorsal spinal cord interneuron axon guidance	0
+GO:0097379	dorsal spinal cord interneuron posterior axon guidance	0
+GO:0097380	dorsal spinal cord interneuron anterior axon guidance	0
+GO:0097410	hippocampal interneuron differentiation	0
+GO:0097480	establishment of synaptic vesicle localization	0
+GO:0098818	hyperpolarization of postsynaptic membrane	0
+GO:0098819	depolarization of postsynaptic membrane	0
+GO:0098873	neuronal action potential back-propagation	0
+GO:0098934	retrograde dendritic transport	0
+GO:0098940	anterograde trans-synaptic signaling by nitric oxide	0
+GO:0098941	anterograde trans-synaptic signaling by trans-synaptic protein complex	0
+GO:0098959	retrograde dendritic transport of mitochondrion	0
+GO:0098987	regulation of modification of synapse structure, modulating synaptic transmission	0
+GO:0099014	neuronal dense core vesicle organization	0
+GO:0099069	synaptic vesicle tethering involved in synaptic vesicle exocytosis	0
+GO:0099087	anterograde axonal transport of messenger ribonucleoprotein complex	0
+GO:0099113	negative regulation of presynaptic cytosolic calcium concentration	0
+GO:0099124	axonal dopamine secretion	0
+GO:0099155	synaptic transmission, noradrenergic	0
+GO:0099157	trans-synaptic signaling via exosome	0
+GO:0099176	regulation of retrograde trans-synaptic signaling by trans-synaptic protein complex	0
+GO:0099185	postsynaptic intermediate filament cytoskeleton organization	0
+GO:0099190	postsynaptic spectrin-associated cytoskeleton organization	0
+GO:0099506	synaptic vesicle transport along actin filament	0
+GO:0099531	presynaptic process involved in chemical synaptic transmission	0
+GO:0099539	neuropeptide secretion from presynapse	0
+GO:0099549	trans-synaptic signaling by carbon monoxide	0
+GO:0099556	trans-synaptic signaling by carbon monoxide, modulating synaptic transmission	0
+GO:0099559	maintenance of alignment of postsynaptic density and presynaptic active zone	0
+GO:0099561	synaptic membrane adhesion to extracellular matrix	0
+GO:0099564	modification of synaptic structure, modulating synaptic transmission	0
+GO:0099574	regulation of protein catabolic process at synapse, modulating synaptic transmission	0
+GO:0099585	release of sequestered calcium ion into presynaptic cytosol	0
+GO:0099586	release of sequestered calcium ion into postsynaptic cytosol	0
+GO:0099588	positive regulation of postsynaptic cytosolic calcium concentration	0
+GO:0099592	endocytosed synaptic vesicle processing via endosome	0
+GO:0099593	endocytosed synaptic vesicle to endosome fusion	0
+GO:0099644	protein localization to presynaptic membrane	0
+GO:0099703	induction of synaptic vesicle exocytosis by positive regulation of presynaptic cytosolic calcium ion concentration	0
+GO:0100067	positive regulation of spinal cord association neuron differentiation by canonical Wnt signaling pathway	0
+GO:0106092	glial cell projection elongation involved in axon ensheathment	0
+GO:0120308	axonemal outer doublet assembly	0
+GO:0140237	translation at presynapse, modulating chemical synaptic transmission	0
+GO:0140247	protein catabolic process at presynapse	0
+GO:0150008	bulk synaptic vesicle endocytosis	0
+GO:0150021	apical dendrite morphogenesis	0
+GO:0150022	apical dendrite development	0
+GO:0150023	apical dendrite arborization	0
+GO:0150091	multiple spine synapse organization, multiple dendrites	0
+GO:0160001	extrasynaptic signaling via GABA	0
+GO:0160036	positive regulation of postsynaptic density assembly	0
+GO:0160037	negative regulation of postsynaptic density assembly	0
+GO:1900074	negative regulation of neuromuscular synaptic transmission	0
+GO:1901546	regulation of synaptic vesicle lumen acidification	0
+GO:1901547	negative regulation of synaptic vesicle lumen acidification	0
+GO:1901548	positive regulation of synaptic vesicle lumen acidification	0
+GO:1901630	negative regulation of presynaptic membrane organization	0
+GO:1901633	negative regulation of synaptic vesicle membrane organization	0
+GO:1902077	negative regulation of lateral motor column neuron migration	0
+GO:1902286	semaphorin-plexin signaling pathway involved in dendrite guidance	0
+GO:1902829	regulation of spinal cord association neuron differentiation	0
+GO:1902830	negative regulation of spinal cord association neuron differentiation	0
+GO:1902831	positive regulation of spinal cord association neuron differentiation	0
+GO:1902844	positive regulation of spinal cord association neuron differentiation by negative regulation of canonical Wnt signaling pathway	0
+GO:1902848	negative regulation of neuronal signal transduction	0
+GO:1902849	positive regulation of neuronal signal transduction	0
+GO:1903388	regulation of synaptic vesicle uncoating	0
+GO:1903389	negative regulation of synaptic vesicle uncoating	0
+GO:1903390	positive regulation of synaptic vesicle uncoating	0
+GO:1904072	presynaptic active zone disassembly	0
+GO:1904081	positive regulation of transcription from RNA polymerase II promoter involved in neuron differentiation	0
+GO:1904801	positive regulation of neuron remodeling	0
+GO:1904955	planar cell polarity pathway involved in midbrain dopaminergic neuron differentiation	0
+GO:1904957	negative regulation of midbrain dopaminergic neuron differentiation	0
+GO:1905046	positive regulation of Schwann cell proliferation involved in axon regeneration	0
+GO:1905079	regulation of cerebellar neuron development	0
+GO:1905080	negative regulation of cerebellar neuron development	0
+GO:1905081	positive regulation of cerebellar neuron development	0
+GO:1905088	positive regulation of synaptonemal complex assembly	0
+GO:1905127	negative regulation of axo-dendritic protein transport	0
+GO:1905129	endocannabinoid signaling pathway involved in trans-synaptic signaling	0
+GO:1905197	endocannabinoid signaling pathway involved in retrograde trans-synaptic signaling	0
+GO:1905275	Rohon-Beard neuron differentiation	0
+GO:1905384	regulation of protein localization to presynapse	0
+GO:1905385	negative regulation of protein localization to presynapse	0
+GO:1905386	positive regulation of protein localization to presynapse	0
+GO:1905425	negative regulation of Wnt-mediated midbrain dopaminergic neuron differentiation	0
+GO:1905434	positive regulation of retrograde trans-synaptic signaling by neuropeptide	0
+GO:1905484	negative regulation of motor neuron migration	0
+GO:1905486	regulation of anterior/posterior axon guidance	0
+GO:1905487	negative regulation of anterior/posterior axon guidance	0
+GO:1905488	positive regulation of anterior/posterior axon guidance	0
+GO:1905489	regulation of sensory neuron axon guidance	0
+GO:1905490	negative regulation of sensory neuron axon guidance	0
+GO:1905491	positive regulation of sensory neuron axon guidance	0
+GO:1905514	positive regulation of short-term synaptic potentiation	0
+GO:1905519	negative regulation of presynaptic active zone assembly	0
+GO:1905593	positive regulation of optical nerve axon regeneration	0
+GO:1905741	calcium export from the mitochondrion involved in positive regulation of presynaptic cytosolic calcium concentration	0
+GO:1905743	calcium import into the mitochondrion involved in negative regulation of presynaptic cytosolic calcium concentration	0
+GO:1905807	negative regulation of synapse pruning	0
+GO:1905810	regulation of excitatory synapse pruning	0
+GO:1905811	negative regulation of excitatory synapse pruning	0
+GO:1905812	regulation of motor neuron axon guidance	0
+GO:1905813	negative regulation of motor neuron axon guidance	0
+GO:1905814	positive regulation of motor neuron axon guidance	0
+GO:1905815	regulation of dorsal/ventral axon guidance	0
+GO:1905816	negative regulation of dorsal/ventral axon guidance	0
+GO:1905817	positive regulation of dorsal/ventral axon guidance	0
+GO:1905876	positive regulation of postsynaptic density organization	0
+GO:1905942	regulation of formation of growth cone in injured axon	0
+GO:1905943	negative regulation of formation of growth cone in injured axon	0
+GO:1905944	positive regulation of formation of growth cone in injured axon	0
+GO:1990255	subsynaptic reticulum organization	0
+GO:2000289	regulation of photoreceptor cell axon guidance	0
+GO:2000305	semaphorin-plexin signaling pathway involved in regulation of photoreceptor cell axon guidance	0
+GO:2000528	negative regulation of myeloid dendritic cell chemotaxis	0
+GO:2001018	negative regulation of retrograde axon cargo transport	0
+GO:2001266	Roundabout signaling pathway involved in axon guidance	0

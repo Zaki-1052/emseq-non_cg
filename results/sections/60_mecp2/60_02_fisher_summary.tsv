@@ -1,0 +1,3 @@
+test_id	row_var	col_var	n_genes	n_focal	n_background	n_focal_gained	n_background_gained	pct_focal_gained	pct_background_gained	odds_ratio	ci_low	ci_high	p_value
+mecp2_no_mch_vs_k119ub_signal_gain	in_mecp2_no_mch	k119ub_signal_gain	11763	59	11704	43	5917	72.8813559322034	50.5553656869446	2.6284278715011	1.44862163437507	5.00409704023069	0.000603848348938822
+mecp2_no_mch_vs_k119ub_peak_gain	in_mecp2_no_mch	k119ub_peak_gain	5445	49	5396	25	2073	51.0204081632653	38.4173461823573	1.66955557559086	0.912193385175317	3.06229001802746	0.0775416168846151

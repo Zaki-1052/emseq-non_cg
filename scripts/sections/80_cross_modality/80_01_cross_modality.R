@@ -175,8 +175,8 @@ main <- function() {
 
   # --- Load Biomodal data ---
   cat("Loading Biomodal CG DMR data...\n")
-  mc_path  <- file.path(DATA_DIR, "data", "biomodal", "cg_mc_dmr_genes.bed")
-  hmc_path <- file.path(DATA_DIR, "data", "biomodal", "cg_hmc_dmr_genes.bed")
+  mc_path  <- file.path(CODE_DIR, "data", "biomodal", "cg_mc_dmr_genes.bed")
+  hmc_path <- file.path(CODE_DIR, "data", "biomodal", "cg_hmc_dmr_genes.bed")
   stopifnot(file.exists(mc_path))
   stopifnot(file.exists(hmc_path))
 
