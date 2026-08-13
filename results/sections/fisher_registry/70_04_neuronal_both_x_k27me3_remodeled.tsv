@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_04	neuronal_both_x_k27me3_remodeled	Genes in both the neuronal gene set and the MeCP2-up set are enriched among genes whose H3K27me3 peak changes at FDR < 0.05.	is_neuronal_and_mecp2_up	k27me3_remodeled	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_04_neuronal_both_x_k27me3_remodeled_genes.tsv	4244	56	1437	31	2.45299446484486	0.000952775561821093

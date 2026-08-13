@@ -1,0 +1,3 @@
+condition	n_terms_significant	n_terms_neuronal	frac_terms_neuronal	n_leading	n_leading_neuronal	frac_leading_neuronal	top_neuronal_term	top_neuronal_nes	fdr_threshold
+Control	1186	56	0.0472175379426644	50	11	0.22	neuron fate specification	2.51792634405248	0.05
+Mutant	970	42	0.0432989690721649	50	10	0.2	neuron fate specification	2.22989997184491	0.05

@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+20_04	mch_gain_vs_mecp2_gain_neither	Among genes in the Neither mark category, gene-body mCH gain against MeCP2 binding gain.	mch_gain	mecp2_gain	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_04_mch_gain_vs_mecp2_gain_neither_genes.tsv	2772	1385	764	462	1.79795099707352	9.17806042854867e-12

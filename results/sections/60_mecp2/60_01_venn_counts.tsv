@@ -1,0 +1,6 @@
+region	n_genes	pct_of_tested
+mCH significant only	5455	25.8874335611238
+MeCP2 changed only	59	0.279992406985573
+Both	96	0.455580865603645
+Neither	15462	73.376993166287
+Tested universe	21072	100

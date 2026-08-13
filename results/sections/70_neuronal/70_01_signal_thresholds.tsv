@@ -1,0 +1,5 @@
+flag	signal_column	quantile	threshold	n_genes_at_or_above
+ctrl_top_quartile	gb_ctrl_signal	0.75	1.6133315	5401
+ctrl_top_decile	gb_ctrl_signal	0.9	2.5945773	2161
+mut_top_quartile	gb_mut_signal	0.75	1.7968	5401
+mut_top_decile	gb_mut_signal	0.9	3.0312389	2161

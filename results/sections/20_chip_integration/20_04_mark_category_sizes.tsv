@@ -1,0 +1,5 @@
+mark_category	n_genes_total	n_genes_with_mecp2	pct_of_universe	pct_with_mecp2	n_bivalent_promoter	n_body_active	n_body_mixed	n_body_polycomb	n_body_enhancer_marked	n_body_unmarked
+K27ac only	6555	4269	31.1076309794989	65.1258581235698	12	6555	0	0	0	0
+Bivalent	671	555	3.18432042520881	82.7123695976155	274	0	519	149	3	0
+K27me3 only	3173	1921	15.0578967350038	60.5420737472424	0	0	0	3173	0	0
+Neither	10673	2772	50.6501518602885	25.9720790780474	0	0	0	0	5467	5206

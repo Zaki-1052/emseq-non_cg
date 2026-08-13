@@ -1,0 +1,5 @@
+condition	group	n_genes	median_signal	mean_signal	wilcoxon_p	wilcoxon_alternative
+Control	Neuronal	4797	1.014501	1.6092247375443	2.19091185436439e-12	neuronal greater
+Control	Other	16807	0.968359	1.32778320408163	2.19091185436439e-12	neuronal greater
+Mutant	Neuronal	4797	0.994183	1.6125689747759	0.642170670929643	neuronal greater
+Mutant	Other	16807	0.991535	1.43876349473434	0.642170670929643	neuronal greater

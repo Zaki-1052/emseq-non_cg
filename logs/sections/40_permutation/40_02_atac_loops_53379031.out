@@ -1,0 +1,137 @@
+=========================================
+EM-seq section 40_02: ATAC and loop anchor permutation
+=========================================
+Job ID: 53379031
+Node: exp-14-32
+Start time: Wed Aug 12 14:13:05 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379031
+Code dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:        /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:          /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/40_permutation/40_02_atac_loops.R
+Output dir:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Chromatin state: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/gene_chromatin_state.tsv
+Cores:           32
+Randomisations:  5000
+FORCE_RERUN not set: an existing permutation cache is reused.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+Loading required package: BSgenome
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘XVector’
+
+The following object is masked from ‘package:purrr’:
+
+    compact
+
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:grid’:
+
+    pattern
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: BiocIO
+
+Attaching package: ‘BiocIO’
+
+The following object is masked from ‘package:rtracklayer’:
+
+    FileForFormat
+
+================================================================================
+SECTION 40_02: PERMUTATION VALIDATION OF ATAC PEAKS AND Hi-C LOOP ANCHORS
+================================================================================
+Output directory: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation
+Cache directory:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/cache
+Permutations:     5,000
+Cores:            32
+Seed:             42
+Randomisation:    randomizeRegions (per.chromosome = TRUE)
+Evaluation:       numOverlaps
+FORCE_RERUN:      not set
+
+  Patched regioneReloaded::chooseHclustMet for small-matrix safety.
+
+--- Building the genome object ---
+The masked version of 'mm10' is not installed. Using the unmasked version. This means that no automatic masking will be available.
+  mm10 genome: 20 chromosomes, 2,633,776,672 bp
+
+--- Loading region sets ---
+
+Loading mark peak sets...
+  CTCF: 32487 peaks
+  CTCF                           32,474 regions kept,     13 dropped off chr1-19 and chrX
+  H3K27ac: 15105 peaks
+  H3K27ac                        15,100 regions kept,      5 dropped off chr1-19 and chrX
+  H3K27me3: 15809 peaks
+  H3K27me3                       15,794 regions kept,     15 dropped off chr1-19 and chrX
+  H3K4me1: 113781 peaks
+  H3K4me1                       113,652 regions kept,    129 dropped off chr1-19 and chrX
+  H3K4me3: 6581 peaks
+  H3K4me3                         6,580 regions kept,      1 dropped off chr1-19 and chrX
+  Bivalent: 318 peaks
+  Bivalent                          318 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading differential ATAC peak sets...
+  ATAC Up: 7620 peaks
+  ATAC Up                         7,618 regions kept,      2 dropped off chr1-19 and chrX
+  ATAC Down: 3744 peaks
+  ATAC Down                       3,744 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading differential MeCP2 peak sets...
+  MeCP2 Up: 7686 peaks
+  MeCP2 Up                        7,686 regions kept,      0 dropped off chr1-19 and chrX
+  MeCP2 Down: 1200 peaks
+  MeCP2 Down                      1,200 regions kept,      0 dropped off chr1-19 and chrX
+
+Building mCH gene body sets...
+  mCH Hyper genes                 1,402 regions kept,      0 dropped off chr1-19 and chrX
+  mCH Hypo genes                  4,155 regions kept,      0 dropped off chr1-19 and chrX
+
+Loading Hi-C loop anchors...
+Error in require_columns(loops, c("loop_id", "direction", "significant",  : 
+  Loop table /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/hic/characterized_loops.tsv is missing columns: anchor1_chr, anchor1_start, anchor1_end, anchor2_chr, anchor2_start, anchor2_end
+  Found: loop_id, chr1, start1, end1, chr2, start2, end2, logFC, logCPM, FDR, PValue, significant, resolution_kb, n_overlaps, loop_distance, loop_type, direction, category, anchor1_H3K27ac_overlap, anchor1_H3K27me3_overlap, anchor1_H3K4me1_overlap, anchor1_H3K4me3_overlap, anchor1_Bivalent_Promoter_overlap, anchor1_CTCF_overlap, anchor1_CTCF_motif_overlap, anchor2_H3K27ac_overlap, anchor2_H3K27me3_overlap, anchor2_H3K4me1_overlap, anchor2_H3K4me3_overlap, anchor2_Bivalent_Promoter_overlap, anchor2_CTCF_overlap, anchor2_CTCF_motif_overlap, anchor1_distance_to_tss_ext, anchor2_distance_to_tss_ext, anchor1_type_extended, anchor2_type_extended, loop_type_extended
+Calls: main -> build_loop_anchor_sets -> require_columns
+Execution halted
+
+=========================================
+Complete: section 40_02
+Time: 19s
+Exit code: 1
+End time: Wed Aug 12 14:13:27 PDT 2026
+=========================================

@@ -1,0 +1,9 @@
+sub_analysis	region_set_a	region_set_b	n_region_a	n_region_b	observed_hits	expected_hits	sd_perm_hits	perm_z_score	perm_norm_zscore	perm_p_value	perm_adj_p_value	test_id	perm_sig_label
+Compartment	mCH Hyper genes	A Compartment	1399	2038	1144	827.4482	21.4151030370535	14.7817	0.395198717569826	0.0001999600079984	3e-04	mCH Hyper genes x A Compartment	***
+Compartment	mCH Hyper genes	B Compartment	1399	2145	655	933.3574	22.5731073243108	-12.3314	-0.329688294704976	0.0001999600079984	3e-04	mCH Hyper genes x B Compartment	***
+Compartment	mCH Hyper genes	B to A Shift	1399	880	149	158.4598	13.8539947522048	-0.6828	-0.0182551184475857	0.262147570485903	0.2621	mCH Hyper genes x B to A Shift	ns
+Compartment	mCH Hyper genes	A to B Shift	1399	449	138	79.0272	10.0998644353438	5.839	0.156109602541671	0.0001999600079984	3e-04	mCH Hyper genes x A to B Shift	***
+Compartment	mCH Hypo genes	A Compartment	4152	2038	3824	2156.222	33.6963351805641	49.4943	0.768115473517826	0.0001999600079984	2e-04	mCH Hypo genes x A Compartment	***
+Compartment	mCH Hypo genes	B Compartment	4152	2145	828	2455.7546	34.1967229718346	-47.5997	-0.738712661959185	0.0001999600079984	2e-04	mCH Hypo genes x B Compartment	***
+Compartment	mCH Hypo genes	B to A Shift	4152	880	196	339.9804	18.8860729795931	-7.6236	-0.118312717300992	0.0001999600079984	2e-04	mCH Hypo genes x B to A Shift	***
+Compartment	mCH Hypo genes	A to B Shift	4152	449	101	168.3222	13.6036244758438	-4.9488	-0.0768017702108125	0.0001999600079984	2e-04	mCH Hypo genes x A to B Shift	***

@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+10_01	promoter_Repressed_Promoter	Genes with significant differential mCH versus all other tested genes, enrichment in promoter state Repressed_Promoter.	mch_sig	in_state	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_01_promoter_Repressed_Promoter_genes.tsv	21097	5557	2775	906	1.42483652765438	1.94408735291405e-15

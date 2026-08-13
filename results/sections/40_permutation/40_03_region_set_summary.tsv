@@ -1,0 +1,9 @@
+sub_analysis	role	region_set	n_intervals	total_bp	median_width_bp	mean_width_bp	max_width_bp
+Both	Alist	mCH Hyper genes	1399	256998644	100847	183701.675482487	2960900
+Both	Alist	mCH Hypo genes	4152	377596721	54698.5	90943.3335741811	4434882
+Compartment	Blist	A Compartment	2038	1181025000	162500	579501.962708538	14700000
+Compartment	Blist	B Compartment	2145	1.362e+09	275000	634965.034965035	9900000
+Compartment	Blist	B to A Shift	880	135750000	75000	154261.363636364	3075000
+Compartment	Blist	A to B Shift	449	66025000	75000	147048.997772829	2600000
+Polycomb	Blist	H3K27me3 Domains	10034	65387135	3662	6516.5572055013	183025
+Polycomb	Blist	Polycomb State Intervals	3171	245017438	27249	77268.1923683381	1550396

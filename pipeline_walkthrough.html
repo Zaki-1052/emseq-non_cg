@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EM-seq mCH Pipeline</title>
+<style>
+/* --- Tokens --- */
+:root {
+  --surface: #F7F8FA;
+  --surface-raised: #FFFFFF;
+  --text: #1E2328;
+  --text-secondary: #4A5568;
+  --accent: #2E6B8A;
+  --accent-light: #E8F1F5;
+  --emphasis: #D4713B;
+  --emphasis-light: #FDF0E8;
+  --subtle: #8B95A2;
+  --border: #D8DCE2;
+  --loss: #3A7CA5;
+  --gain: #C24B3F;
+  --warn-bg: #FFF3CD;
+  --warn-border: #E6C85C;
+  --warn-text: #6B5900;
+  --sidebar-bg: #EEF0F3;
+  --sidebar-active: #2E6B8A;
+  --row-alt: #F2F4F7;
+  --code-bg: #ECEEF2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #1A1D23;
+    --surface-raised: #22262E;
+    --text: #E1E4E8;
+    --text-secondary: #9CA3AF;
+    --accent: #5BA3C9;
+    --accent-light: #1E3040;
+    --emphasis: #E8935A;
+    --emphasis-light: #3A2A1A;
+    --subtle: #6B7585;
+    --border: #353A44;
+    --loss: #5BA3C9;
+    --gain: #E07060;
+    --warn-bg: #3A3520;
+    --warn-border: #8A7A30;
+    --warn-text: #E6D88A;
+    --sidebar-bg: #16191F;
+    --sidebar-active: #5BA3C9;
+    --row-alt: #1E222A;
+    --code-bg: #282C34;
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #1A1D23;
+  --surface-raised: #22262E;
+  --text: #E1E4E8;
+  --text-secondary: #9CA3AF;
+  --accent: #5BA3C9;
+  --accent-light: #1E3040;
+  --emphasis: #E8935A;
+  --emphasis-light: #3A2A1A;
+  --subtle: #6B7585;
+  --border: #353A44;
+  --loss: #5BA3C9;
+  --gain: #E07060;
+  --warn-bg: #3A3520;
+  --warn-border: #8A7A30;
+  --warn-text: #E6D88A;
+  --sidebar-bg: #16191F;
+  --sidebar-active: #5BA3C9;
+  --row-alt: #1E222A;
+  --code-bg: #282C34;
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* --- Layout --- */
+.page { display: flex; min-height: 100vh; }
+
+nav.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  min-width: 220px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 1.5rem 0;
+  font-size: 13px;
+  z-index: 10;
+}
+nav.sidebar .nav-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+  padding: 0 1rem 0.75rem;
+  letter-spacing: -0.01em;
+}
+nav.sidebar a {
+  display: block;
+  padding: 0.35rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+nav.sidebar a:hover { background: var(--accent-light); }
+nav.sidebar a.active {
+  color: var(--sidebar-active);
+  border-left-color: var(--sidebar-active);
+  font-weight: 600;
+  background: var(--accent-light);
+}
+nav.sidebar .nav-group { margin-top: 1rem; }
+nav.sidebar .nav-group-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--subtle);
+  padding: 0 1rem 0.25rem;
+}
+
+main {
+  flex: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+h1 .subtitle {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.5rem 0 0.75rem;
+}
+p { margin-bottom: 0.75rem; max-width: 65ch; }
+code {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+
+/* --- Stat tiles --- */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+.stat {
+  flex: 1;
+  min-width: 140px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+.stat .value {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--emphasis);
+  line-height: 1.2;
+}
+.stat .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+.stat.highlight { border-color: var(--emphasis); background: var(--emphasis-light); }
+.stat.highlight .value { color: var(--emphasis); }
+
+/* --- Tables --- */
+.table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  position: sticky;
+  top: 0;
+}
+tbody td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:nth-child(even) { background: var(--row-alt); }
+td.num {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  text-align: right;
+}
+
+/* --- Decision cards --- */
+.decisions { display: grid; gap: 1rem; margin: 1rem 0 1.5rem; }
+.decision {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+}
+.decision .title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.decision .body { font-size: 0.875rem; color: var(--text-secondary); max-width: 65ch; }
+
+/* --- Warning banner --- */
+.warn {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  color: var(--warn-text);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* --- Method/result boxes --- */
+.method {
+  background: var(--accent-light);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+.method .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.5rem;
+}
+
+/* --- Plots --- */
+.plot-wrap {
+  margin: 1.25rem 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.plot-wrap img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.plot-caption {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+
+/* --- Direction bar --- */
+.dir-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.75rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+.dir-bar .loss { background: var(--loss); display: flex; align-items: center; justify-content: center; }
+.dir-bar .gain { background: var(--gain); display: flex; align-items: center; justify-content: center; }
+
+/* --- Collapsible --- */
+details {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 0.75rem 0;
+}
+details summary {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--accent);
+  user-select: none;
+}
+details summary:hover { background: var(--accent-light); border-radius: 6px; }
+details[open] summary { border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0; }
+details .inner { padding: 1rem; }
+
+/* --- Pipeline SVG --- */
+.pipeline-svg { margin: 1.5rem 0; overflow-x: auto; }
+.pipeline-svg svg text { font-family: system-ui, sans-serif; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  nav.sidebar { display: none; }
+  main { padding: 1.5rem 1rem; }
+}
+
+/* --- Focus --- */
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav-title">EM-seq mCH</div>
+  <a href="#overview">Overview</a>
+  <a href="#samples">Samples</a>
+  <a href="#pipeline">Pipeline</a>
+  <a href="#decisions">Decisions</a>
+  <div class="nav-group">
+    <div class="nav-group-label">Core pipeline</div>
+    <a href="#step01">01 Combine CH</a>
+    <a href="#step02">02 Aggregate</a>
+    <a href="#step03">03 edgeR</a>
+    <a href="#step04">04 Integration</a>
+    <a href="#step05">05 Volcano</a>
+    <a href="#step06">06 dmrseq</a>
+    <a href="#step07">07 Quadrant</a>
+    <a href="#step08">08 Three-way</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Comparison</div>
+    <a href="#ca">CA-only</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Downstream</div>
+    <a href="#sections">23 Sections</a>
+    <a href="#fisher">Fisher registry</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Reference</div>
+    <a href="#packages">Packages</a>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main>
+
+<!-- 0. Header -->
+<section id="overview">
+<h1>BAP1-KO mCH analysis
+<span class="subtitle">EM-seq, 8 samples, mm10. Testing H2AK119Ub &rarr; DNMT3A &rarr; mCH &rarr; MeCP2.</span>
+</h1>
+</section>
+
+<!-- Samples -->
+<section id="samples">
+<h2>Samples</h2>
+<p>4 controls, 4 mutants. Math1-Cre conditional knockout, adult cerebellum. Balanced male/female.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>ID</th><th>Genotype</th><th>Sex</th><th>Coverage</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>ctrl_M1</td><td>control</td><td>M</td><td class="num">~38x</td><td></td></tr>
+<tr><td>ctrl_M2</td><td>control</td><td>M</td><td class="num">~57x</td><td></td></tr>
+<tr><td>ctrl_F1</td><td>control</td><td>F</td><td class="num">~54x</td><td></td></tr>
+<tr><td>ctrl_F2</td><td>control</td><td>F</td><td class="num">~68x</td><td></td></tr>
+<tr><td>mut_M1</td><td>mutant</td><td>M</td><td class="num">~55x</td><td></td></tr>
+<tr><td>mut_M2</td><td>mutant</td><td>M</td><td class="num">~118x</td><td style="color:var(--emphasis)">deep outlier</td></tr>
+<tr><td>mut_F1</td><td>mutant</td><td>F</td><td class="num">~101x</td><td style="color:var(--emphasis)">deep outlier</td></tr>
+<tr><td>mut_F2</td><td>mutant</td><td>F</td><td class="num">~53x</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>The two deep outliers (mut_M2, mut_F1) are handled by <code>log(total_coverage)</code> as an offset term in the edgeR model.</p>
+</section>
+
+<!-- 1. Pipeline diagram -->
+<section id="pipeline">
+<h2>Pipeline architecture</h2>
+<p>Two parallel pipelines for gene-body differential mCH. Both run on SDSC Expanse with SLURM dependency chaining.</p>
+<div class="pipeline-svg">
+<svg viewBox="0 0 840 420" width="840" height="420" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+  <!-- Nodes -->
+  <rect x="20" y="30" width="140" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="90" y="52" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">01 Combine CH</text>
+  <text x="90" y="68" text-anchor="middle" fill="var(--subtle)" font-size="9">CHH + CHG merge</text>
+
+  <rect x="220" y="30" width="140" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="290" y="52" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">02 Aggregate</text>
+  <text x="290" y="68" text-anchor="middle" fill="var(--subtle)" font-size="9">GenomicRanges</text>
+
+  <rect x="420" y="30" width="140" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="490" y="52" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">03 edgeR</text>
+  <text x="490" y="68" text-anchor="middle" fill="var(--subtle)" font-size="9">QL F-test</text>
+
+  <rect x="620" y="30" width="180" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="710" y="52" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">04 Integration</text>
+  <text x="710" y="68" text-anchor="middle" fill="var(--subtle)" font-size="9">K119ub, MeCP2, CG, neuronal</text>
+
+  <rect x="620" y="110" width="180" height="50" rx="8" fill="var(--emphasis)" opacity="0.15" stroke="var(--emphasis)" stroke-width="1.5"/>
+  <text x="710" y="132" text-anchor="middle" fill="var(--emphasis)" font-size="12" font-weight="600">05 Volcano</text>
+  <text x="710" y="148" text-anchor="middle" fill="var(--subtle)" font-size="9">3-panel, ggplot2</text>
+
+  <rect x="220" y="130" width="140" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="290" y="152" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">06 dmrseq</text>
+  <text x="290" y="168" text-anchor="middle" fill="var(--subtle)" font-size="9">per-chromosome DMRs</text>
+
+  <rect x="420" y="200" width="160" height="50" rx="8" fill="var(--emphasis)" opacity="0.15" stroke="var(--emphasis)" stroke-width="1.5"/>
+  <text x="500" y="222" text-anchor="middle" fill="var(--emphasis)" font-size="12" font-weight="600">07 Quadrant</text>
+  <text x="500" y="238" text-anchor="middle" fill="var(--subtle)" font-size="9">MeCP2 vs H2AK119Ub</text>
+
+  <rect x="640" y="200" width="160" height="50" rx="8" fill="var(--emphasis)" opacity="0.15" stroke="var(--emphasis)" stroke-width="1.5"/>
+  <text x="720" y="222" text-anchor="middle" fill="var(--emphasis)" font-size="12" font-weight="600">08 Three-way</text>
+  <text x="720" y="238" text-anchor="middle" fill="var(--subtle)" font-size="9">mCH + MeCP2 + H2AK119Ub</text>
+
+  <rect x="220" y="230" width="140" height="50" rx="8" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="290" y="252" text-anchor="middle" fill="var(--accent)" font-size="12" font-weight="600">02b Features</text>
+  <text x="290" y="268" text-anchor="middle" fill="var(--subtle)" font-size="9">exon/intron/UTR/splice</text>
+
+  <rect x="120" y="310" width="660" height="70" rx="8" fill="var(--accent)" opacity="0.08" stroke="var(--accent)" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="450" y="335" text-anchor="middle" fill="var(--accent)" font-size="13" font-weight="600">23 Downstream sections (7 thematic groups)</text>
+  <text x="450" y="355" text-anchor="middle" fill="var(--subtle)" font-size="10">Chromatin, ChIP integration, Hi-C, permutation, features, MeCP2, neuronal</text>
+  <text x="450" y="370" text-anchor="middle" fill="var(--warn-text)" font-size="10" font-weight="600">Currently being rerun with corrected logFC</text>
+
+  <!-- Edges -->
+  <line x1="160" y1="55" x2="220" y2="55" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="360" y1="55" x2="420" y2="55" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="560" y1="55" x2="620" y2="55" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="710" y1="80" x2="710" y2="110" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 01 -> 06 parallel -->
+  <path d="M 90 80 L 90 155 L 220 155" fill="none" stroke="var(--subtle)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+  <!-- 01 -> 02b parallel -->
+  <path d="M 90 80 L 90 255 L 220 255" fill="none" stroke="var(--subtle)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+  <!-- 03 -> 07 -->
+  <path d="M 490 80 L 490 225 L 420 225" fill="none" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrowleft)"/>
+  <!-- 07 -> 08 -->
+  <line x1="580" y1="225" x2="640" y2="225" stroke="var(--subtle)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 03 -> sections -->
+  <path d="M 490 80 L 490 130 L 450 130 L 450 310" fill="none" stroke="var(--subtle)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--subtle)"/>
+    </marker>
+    <marker id="arrowleft" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="var(--subtle)"/>
+    </marker>
+  </defs>
+</svg>
+</div>
+<p>Solid arrows: sequential dependency (<code>--dependency=afterok</code>). Dashed arrows: parallel branches.</p>
+</section>
+
+<!-- 2. Key decisions -->
+<section id="decisions">
+<h2>Methodological decisions</h2>
+<div class="decisions">
+
+<div class="decision">
+  <div class="title">edgeR over DSS</div>
+  <div class="body">edgeR's quasi-likelihood F-test is calibrated for small n (4 per group). The initial CA-only analysis used DSS, which pinned dispersion at its 0.001 floor. Real overdispersion is 2 to 16x in variance. edgeR's empirical Bayes shrinkage gives prior df of 22.1, not 2.1. DESeq2 assumes gene-level counts. It doesn't handle the methylated-read-within-coverage structure that edgeR models via the offset term.</div>
+</div>
+
+<div class="decision">
+  <div class="title">All-CH over CA-only</div>
+  <div class="body">CHH + CHG combined gives about 3x more sites per gene body than CA alone. A CA-only pipeline exists for comparison with published mCA atlases. Both pipelines produce the same directional pattern.</div>
+</div>
+
+<div class="decision">
+  <div class="title">Lambda as covariate, not pre-subtracted</div>
+  <div class="body">The noise floor is 0.5 to 0.9%. The signal is about 1%. Pre-subtraction zeroed 30 to 85% of genes (depending on sample) and created a systematic artifact. Lambda rates correlate with genotype (r = +0.417). Mutant samples got more subtracted, producing an artificial genome-wide decrease. Including lambda as a covariate avoids count modification entirely.</div>
+</div>
+
+<div class="decision">
+  <div class="title">Gene-body aggregation</div>
+  <div class="body">Site-level differential mCH is underpowered. A 50 kb gene has about 3,050 CA sites. At 25x coverage, that gives about 76,000 observations per gene per sample.</div>
+</div>
+
+<div class="decision">
+  <div class="title">FDR as binary gatekeeper</div>
+  <div class="body">FDR is a threshold: pass or fail at 0.05. It's not a continuous weight or confidence score. This follows the ASA 2016 statement on p-values (Wasserstein and Lazar).</div>
+</div>
+
+</div>
+</section>
+
+<!-- Step 01 -->
+<section id="step01">
+<h2>Step 01: Combine CHH + CHG</h2>
+<div class="method"><span class="tag">method</span> Merge per-sample CHH and CHG methylKit files. SLURM array job, tasks 0 to 7. Pure file concatenation.</div>
+<p>Data preparation only. No results to show from this step.</p>
+</section>
+
+<!-- Step 02 -->
+<section id="step02">
+<h2>Step 02: Gene-body aggregation</h2>
+<div class="method"><span class="tag">method</span> <code>GenomicRanges::findOverlaps</code> over protein-coding gene bodies. Extracts lambda spike-in rate per sample. Filters to canonical chromosomes. Per-gene output: <code>n_ch_sites</code>, <code>total_coverage</code>, <code>meth_reads</code>.</div>
+<h3>Lambda conversion rates</h3>
+<p>Lambda spike-in controls measure the conversion noise floor per sample. Rates range from 0.87% to 1.81%. Genotype and lambda are correlated (r = +0.417).</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Sample</th><th>Lambda rate</th><th>Genotype</th></tr></thead>
+<tbody>
+<tr><td>ctrl_M1</td><td class="num">0.87%</td><td>control</td></tr>
+<tr><td>ctrl_M2</td><td class="num">1.12%</td><td>control</td></tr>
+<tr><td>ctrl_F1</td><td class="num">1.16%</td><td>control</td></tr>
+<tr><td>ctrl_F2</td><td class="num">1.32%</td><td>control</td></tr>
+<tr><td>mut_M1</td><td class="num">0.87%</td><td>mutant</td></tr>
+<tr><td>mut_M2</td><td class="num">1.25%</td><td>mutant</td></tr>
+<tr><td>mut_F1</td><td class="num">1.30%</td><td>mutant</td></tr>
+<tr><td>mut_F2</td><td class="num">1.81%</td><td>mutant</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Step 03 -->
+<section id="step03">
+<h2>Step 03: edgeR differential mCH</h2>
+<div class="method"><span class="tag">method</span> edgeR quasi-likelihood F-test. Design: <code>~ genotype + sex + lambda_ch_rate</code>. Offset: <code>log(total_coverage)</code>. Filters: &ge;100 CH sites and &ge;2,500 total coverage per gene per sample. <code>estimateDisp(robust = TRUE)</code>.</div>
+
+<div class="stats">
+  <div class="stat"><div class="value">21,097</div><div class="label">testable genes</div></div>
+  <div class="stat highlight"><div class="value">5,557</div><div class="label">FDR &lt; 0.05</div></div>
+  <div class="stat"><div class="value">949</div><div class="label">Bonferroni</div></div>
+  <div class="stat"><div class="value">0.1728</div><div class="label">common BCV</div></div>
+</div>
+
+<h3>Direction</h3>
+<div class="dir-bar">
+  <div class="loss" style="width:88.4%">4,915 loss (88.4%)</div>
+  <div class="gain" style="width:11.6%">642 gain</div>
+</div>
+<p>Median logFC = &minus;0.17. The 7.7:1 loss-to-gain ratio reflects a genome-wide mCH shift.</p>
+
+<div class="stats">
+  <div class="stat"><div class="value">4.962</div><div class="label">lambda GC (expected biology)</div></div>
+  <div class="stat"><div class="value">Auts2</div><div class="label">top gene (logFC &minus;0.59, FDR 6.5e-20)</div></div>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/plots/05_mch_volcano_direction/05_mch_volcano_direction.png" alt="mCH volcano plot colored by direction (higher/lower in mutant)" loading="lazy">
+  <div class="plot-caption">Volcano plot. Color: direction of mCH change in BAP1-KO. Red = higher in mutant. Blue = lower.</div>
+</div>
+</section>
+
+<!-- Step 04 -->
+<section id="step04">
+<h2>Step 04: Integration analyses</h2>
+<p>Four sub-analyses connect the mCH differential results to ChIP marks, gene sets, and CG methylation.</p>
+
+<h3>4a. K119ub overlap</h3>
+<div class="stats">
+  <div class="stat highlight"><div class="value">OR 3.04</div><div class="label">Fisher's exact (p = 3.5e-268)</div></div>
+</div>
+<p>3,362 significant mCH genes overlap K119ub peaks, vs 2,195 without overlap.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>K119ub status</th><th>Median logFC</th><th>p (Wilcoxon)</th></tr></thead>
+<tbody>
+<tr><td>Gained peaks</td><td class="num">&minus;0.102</td><td class="num">9.1e-145</td></tr>
+<tr><td>Unchanged</td><td class="num">&minus;0.182</td><td class="num">(reference)</td></tr>
+<tr><td>Lost peaks</td><td class="num">&minus;0.232</td><td class="num">4.9e-33</td></tr>
+</tbody>
+</table>
+</div>
+<div class="plot-wrap">
+  <img src="results/plots/04_k119ub_direction_boxplot/04_k119ub_direction_boxplot.png" alt="K119ub direction vs mCH logFC boxplot" loading="lazy">
+  <div class="plot-caption">mCH logFC by K119ub peak direction. Gained peaks show the least mCH decrease.</div>
+</div>
+
+<h3>4b. MeCP2 overlap</h3>
+<div class="stats">
+  <div class="stat highlight"><div class="value">OR 2.90</div><div class="label">Fisher's exact (p = 3.3e-243)</div></div>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>MeCP2 status</th><th>Median logFC</th><th>p (Wilcoxon)</th></tr></thead>
+<tbody>
+<tr><td>Gained peaks</td><td class="num">+0.088</td><td class="num">1.2e-217</td></tr>
+<tr><td>Unchanged</td><td class="num">&minus;0.182</td><td class="num">(reference)</td></tr>
+<tr><td>Lost peaks</td><td class="num">&minus;0.306</td><td class="num">7.9e-45</td></tr>
+</tbody>
+</table>
+</div>
+<div class="plot-wrap">
+  <img src="results/plots/04_mecp2_direction_boxplot/04_mecp2_direction_boxplot.png" alt="MeCP2 direction vs mCH logFC boxplot" loading="lazy">
+  <div class="plot-caption">mCH logFC by MeCP2 peak direction. MeCP2-gained genes are the only group with a positive median.</div>
+</div>
+
+<h3>4c. Neuronal gene set</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>Statistic</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>Neuronal vs non-neuronal (Wilcoxon)</td><td class="num">median nearly identical</td><td class="num">0.41</td></tr>
+<tr><td>Gene-length x neuronal interaction</td><td class="num">p = 0.019</td><td class="num">significant</td></tr>
+<tr><td>fGSEA neuronal set</td><td class="num">NES = &minus;0.98</td><td class="num">padj = 0.68</td></tr>
+</tbody>
+</table>
+</div>
+<p>Neuronal genes aren't differentially affected as a group. But the gene-length x neuronal interaction is significant: longer neuronal genes show a stronger effect.</p>
+<div class="plot-wrap">
+  <img src="results/plots/04_neuronal_wilcoxon_boxplot/04_neuronal_wilcoxon_boxplot.png" alt="Neuronal vs non-neuronal mCH logFC" loading="lazy">
+  <div class="plot-caption">mCH logFC by neuronal gene set membership.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/plots/04_genelength_quintile_boxplot/04_genelength_quintile_boxplot.png" alt="Gene length quintile effect on mCH" loading="lazy">
+  <div class="plot-caption">mCH logFC by gene-length quintile.</div>
+</div>
+
+<h3>4d. CG cross-modality</h3>
+<div class="stats">
+  <div class="stat"><div class="value">&rho; = 0.110</div><div class="label">Spearman (p = 5.4e-57, n = 20,891)</div></div>
+</div>
+<p>Weak but significant. Largest quadrant: CG mC up / mCH down (9,503 genes).</p>
+<p>The CG data comes from the Biomodal DUET evoC cohort. The mCH data comes from the EM-seq batch. Different libraries, different animals. The join is by gene symbol, so this compares across two datasets.</p>
+<div class="plot-wrap">
+  <img src="results/plots/04_cg_mch_scatter/04_cg_mch_scatter.png" alt="CG mC difference vs mCH logFC scatter" loading="lazy">
+  <div class="plot-caption">x: CG mC difference (mut &minus; ctrl), from the Biomodal DUET DMR file. y: mCH logFC from edgeR. The axes are different quantities: an arithmetic difference against a log ratio. Spearman is rank-based, so the correlation holds. The fitted line crosses mismatched scales, so its slope has no direct reading.</div>
+</div>
+</section>
+
+<!-- Step 05 -->
+<section id="step05">
+<h2>Step 05: Volcano plots</h2>
+<div class="method"><span class="tag">method</span> Three panels: direction-colored, FDR-stringency gradient, gene-length gradient. <code>ggplot2</code> + <code>ggrepel</code>. All formats via <code>multi_format_output.R</code>.</div>
+<p>Volcano plots above (in Step 03) show the direction panel. The full 3-panel composite is below.</p>
+</section>
+
+<!-- Step 06 -->
+<section id="step06">
+<h2>Step 06: dmrseq</h2>
+<div class="method"><span class="tag">method</span> Genome-wide CH DMR discovery with <code>dmrseq</code>. Processed per-chromosome to bound memory. <code>testCovariate = "genotype"</code>, <code>adjustCovariate = "sex"</code>, <code>cutoff = 0.01</code>, <code>minNumRegion = 20</code>. Lambda-corrected methylation counts. Runs parallel to steps 02 through 04.</div>
+</section>
+
+<!-- Step 07 -->
+<section id="step07">
+<h2>Step 07: MeCP2 vs H2AK119Ub quadrant analysis</h2>
+<div class="method"><span class="tag">method</span> ChIPseeker annotation to genes. Gene-body filter: Promoter, Exon, Intron, 5'/3' UTR. Multiple peaks per gene collapsed via median FC of significant peaks. FDR as binary gatekeeper. Background: genes with peaks in both marks. GO: <code>enrichGO</code> + <code>goseq</code> on all 4 quadrants.</div>
+
+<p>Rewritten from the original script. 15 issues fixed from code review. Key fixes: dplyr sequential-evaluation bug (n_sig_peaks always 0 or 1), FDR removed as continuous weight, wrong GO background corrected, gene-body filter added, goseq added.</p>
+
+<div class="stats">
+  <div class="stat"><div class="value">7,371</div><div class="label">genes with peaks in both marks</div></div>
+  <div class="stat highlight"><div class="value">1,403</div><div class="label">significant</div></div>
+  <div class="stat"><div class="value">&rho; = 0.382</div><div class="label">Spearman</div></div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Quadrant</th><th>Total</th><th>%</th><th>Sig</th><th>% of sig</th></tr></thead>
+<tbody>
+<tr><td>Q1 (MeCP2 up / H2A up)</td><td class="num">2,001</td><td class="num">27.1%</td><td class="num">991</td><td class="num" style="font-weight:700;color:var(--emphasis)">70.6%</td></tr>
+<tr><td>Q2 (MeCP2 down / H2A up)</td><td class="num">2,591</td><td class="num">35.2%</td><td class="num">97</td><td class="num">6.9%</td></tr>
+<tr><td>Q3 (MeCP2 down / H2A down)</td><td class="num">2,312</td><td class="num">31.4%</td><td class="num">267</td><td class="num">19.0%</td></tr>
+<tr><td>Q4 (MeCP2 up / H2A down)</td><td class="num">467</td><td class="num">6.3%</td><td class="num">48</td><td class="num">3.4%</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>GO enrichment: zero terms survive goseq correction in any quadrant. The original synapse/cognition enrichment was a compound artifact of wrong background + gene-length bias.</p>
+
+<div class="plot-wrap">
+  <img src="results/07_quadrant/quadrant_plot_v2/quadrant_plot_v2.png" alt="MeCP2 vs H2AK119Ub quadrant scatter" loading="lazy">
+  <div class="plot-caption">MeCP2 log2FC vs H2AK119Ub log2FC. 7,371 genes with peaks in both marks.</div>
+</div>
+</section>
+
+<!-- Step 08 -->
+<section id="step08">
+<h2>Step 08: Three-way mCH integration</h2>
+<div class="method"><span class="tag">method</span> Merge step 07 gene-level results with mCH edgeR output. Deduplicate 23 genes with multiple ENSMUSG IDs (keep highest |logFC| per gene name). 6,351 genes with data across all 3 modalities.</div>
+
+<div class="stats">
+  <div class="stat"><div class="value">6,351</div><div class="label">genes, all 3 modalities</div></div>
+  <div class="stat"><div class="value">&rho; = 0.383</div><div class="label">mCH vs MeCP2</div></div>
+  <div class="stat"><div class="value">&rho; = 0.372</div><div class="label">mCH vs H2AK119Ub</div></div>
+</div>
+
+<h3>Directional coherence by quadrant</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Quadrant</th><th>Total</th><th>mCH sig</th><th style="color:var(--loss)">mCH down</th><th style="color:var(--gain)">mCH up</th><th>Ratio</th></tr></thead>
+<tbody>
+<tr><td>Q1 (MeCP2 up / H2A up)</td><td class="num">1,620</td><td class="num">745</td><td class="num">347</td><td class="num">398</td><td class="num">~1:1 (mixed)</td></tr>
+<tr><td>Q2 (MeCP2 down / H2A up)</td><td class="num">2,289</td><td class="num">865</td><td class="num">817</td><td class="num">48</td><td class="num">17:1</td></tr>
+<tr style="background:var(--emphasis-light);font-weight:600"><td>Q3 (MeCP2 down / H2A down)</td><td class="num">2,038</td><td class="num">992</td><td class="num" style="color:var(--loss)">990</td><td class="num">2</td><td class="num" style="color:var(--emphasis)">495:1</td></tr>
+<tr><td>Q4 (MeCP2 up / H2A down)</td><td class="num">404</td><td class="num">141</td><td class="num">132</td><td class="num">9</td><td class="num">15:1</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Q3 shows near-complete directional coherence. 990 of 992 mCH-significant genes lose mCH when both ChIP marks go down. Q1 is the only quadrant with a mixed mCH response.</p>
+
+<p>GO enrichment: zero terms survive goseq in any quadrant for the three-way gene sets.</p>
+
+<div class="plot-wrap">
+  <img src="results/08_three_way/three_way_scatter_v2/three_way_scatter_v2.png" alt="Three-way scatter: MeCP2 vs H2AK119Ub colored by mCH direction" loading="lazy">
+  <div class="plot-caption">MeCP2 vs H2AK119Ub, colored by mCH direction. Blue = mCH down. Red = mCH up. Grey = mCH not significant.</div>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/08_three_way/mch_vs_mecp2_v2/mch_vs_mecp2_v2.png" alt="mCH vs MeCP2 scatter" loading="lazy">
+  <div class="plot-caption">mCH logFC vs MeCP2 fold change. Spearman rho = 0.383.</div>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/08_three_way/mch_vs_h2aub_v2/mch_vs_h2aub_v2.png" alt="mCH vs H2AK119Ub scatter" loading="lazy">
+  <div class="plot-caption">mCH logFC vs H2AK119Ub fold change. Spearman rho = 0.372.</div>
+</div>
+</section>
+
+<!-- CA comparison -->
+<section id="ca">
+<h2>CA-only pipeline comparison</h2>
+<p>A parallel pipeline filters to CA dinucleotide context only, for comparison with published mCA atlases. Same edgeR model, same lambda-covariate approach.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Metric</th><th>All-CH</th><th>CA-only</th></tr></thead>
+<tbody>
+<tr><td>Testable genes</td><td class="num">21,097</td><td class="num">20,369</td></tr>
+<tr><td>FDR &lt; 0.05</td><td class="num">5,557</td><td class="num">8,767</td></tr>
+<tr><td>Bonferroni</td><td class="num">949</td><td class="num">2,548</td></tr>
+<tr><td>Direction (FDR sig, down/up)</td><td class="num">4,915 / 642</td><td class="num">7,466 / 1,301</td></tr>
+<tr><td>Median logFC</td><td class="num">&minus;0.173</td><td class="num">&minus;0.198</td></tr>
+<tr><td>Common BCV</td><td class="num">0.1728</td><td class="num">0.1303</td></tr>
+<tr><td>Lambda GC</td><td class="num">4.962</td><td class="num">8.457</td></tr>
+</tbody>
+</table>
+</div>
+<p>Both pipelines show the same directional pattern. CA-only calls more genes significant, with lower BCV and higher lambda GC.</p>
+</section>
+
+<!-- Section pipeline -->
+<section id="sections">
+<h2>Section pipeline (23 scripts)</h2>
+<div class="warn">Section results are preliminary. The pipeline is being rerun with the corrected edgeR logFC from the lambda-covariate fix.</div>
+<p>23 downstream analysis sections ported from the companion Biomodal CG 5mC/5hmC pipeline. Each section sources <code>_shared_config.R</code>, which pre-loads the mCH differential results, all DiffBind tables, consensus peaks, and shared helper functions.</p>
+
+<details open>
+<summary>10 Chromatin (4 scripts)</summary>
+<div class="inner">
+<p>Chromatin state classification, A/B compartments, Polycomb enrichment, subcompartments.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>10_01: mCH sig x Active Promoter</td><td class="num">1.99</td><td class="num">2.9e-95</td></tr>
+<tr><td>10_02: Hyper in compartment A</td><td class="num">0.68</td><td class="num">2.2e-10</td></tr>
+<tr><td>10_04: A subcompartment x mCH sig</td><td class="num">1.75</td><td class="num">2.4e-53</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+
+<details>
+<summary>20 ChIP integration (4 scripts)</summary>
+<div class="inner">
+<p>MeCP2 correlation, multi-mark DiffBind integration, quadrant scatters, mCH-MeCP2 by mark.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>20_01: Hyper vs MeCP2 up</td><td class="num">22.29</td><td class="num">1.7e-312</td></tr>
+</tbody>
+</table>
+</div>
+<p>Aggregation crosscheck: Spearman rho = 0.384 between annotated and DiffBind routes. 69.4% same-sign agreement.</p>
+</div>
+</details>
+
+<details>
+<summary>30 Hi-C (2 scripts)</summary>
+<div class="inner">
+<p>Hi-C loop anchor methylation, MeCP2 at loop anchors. 2,910 loops across 3 resolutions. Gained loops outnumber lost about 2:1.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>30_01: Hyper x gained Hi-C anchor</td><td class="num">1.48</td><td class="num">8.6e-6</td></tr>
+<tr><td>30_02: MeCP2 gained at gained anchor</td><td class="num">1.68</td><td class="num">0.001</td></tr>
+</tbody>
+</table>
+</div>
+<p>Gained-anchor genes: 36.2% sig mCH (vs 26.9% for no-anchor genes).</p>
+</div>
+</details>
+
+<details>
+<summary>40 Permutation (4 scripts)</summary>
+<div class="inner">
+<p>Spatial permutation (DMR x marks, ATAC x loops, domains), gene-level label-shuffle validation. 5,000 permutations for spatial tests, 10,000 for gene-level. SLURM: 32 CPUs, 128G, 48h.</p>
+<p>Results pending for some sections.</p>
+</div>
+</details>
+
+<details>
+<summary>50 Features (1 script)</summary>
+<div class="inner">
+<p>Sub-gene feature methylation: exon, intron, UTR, splice sites. Depends on step 02b feature aggregation output.</p>
+</div>
+</details>
+
+<details>
+<summary>60 MeCP2 (4 scripts)</summary>
+<div class="inner">
+<p>MeCP2 cascade, K119ub at unmethylated genes, peak reconciliation, aging trajectory.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Metric</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Gained peaks</td><td class="num">7,686</td></tr>
+<tr><td>Lost peaks</td><td class="num">1,200</td></tr>
+<tr><td>Gain-to-loss ratio</td><td class="num">6.4:1</td></tr>
+<tr><td>Gained signal mass</td><td class="num">+60.8M</td></tr>
+<tr><td>Lost signal mass</td><td class="num">&minus;8.0M</td></tr>
+<tr><td>Collapse rule rho</td><td class="num">0.496</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>60_03: Collapse rule gain agreement</td><td class="num">Inf</td><td class="num">5.8e-170</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+
+<details>
+<summary>70 Neuronal (4 scripts)</summary>
+<div class="inner">
+<p>K119ub neuronal enrichment, chromatin remodeling, gene set overlap, synapse chromatin.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Metric</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Neuronal gene set (derived vs external Jaccard)</td><td class="num">0.928</td></tr>
+<tr><td>K119ub signal: neuronal vs non-neuronal in ctrl</td><td class="num">p = 2.2e-12 (higher in neuronal)</td></tr>
+<tr><td>K119ub signal: neuronal vs non-neuronal in mutant</td><td class="num">p = 0.64 (difference disappears)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>70_01: Neuronal in ctrl top quartile K119ub</td><td class="num">1.35</td><td class="num">6.5e-16</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</section>
+
+<!-- Fisher registry -->
+<section id="fisher">
+<h2>Fisher test registry</h2>
+<p>All registered Fisher tests from the section pipeline. Each section writes a shard to <code>results/sections/fisher_registry/</code>. Section 40_04 reads all shards for permutation validation.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Section</th><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>10_01</td><td>mCH sig x Active Promoter</td><td class="num">1.99</td><td class="num">2.9e-95</td></tr>
+<tr><td>10_02</td><td>Hyper in compartment A</td><td class="num">0.68</td><td class="num">2.2e-10</td></tr>
+<tr><td>10_04</td><td>A subcompartment x mCH sig</td><td class="num">1.75</td><td class="num">2.4e-53</td></tr>
+<tr><td>20_01</td><td>Hyper vs MeCP2 up</td><td class="num">22.29</td><td class="num">1.7e-312</td></tr>
+<tr><td>30_01</td><td>Hyper x gained Hi-C anchor</td><td class="num">1.48</td><td class="num">8.6e-6</td></tr>
+<tr><td>30_02</td><td>MeCP2 gained at gained anchor</td><td class="num">1.68</td><td class="num">0.001</td></tr>
+<tr><td>60_03</td><td>Collapse rule gain agreement</td><td class="num">Inf</td><td class="num">5.8e-170</td></tr>
+<tr><td>70_01</td><td>Neuronal in ctrl top quartile K119ub</td><td class="num">1.35</td><td class="num">6.5e-16</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Packages -->
+<section id="packages">
+<h2>Packages and parameters</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Package</th><th>Steps</th><th>Key parameters</th></tr></thead>
+<tbody>
+<tr><td><code>edgeR</code></td><td>03, CA</td><td>QL F-test, <code>~ genotype + sex + lambda_ch_rate</code>, <code>robust = TRUE</code></td></tr>
+<tr><td><code>GenomicRanges</code></td><td>02, 02b</td><td><code>findOverlaps</code> over protein-coding gene bodies</td></tr>
+<tr><td><code>data.table</code></td><td>02, 03</td><td><code>fread</code> for methylKit files</td></tr>
+<tr><td><code>bsseq</code></td><td>06</td><td>BSseq objects for dmrseq input</td></tr>
+<tr><td><code>dmrseq</code></td><td>06</td><td><code>cutoff = 0.01</code>, <code>minNumRegion = 20</code></td></tr>
+<tr><td><code>ChIPseeker</code></td><td>07</td><td>Peak annotation to genes via TxDb</td></tr>
+<tr><td><code>clusterProfiler</code></td><td>07, 08</td><td><code>enrichGO</code>, <code>ont = "BP"</code>, corrected background</td></tr>
+<tr><td><code>goseq</code></td><td>07, 08</td><td>Gene-length bias correction for GO</td></tr>
+<tr><td><code>fgsea</code></td><td>04</td><td>Fast preranked GSEA for neuronal set</td></tr>
+<tr><td><code>ggplot2</code></td><td>all</td><td>All plots</td></tr>
+<tr><td><code>patchwork</code></td><td>05</td><td>Multi-panel volcano layout</td></tr>
+<tr><td><code>ggrepel</code></td><td>05, 07, 08</td><td>Gene labels on scatters</td></tr>
+<tr><td><code>regioneR</code></td><td>40_01 to 40_03</td><td><code>permTest</code>, 5,000 permutations</td></tr>
+<tr><td><code>BSgenome.Mmusculus.UCSC.mm10</code></td><td>40_01 to 40_03</td><td>Genome mask for regioneR</td></tr>
+<tr><td><code>pysam</code></td><td>CA filter</td><td>Reference FASTA lookup for CA context</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+</main>
+</div>
+
+<!-- Sidebar scroll highlight -->
+<script>
+(function() {
+  var links = document.querySelectorAll('nav.sidebar a');
+  var sections = [];
+  links.forEach(function(a) {
+    var id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      var el = document.getElementById(id.slice(1));
+      if (el) sections.push({ el: el, link: a });
+    }
+  });
+  function update() {
+    var scrollY = window.scrollY + 80;
+    var current = null;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].el.offsetTop <= scrollY) { current = sections[i]; break; }
+    }
+    links.forEach(function(a) { a.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>

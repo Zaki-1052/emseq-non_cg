@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+10_02	hypo_in_shift_a_to_b	mCH hypomethylated genes are enriched in bins that shift from A to B in the mutant.	mch_hypo	shift_a_to_b	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_02_hypo_in_shift_a_to_b_genes.tsv	21034	4904	272	70	1.14184552940866	0.348180988086798

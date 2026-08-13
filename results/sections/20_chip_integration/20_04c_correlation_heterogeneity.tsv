@@ -1,0 +1,2 @@
+test	n_categories	n_genes	pooled_fisher_z	pooled_rho	chi_squared	df	p_value	z_variance_factor
+chi_square_heterogeneity_of_fisher_z	4	9517	0.208246392756405	0.205287400796054	34.7802635712837	3	1.35567708525108e-07	1.06

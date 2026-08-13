@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+70_03	synapse_vs_mecp2_up	Synapse and axon genes are enriched among genes that gain MeCP2 binding in the BAP1 mutant.	is_synapse	is_mecp2_up	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/70_neuronal/fisher_tables/70_03_synapse_vs_mecp2_up_genes.tsv	21072	2121	412	74	1.99068213868853	7.96943855491325e-07

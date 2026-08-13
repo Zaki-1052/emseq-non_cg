@@ -1,0 +1,134 @@
+=========================================
+EM-seq section 10_02: A/B compartment
+=========================================
+Job ID: 53379017
+Node: exp-3-37
+Start time: Wed Aug 12 14:12:04 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379017
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/10_chromatin/10_02_ab_compartment.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+================================================================================
+SECTION 10_02: A/B COMPARTMENT ASYMMETRY OF mCH CHANGE
+================================================================================
+Output dir:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Shift FDR:   0.05
+Shift |diff|:0.3
+
+STEP 1: Load HOMER compartment bins
+  Loaded 104,071 bins from diffcompartments.txt
+  Control PC1 columns: ctrl_M1, ctrl_M2, ctrl_M3
+  Mutant PC1 columns:  mut_M1, mut_M2, mut_M3
+  Difference column:   ctrl vs. mut Difference
+  Adjusted p column:   ctrl vs. mut adj. p-value
+  Bins on canonical chromosomes: 104,071 of 104,071
+  Compartment A: 48,207 bins (46.3%), B: 55,864 bins (53.7%)
+  Shift (adj p < 0.05, |difference| > 0.30): B to A 5,485, A to B 2,704, Stable 95,882
+
+STEP 2: Assign genes to compartment bins
+  mCH genes: 21,097 tested, 25 duplicate symbols collapsed, 21,072 kept
+  Genes on canonical chromosomes: 21,072 of 21,072
+  Genes assigned to a bin: 21,034 of 21,072 (99.8%)
+  Assigned genes by compartment: A 15,350, B 5,684
+  Assigned genes by shift: B to A 467, A to B 272, Stable 20,295
+
+STEP 3: Gene-level Fisher tests
+  Wrote: 10_02_hyper_in_compartment_a_genes.tsv (21,034 rows, 4 cols)
+  Wrote: 10_02_hyper_in_compartment_a.tsv (1 rows, 12 cols)
+  Fisher 10_02:hyper_in_compartment_a: OR=1.195, p=0.0637 (n=21,034 genes) [registered]
+  Wrote: 10_02_hypo_in_compartment_b_genes.tsv (21,034 rows, 4 cols)
+  Wrote: 10_02_hypo_in_compartment_b.tsv (1 rows, 12 cols)
+  Fisher 10_02:hypo_in_compartment_b: OR=0.572, p=6.44e-47 (n=21,034 genes) [registered]
+  Wrote: 10_02_hyper_in_shift_b_to_a_genes.tsv (21,034 rows, 4 cols)
+  Wrote: 10_02_hyper_in_shift_b_to_a.tsv (1 rows, 12 cols)
+  Fisher 10_02:hyper_in_shift_b_to_a: OR=4.458, p=3.13e-17 (n=21,034 genes) [registered]
+  Wrote: 10_02_hypo_in_shift_a_to_b_genes.tsv (21,034 rows, 4 cols)
+  Wrote: 10_02_hypo_in_shift_a_to_b.tsv (1 rows, 12 cols)
+  Fisher 10_02:hypo_in_shift_a_to_b: OR=1.142, p=0.348 (n=21,034 genes) [registered]
+
+STEP 4: Wilcoxon and Spearman tests
+  Wilcoxon A vs B (compartment): median A = 0.00010, median B = 0.00069, adjusted p < 2.2e-16
+  Wilcoxon A to B vs B to A (shift): median A to B = 0.00099, median B to A = 0.00079, adjusted p = 1.85e-01
+  Wilcoxon Stable vs B to A (shift): median Stable = 0.00026, median B to A = 0.00079, adjusted p = 5.88e-05
+  Wilcoxon Stable vs A to B (shift): median Stable = 0.00026, median A to B = 0.00099, adjusted p = 4.28e-05
+  Spearman PC1 vs mCH: rho = -0.119, p < 2.2e-16
+
+STEP 5: Direction proportions
+  compartment A: n = 15,350, 4,449 significant, 11.0% hypermethylated of significant
+  compartment B: n = 5,684, 1,095 significant, 13.9% hypermethylated of significant
+  shift B to A: n = 467, 170 significant, 31.8% hypermethylated of significant
+  shift A to B: n = 272, 128 significant, 45.3% hypermethylated of significant
+  shift Stable: n = 20,295, 5,246 significant, 10.1% hypermethylated of significant
+
+STEP 6: Figures
+  Saved: 10_02a_mch_violin_by_compartment/{pdf,svg,png,jpg}
+  Saved: 10_02b_mch_violin_by_shift/{pdf,svg,png,jpg}
+  Saved: 10_02c_mch_direction_stacked_bar/{pdf,svg,png,jpg}
+  Saved: 10_02d_pc1_vs_mch_scatter/{pdf,svg,png,jpg}
+  Saved: 10_02e_composite_compartment_summary/{pdf,svg,png,jpg}
+
+STEP 7: Tables
+  Wrote: gene_compartment_assignment.tsv (21,034 rows, 25 cols)
+  Wrote: compartment_bin_summary.tsv (6 rows, 4 cols)
+  Wrote: compartment_gene_summary.tsv (5 rows, 12 cols)
+  Wrote: compartment_direction_proportions.tsv (10 rows, 5 cols)
+  Wrote: shift_direction_observed_expected.tsv (6 rows, 5 cols)
+  Wrote: compartment_fisher_tests.tsv (4 rows, 16 cols)
+  Wrote: compartment_wilcoxon_tests.tsv (4 rows, 10 cols)
+  Wrote: compartment_pc1_spearman.tsv (1 rows, 6 cols)
+  Wrote: violin_stats_compartment.tsv (2 rows, 6 cols)
+  Wrote: violin_stats_shift.tsv (3 rows, 6 cols)
+
+================================================================================
+SECTION 10_02 SUMMARY
+================================================================================
+Genes assigned to compartment bins: 21,034
+  Fisher hyper_in_compartment_a: OR = 1.195 (95% CI 0.991-1.447), p = 6.37e-02
+  Fisher hypo_in_compartment_b: OR = 0.572 (95% CI 0.528-0.619), p < 2.2e-16
+  Fisher hyper_in_shift_b_to_a: OR = 4.458 (95% CI 3.254-6.009), p < 2.2e-16
+  Fisher hypo_in_shift_a_to_b: OR = 1.142 (95% CI 0.856-1.509), p = 3.48e-01
+  Median mCH difference: A = 0.00010, B = 0.00069
+  Spearman control PC1 against mCH difference: rho = -0.119, p < 2.2e-16
+
+Figures and tables written to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin
+Section 10_02 complete.
+
+
+=========================================
+Complete: section 10_02
+Time: 79s
+Exit code: 0
+End time: Wed Aug 12 14:13:27 PDT 2026
+=========================================

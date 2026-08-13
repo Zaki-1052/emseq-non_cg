@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+10_04	label_changed_sig	Genes in bins whose subcompartment label changed in the mutant versus stable bins, against significant mCH change.	label_changed	mch_sig	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_04_label_changed_sig_genes.tsv	20105	2291	5391	747	1.37201735955776	6.86618016118544e-11

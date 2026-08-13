@@ -7,14 +7,17 @@ Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
 Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
 
 Loading mCH differential results...
-  21,097 genes tested, 5,557 significant (1,402 hyper, 4,155 hypo) at FDR<0.05
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
 
 Loading DiffBind results...
   H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
   MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
-  ATAC: 75867 peaks (9263 gained, 4159 lost at FDR<0.05)
-  H3K27ac: 25669 peaks (5077 gained, 6706 lost at FDR<0.05)
-  H3K27me3: 18324 peaks (2293 gained, 4811 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
 
 Loading consensus peak sets...
   K119ub consensus: 34088 peaks

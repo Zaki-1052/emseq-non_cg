@@ -1,0 +1,166 @@
+=========================================
+EM-seq section 60_01: methylation scale
+=========================================
+Job ID: 53379025
+Node: exp-1-49
+Start time: Wed Aug 12 14:12:05 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379025
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/60_mecp2/60_01_methylation_scale.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+
+Attaching package: ‘ggVennDiagram’
+
+The following object is masked from ‘package:ChIPseeker’:
+
+    overlap
+
+The following object is masked from ‘package:tidyr’:
+
+    unite
+
+================================================================================
+SECTION 60_01: mCH SCALE vs MeCP2 BINDING SCALE
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2
+FDR threshold: 0.05
+
+--- Loading MeCP2 peak annotation ---
+  MeCP2 annotated peaks: 202,650 total, 202,542 with a gene symbol
+  Peak-level significance at FDR<0.05: 7,683 up, 1,200 down
+
+--- Aggregating MeCP2 peaks to genes (nearest TSS) ---
+  Genes with a MeCP2 annotated peak: 21,195
+
+--- Building the gene table ---
+  Deduplicated 21,097 mCH rows to 21,072 gene names
+  Gene table: 21,072 genes, 17,096 carry a MeCP2 peak
+  MeCP2 gene-level change at FDR<0.05: 96 gained, 59 lost
+  Wrote: 60_01_gene_level_mch_mecp2.tsv (21,072 rows, 26 cols)
+
+--- Analysis 1: the cascade ---
+  Genes tested                             21,072 genes  (100.00% of previous, 100.00% of tested)
+  mCH significant                           5,551 genes  ( 26.34% of previous,  26.34% of tested)
+  mCH hypermethylated                         641 genes  ( 11.55% of previous,   3.04% of tested)
+  Hypermethylated with a MeCP2 peak           593 genes  ( 92.51% of previous,   2.81% of tested)
+  Hypermethylated with a MeCP2 change          56 genes  (  9.44% of previous,   0.27% of tested)
+  Wrote: 60_01_cascade.tsv (5 rows, 5 cols)
+
+--- Analysis 2: scale comparison ---
+  Genes with a MeCP2 peak: 17,096
+  mCH significant: 5,146 | MeCP2 changed: 155 | ratio 33.2x
+  Of mCH-significant genes, 1.87% also change MeCP2 (sufficiency)
+  Of MeCP2-changed genes, 61.94% also change mCH (necessity)
+  MeCP2 peak level: 36,804 peaks, 5,675 gained, 1,107 lost at FDR<0.05
+  Wrote: 60_01_scale_comparison.tsv (1 rows, 12 cols)
+
+--- Figure 60_01a: two-panel hierarchy ---
+  Saved: 60_01a_scale_hierarchy/{pdf,svg,png,jpg}
+  Wrote: 60_01_hierarchy_counts.tsv (8 rows, 4 cols)
+
+--- Figure 60_01b: two-set Venn ---
+  mCH significant only      5,455 genes (25.89% of tested)
+  MeCP2 changed only           59 genes ( 0.28% of tested)
+  Both                         96 genes ( 0.46% of tested)
+  Neither                  15,462 genes (73.38% of tested)
+  Tested universe          21,072 genes (100.00% of tested)
+  Saved: 60_01b_mch_mecp2_venn/{pdf,svg,png,jpg}
+  Wrote: 60_01_venn_counts.tsv (5 rows, 3 cols)
+
+--- Figure 60_01c: quadrant scatter ---
+  Q1 (mCH up, MeCP2 up      ):    3,113 genes (18.21%)
+  Q2 (mCH down, MeCP2 up    ):    2,337 genes (13.67%)
+  Q3 (mCH down, MeCP2 down  ):    5,481 genes (32.06%)
+  Q4 (mCH up, MeCP2 down    ):    6,165 genes (36.06%)
+  Saved: 60_01c_mch_mecp2_quadrant/{pdf,svg,png,jpg}
+  Wrote: 60_01_quadrant_counts.tsv (4 rows, 4 cols)
+
+--- Figure 60_01d: cascade funnel ---
+  Saved: 60_01d_cascade_funnel/{pdf,svg,png,jpg}
+
+--- Figure 60_01e: MeCP2 fold by mCH direction ---
+  Hypermethylated  n =      593, median MeCP2 fold = +0.0016, mean = +0.1697
+  Hypomethylated   n =    4,553, median MeCP2 fold = -0.0206, mean = -0.0418
+  Not Significant  n =   11,950, median MeCP2 fold = -0.0182, mean = -0.0284
+  Wilcoxon Hypermethylated vs Hypomethylated: W = 1734962, p = 1.13e-29
+  Wilcoxon Hypermethylated vs Not Significant: W = 4431975, p = 5.33e-25
+  Wilcoxon Hypomethylated vs Not Significant: W = 26062759, p = 3.01e-05
+  Saved: 60_01e_mecp2_fold_by_mch_direction/{pdf,svg,png,jpg}
+  Wrote: 60_01_mecp2_fold_by_mch_direction_summary.tsv (3 rows, 6 cols)
+  Wrote: 60_01_mecp2_fold_by_mch_direction_wilcoxon.tsv (3 rows, 9 cols)
+
+--- Analysis 3: registered Fisher test ---
+  Wrote: 60_01_mch_sig_vs_mecp2_sig_genes.tsv (17,096 rows, 4 cols)
+  Wrote: 60_01_mch_sig_vs_mecp2_sig.tsv (1 rows, 12 cols)
+  Fisher 60_01:mch_sig_vs_mecp2_sig: OR=3.831, p=2.72e-16 (n=17,096 genes) [registered]
+  Wrote: 60_01_fisher_summary.tsv (1 rows, 14 cols)
+
+--- Handoff: MeCP2 changes without an mCH change ---
+  Wrote: mecp2_no_meth_genes.tsv (59 rows, 12 cols)
+  MeCP2 changes without an mCH change: 59 genes (32 gained, 27 lost)
+
+================================================================================
+SECTION 60_01 SUMMARY
+================================================================================
+Genes tested                             21,072  (100.00% of previous, 100.00% of tested)
+mCH significant                           5,551  ( 26.34% of previous,  26.34% of tested)
+mCH hypermethylated                         641  ( 11.55% of previous,   3.04% of tested)
+Hypermethylated with a MeCP2 peak           593  ( 92.51% of previous,   2.81% of tested)
+Hypermethylated with a MeCP2 change          56  (  9.44% of previous,   0.27% of tested)
+Genes with a MeCP2 peak:               17,096
+mCH-significant to MeCP2-changed ratio: 33.2x
+mCH-significant genes that change MeCP2: 1.87%
+MeCP2-changed genes that change mCH:     61.94%
+Fisher mch_sig x mecp2_sig:            OR = 3.831 (95% CI 2.737 to 5.401), p = 2.72e-16
+Wilcoxon hyper vs hypo MeCP2 fold:     p = 1.13e-29
+MeCP2 change without an mCH change:    59 genes
+Handoff table: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/60_mecp2/mecp2_no_meth_genes.tsv
+Fisher tests registered in: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/fisher_registry
+
+Section 60_01 complete.
+
+Warning messages:
+1: In geom_label(aes(label = .data[[label]]), data = region_label,  :
+  Ignoring unknown parameters: `linewidth`
+2: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+5: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+
+=========================================
+Complete: section 60_01
+Time: 39s
+Exit code: 0
+End time: Wed Aug 12 14:12:47 PDT 2026
+=========================================

@@ -1,0 +1,21 @@
+group	n_predicted	n_genes	n_group	pct	count_type
+Neuronal	0	98	493	19.8782961460446	Direction of the fold change
+Other	0	115	867	13.2641291810842	Direction of the fold change
+Neuronal	1	142	493	28.8032454361055	Direction of the fold change
+Other	1	214	867	24.6828143021915	Direction of the fold change
+Neuronal	2	121	493	24.5436105476673	Direction of the fold change
+Other	2	265	867	30.5651672433679	Direction of the fold change
+Neuronal	3	76	493	15.4158215010142	Direction of the fold change
+Other	3	169	867	19.4925028835063	Direction of the fold change
+Neuronal	4	56	493	11.3590263691684	Direction of the fold change
+Other	4	104	867	11.9953863898501	Direction of the fold change
+Neuronal	0	206	493	41.7849898580122	Direction and FDR < 0.05
+Other	0	320	867	36.9088811995386	Direction and FDR < 0.05
+Neuronal	1	155	493	31.4401622718053	Direction and FDR < 0.05
+Other	1	295	867	34.0253748558247	Direction and FDR < 0.05
+Neuronal	2	81	493	16.4300202839757	Direction and FDR < 0.05
+Other	2	160	867	18.4544405997693	Direction and FDR < 0.05
+Neuronal	3	34	493	6.89655172413793	Direction and FDR < 0.05
+Other	3	80	867	9.22722029988466	Direction and FDR < 0.05
+Neuronal	4	17	493	3.44827586206897	Direction and FDR < 0.05
+Other	4	12	867	1.3840830449827	Direction and FDR < 0.05

@@ -1,0 +1,101 @@
+=========================================
+EM-seq section 50_01: feature methylation
+=========================================
+Job ID: 53379024
+Node: exp-1-45
+Start time: Wed Aug 12 14:26:15 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379024
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/50_features/50_01_feature_methylation.R
+Output dir:  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features
+Feature dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+
+All 8 per-sample feature tables are present.
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 50_01: mCH ACROSS SUB-GENE FEATURE TYPES
+================================================================================
+Output dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/50_features
+Feature dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+Min coverage:  20 pooled reads per genotype
+Max rank:      20
+Metagene bins: 50
+
+Loading per-sample feature tables from:
+  /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+  ctrl_M1  939,085 intervals  448,392,497 CH site observations  5,570,063,259 read coverage
+  ctrl_M2  939,085 intervals  451,879,444 CH site observations  7,374,693,056 read coverage
+  ctrl_F1  939,085 intervals  452,044,113 CH site observations  7,981,757,853 read coverage
+  ctrl_F2  939,085 intervals  451,988,115 CH site observations  8,399,907,233 read coverage
+  mut_M1   939,085 intervals  450,863,072 CH site observations  6,151,301,236 read coverage
+  mut_M2   939,085 intervals  453,720,031 CH site observations  17,449,825,935 read coverage
+  mut_F1   939,085 intervals  453,537,488 CH site observations  15,860,234,126 read coverage
+  mut_F2   939,085 intervals  451,324,609 CH site observations  7,288,142,377 read coverage
+
+  939,085 intervals across 21,820 genes and 6 feature types
+
+Coverage threshold sweep:
+  >=      0 reads:    939,085 kept,          0 removed (  0.0%)
+  >=      5 reads:    929,268 kept,      9,817 removed (  1.0%)
+  >=     10 reads:    928,953 kept,     10,132 removed (  1.1%)
+  >=     20 reads:    928,454 kept,     10,631 removed (  1.1%)
+  >=     30 reads:    927,967 kept,     11,118 removed (  1.2%)
+  >=     50 reads:    926,919 kept,     12,166 removed (  1.3%)
+  >=    100 reads:    923,998 kept,     15,087 removed (  1.6%)
+  >=    200 reads:    913,976 kept,     25,109 removed (  2.7%)
+
+Applying the coverage filter (>= 20 pooled reads per genotype):
+  5UTR                     45,110 of     46,033 kept (  2.0% removed)
+  Exon                    223,960 of    226,407 kept (  1.1% removed)
+  SpliceSite_Donor        202,065 of    204,583 kept (  1.2% removed)
+  SpliceSite_Acceptor     202,039 of    204,578 kept (  1.2% removed)
+  Intron                  203,313 of    204,586 kept (  0.6% removed)
+  3UTR                     51,967 of     52,898 kept (  1.8% removed)
+  All                     928,454 of    939,085 kept (  1.1% removed)
+
+Loading the active enhancer segmentation...
+  Active enhancer: 28110 peaks
+  16,435 of 928,454 intervals overlap an active enhancer (1.8%)
+
+Building summary tables...
+Error in `[.data.table`(kept_intervals, , .(n_intervals_pass = .N, n_genes = uniqueN(gene_name),  : 
+  Column 4 of result for group 3 is type 'integer' but expecting type 'double'. Column types must be consistent for each group.
+Calls: main -> feature_type_summary -> [ -> [.data.table
+Execution halted
+
+=========================================
+Complete: section 50_01
+Time: 42s
+Exit code: 1
+End time: Wed Aug 12 14:26:59 PDT 2026
+=========================================

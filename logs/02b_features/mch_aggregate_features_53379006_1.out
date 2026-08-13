@@ -1,0 +1,50 @@
+=========================================
+EM-seq: Sub-gene feature mCH aggregation
+=========================================
+Job ID: 53379006_1
+Node: exp-2-42
+Start time: Wed Aug 12 14:12:30 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379006_1
+Sample:      mut_M1
+CH file:     /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M1_CH.methylKit.gz
+Feature dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features
+Output:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+
+Sample: mut_M1 
+data.table threads: 64 
+
+Loading feature intervals from: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features 
+  5UTR                   46,033 intervals
+  Exon                  226,407 intervals
+  SpliceSite_Donor      204,583 intervals
+  SpliceSite_Acceptor   204,578 intervals
+  Intron                204,586 intervals
+  3UTR                   52,898 intervals
+  Total: 939,085 intervals across 21,820 genes
+
+Reading: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/mut_M1_CH.methylKit.gz 
+  Total sites: 985,722,045
+  Canonical chr sites: 984,941,891
+Building GRanges...
+Finding overlaps...
+  Overlapping pairs: 450,863,072
+Aggregating per interval...
+
+Wrote 939,085 intervals to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features/mut_M1_feature_mch.tsv 
+
+--- Summary by feature type ---
+  5UTR                   46,033 intervals    45,156 with sites     3,503,180 CH sites  mCH 0.0144 (1.44%)
+  Exon                  226,407 intervals   224,034 with sites    41,611,170 CH sites  mCH 0.0134 (1.34%)
+  SpliceSite_Donor      204,583 intervals   202,246 with sites     1,855,758 CH sites  mCH 0.0141 (1.41%)
+  SpliceSite_Acceptor   204,578 intervals   202,237 with sites     1,878,719 CH sites  mCH 0.0128 (1.28%)
+  Intron                204,586 intervals   203,338 with sites   386,507,833 CH sites  mCH 0.0176 (1.76%)
+  3UTR                   52,898 intervals    52,003 with sites    15,506,412 CH sites  mCH 0.0135 (1.35%)
+
+=========================================
+Complete: mut_M1
+Time: 517s
+Exit code: 0
+End time: Wed Aug 12 14:21:10 PDT 2026
+=========================================

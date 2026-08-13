@@ -1,0 +1,6 @@
+step	step_label	n_genes	pct_of_previous	pct_of_tested
+1	Genes tested	21072	100	100
+2	mCH significant	5551	26.3430144267274	26.3430144267274
+3	mCH hypermethylated	641	11.5474689245181	3.04195140470767
+4	Hypermethylated with a MeCP2 peak	593	92.5117004680187	2.81416097190585
+5	Hypermethylated with a MeCP2 change	56	9.44350758853288	0.265755504935459

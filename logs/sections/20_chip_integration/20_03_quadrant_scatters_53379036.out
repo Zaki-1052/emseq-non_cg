@@ -1,0 +1,179 @@
+=========================================
+EM-seq section 20_03: quadrant scatters
+=========================================
+Job ID: 53379036
+Node: exp-2-13
+Start time: Wed Aug 12 14:15:07 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379036
+Code dir:         /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:         /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:           /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/20_chip_integration/20_03_quadrant_scatters.R
+Output dir:       /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+Gene-level marks: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/gene_level_all_marks.tsv
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+===========================================================================
+  SECTION 20_03: QUADRANT SCATTERS OF CHROMATIN MARKS AND mCH
+===========================================================================
+  Output directory:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration
+  MeCP2 FDR threshold:  0.05
+  Axis clip percentile: 0.995
+
+--- Loading inputs ---
+  Gene-level mark table: 21,097 rows
+    mCH significant: 5,557 | H3K27ac fold: 8,606 | H3K27me3 fold: 4,248
+  Collapsed 21,097 rows to 21,072 gene names (25 rows dropped)
+  H2AK119ub signal: 23,150 rows in, 23,150 gene symbols kept (0 collapsed)
+    quantifiable in both conditions: 21,604 (93.3%)
+  Aggregating MeCP2 DiffBind peaks to genes...
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+    36,791 of 36,804 annotated MeCP2 peaks carry a gene symbol
+    11,229 genes carry a MeCP2 peak
+
+--- Building the master table ---
+  Master table: 21,072 genes
+    H2AK119ub gene-body log2FC: 18,014 | quantifiable: 17,535
+    MeCP2 fold: 9,517 | H3K27ac fold: 8,599 | H3K27me3 fold: 4,244
+    body state      Active           6,555 genes
+    body state      Mixed            519 genes
+    body state      Polycomb         3,322 genes
+    body state      Enhancer_Marked  5,470 genes
+    body state      Unmarked         5,206 genes
+    chromatin group Euchromatin      12,025 genes
+    chromatin group Heterochromatin  3,841 genes
+    chromatin group Neither          5,206 genes
+  Wrote: 20_03_chromatin_group_counts.tsv (19 rows, 5 cols)
+
+--- Figure 20_03a_k119ub_vs_mecp2: H2AK119ub against MeCP2 at gene bodies ---
+  Subset 'k119ub_quantifiable': 17,535 genes
+  Saved: 20_03a_k119ub_vs_mecp2/{pdf,svg,png,jpg}
+  n = 9,399 | Spearman rho = +0.169 (p = 1.6e-61) | Pearson r = +0.251
+    Q1  K119ub up, MeCP2 up          1,632 genes (17.4%)
+    Q2  K119ub down, MeCP2 up        926 genes (9.9%)
+    Q3  K119ub down, MeCP2 down      3,485 genes (37.1%)
+    Q4  K119ub up, MeCP2 down        3,356 genes (35.7%)
+
+--- Figure 20_03b_mecp2_vs_k27ac_euchromatin: MeCP2 against H3K27ac in euchromatin ---
+  Subset 'euchromatin': 12,025 genes
+  Saved: 20_03b_mecp2_vs_k27ac_euchromatin/{pdf,svg,png,jpg}
+  n = 5,180 | Spearman rho = -0.135 (p = 1.19e-22) | Pearson r = -0.235
+    Q1  MeCP2 up, K27ac up           605 genes (11.7%)
+    Q2  MeCP2 down, K27ac up         2,282 genes (44.1%)
+    Q3  MeCP2 down, K27ac down       1,546 genes (29.8%)
+    Q4  MeCP2 up, K27ac down         747 genes (14.4%)
+
+--- Figure 20_03c_mecp2_vs_k27me3_heterochromatin: MeCP2 against H3K27me3 in heterochromatin ---
+  Subset 'heterochromatin': 3,841 genes
+  Saved: 20_03c_mecp2_vs_k27me3_heterochromatin/{pdf,svg,png,jpg}
+  n = 2,178 | Spearman rho = +0.009 (p = 0.679) | Pearson r = +0.013
+    Q1  MeCP2 up, K27me3 up          178 genes (8.2%)
+    Q2  MeCP2 down, K27me3 up        424 genes (19.5%)
+    Q3  MeCP2 down, K27me3 down      1,138 genes (52.2%)
+    Q4  MeCP2 up, K27me3 down        438 genes (20.1%)
+
+--- Figure 20_03d_k119ub_vs_mch: H2AK119ub against gene-body mCH change ---
+  Subset 'k119ub_quantifiable': 17,535 genes
+  Saved: 20_03d_k119ub_vs_mch/{pdf,svg,png,jpg}
+  n = 17,535 | Spearman rho = +0.261 (p = 4.78e-271) | Pearson r = +0.346
+    Q1  K119ub up, mCH up            5,342 genes (30.5%)
+    Q2  K119ub down, mCH up          4,123 genes (23.5%)
+    Q3  K119ub down, mCH down        4,913 genes (28.0%)
+    Q4  K119ub up, mCH down          3,157 genes (18.0%)
+
+--- Figure 20_03e_mecp2_vs_mch: MeCP2 against gene-body mCH change ---
+  Subset 'all_genes': 21,072 genes
+  Saved: 20_03e_mecp2_vs_mch/{pdf,svg,png,jpg}
+  n = 9,517 | Spearman rho = +0.207 (p = 1.95e-92) | Pearson r = +0.308
+    Q1  MeCP2 up, mCH up             1,614 genes (17.0%)
+    Q2  MeCP2 down, mCH up           3,223 genes (33.9%)
+    Q3  MeCP2 down, mCH down         3,708 genes (39.0%)
+    Q4  MeCP2 up, mCH down           972 genes (10.2%)
+
+--- Figure 20_03f: composite of all five scatters ---
+  Saved: 20_03f_quadrant_composite/{pdf,svg,png,jpg}
+
+--- Writing tables ---
+  Wrote: 20_03_scatter_statistics.tsv (5 rows, 22 cols)
+  Wrote: 20_03_quadrant_counts.tsv (20 rows, 11 cols)
+  Wrote: 20_03_key_gene_coordinates.tsv (35 rows, 13 cols)
+  Wrote: 20_03_quadrant_master.tsv (21,072 rows, 44 cols)
+
+--- Gene-level Fisher tests ---
+  Wrote: 20_03_k119ub_up_vs_mecp2_up_genes.tsv (9,399 rows, 4 cols)
+  Wrote: 20_03_k119ub_up_vs_mecp2_up.tsv (1 rows, 12 cols)
+  Fisher 20_03:k119ub_up_vs_mecp2_up: OR=1.830, p=1.47e-37 (n=9,399 genes) [registered]
+  Wrote: 20_03_mecp2_up_vs_k27ac_up_euchromatin_genes.tsv (5,180 rows, 4 cols)
+  Wrote: 20_03_mecp2_up_vs_k27ac_up_euchromatin.tsv (1 rows, 12 cols)
+  Fisher 20_03:mecp2_up_vs_k27ac_up_euchromatin: OR=0.549, p=4.36e-21 (n=5,180 genes) [registered]
+  Wrote: 20_03_mecp2_up_vs_k27me3_up_heterochromatin_genes.tsv (2,178 rows, 4 cols)
+  Wrote: 20_03_mecp2_up_vs_k27me3_up_heterochromatin.tsv (1 rows, 12 cols)
+  Fisher 20_03:mecp2_up_vs_k27me3_up_heterochromatin: OR=1.091, p=0.425 (n=2,178 genes) [registered]
+  Wrote: 20_03_k119ub_up_vs_mch_hyper_genes.tsv (17,535 rows, 4 cols)
+  Wrote: 20_03_k119ub_up_vs_mch_hyper.tsv (1 rows, 12 cols)
+  Fisher 20_03:k119ub_up_vs_mch_hyper: OR=2.016, p=2.22e-116 (n=17,535 genes) [registered]
+  Wrote: 20_03_mecp2_up_vs_mch_hyper_genes.tsv (9,517 rows, 4 cols)
+  Wrote: 20_03_mecp2_up_vs_mch_hyper.tsv (1 rows, 12 cols)
+  Fisher 20_03:mecp2_up_vs_mch_hyper: OR=1.910, p=1.23e-43 (n=9,517 genes) [registered]
+  Wrote: 20_03_k119ub_up_vs_mch_hyper_sig_genes.tsv (5,119 rows, 4 cols)
+  Wrote: 20_03_k119ub_up_vs_mch_hyper_sig.tsv (1 rows, 12 cols)
+  Fisher 20_03:k119ub_up_vs_mch_hyper_sig: OR=3.566, p=7.95e-81 (n=5,119 genes) [registered]
+  Wrote: 20_03_mecp2_up_vs_mch_hyper_sig_genes.tsv (3,527 rows, 4 cols)
+  Wrote: 20_03_mecp2_up_vs_mch_hyper_sig.tsv (1 rows, 12 cols)
+  Fisher 20_03:mecp2_up_vs_mch_hyper_sig: OR=3.403, p=6.32e-49 (n=3,527 genes) [registered]
+  Wrote: 20_03_fisher_summary.tsv (7 rows, 13 cols)
+
+---------------------------------------------------------------------------
+  SUMMARY
+---------------------------------------------------------------------------
+  k119ub_vs_mecp2    n =   9,399  rho = +0.169 (p = 1.6e-61)
+  mecp2_vs_k27ac     n =   5,180  rho = -0.135 (p = 1.19e-22)
+  mecp2_vs_k27me3    n =   2,178  rho = +0.009 (p = 0.679)
+  k119ub_vs_mch      n =  17,535  rho = +0.261 (p = 4.78e-271)
+  mecp2_vs_mch       n =   9,517  rho = +0.207 (p = 1.95e-92)
+  Fisher tests (sign concordance):
+    k119ub_up_vs_mecp2_up                    OR = 1.830 [1.665, 2.012], p = 1.47e-37 (n = 9,399)
+    mecp2_up_vs_k27ac_up_euchromatin         OR = 0.549 [0.483, 0.623], p = 4.36e-21 (n = 5,180)
+    mecp2_up_vs_k27me3_up_heterochromatin    OR = 1.091 [0.881, 1.347], p = 0.425 (n = 2,178)
+    k119ub_up_vs_mch_hyper                   OR = 2.016 [1.897, 2.143], p = 2.22e-116 (n = 17,535)
+    mecp2_up_vs_mch_hyper                    OR = 1.910 [1.740, 2.098], p = 1.23e-43 (n = 9,517)
+    k119ub_up_vs_mch_hyper_sig               OR = 3.566 [3.111, 4.091], p = 7.95e-81 (n = 5,119)
+    mecp2_up_vs_mch_hyper_sig                OR = 3.403 [2.883, 4.018], p = 6.32e-49 (n = 3,527)
+
+=== Section 20_03 complete ===
+
+
+=========================================
+Complete: section 20_03
+Time: 54s
+Exit code: 0
+End time: Wed Aug 12 14:16:03 PDT 2026
+=========================================

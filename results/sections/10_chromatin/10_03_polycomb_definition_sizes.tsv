@@ -1,0 +1,6 @@
+gene_set	column	n_tested	n_in_set	pct_in_set	n_missing
+Polycomb body state	pc_body_polycomb	21072	3322	15.7649962034928	0
+Polycomb or Mixed body	pc_body_polycomb_mixed	21072	3841	18.2279802581625	0
+Repressed/Bivalent promoter	pc_repressed_bivalent	21072	3060	14.5216400911162	0
+H3K27me3 body overlap	pc_k27me3_peak	21072	3841	18.2279802581625	0
+K119ub top 10%	pc_k119ub_top	18543	1855	10.0037750094375	2529

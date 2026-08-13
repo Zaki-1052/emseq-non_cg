@@ -1,0 +1,50 @@
+=========================================
+EM-seq: Sub-gene feature mCH aggregation
+=========================================
+Job ID: 53379006_6
+Node: exp-6-39
+Start time: Wed Aug 12 14:16:08 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379006_6
+Sample:      ctrl_F2
+CH file:     /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F2_CH.methylKit.gz
+Feature dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features
+Output:      /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features
+
+Sample: ctrl_F2 
+data.table threads: 64 
+
+Loading feature intervals from: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/data/features 
+  5UTR                   46,033 intervals
+  Exon                  226,407 intervals
+  SpliceSite_Donor      204,583 intervals
+  SpliceSite_Acceptor   204,578 intervals
+  Intron                204,586 intervals
+  3UTR                   52,898 intervals
+  Total: 939,085 intervals across 21,820 genes
+
+Reading: /expanse/lustre/projects/csd940/zalibhai/emseq/combined_ch/ctrl_F2_CH.methylKit.gz 
+  Total sites: 983,837,632
+  Canonical chr sites: 983,058,793
+Building GRanges...
+Finding overlaps...
+  Overlapping pairs: 451,988,115
+Aggregating per interval...
+
+Wrote 939,085 intervals to: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/02b_features/ctrl_F2_feature_mch.tsv 
+
+--- Summary by feature type ---
+  5UTR                   46,033 intervals    45,021 with sites     3,509,573 CH sites  mCH 0.0182 (1.82%)
+  Exon                  226,407 intervals   223,587 with sites    41,636,162 CH sites  mCH 0.0168 (1.68%)
+  SpliceSite_Donor      204,583 intervals   201,934 with sites     1,855,588 CH sites  mCH 0.0175 (1.75%)
+  SpliceSite_Acceptor   204,578 intervals   201,911 with sites     1,878,462 CH sites  mCH 0.0159 (1.59%)
+  Intron                204,586 intervals   202,720 with sites   387,589,591 CH sites  mCH 0.0208 (2.08%)
+  3UTR                   52,898 intervals    51,895 with sites    15,518,739 CH sites  mCH 0.0169 (1.69%)
+
+=========================================
+Complete: ctrl_F2
+Time: 563s
+Exit code: 0
+End time: Wed Aug 12 14:25:34 PDT 2026
+=========================================

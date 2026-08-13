@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+40_03	mch_hypo_genes_x_b_to_a_shift	Are mCH hypomethylated genes enriched among genes overlapping B to A Shift?	mch_hypo	in_target	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/40_permutation/fisher_tables/40_03_mch_hypo_genes_x_b_to_a_shift_genes.tsv	21072	4152	696	170	1.33057783866787	0.00190045808141843

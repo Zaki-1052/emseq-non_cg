@@ -1,0 +1,4 @@
+mch_group	n_genes	median_concordant	mean_concordant	kruskal_chisq	kruskal_df	kruskal_p
+mCH Hyper	642	1	1.34267912772586	1512.14782794859	2	0
+mCH Hypo	4915	0	0.281790437436419	1512.14782794859	2	0
+Not Significant	15540	0	0.225675675675676	1512.14782794859	2	0

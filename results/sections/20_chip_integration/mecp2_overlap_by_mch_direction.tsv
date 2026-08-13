@@ -1,0 +1,7 @@
+mch_category	n_genes	mecp2_direction	count	percentage
+Hypermethylated	641	MeCP2 Up	398	62.0904836193448
+Hypermethylated	641	MeCP2 Down	16	2.49609984399376
+Hypomethylated	4910	MeCP2 Up	145	2.95315682281059
+Hypomethylated	4910	MeCP2 Down	357	7.27087576374745
+Not Significant	15521	MeCP2 Up	305	1.96507956961536
+Not Significant	15521	MeCP2 Down	77	0.496102055279943

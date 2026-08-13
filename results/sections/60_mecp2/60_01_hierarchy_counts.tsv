@@ -1,0 +1,9 @@
+hierarchy	step_label	n_genes	pct_of_hierarchy_top
+mCH	Genes tested	21072	100
+mCH	mCH significant	5551	26.3430144267274
+mCH	mCH hypermethylated	641	3.04195140470767
+mCH	mCH hypomethylated	4910	23.3010630220197
+MeCP2	Genes with a MeCP2 peak	17096	100
+MeCP2	MeCP2 significant	155	0.906644829199813
+MeCP2	MeCP2 gained	96	0.561534861956013
+MeCP2	MeCP2 lost	59	0.3451099672438

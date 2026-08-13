@@ -1,0 +1,21 @@
+mark_category	body_state	n_genes
+K27ac only	Active	4269
+Bivalent	Active	0
+K27me3 only	Active	0
+Neither	Active	0
+K27ac only	Mixed	0
+Bivalent	Mixed	428
+K27me3 only	Mixed	0
+Neither	Mixed	0
+K27ac only	Polycomb	0
+Bivalent	Polycomb	126
+K27me3 only	Polycomb	1921
+Neither	Polycomb	0
+K27ac only	Enhancer_Marked	0
+Bivalent	Enhancer_Marked	1
+K27me3 only	Enhancer_Marked	0
+Neither	Enhancer_Marked	2216
+K27ac only	Unmarked	0
+Bivalent	Unmarked	0
+K27me3 only	Unmarked	0
+Neither	Unmarked	556

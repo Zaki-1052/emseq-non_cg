@@ -1,0 +1,7 @@
+peakset	direction	n_peaks	n_overlap_up_bed	n_overlap_down_bed	n_in_consensus	pct_overlap_up_bed	pct_overlap_down_bed	pct_in_consensus
+Annotated peakset	Gained	7686	7686	0	4958	100	0	64.5068956544366
+Annotated peakset	Lost	1200	0	1200	790	0	100	65.8333333333333
+Annotated peakset	Unchanged	193764	0	0	31179	0	0	16.0912243760451
+DiffBind Conc4 peakset	Gained	5675	4687	0	5675	82.5903083700441	0	100
+DiffBind Conc4 peakset	Lost	1107	0	648	1107	0	58.5365853658537	100
+DiffBind Conc4 peakset	Unchanged	30022	266	142	30022	0.886016920924655	0.472986476583839	100

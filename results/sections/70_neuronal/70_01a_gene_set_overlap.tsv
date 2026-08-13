@@ -1,0 +1,4 @@
+category	n_genes	n_in_k119ub_universe	n_derived_total	n_external_total	n_union_total	jaccard_index
+Derived only	60	40	5327	5614	5674	0.928269298554811
+Both	5267	4757	5327	5614	5674	0.928269298554811
+External only	347	320	5327	5614	5674	0.928269298554811

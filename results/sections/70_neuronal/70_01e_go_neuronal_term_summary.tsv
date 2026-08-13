@@ -1,0 +1,2 @@
+n_query_genes	n_background_genes	n_terms_reported	n_terms_significant	n_terms_neuronal	frac_terms_neuronal	n_top_shown	n_top_neuronal	fdr_threshold
+5401	21604	6296	1718	100	0.0582072176949942	25	4	0.05

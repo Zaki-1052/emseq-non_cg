@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+10_03	promoter_state_Active_Promoter_hypo	Are genes with the Active_Promoter promoter state enriched among mCH hypomethylated genes?	promoter_state_Active_Promoter	mch_hypo	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/10_chromatin/fisher_tables/10_03_promoter_state_Active_Promoter_hypo_genes.tsv	21072	6178	4152	1709	1.9489726003595	1.33070261267611e-74

@@ -1,0 +1,5 @@
+mark	mark_display	predicted_direction	n_quintiles	n_consistent_and_significant	n_consistent_sign	n_significant	min_delta_median	max_delta_median	effect_survives_length_control
+atac	ATAC-seq	down	5	0	0	5	0.015523688444653	0.032208029509326	FALSE
+k27ac	H3K27ac	down	5	0	1	1	-0.0067292626446875	0.0408183651272716	FALSE
+k27me3	H3K27me3	up	5	0	0	1	-0.0697688580589965	-0.0154383722811707	FALSE
+k119ub	H2AK119ub	up	5	0	0	5	-0.206517173	-0.051235503	FALSE

@@ -1,0 +1,4 @@
+value	group1	group2	n1	n2	median1	median2	median_difference	W	p_value
+distance_to_anchor	Gained	Unchanged	5675	30020	175502	261668.5	-86166.5	74557614	2.20072680167371e-50
+distance_to_anchor	Lost	Unchanged	1107	30020	235098	261668.5	-26570.5	16257570	0.222024130933752
+distance_to_anchor	Gained	Lost	5675	1107	175502	235098	-59596	2800072	1.01795610335584e-08

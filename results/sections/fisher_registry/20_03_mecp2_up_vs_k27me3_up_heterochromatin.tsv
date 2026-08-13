@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+20_03	mecp2_up_vs_k27me3_up_heterochromatin	Among heterochromatic genes with both a MeCP2 and an H3K27me3 peak, does a MeCP2 gain occur with an H3K27me3 gain?	MeCP2_up	K27me3_up	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/20_chip_integration/fisher_tables/20_03_mecp2_up_vs_k27me3_up_heterochromatin_genes.tsv	2178	616	602	178	1.09069606008012	0.425028141033077

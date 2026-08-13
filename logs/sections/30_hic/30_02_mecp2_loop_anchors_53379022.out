@@ -1,0 +1,186 @@
+=========================================
+EM-seq section 30_02: MeCP2 loop anchors
+=========================================
+Job ID: 53379022
+Node: exp-1-41
+Start time: Wed Aug 12 14:12:04 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53379022
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/30_hic/30_02_mecp2_loop_anchors.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+================================================================================
+SECTION 30_02: MeCP2 DIFFERENTIAL BINDING AT HI-C LOOP ANCHORS
+================================================================================
+Output dir:        /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/30_hic
+FDR threshold:     0.05
+Background offset: 1000000 bp
+
+Loading Hi-C loops...
+  Loop table: 2,910 rows, 2,910 significant
+  Significant loops: 2,910 (1,723 up_in_mutant, 1,187 down_in_mutant)
+  Anchor occurrences: 5,820 (2 per loop)
+  Unique anchor intervals: 4,853
+    Gained anchor    2,908
+    Lost anchor      1,859
+    Mixed anchor     86
+  Matched background intervals: 4,637 (from 4,853 anchors, offset 1,000,000 bp)
+
+Preparing MeCP2 peak sets...
+  MeCP2 peaks: 36,804 total, 5,675 gained, 1,107 lost at FDR < 0.050
+  MeCP2 consensus peaks: 36,804
+
+Analysis 1: MeCP2 peak density at anchors against matched background...
+  Gained anchor      All MeCP2 peaks    38.8 peaks/Mb (1,353 peaks over 34.91 Mb)
+  Gained anchor      MeCP2 gained        5.7 peaks/Mb (200 peaks over 34.91 Mb)
+  Gained anchor      MeCP2 lost          0.7 peaks/Mb (26 peaks over 34.91 Mb)
+  Lost anchor        All MeCP2 peaks    51.4 peaks/Mb (1,291 peaks over 25.12 Mb)
+  Lost anchor        MeCP2 gained       22.1 peaks/Mb (555 peaks over 25.12 Mb)
+  Lost anchor        MeCP2 lost          0.7 peaks/Mb (17 peaks over 25.12 Mb)
+  Mixed anchor       All MeCP2 peaks    59.6 peaks/Mb (82 peaks over 1.38 Mb)
+  Mixed anchor       MeCP2 gained        9.5 peaks/Mb (13 peaks over 1.38 Mb)
+  Mixed anchor       MeCP2 lost          0.7 peaks/Mb (1 peaks over 1.38 Mb)
+  Matched background All MeCP2 peaks    16.6 peaks/Mb (952 peaks over 57.28 Mb)
+  Matched background MeCP2 gained        2.7 peaks/Mb (157 peaks over 57.28 Mb)
+  Matched background MeCP2 lost          0.5 peaks/Mb (27 peaks over 57.28 Mb)
+  Fisher anchor vs background, All MeCP2 peaks: OR = 3.69, p < 2.2e-16
+  Fisher anchor vs background, MeCP2 gained: OR = 4.85, p < 2.2e-16
+  Fisher anchor vs background, MeCP2 lost: OR = 1.40, p = 0.21
+  Saved: 30_02a_mecp2_peak_density_at_anchors/{pdf,svg,png,jpg}
+
+Analysis 2: MeCP2 peak fold change by anchor class...
+  Gained anchor      1,298 peaks
+  Lost anchor        1,237 peaks
+  Mixed anchor       120 peaks
+  Matched background 946 peaks
+  Other genome       33,203 peaks
+  Wilcoxon Gained anchor vs Matched background: median -0.0034 vs -0.0163, p = 0.148
+  Wilcoxon Lost anchor vs Matched background: median 0.2412 vs -0.0163, p < 2.2e-16
+  Wilcoxon Mixed anchor vs Matched background: median 0.0004 vs -0.0163, p = 0.294
+  Wilcoxon Gained anchor vs Lost anchor: median -0.0034 vs 0.2412, p < 2.2e-16
+  Wilcoxon Gained anchor vs Other genome: median -0.0034 vs -0.0136, p = 0.00676
+  Wilcoxon Lost anchor vs Other genome: median 0.2412 vs -0.0136, p < 2.2e-16
+  Saved: 30_02b_mecp2_peak_fold_by_anchor_class/{pdf,svg,png,jpg}
+
+Analysis 3: distance from MeCP2 peaks to the nearest anchor...
+  2 MeCP2 peaks lie on chromosomes with no loop anchor and have no distance
+  Gained     n = 5,675, median = 175,502 bp, inside anchor = 13.3%
+  Lost       n = 1,107, median = 235,098 bp, inside anchor = 3.8%
+  Unchanged  n = 30,020, median = 261,668 bp, inside anchor = 6.2%
+  Wilcoxon distance Gained vs Unchanged: p < 2.2e-16
+  Wilcoxon distance Lost vs Unchanged: p = 0.222
+  Wilcoxon distance Gained vs Lost: p = 1.02e-08
+  Saved: 30_02d_mecp2_distance_to_nearest_anchor/{pdf,svg,png,jpg}
+
+Aggregating MeCP2 peaks to genes...
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  11,229 genes carry a MeCP2 peak
+  11,229 genes have a concentration-weighted MeCP2 fold
+
+Assigning genes to loop anchors...
+  Genes assigned to anchors: 1,935 of 21,072
+  9,517 genes with a MeCP2 peak, 412 MeCP2-gained, 96 MeCP2-lost
+
+Analysis 4: gene-level Fisher tests (registered for section 40_04)...
+  Fisher gene universe: 9,517 genes with both mCH testing and a MeCP2 peak
+  Wrote: 30_02_mecp2_gained_at_gained_anchor_genes.tsv (9,517 rows, 4 cols)
+  Wrote: 30_02_mecp2_gained_at_gained_anchor.tsv (1 rows, 12 cols)
+  Fisher 30_02:mecp2_gained_at_gained_anchor: OR=1.678, p=0.00106 (n=9,517 genes) [registered]
+  Wrote: 30_02_mecp2_gained_at_lost_anchor_genes.tsv (9,517 rows, 4 cols)
+  Wrote: 30_02_mecp2_gained_at_lost_anchor.tsv (1 rows, 12 cols)
+  Fisher 30_02:mecp2_gained_at_lost_anchor: OR=3.715, p=2.3e-17 (n=9,517 genes) [registered]
+
+Analysis 5: gene-level MeCP2 fold change by anchor class...
+  Wilcoxon gene fold Gained anchor vs No anchor: median -0.0289 vs -0.0373, p = 3.97e-05
+  Wilcoxon gene fold Lost anchor vs No anchor: median -0.0260 vs -0.0373, p = 2.82e-05
+  Wilcoxon gene fold Mixed anchor vs No anchor: median -0.0343 vs -0.0373, p = 0.239
+  Wilcoxon gene fold Gained anchor vs Lost anchor: median -0.0289 vs -0.0260, p = 0.358
+  Wilcoxon Conc-weighted fold Gained anchor vs No anchor: median -0.0156 vs -0.0336, p = 5.52e-09
+  Wilcoxon Conc-weighted fold Lost anchor vs No anchor: median -0.0002 vs -0.0336, p < 2.2e-16
+  Wilcoxon Conc-weighted fold Mixed anchor vs No anchor: median 0.0240 vs -0.0336, p = 1.97e-06
+  Wilcoxon Conc-weighted fold Gained anchor vs Lost anchor: median -0.0156 vs -0.0002, p = 1.43e-06
+  Saved: 30_02c_mecp2_gene_fold_by_anchor_class/{pdf,svg,png,jpg}
+
+Analysis 6: gene-level MeCP2 fold against loop logFC...
+  1,302 anchor-assigned genes, Spearman rho = -0.011, p = 0.687
+    Q1: 268 genes
+    Q2: 178 genes
+    Q3: 350 genes
+    Q4: 506 genes
+  Labelling 23 genes (9 of 10 KEY_GENES present)
+  Saved: 30_02e_mecp2_fold_vs_loop_logfc/{pdf,svg,png,jpg}
+
+  Loops with a MeCP2-gained peak at either anchor: 607 of 2,910 (20.9%)
+  Loops with a MeCP2-lost peak at either anchor:   42 of 2,910 (1.4%)
+
+Writing tables...
+  Wrote: 30_02_anchor_intervals.tsv (4,853 rows, 13 cols)
+  Wrote: 30_02_matched_background_intervals.tsv (4,637 rows, 7 cols)
+  Wrote: 30_02_loop_anchor_mecp2_overlap.tsv (2,910 rows, 16 cols)
+  Wrote: 30_02_peak_density_by_class.tsv (12 rows, 7 cols)
+  Wrote: 30_02_anchor_vs_background_fisher.tsv (3 rows, 11 cols)
+  Wrote: 30_02_mecp2_peaks_anchor_class.tsv (36,804 rows, 8 cols)
+  Wrote: 30_02_peak_fold_by_class_summary.tsv (5 rows, 6 cols)
+  Wrote: 30_02_peak_fold_by_class_wilcoxon.tsv (6 rows, 10 cols)
+  Wrote: 30_02_distance_to_anchor_summary.tsv (3 rows, 8 cols)
+  Wrote: 30_02_distance_to_anchor_wilcoxon.tsv (3 rows, 10 cols)
+  Wrote: 30_02_gene_anchor_table.tsv (21,072 rows, 27 cols)
+  Wrote: 30_02_gene_fold_by_class_summary.tsv (4 rows, 6 cols)
+  Wrote: 30_02_gene_fold_by_class_wilcoxon.tsv (4 rows, 10 cols)
+  Wrote: 30_02_conc_weighted_fold_by_class_summary.tsv (4 rows, 6 cols)
+  Wrote: 30_02_conc_weighted_fold_by_class_wilcoxon.tsv (4 rows, 10 cols)
+  Wrote: 30_02_gene_fisher_summary.tsv (2 rows, 10 cols)
+  Wrote: 30_02_mecp2_vs_loop_logfc_stats.tsv (1 rows, 7 cols)
+
+================================================================================
+SECTION 30_02 SUMMARY
+================================================================================
+Loops:                    2,910
+Unique anchor intervals:  4,853
+Matched background:       4,637 intervals
+MeCP2 peaks:              36,804 (5,675 gained, 1,107 lost)
+Genes with a MeCP2 peak:  9,517
+Fisher MeCP2 gain x gained anchor: OR = 1.678, p = 0.00106
+Fisher MeCP2 gain x lost anchor:   OR = 3.715, p < 2.2e-16
+Spearman MeCP2 fold vs loop logFC: rho = -0.011, p = 0.687
+
+Section 30_02 complete.
+
+
+=========================================
+Complete: section 30_02
+Time: 52s
+Exit code: 0
+End time: Wed Aug 12 14:12:59 PDT 2026
+=========================================
