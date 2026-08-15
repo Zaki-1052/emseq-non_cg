@@ -1,0 +1,114 @@
+=========================================
+EM-seq section 80_02: K119ub stratification
+=========================================
+Job ID: 53508682
+Node: exp-3-06
+Start time: Fri Aug 14 22:07:48 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53508682
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/80_cross_modality/80_02_k119ub_stratification.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/80_cross_modality
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+=== Section 80_02: K119ub stratification and quadrant reorientation ===
+
+STEP 1: Axis-swapped quadrant scatter
+  K119ub gene signal: 23,150 genes (21,604 quantifiable)
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  MeCP2 gene-level: 11,229 genes
+  Genes with both K119ub gene-body signal and MeCP2 fold: 10,751
+  Saved: 80_02a_quadrant_reoriented/{pdf,svg,png,jpg}
+  Wrote: 80_02_quadrant_summary.tsv (4 rows, 4 cols)
+
+STEP 2: K119ub peak location classification (full coordinates)
+  K119ub raw: 41,295 peaks (17,078 gained, 6,304 lost) using full coordinates
+  Annotating K119ub peaks with ChIPseeker...
+'select()' returned 1:many mapping between keys and columns
+  K119ub: 29,859 intragenic (72.3%), 11,436 intergenic (27.7%)
+  Wrote: 80_02_k119ub_location_summary.tsv (2 rows, 9 cols)
+  Summary written: 2 rows
+
+STEP 3: K119ub direction x location analysis
+  Direction x location Fisher: OR = 2.37, p = 2.32e-134
+  Wrote: 80_02_k119ub_direction_by_location.tsv (2 rows, 3 cols)
+  Assigning intergenic peaks to nearest gene...
+  Gene counts: 7,172 intragenic-only, 818 intergenic-only, 2,683 both
+  Wrote: 80_02_mch_by_k119ub_location.tsv (4 rows, 6 cols)
+  Saved: 80_02b_mch_by_k119ub_location/{pdf,svg,png,jpg}
+  Intragenic vs Intergenic mCH logFC Wilcoxon: p = 1.89e-01
+
+STEP 4: MeCP2 peak location classification
+  MeCP2 raw: 36,804 peaks
+  Annotating MeCP2 peaks with ChIPseeker...
+'select()' returned 1:many mapping between keys and columns
+  MeCP2: 27,411 intragenic (74.5%), 9,393 intergenic (25.5%)
+  Wrote: 80_02_mecp2_location_summary.tsv (2 rows, 6 cols)
+  MeCP2 direction x location Fisher: OR = 4.71, p = 4.49e-89
+
+STEP 5: K119ub-up / mCH-down loci characterisation
+  K119ub gained + mCH hypo: 900 genes
+  K119ub gained + mCH hyper: 421 genes
+  Wrote: 80_02_divergent_chromatin_state.tsv (5 rows, 5 cols)
+  MeCP2 at divergent genes: 90 Up, 101 Down, 709 No peak
+  Wrote: 80_02_divergent_genes.tsv (900 rows, 10 cols)
+  Wrote: 80_02_k119ub_gained_mch_direction_genes.tsv (1,321 rows, 4 cols)
+  Wrote: 80_02_k119ub_gained_mch_direction.tsv (1 rows, 12 cols)
+  Fisher 80_02:k119ub_gained_mch_direction: OR=0.000, p=1 (n=1,321 genes) [registered]
+  Running GO enrichment on divergent gene set...
+'select()' returned 1:1 mapping between keys and columns
+'select()' returned 1:1 mapping between keys and columns
+  Wrote: 80_02_divergent_go_enrichment.tsv (50 rows, 9 cols)
+    50 GO terms at q < 0.1
+  Saved: 80_02e_divergent_go/{pdf,svg,png,jpg}
+
+STEP 6: Consensus peak analysis
+  K119ub consensus: 34,088 total, 21,943 intragenic (64.4%), 12,145 intergenic (35.6%)
+  Active enhancer: 28110 peaks
+  Intergenic K119ub consensus peaks overlapping active enhancers: 2,849 (23.5%)
+  Wrote: 80_02_consensus_peak_summary.tsv (4 rows, 2 cols)
+  MeCP2 consensus: 36,804 total, 24,159 intragenic (65.6%), 12,645 intergenic (34.4%)
+  1 intergenic peaks on chromosomes with no genes (dropped from distance calc)
+  Intergenic K119ub peak distance to nearest gene: median 56,016 bp, max 2,193,619 bp (n = 12,144)
+  Wrote: 80_02_intergenic_distance_to_gene.tsv (8 rows, 2 cols)
+
+=== Section 80_02 complete ===
+Warning message:
+In bitr(mch_results$gene_name, fromType = "SYMBOL", toType = "ENTREZID",  :
+  9.6% of input gene IDs are fail to map...
+
+=========================================
+Complete: section 80_02
+Time: 98s
+Exit code: 0
+End time: Fri Aug 14 22:09:29 PDT 2026
+=========================================

@@ -1,0 +1,9 @@
+metric	value
+n_peaks	12145
+n_with_nearest	12144
+n_no_nearest	1
+median_distance_bp	56016
+mean_distance_bp	120093.65958498
+q25_distance_bp	15818.25
+q75_distance_bp	157582
+max_distance_bp	2193619

@@ -896,11 +896,34 @@ a:focus-visible, summary:focus-visible {
 
 <section id="s80_02">
 <h2>80_02: K119ub stratification</h2>
-<div class="method"><span class="tag">method</span> K119ub peaks classified intragenic vs intergenic by ChIPseeker annotation against TxDb. Quadrant scatter (K119ub on x, MeCP2 on y, matching the causal model direction). "Divergent" set: K119ub gained + mCH hypo. GO BP enrichment of divergent genes.</div>
+<div class="method"><span class="tag">method</span> K119ub and MeCP2 peaks classified intragenic vs intergenic by ChIPseeker annotation against TxDb (full peak coordinates, not summit windows). Intragenic = Promoter, UTR, Exon, Intron. Quadrant scatter with K119ub on x, MeCP2 on y (causal model direction). "Divergent" set: K119ub gained + mCH hypo. GO BP enrichment via <code>enrichGO</code>.</div>
+
+<div class="stats">
+  <div class="stat"><div class="value">72.3%</div><div class="label">K119ub peaks intragenic</div></div>
+  <div class="stat highlight"><div class="value">OR 2.37</div><div class="label">K119ub gained x intragenic (p = 2.3e-134)</div></div>
+  <div class="stat"><div class="value">OR 4.71</div><div class="label">MeCP2 gained x intragenic (p = 4.5e-89)</div></div>
+</div>
+
+<h3>Divergent loci: K119ub gained + mCH hypo</h3>
+<div class="stats">
+  <div class="stat"><div class="value">900</div><div class="label">K119ub gained + mCH hypo</div></div>
+  <div class="stat"><div class="value">421</div><div class="label">K119ub gained + mCH hyper</div></div>
+  <div class="stat"><div class="value">50</div><div class="label">GO terms at q &lt; 0.1</div></div>
+</div>
+<p>At divergent genes: 90 MeCP2 up, 101 MeCP2 down, 709 no MeCP2 peak. Intragenic-only vs intergenic-only mCH logFC: p = 0.189 (not significant).</p>
+<p>Intergenic K119ub consensus peaks: median 56 kb to nearest gene. 23.5% overlap an active enhancer.</p>
 
 <div class="plot-wrap">
   <img src="results/sections/80_cross_modality/80_02a_quadrant_reoriented/80_02a_quadrant_reoriented.png" alt="K119ub-MeCP2 quadrant reoriented" loading="lazy">
-  <div class="plot-caption">x: K119ub fold. y: MeCP2 fold. Oriented to match the causal model (K119ub &rarr; MeCP2).</div>
+  <div class="plot-caption">x: K119ub gene-body signal log2FC. y: MeCP2 nearest-TSS fold. Oriented to match the causal model (K119ub &rarr; MeCP2).</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/80_cross_modality/80_02b_mch_by_k119ub_location/80_02b_mch_by_k119ub_location.png" alt="mCH by K119ub peak location" loading="lazy">
+  <div class="plot-caption">mCH edgeR logFC by K119ub peak location relative to gene (intragenic-only, intergenic-only, both, no peak).</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/80_cross_modality/80_02e_divergent_go/80_02e_divergent_go.png" alt="Divergent GO enrichment" loading="lazy">
+  <div class="plot-caption">GO BP enrichment of K119ub-gained + mCH-hypo genes (the divergent set). 50 terms at q &lt; 0.1.</div>
 </div>
 </section>
 
