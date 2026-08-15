@@ -461,25 +461,21 @@ main <- function() {
   mecp2_raw_df <- read.table(mecp2_raw_path, header = TRUE, sep = "\t",
                              stringsAsFactors = FALSE, quote = "", fill = TRUE)
 
-  if ("Summit_Chr" %in% colnames(mecp2_raw_df)) {
-    if ("seqnames" %in% colnames(mecp2_raw_df)) {
-      mecp2_raw_df$Chr <- paste0("chr", as.character(mecp2_raw_df$seqnames))
-      mecp2_raw_df$peak_start <- mecp2_raw_df$start
-      mecp2_raw_df$peak_end <- mecp2_raw_df$end
-    } else {
-      mecp2_raw_df$Chr <- as.character(mecp2_raw_df$Summit_Chr)
-      if (!grepl("^chr", mecp2_raw_df$Chr[1])) {
-        mecp2_raw_df$Chr <- paste0("chr", mecp2_raw_df$Chr)
-      }
-      mecp2_raw_df$peak_start <- mecp2_raw_df$Summit_Start
-      mecp2_raw_df$peak_end <- mecp2_raw_df$Summit_End
-    }
-  } else if ("seqnames" %in% colnames(mecp2_raw_df)) {
-    mecp2_raw_df$Chr <- paste0("chr", as.character(mecp2_raw_df$seqnames))
+  ensure_chr_prefix <- function(x) {
+    x <- as.character(x)
+    ifelse(grepl("^chr", x), x, paste0("chr", x))
+  }
+
+  if ("seqnames" %in% colnames(mecp2_raw_df)) {
+    mecp2_raw_df$Chr <- ensure_chr_prefix(mecp2_raw_df$seqnames)
     mecp2_raw_df$peak_start <- mecp2_raw_df$start
     mecp2_raw_df$peak_end <- mecp2_raw_df$end
+  } else if ("Summit_Chr" %in% colnames(mecp2_raw_df)) {
+    mecp2_raw_df$Chr <- ensure_chr_prefix(mecp2_raw_df$Summit_Chr)
+    mecp2_raw_df$peak_start <- mecp2_raw_df$Summit_Start
+    mecp2_raw_df$peak_end <- mecp2_raw_df$Summit_End
   } else {
-    mecp2_raw_df$Chr <- as.character(mecp2_raw_df$Chr)
+    mecp2_raw_df$Chr <- ensure_chr_prefix(mecp2_raw_df$Chr)
     mecp2_raw_df$peak_start <- mecp2_raw_df$Start
     mecp2_raw_df$peak_end <- mecp2_raw_df$End
   }
