@@ -722,15 +722,23 @@ main <- function() {
   # Distance from intergenic K119ub consensus peaks to nearest gene
   if (length(k119ub_cons_inter) > 0) {
     nearest_idx <- nearest(k119ub_cons_inter, gene_gr)
-    dists <- distance(k119ub_cons_inter, gene_gr[nearest_idx])
-    cat(sprintf("  Intergenic K119ub peak distance to nearest gene: median %s bp, max %s bp\n",
+    has_nearest <- !is.na(nearest_idx)
+    if (sum(!has_nearest) > 0) {
+      cat(sprintf("  %s intergenic peaks on chromosomes with no genes (dropped from distance calc)\n",
+                  fmt_int(sum(!has_nearest))))
+    }
+    dists <- distance(k119ub_cons_inter[has_nearest], gene_gr[nearest_idx[has_nearest]])
+    cat(sprintf("  Intergenic K119ub peak distance to nearest gene: median %s bp, max %s bp (n = %s)\n",
                 fmt_int(median(dists, na.rm = TRUE)),
-                fmt_int(max(dists, na.rm = TRUE))))
+                fmt_int(max(dists, na.rm = TRUE)),
+                fmt_int(length(dists))))
 
     dist_summary <- data.frame(
-      metric = c("n_peaks", "median_distance_bp", "mean_distance_bp",
+      metric = c("n_peaks", "n_with_nearest", "n_no_nearest",
+                 "median_distance_bp", "mean_distance_bp",
                  "q25_distance_bp", "q75_distance_bp", "max_distance_bp"),
-      value = c(length(dists), median(dists, na.rm = TRUE), mean(dists, na.rm = TRUE),
+      value = c(length(nearest_idx), sum(has_nearest), sum(!has_nearest),
+                median(dists, na.rm = TRUE), mean(dists, na.rm = TRUE),
                 quantile(dists, 0.25, na.rm = TRUE), quantile(dists, 0.75, na.rm = TRUE),
                 max(dists, na.rm = TRUE)),
       stringsAsFactors = FALSE
