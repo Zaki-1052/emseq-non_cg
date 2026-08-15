@@ -1,0 +1,95 @@
+=========================================
+EM-seq section 80_01: Cross-modality comparison
+=========================================
+Job ID: 53505896
+Node: exp-3-06
+Start time: Fri Aug 14 16:14:14 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53505896
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/80_cross_modality/80_01_cross_modality.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/80_cross_modality
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+=== Section 80_01: Cross-modality CG/hmC/mCH comparison ===
+
+Loading Biomodal CG DMR data...
+  CG 5mC: 20,962 genes, 10,789 significant at FDR < 0.050
+  CG 5hmC: 20,881 genes, 11,499 significant at FDR < 0.050
+
+Merging with mCH differential results...
+  Genes with all three modalities: 20,848
+  mCH significant: 5,551
+
+Computing Spearman correlations on log2 fold changes...
+  mCH logFC vs CG 5mC log2FC:  rho = 0.1089 [NA, NA], p = 5.42e-56
+  mCH logFC vs CG 5hmC log2FC: rho = 0.0716 [NA, NA], p = 4.22e-25
+  CG 5mC vs CG 5hmC log2FC:    rho = -0.4782 [NA, NA], p = 0.00e+00
+  Steiger's test (mCH~5mC vs mCH~5hmC): z = 3.156, p = 1.60e-03
+  Wrote: 80_01_correlation_comparison.tsv (3 rows, 8 cols)
+
+Generating scatter plots...
+  Saved: 80_01a_mch_vs_cg_mc/{pdf,svg,png,jpg}
+  Saved: 80_01b_mch_vs_cg_hmc/{pdf,svg,png,jpg}
+  Saved: 80_01c_cg_mc_vs_hmc/{pdf,svg,png,jpg}
+  Saved: 80_01d_composite/{pdf,svg,png,jpg}
+
+Direction agreement analysis...
+  mCH vs CG 5mC: 3,977 genes sig in both. Agreement: 1,780 (44.8%)
+    Fisher OR = 4.24, p = 3.06e-34
+  Wrote: 80_01_mch_direction_vs_cg_mc_direction_genes.tsv (3,977 rows, 4 cols)
+  Wrote: 80_01_mch_direction_vs_cg_mc_direction.tsv (1 rows, 12 cols)
+  Fisher 80_01:mch_direction_vs_cg_mc_direction: OR=4.235, p=3.06e-34 (n=3,977 genes) [registered]
+  mCH vs CG 5hmC: 4,152 genes sig in both. Agreement: 3,242 (78.1%)
+    Fisher OR = 2.81, p = 1.58e-21
+  Wrote: 80_01_mch_direction_vs_cg_hmc_direction_genes.tsv (4,152 rows, 4 cols)
+  Wrote: 80_01_mch_direction_vs_cg_hmc_direction.tsv (1 rows, 12 cols)
+  Fisher 80_01:mch_direction_vs_cg_hmc_direction: OR=2.815, p=1.58e-21 (n=4,152 genes) [registered]
+  Wrote: 80_01_direction_agreement.tsv (2 rows, 7 cols)
+  Wrote: 80_01_cross_modality_merged.tsv (20,848 rows, 16 cols)
+
+Section 80_01 complete.
+Warning messages:
+1: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+5: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+6: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+7: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+8: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+
+=========================================
+Complete: section 80_01
+Time: 41s
+Exit code: 0
+End time: Fri Aug 14 16:15:00 PDT 2026
+=========================================

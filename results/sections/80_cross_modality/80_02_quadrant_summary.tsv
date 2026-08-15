@@ -1,0 +1,5 @@
+quadrant	description	n_genes	spearman_rho
+Q1	K119ub_up + MeCP2_up	2069	0.192223097178786
+Q2	K119ub_down + MeCP2_up	1093	0.192223097178786
+Q3	K119ub_down + MeCP2_down	3823	0.192223097178786
+Q4	K119ub_up + MeCP2_down	3766	0.192223097178786

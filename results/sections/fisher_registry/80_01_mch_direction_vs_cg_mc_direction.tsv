@@ -1,0 +1,2 @@
+section	test_id	description	row_var	col_var	gene_table_path	n_genes	n_row_true	n_col_true	n_both_true	odds_ratio	p_value
+80_01	mch_direction_vs_cg_mc_direction	mCH direction vs CG 5mC direction (both significant)	mch_hyper	cg_mc_up	/expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/80_cross_modality/fisher_tables/80_01_mch_direction_vs_cg_mc_direction_genes.tsv	3977	524	2587	457	4.23530542164968	3.0613956258494e-34

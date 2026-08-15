@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EM-seq mCH Section Analyses</title>
+<style>
+/* --- Tokens --- */
+:root {
+  --surface: #F7F8FA;
+  --surface-raised: #FFFFFF;
+  --text: #1E2328;
+  --text-secondary: #4A5568;
+  --accent: #2E6B8A;
+  --accent-light: #E8F1F5;
+  --emphasis: #D4713B;
+  --emphasis-light: #FDF0E8;
+  --subtle: #8B95A2;
+  --border: #D8DCE2;
+  --loss: #3A7CA5;
+  --gain: #C24B3F;
+  --warn-bg: #FFF3CD;
+  --warn-border: #E6C85C;
+  --warn-text: #6B5900;
+  --sidebar-bg: #EEF0F3;
+  --sidebar-active: #2E6B8A;
+  --row-alt: #F2F4F7;
+  --code-bg: #ECEEF2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #1A1D23;
+    --surface-raised: #22262E;
+    --text: #E1E4E8;
+    --text-secondary: #9CA3AF;
+    --accent: #5BA3C9;
+    --accent-light: #1E3040;
+    --emphasis: #E8935A;
+    --emphasis-light: #3A2A1A;
+    --subtle: #6B7585;
+    --border: #353A44;
+    --loss: #5BA3C9;
+    --gain: #E07060;
+    --warn-bg: #3A3520;
+    --warn-border: #8A7A30;
+    --warn-text: #E6D88A;
+    --sidebar-bg: #16191F;
+    --sidebar-active: #5BA3C9;
+    --row-alt: #1E222A;
+    --code-bg: #282C34;
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #1A1D23;
+  --surface-raised: #22262E;
+  --text: #E1E4E8;
+  --text-secondary: #9CA3AF;
+  --accent: #5BA3C9;
+  --accent-light: #1E3040;
+  --emphasis: #E8935A;
+  --emphasis-light: #3A2A1A;
+  --subtle: #6B7585;
+  --border: #353A44;
+  --loss: #5BA3C9;
+  --gain: #E07060;
+  --warn-bg: #3A3520;
+  --warn-border: #8A7A30;
+  --warn-text: #E6D88A;
+  --sidebar-bg: #16191F;
+  --sidebar-active: #5BA3C9;
+  --row-alt: #1E222A;
+  --code-bg: #282C34;
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* --- Layout --- */
+.page { display: flex; min-height: 100vh; }
+
+nav.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  min-width: 220px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 1.5rem 0;
+  font-size: 13px;
+  z-index: 10;
+}
+nav.sidebar .nav-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+  padding: 0 1rem 0.75rem;
+  letter-spacing: -0.01em;
+}
+nav.sidebar a {
+  display: block;
+  padding: 0.35rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+nav.sidebar a:hover { background: var(--accent-light); }
+nav.sidebar a.active {
+  color: var(--sidebar-active);
+  border-left-color: var(--sidebar-active);
+  font-weight: 600;
+  background: var(--accent-light);
+}
+nav.sidebar .nav-group { margin-top: 1rem; }
+nav.sidebar .nav-group-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--subtle);
+  padding: 0 1rem 0.25rem;
+}
+
+main {
+  flex: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+h1 .subtitle {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.5rem 0 0.75rem;
+}
+p { margin-bottom: 0.75rem; max-width: 65ch; }
+code {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+
+/* --- Stat tiles --- */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+.stat {
+  flex: 1;
+  min-width: 140px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+.stat .value {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--emphasis);
+  line-height: 1.2;
+}
+.stat .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+.stat.highlight { border-color: var(--emphasis); background: var(--emphasis-light); }
+.stat.highlight .value { color: var(--emphasis); }
+
+/* --- Tables --- */
+.table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  position: sticky;
+  top: 0;
+}
+tbody td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:nth-child(even) { background: var(--row-alt); }
+td.num {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  text-align: right;
+}
+
+/* --- Method boxes --- */
+.method {
+  background: var(--accent-light);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+.method .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.5rem;
+}
+
+/* --- Plots --- */
+.plot-wrap {
+  margin: 1.25rem 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.plot-wrap img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.plot-caption {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+
+/* --- Collapsible --- */
+details {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 0.75rem 0;
+}
+details summary {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--accent);
+  user-select: none;
+}
+details summary:hover { background: var(--accent-light); border-radius: 6px; }
+details[open] summary { border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0; }
+details .inner { padding: 1rem; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  nav.sidebar { display: none; }
+  main { padding: 1.5rem 1rem; }
+}
+
+/* --- Focus --- */
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav-title">mCH Sections</div>
+  <a href="#overview">Overview</a>
+  <div class="nav-group">
+    <div class="nav-group-label">Chromatin</div>
+    <a href="#s10_01">10_01 State classification</a>
+    <a href="#s10_02">10_02 A/B compartments</a>
+    <a href="#s10_03">10_03 Polycomb</a>
+    <a href="#s10_04">10_04 Subcompartments</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">ChIP integration</div>
+    <a href="#s20_01">20_01 MeCP2 correlation</a>
+    <a href="#s20_02">20_02 Multi-mark model</a>
+    <a href="#s20_03">20_03 Pairwise quadrants</a>
+    <a href="#s20_04">20_04 mCH-MeCP2 by mark</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Hi-C</div>
+    <a href="#s30_01">30_01 Loop anchor mCH</a>
+    <a href="#s30_02">30_02 MeCP2 at anchors</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Permutation</div>
+    <a href="#s40_01">40_01 DMR x marks</a>
+    <a href="#s40_02">40_02 ATAC x features</a>
+    <a href="#s40_03">40_03 Domains</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Features</div>
+    <a href="#s50_01">50_01 Sub-gene features</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">MeCP2</div>
+    <a href="#s60_01">60_01 mCH-MeCP2 cascade</a>
+    <a href="#s60_02">60_02 K119ub at no-mCH genes</a>
+    <a href="#s60_03">60_03 Peak reconciliation</a>
+    <a href="#s60_04">60_04 Aging trajectory</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Neuronal</div>
+    <a href="#s70_01">70_01 K119ub enrichment</a>
+    <a href="#s70_02">70_02 Chromatin remodeling</a>
+    <a href="#s70_03">70_03 Gene set overlap</a>
+    <a href="#s70_04">70_04 Synapse chromatin</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Cross-modality</div>
+    <a href="#s80_01">80_01 mCH vs CG</a>
+    <a href="#s80_02">80_02 K119ub stratification</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Reference</div>
+    <a href="#fisher">Fisher summary</a>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main>
+
+<!-- Overview -->
+<section id="overview">
+<h1>BAP1-KO mCH downstream analyses
+<span class="subtitle">25 section scripts across 8 thematic groups. Run on corrected edgeR results (lambda as covariate).</span>
+</h1>
+<p>Each section sources <code>_shared_config.R</code>, which pre-loads the mCH differential results (21,097 testable genes, 5,557 at FDR &lt; 0.05), all DiffBind tables, consensus peaks, and shared helper functions. Gene-level Fisher tests go through <code>register_fisher_test()</code>, which writes per-test shards to a central registry. 165 tests registered across all sections.</p>
+<p>Core pipeline results (steps 01-08) are in the companion <code>pipeline_walkthrough.html</code>.</p>
+</section>
+
+<!-- ===== 10. CHROMATIN ===== -->
+
+<section id="s10_01">
+<h2>10_01: Chromatin state classification</h2>
+<div class="method"><span class="tag">method</span> Each gene classified into a promoter state and a body state by overlapping CUT&amp;RUN consensus peak BEDs from <code>data/chip_peaks/</code>. Body state uses H3K27ac, H3K27me3, H3K4me1 (priority: Mixed, Polycomb, Active, Enhancer_Marked, Unmarked). Promoter state uses H3K4me3, H3K27me3, H3K27ac, Bivalent (priority: Bivalent, Active, Repressed, Unmarked). Fisher exact test per state, BH-adjusted.</div>
+
+<h3>State enrichment for mCH significance</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>State</th><th>Kind</th><th>n genes</th><th>n sig</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>Active</td><td>Body</td><td class="num">6,566</td><td class="num">2,378</td><td class="num">2.03</td><td class="num">7.4e-103</td></tr>
+<tr><td>Mixed</td><td>Body</td><td class="num">520</td><td class="num">291</td><td class="num">3.69</td><td class="num">3.3e-47</td></tr>
+<tr><td>Polycomb</td><td>Body</td><td class="num">3,324</td><td class="num">1,130</td><td class="num">1.55</td><td class="num">1.4e-26</td></tr>
+<tr><td>Enhancer_Marked</td><td>Body</td><td class="num">5,477</td><td class="num">1,338</td><td class="num">0.87</td><td class="num">1.8e-4</td></tr>
+<tr><td>Unmarked</td><td>Body</td><td class="num">5,210</td><td class="num">420</td><td class="num">0.18</td><td class="num">2.0e-308</td></tr>
+<tr><td>Active_Promoter</td><td>Promoter</td><td class="num">6,190</td><td class="num">2,245</td><td class="num">1.99</td><td class="num">2.9e-95</td></tr>
+<tr><td>Bivalent_Promoter</td><td>Promoter</td><td class="num">286</td><td class="num">122</td><td class="num">2.10</td><td class="num">1.8e-9</td></tr>
+<tr><td>Repressed_Promoter</td><td>Promoter</td><td class="num">2,775</td><td class="num">906</td><td class="num">1.42</td><td class="num">1.9e-15</td></tr>
+<tr><td>Unmarked_Promoter</td><td>Promoter</td><td class="num">11,846</td><td class="num">2,284</td><td class="num">0.44</td><td class="num">3.7e-152</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Significance rate by state</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>State</th><th>Kind</th><th>% sig</th><th>% hyper</th><th>% hypo</th><th>Median logFC</th></tr></thead>
+<tbody>
+<tr><td>Mixed</td><td>Body</td><td class="num">56.0%</td><td class="num">12.5%</td><td class="num">43.5%</td><td class="num">&minus;0.134</td></tr>
+<tr><td>Active</td><td>Body</td><td class="num">36.2%</td><td class="num">5.6%</td><td class="num">30.6%</td><td class="num">&minus;0.167</td></tr>
+<tr><td>Polycomb</td><td>Body</td><td class="num">34.0%</td><td class="num">2.5%</td><td class="num">31.5%</td><td class="num">&minus;0.176</td></tr>
+<tr><td>Enhancer_Marked</td><td>Body</td><td class="num">24.4%</td><td class="num">2.0%</td><td class="num">22.5%</td><td class="num">&minus;0.182</td></tr>
+<tr><td>Unmarked</td><td>Body</td><td class="num">8.1%</td><td class="num">0.3%</td><td class="num">7.7%</td><td class="num">&minus;0.172</td></tr>
+<tr><td>Bivalent_Promoter</td><td>Promoter</td><td class="num">42.7%</td><td class="num">10.8%</td><td class="num">31.8%</td><td class="num">&minus;0.138</td></tr>
+<tr><td>Active_Promoter</td><td>Promoter</td><td class="num">36.3%</td><td class="num">3.8%</td><td class="num">32.5%</td><td class="num">&minus;0.183</td></tr>
+<tr><td>Repressed_Promoter</td><td>Promoter</td><td class="num">32.6%</td><td class="num">3.2%</td><td class="num">29.4%</td><td class="num">&minus;0.169</td></tr>
+<tr><td>Unmarked_Promoter</td><td>Promoter</td><td class="num">19.3%</td><td class="num">2.4%</td><td class="num">16.9%</td><td class="num">&minus;0.168</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_01h_state_enrichment_odds_ratio/10_01h_state_enrichment_odds_ratio.png" alt="State enrichment odds ratio forest plot" loading="lazy">
+  <div class="plot-caption">Fisher OR for mCH significance vs chromatin state. Dashed line at OR = 1.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_01i_mch_diff_by_state/10_01i_mch_diff_by_state.png" alt="mCH diff by chromatin state" loading="lazy">
+  <div class="plot-caption">mCH difference (mut &minus; ctrl) by gene-body chromatin state.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_01f_promoter_body_state_crosstab/10_01f_promoter_body_state_crosstab.png" alt="Promoter vs body state crosstab" loading="lazy">
+  <div class="plot-caption">Promoter state (rows) vs body state (columns). Cell counts and significance rates.</div>
+</div>
+</section>
+
+<section id="s10_02">
+<h2>10_02: A/B compartments</h2>
+<div class="method"><span class="tag">method</span> HOMER compartment output (<code>data/hic/diffcompartments.txt</code>), 25 kb bins at 50 kb step (overlapping). Compartment A = mean control PC1 &gt; 0. Shift: adjusted p &lt; 0.05 AND |PC1 difference| &gt; 0.30. Genes assigned by midpoint. Fisher, Wilcoxon, Spearman.</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Group</th><th>n genes</th><th>% sig</th><th>% hyper of sig</th><th>Median mCH diff</th><th>Median logFC</th></tr></thead>
+<tbody>
+<tr><td>Compartment A</td><td class="num">15,350</td><td class="num">29.0%</td><td class="num">11.0%</td><td class="num">9.6e-5</td><td class="num">&minus;0.162</td></tr>
+<tr><td>Compartment B</td><td class="num">5,684</td><td class="num">19.3%</td><td class="num">13.9%</td><td class="num">6.9e-4</td><td class="num">&minus;0.147</td></tr>
+<tr><td>B to A shift</td><td class="num">467</td><td class="num">36.4%</td><td class="num">31.8%</td><td class="num">7.9e-4</td><td class="num">&minus;0.068</td></tr>
+<tr><td>A to B shift</td><td class="num">272</td><td class="num">47.1%</td><td class="num">45.3%</td><td class="num">9.9e-4</td><td class="num">&minus;0.079</td></tr>
+<tr><td>Stable</td><td class="num">20,295</td><td class="num">25.8%</td><td class="num">10.1%</td><td class="num">2.6e-4</td><td class="num">&minus;0.161</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_02e_composite_compartment_summary/10_02e_composite_compartment_summary.png" alt="Compartment composite" loading="lazy">
+  <div class="plot-caption">A/B compartment multi-panel summary. mCH direction and significance by compartment and shift category.</div>
+</div>
+</section>
+
+<section id="s10_03">
+<h2>10_03: Polycomb enrichment</h2>
+<div class="method"><span class="tag">method</span> Five definitions of "Polycomb gene" compared: body_state Polycomb, body Polycomb+Mixed, repressed/bivalent promoter, H3K27me3 peak overlap, K119ub signal top decile. Fisher per definition x direction. Wilcoxon |mCH diff|. Jaccard overlap of definitions. Data from 10_01 handoff + <code>data/k119ub_gene_signal.tsv</code>.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_03h_composite_summary/10_03h_composite_summary.png" alt="Polycomb composite" loading="lazy">
+  <div class="plot-caption">Polycomb enrichment composite. Five definitions compared against mCH direction.</div>
+</div>
+</section>
+
+<section id="s10_04">
+<h2>10_04: Subcompartments</h2>
+<div class="method"><span class="tag">method</span> CALDER2 labels at 100 kb resolution (<code>data/hic/calder2_subcompartments_100kb.tsv</code>). Four subcompartments: A.1, A.2, B.1, B.2. Genes assigned by midpoint. Chi-squared, Fisher, Kruskal-Wallis, pairwise Wilcoxon.</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Subcompartment</th><th>n genes</th><th>% sig</th><th>% hyper of sig</th><th>Median mCH ctrl</th><th>Median mCH diff</th></tr></thead>
+<tbody>
+<tr><td>A.1</td><td class="num">10,933</td><td class="num">30.0%</td><td class="num">11.8%</td><td class="num">1.68%</td><td class="num">7.5e-5</td></tr>
+<tr><td>A.2</td><td class="num">3,083</td><td class="num">29.6%</td><td class="num">8.1%</td><td class="num">1.66%</td><td class="num">1.1e-4</td></tr>
+<tr><td>B.1</td><td class="num">1,926</td><td class="num">28.6%</td><td class="num">12.4%</td><td class="num">1.65%</td><td class="num">2.5e-4</td></tr>
+<tr><td>B.2</td><td class="num">4,163</td><td class="num">15.5%</td><td class="num">13.8%</td><td class="num">1.31%</td><td class="num">7.9e-4</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/10_chromatin/10_04_subcompartment_composite/10_04_subcompartment_composite.png" alt="Subcompartment composite" loading="lazy">
+  <div class="plot-caption">CALDER2 subcompartment composite. mCH levels, differences, and significance by A.1/A.2/B.1/B.2.</div>
+</div>
+</section>
+
+<!-- ===== 20. CHIP INTEGRATION ===== -->
+
+<section id="s20_01">
+<h2>20_01: MeCP2 correlation</h2>
+<div class="method"><span class="tag">method</span> MeCP2 peaks from <code>data/mecp2/MeCP2_annotated.txt</code>. Gene-level fold = nearest-TSS peak fold. Fisher, Wilcoxon, Spearman, linear model, logistic GLM. Crosscheck against independent DiffBind route via ChIPseeker.</div>
+
+<div class="stats">
+  <div class="stat highlight"><div class="value">OR 72.5</div><div class="label">mCH hyper vs MeCP2 up (p &lt; 2.2e-16)</div></div>
+  <div class="stat"><div class="value">OR 13.5</div><div class="label">mCH hypo vs MeCP2 down (p = 8.6e-143)</div></div>
+  <div class="stat"><div class="value">OR 3.83</div><div class="label">mCH sig vs MeCP2 sig (p = 2.7e-16)</div></div>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_01c_mch_diff_vs_mecp2_fold/20_01c_mch_diff_vs_mecp2_fold.png" alt="mCH diff vs MeCP2 fold scatter" loading="lazy">
+  <div class="plot-caption">x: mCH difference (mut &minus; ctrl, percentage points). y: MeCP2 nearest-TSS peak fold. Spearman rho annotated.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_01d_mecp2_model_coefficients/20_01d_mecp2_model_coefficients.png" alt="MeCP2 model coefficients" loading="lazy">
+  <div class="plot-caption">Linear and logistic model coefficients. Predictors: mCH diff, gene length, interaction.</div>
+</div>
+</section>
+
+<section id="s20_02">
+<h2>20_02: Multi-mark model</h2>
+<div class="method"><span class="tag">method</span> Four DiffBind tables (ATAC, K27ac, K27me3, K119ub) collapsed to gene-level fold via nearest-TSS. Pairwise Spearman correlation matrix. Logistic GLM: <code>mch_hyper ~ atac_fold + k27ac_fold + k27me3_fold + k119ub_fold</code>. ROC via <code>pROC</code>.</div>
+
+<h3>Cross-mark Spearman correlation matrix</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th></th><th>mCH</th><th>ATAC</th><th>K27ac</th><th>K27me3</th><th>K119ub</th></tr></thead>
+<tbody>
+<tr><td>mCH diff</td><td class="num">1</td><td class="num">&minus;0.107</td><td class="num">&minus;0.247</td><td class="num">0.063</td><td class="num">0.356</td></tr>
+<tr><td>ATAC</td><td class="num">&minus;0.107</td><td class="num">1</td><td class="num">0.442</td><td class="num">&minus;0.415</td><td class="num">&minus;0.221</td></tr>
+<tr><td>K27ac</td><td class="num">&minus;0.247</td><td class="num">0.442</td><td class="num">1</td><td class="num">&minus;0.503</td><td class="num">&minus;0.301</td></tr>
+<tr><td>K27me3</td><td class="num">0.063</td><td class="num">&minus;0.415</td><td class="num">&minus;0.503</td><td class="num">1</td><td class="num">0.282</td></tr>
+<tr><td>K119ub</td><td class="num">0.356</td><td class="num">&minus;0.221</td><td class="num">&minus;0.301</td><td class="num">0.282</td><td class="num">1</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Logistic model: predicting mCH hypermethylation</h3>
+<div class="stats">
+  <div class="stat highlight"><div class="value">0.766</div><div class="label">AUC (95% CI: 0.725-0.807)</div></div>
+  <div class="stat"><div class="value">1,365</div><div class="label">genes in model (all 4 marks)</div></div>
+  <div class="stat"><div class="value">0.122</div><div class="label">McFadden pseudo-R&sup2;</div></div>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Mark</th><th>OR</th><th>95% CI</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>H2AK119ub</td><td class="num">3.53</td><td class="num">2.28&ndash;5.47</td><td class="num">1.8e-8</td></tr>
+<tr><td>ATAC-seq</td><td class="num">2.24</td><td class="num">1.27&ndash;3.96</td><td class="num">0.0055</td></tr>
+<tr><td>H3K27me3</td><td class="num">1.52</td><td class="num">1.26&ndash;1.84</td><td class="num">1.7e-5</td></tr>
+<tr><td>H3K27ac</td><td class="num">0.54</td><td class="num">0.39&ndash;0.75</td><td class="num">2.0e-4</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_02b_cross_mark_correlation/20_02b_cross_mark_correlation.png" alt="Cross-mark correlation heatmap" loading="lazy">
+  <div class="plot-caption">Spearman correlation matrix across 5 marks and mCH. Gene-level fold changes.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_02e_logistic_forest/20_02e_logistic_forest.png" alt="Logistic model forest plot" loading="lazy">
+  <div class="plot-caption">Logistic regression: odds ratios for mCH hyper from 4-mark model.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_02f_logistic_roc/20_02f_logistic_roc.png" alt="Logistic ROC curve" loading="lazy">
+  <div class="plot-caption">ROC curve for the 4-mark logistic model. AUC = 0.766.</div>
+</div>
+</section>
+
+<section id="s20_03">
+<h2>20_03: Pairwise quadrant scatters</h2>
+<div class="method"><span class="tag">method</span> Five pairwise scatters: K119ub signal log2FC vs MeCP2, MeCP2 vs K27ac (euchromatin), MeCP2 vs K27me3 (heterochromatin), K119ub signal log2FC vs mCH, MeCP2 vs mCH. Spearman + quadrant Fisher per pair. Axes clipped at 99.5th percentile. K119ub axis is gene-body signal log2FC from bigwig quantification, not DiffBind peak fold.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_03f_quadrant_composite/20_03f_quadrant_composite.png" alt="Pairwise quadrant composite" loading="lazy">
+  <div class="plot-caption">Five pairwise mark scatters. Each colored by mCH direction (blue = loss, red = gain).</div>
+</div>
+</section>
+
+<section id="s20_04">
+<h2>20_04: mCH-MeCP2 by mark category</h2>
+<div class="method"><span class="tag">method</span> Four mutually exclusive mark categories from chromatin state: K27ac-only (Active body), Bivalent, K27me3-only (Polycomb body), Neither. Spearman of mCH diff vs MeCP2 fold per category. Fisher z heterogeneity test across categories. Chi-squared of category x quadrant.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/20_chip_integration/20_04a_mch_mecp2_by_mark/20_04a_mch_mecp2_by_mark.png" alt="mCH-MeCP2 by mark category" loading="lazy">
+  <div class="plot-caption">mCH diff vs MeCP2 fold, split by mark category.</div>
+</div>
+</section>
+
+<!-- ===== 30. HI-C ===== -->
+
+<section id="s30_01">
+<h2>30_01: Loop anchor methylation</h2>
+<div class="method"><span class="tag">method</span> Significant loops from <code>data/hic/characterized_loops.tsv</code>. Two anchor-to-gene methods: (1) GREAT-style regulatory domains (5 kb upstream, 1 kb downstream of TSS, extended up to 100 kb toward neighboring gene, built from TxDb), (2) direct gene-body overlap. Fisher, logistic GLM, pairwise Wilcoxon, Spearman.</div>
+
+<h3>Significance rate by anchor class</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Method</th><th>Anchor class</th><th>n genes</th><th>% sig</th><th>% hyper</th><th>% hypo</th></tr></thead>
+<tbody>
+<tr><td>GREAT</td><td>Gained anchor</td><td class="num">1,589</td><td class="num">36.2%</td><td class="num">4.9%</td><td class="num">31.3%</td></tr>
+<tr><td>GREAT</td><td>Lost anchor</td><td class="num">1,079</td><td class="num">38.0%</td><td class="num">9.5%</td><td class="num">28.5%</td></tr>
+<tr><td>GREAT</td><td>No anchor</td><td class="num">15,731</td><td class="num">26.9%</td><td class="num">2.6%</td><td class="num">24.3%</td></tr>
+<tr><td>Direct</td><td>Gained anchor</td><td class="num">1,025</td><td class="num">47.7%</td><td class="num">7.8%</td><td class="num">39.9%</td></tr>
+<tr><td>Direct</td><td>Lost anchor</td><td class="num">765</td><td class="num">43.7%</td><td class="num">12.2%</td><td class="num">31.5%</td></tr>
+<tr><td>Direct</td><td>No anchor</td><td class="num">19,137</td><td class="num">24.3%</td><td class="num">2.3%</td><td class="num">22.0%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/30_hic/30_01_mch_diff_by_anchor_class/30_01_mch_diff_by_anchor_class.png" alt="mCH diff by anchor class" loading="lazy">
+  <div class="plot-caption">mCH difference (mut &minus; ctrl) by Hi-C anchor class. Both GREAT and Direct methods shown.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/30_hic/30_01_k119ub_convergence_heatmap/30_01_k119ub_convergence_heatmap.png" alt="K119ub convergence heatmap" loading="lazy">
+  <div class="plot-caption">Observed/expected: K119ub direction x mCH direction at anchor genes.</div>
+</div>
+</section>
+
+<section id="s30_02">
+<h2>30_02: MeCP2 at loop anchors</h2>
+<div class="method"><span class="tag">method</span> MeCP2 peaks classified by anchor overlap (gained/lost/mixed/background). Matched background = anchors shifted 1 Mb along chromosome, size-matched. Gene-level MeCP2 fold via nearest-TSS. Also concentration-weighted fold: <code>sum(Fold * Conc) / sum(Conc)</code>. Fisher, Wilcoxon, Spearman.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/30_hic/30_02a_mecp2_peak_density_at_anchors/30_02a_mecp2_peak_density_at_anchors.png" alt="MeCP2 peak density at anchors" loading="lazy">
+  <div class="plot-caption">MeCP2 peaks per Mb at Hi-C anchors vs matched background.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/30_hic/30_02e_mecp2_fold_vs_loop_logfc/30_02e_mecp2_fold_vs_loop_logfc.png" alt="MeCP2 fold vs loop logFC" loading="lazy">
+  <div class="plot-caption">x: mean Hi-C loop logFC per gene. y: MeCP2 nearest-TSS fold.</div>
+</div>
+</section>
+
+<!-- ===== 40. PERMUTATION ===== -->
+
+<section id="s40_01">
+<h2>40_01: DMR x marks permutation</h2>
+<div class="method"><span class="tag">method</span> regioneR spatial permutation (5,000 shuffles, per-chromosome, unmasked, using BSgenome.Mmusculus.UCSC.mm10 for chromosome lengths). Query: mCH hyper and hypo gene bodies. Targets: 8 peak sets (ATAC up/down, K119ub gained/lost, K27ac gained/lost, MeCP2 up/down). 16 permutation cells + 24 gene-level Fisher tests. Concordance between Fisher ORs and permutation Z-scores validates that gene-level associations are not region-size artifacts.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/40_permutation/40_01b_zscore_forest/40_01b_zscore_forest.png" alt="Permutation Z-score forest" loading="lazy">
+  <div class="plot-caption">Permutation Z-scores. Each row: mCH hyper/hypo gene bodies vs a ChIP mark's gained/lost peaks.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/40_permutation/40_01d_fisher_vs_permutation/40_01d_fisher_vs_permutation.png" alt="Fisher vs permutation" loading="lazy">
+  <div class="plot-caption">x: Fisher OR (gene-level). y: permutation Z-score. Tests concordance.</div>
+</div>
+</section>
+
+<section id="s40_02">
+<h2>40_02: ATAC x features permutation</h2>
+<div class="method"><span class="tag">method</span> Four sub-analyses: ATAC x 6 consensus mark peaks, ATAC x 5 body states, ATAC x 4 promoter states, loop anchors x 12 feature sets. Same regioneR framework as 40_01. crosswisePermTest + local Z-scores.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/40_permutation/40_02j_fisher_vs_permutation/40_02j_fisher_vs_permutation.png" alt="Fisher vs permutation (ATAC)" loading="lazy">
+  <div class="plot-caption">Fisher vs permutation concordance for ATAC x features tests.</div>
+</div>
+</section>
+
+<section id="s40_03">
+<h2>40_03: Domain permutation</h2>
+<div class="method"><span class="tag">method</span> Query: mCH hyper/hypo gene bodies. Targets: A/B compartment domains (HOMER, merged), B-to-A/A-to-B shifts, H3K27me3 domains (consensus peaks merged at 5 kb gap), Polycomb-state gene bodies. Same regioneR framework. Local Z-scores computed.</div>
+<p>Section 40_04 (gene-level label-shuffle validation of every registered Fisher test) has not been run.</p>
+
+<div class="plot-wrap">
+  <img src="results/sections/40_permutation/40_03e_fisher_vs_permutation/40_03e_fisher_vs_permutation.png" alt="Fisher vs permutation (domains)" loading="lazy">
+  <div class="plot-caption">Fisher vs permutation concordance for compartment and Polycomb domain tests.</div>
+</div>
+</section>
+
+<!-- ===== 50. FEATURES ===== -->
+
+<section id="s50_01">
+<h2>50_01: Sub-gene feature methylation</h2>
+<div class="method"><span class="tag">method</span> Six feature types (5'UTR, exon, splice donor, splice acceptor, intron, 3'UTR) from BEDs in <code>data/features/</code>. Delta mCH per interval: pooled counts across 4 samples per genotype, rate difference. Coverage filter: &ge;20 pooled reads per genotype. Kruskal-Wallis, Dunn post-hoc (BH), Wilcoxon vs zero. <code>dunn.test</code>.</div>
+
+<h3>Delta mCH by feature type</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Feature</th><th>n intervals</th><th>Median delta mCH</th><th>Mean</th><th>Q25</th><th>Q75</th></tr></thead>
+<tbody>
+<tr><td>5'UTR</td><td class="num">45,110</td><td class="num">0.122</td><td class="num">0.092</td><td class="num">&minus;0.626</td><td class="num">0.848</td></tr>
+<tr><td>Splice donor</td><td class="num">202,065</td><td class="num">0.110</td><td class="num">0.063</td><td class="num">&minus;0.702</td><td class="num">0.866</td></tr>
+<tr><td>Splice acceptor</td><td class="num">202,039</td><td class="num">0.100</td><td class="num">0.058</td><td class="num">&minus;0.666</td><td class="num">0.821</td></tr>
+<tr><td>Exon</td><td class="num">223,960</td><td class="num">0.081</td><td class="num">0.055</td><td class="num">&minus;0.472</td><td class="num">0.606</td></tr>
+<tr><td>3'UTR</td><td class="num">51,967</td><td class="num">0.068</td><td class="num">0.052</td><td class="num">&minus;0.402</td><td class="num">0.534</td></tr>
+<tr><td>Intron</td><td class="num">203,313</td><td class="num">0.060</td><td class="num">0.058</td><td class="num">&minus;0.249</td><td class="num">0.372</td></tr>
+</tbody>
+</table>
+</div>
+<p>All feature types show a positive median delta. Wilcoxon vs zero: all p &lt; 2.2e-16.</p>
+
+<div class="plot-wrap">
+  <img src="results/sections/50_features/50_01b_delta_mch_by_feature/50_01b_delta_mch_by_feature.png" alt="Delta mCH by feature type" loading="lazy">
+  <div class="plot-caption">Delta mCH (mut &minus; ctrl) per interval, grouped by feature type.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/50_features/50_01e_metagene_profile/50_01e_metagene_profile.png" alt="Metagene profile" loading="lazy">
+  <div class="plot-caption">Metagene mCH profile. Gene body divided into 50 bins, oriented 5' to 3'. Ctrl (blue) and mut (orange).</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/50_features/50_01g_exon_intron_rank_profile/50_01g_exon_intron_rank_profile.png" alt="Exon/intron rank profile" loading="lazy">
+  <div class="plot-caption">Delta mCH by exon/intron rank position (1 = most 5'). Up to rank 20.</div>
+</div>
+</section>
+
+<!-- ===== 60. MeCP2 ===== -->
+
+<section id="s60_01">
+<h2>60_01: mCH-MeCP2 cascade</h2>
+<div class="method"><span class="tag">method</span> Strict subset chain: tested &rarr; mCH sig &rarr; mCH hyper &rarr; hyper with MeCP2 peak &rarr; hyper with MeCP2 change (nearest-TSS peak passes FDR). Fisher mch_sig vs mecp2_sig. Wilcoxon MeCP2 fold across mCH groups.</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Step</th><th>n genes</th><th>% of previous</th><th>% of tested</th></tr></thead>
+<tbody>
+<tr><td>Genes tested</td><td class="num">21,072</td><td class="num">100%</td><td class="num">100%</td></tr>
+<tr><td>mCH significant</td><td class="num">5,551</td><td class="num">26.3%</td><td class="num">26.3%</td></tr>
+<tr><td>mCH hypermethylated</td><td class="num">641</td><td class="num">11.5%</td><td class="num">3.0%</td></tr>
+<tr><td>Hyper with MeCP2 peak</td><td class="num">593</td><td class="num">92.5%</td><td class="num">2.8%</td></tr>
+<tr><td>Hyper with MeCP2 change</td><td class="num">56</td><td class="num">9.4%</td><td class="num">0.27%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_01d_cascade_funnel/60_01d_cascade_funnel.png" alt="Cascade funnel" loading="lazy">
+  <div class="plot-caption">Cascade funnel: 21,072 tested down to 56 with both mCH hyper and MeCP2 change.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_01c_mch_mecp2_quadrant/60_01c_mch_mecp2_quadrant.png" alt="mCH-MeCP2 quadrant scatter" loading="lazy">
+  <div class="plot-caption">x: mCH diff (percentage points). y: MeCP2 nearest-TSS fold. Color: significance status.</div>
+</div>
+</section>
+
+<section id="s60_02">
+<h2>60_02: K119ub at genes with MeCP2 change but no mCH change</h2>
+<div class="method"><span class="tag">method</span> Three gene groups: MeCP2-only (MeCP2 sig, mCH not sig), MeCP2+mCH (both sig), Neither. Compares H2AK119ub and other mark folds across groups. Mann-Whitney with Cliff's delta effect size. Logistic GLM + ROC. <code>effsize</code>, <code>pROC</code>.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_02c_effect_size_forest/60_02c_effect_size_forest.png" alt="Effect size forest" loading="lazy">
+  <div class="plot-caption">Cliff's delta effect sizes per mark, MeCP2-only group vs each background.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_02g_combined/60_02g_combined.png" alt="Combined multi-panel" loading="lazy">
+  <div class="plot-caption">Multi-panel: mark folds by group, K119ub control level, logistic forest, scatter.</div>
+</div>
+</section>
+
+<section id="s60_03">
+<h2>60_03: Peak reconciliation</h2>
+<div class="method"><span class="tag">method</span> Compares two gene-level collapse rules: nearest-TSS vs median-of-significant. Signal mass = peak width &times; 2<sup>Conc</sup> (linear-scale concentration). Peak properties compared between gained and lost peaks. Three GSEA runs (GO BP) on different gene rankings.</div>
+
+<p>The "collapse rule" converts multiple DiffBind peaks per gene into one gene-level fold change. The nearest-TSS rule picks the peak closest to the TSS. The median-significant rule takes the median fold of peaks passing FDR &lt; 0.05.</p>
+
+<h3>MeCP2 signal mass balance (annotated peakset)</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Class</th><th>n peaks</th><th>Mass delta</th><th>% change</th></tr></thead>
+<tbody>
+<tr><td>Gained</td><td class="num">7,686</td><td class="num">+60.8M</td><td class="num">+289%</td></tr>
+<tr><td>Lost</td><td class="num">1,200</td><td class="num">&minus;8.0M</td><td class="num">&minus;62%</td></tr>
+<tr><td>Unchanged</td><td class="num">193,764</td><td class="num">&minus;21.1M</td><td class="num">&minus;3.9%</td></tr>
+<tr><td>Net (all peaks)</td><td class="num">202,650</td><td class="num">+31.7M</td><td class="num">+5.5%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_03f_signal_mass_balance/60_03f_signal_mass_balance.png" alt="Signal mass balance" loading="lazy">
+  <div class="plot-caption">Signal mass (width &times; concentration) for gained, lost, and unchanged MeCP2 peaks.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_03g_collapse_rule_scatter/60_03g_collapse_rule_scatter.png" alt="Collapse rule scatter" loading="lazy">
+  <div class="plot-caption">x: nearest-TSS fold. y: median-of-significant fold. Agreement between the two collapse rules.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_03k_composite/60_03k_composite.png" alt="MeCP2 peak composite" loading="lazy">
+  <div class="plot-caption">MeCP2 peak properties composite: counts, widths, concentrations, signal mass, collapse rules.</div>
+</div>
+</section>
+
+<section id="s60_04">
+<h2>60_04: Aging trajectory</h2>
+<div class="method"><span class="tag">method</span> MeCP2 DiffBind adult-vs-young, separate tables for ctrl and mut. Fold negated so positive = more MeCP2 in adult. Shared peaks paired by GRanges overlap, one-to-one. "Mutant-specific aging up" = aging-up peak in mutant with no significant aging peak in control.</div>
+
+<div class="stats">
+  <div class="stat"><div class="value">&minus;0.086</div><div class="label">Median ctrl aging fold</div></div>
+  <div class="stat highlight"><div class="value">&minus;0.183</div><div class="label">Median mut aging fold</div></div>
+  <div class="stat"><div class="value">40.1%</div><div class="label">Mut peaks above identity line</div></div>
+  <div class="stat"><div class="value">0.349</div><div class="label">Spearman (ctrl vs mut aging fold)</div></div>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/60_mecp2/60_04c_shared_peak_aging_fold/60_04c_shared_peak_aging_fold.png" alt="Shared peak aging fold" loading="lazy">
+  <div class="plot-caption">x: ctrl aging fold. y: mut aging fold. Identity line: mut = ctrl. Points above: MeCP2 aging amplified in mutant.</div>
+</div>
+</section>
+
+<!-- ===== 70. NEURONAL ===== -->
+
+<section id="s70_01">
+<h2>70_01: K119ub neuronal enrichment</h2>
+<div class="method"><span class="tag">method</span> Neuronal gene set = union of GO-derived (terms matching <code>synap|neuron|axon|dendrit|nervous</code> via org.Mm.eg.db) + external gene set file. K119ub measure = absolute gene-body ChIP signal (not fold change) from <code>data/k119ub_gene_signal.tsv</code>. One-sided Wilcoxon, Fisher per decile, Cochran-Armitage trend, GO enrichment, GSEA.</div>
+
+<h3>K119ub gene-body signal: neuronal vs other</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Condition</th><th>Group</th><th>n genes</th><th>Median signal</th><th>Wilcoxon p</th></tr></thead>
+<tbody>
+<tr><td>Control</td><td>Neuronal</td><td class="num">4,797</td><td class="num">1.015</td><td class="num" rowspan="2">2.2e-12</td></tr>
+<tr><td>Control</td><td>Other</td><td class="num">16,807</td><td class="num">0.968</td></tr>
+<tr><td>Mutant</td><td>Neuronal</td><td class="num">4,797</td><td class="num">0.994</td><td class="num" rowspan="2">0.64</td></tr>
+<tr><td>Mutant</td><td>Other</td><td class="num">16,807</td><td class="num">0.992</td></tr>
+</tbody>
+</table>
+</div>
+<p>In control, neuronal genes carry higher K119ub signal (p = 2.2e-12). In mutant, the difference disappears (p = 0.64).</p>
+
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_01b_k119ub_signal_neuronal_vs_other/70_01b_k119ub_signal_neuronal_vs_other.png" alt="K119ub signal neuronal vs other" loading="lazy">
+  <div class="plot-caption">K119ub gene-body signal (absolute level, not fold change). Neuronal vs other, ctrl and mut.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_01d_neuronal_fraction_by_decile/70_01d_neuronal_fraction_by_decile.png" alt="Neuronal fraction by K119ub decile" loading="lazy">
+  <div class="plot-caption">Fraction of genes that are neuronal, by K119ub signal decile (1 = lowest, 10 = highest).</div>
+</div>
+</section>
+
+<section id="s70_02">
+<h2>70_02: Chromatin remodeling</h2>
+<div class="method"><span class="tag">method</span> Four marks with predicted directions in mutant: ATAC down, K27ac down, K27me3 up, K119ub up. Tests whether neuronal genes show larger fold changes in those directions. Controls for K119ub signal (decile stratification) and gene length (quintile stratification). Wilcoxon, linear model, Fisher.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_02b_effect_size_forest/70_02b_effect_size_forest.png" alt="Effect size forest (neuronal)" loading="lazy">
+  <div class="plot-caption">Cliff's delta: neuronal vs non-neuronal fold change per mark. Raw and gene-length/K119ub-adjusted.</div>
+</div>
+</section>
+
+<section id="s70_03">
+<h2>70_03: Gene set overlap</h2>
+<div class="method"><span class="tag">method</span> Three gene sets: neuronal (broad), synapse+axon (narrow), MeCP2-up. Two-set Venn of neuronal vs MeCP2-up. Fisher tests and mCH comparisons across all three sets. Wilcoxon of mCH level, change, and gene length.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_03a_geneset_venn/70_03a_geneset_venn.png" alt="Gene set Venn" loading="lazy">
+  <div class="plot-caption">Two-set Venn: neuronal gene set vs MeCP2-up genes.</div>
+</div>
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_03f_composite/70_03f_composite.png" alt="Gene set overlap composite" loading="lazy">
+  <div class="plot-caption">Gene set overlap composite: mCH levels, differences, gene length, Fisher enrichment.</div>
+</div>
+</section>
+
+<section id="s70_04">
+<h2>70_04: Synapse chromatin</h2>
+<div class="method"><span class="tag">method</span> Four groups by double overlap (gene set AND MeCP2-up): Both, Gene-set-only, MeCP2-up-only, Neither. Run for neuronal and synapse sets. Mark folds compared across groups. K119ub decile composition. Gene-length quintile stratification. Kruskal-Wallis, pairwise Wilcoxon vs Neither, Fisher.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/70_neuronal/70_04h_composite/70_04h_composite.png" alt="Synapse chromatin composite" loading="lazy">
+  <div class="plot-caption">Synapse chromatin composite: mark folds by group, K119ub deciles, length quintile effects.</div>
+</div>
+</section>
+
+<!-- ===== 80. CROSS-MODALITY ===== -->
+
+<section id="s80_01">
+<h2>80_01: mCH vs CG 5mC/5hmC</h2>
+<div class="method"><span class="tag">method</span> CG data from Biomodal DMR BED files (<code>data/biomodal/cg_mc_dmr_genes.bed</code>, <code>cg_hmc_dmr_genes.bed</code>). <code>mod_fold_change</code> (arithmetic ratio) is log2-transformed. Joined to mCH by gene_name. Different sequencing experiments, different animals. Spearman correlations, Steiger's test, direction agreement Fisher.</div>
+
+<h3>Cross-modality correlations</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Comparison</th><th>n</th><th>Spearman &rho;</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>mCH logFC vs CG 5mC log2FC</td><td class="num">20,848</td><td class="num">0.109</td><td class="num">5.4e-56</td></tr>
+<tr><td>mCH logFC vs CG 5hmC log2FC</td><td class="num">20,848</td><td class="num">0.072</td><td class="num">4.2e-25</td></tr>
+<tr><td>CG 5mC vs CG 5hmC</td><td class="num">20,848</td><td class="num">&minus;0.478</td><td class="num">&lt; 2.2e-16</td></tr>
+</tbody>
+</table>
+</div>
+<p>Steiger's test: rho(mCH, 5mC) vs rho(mCH, 5hmC) differ significantly (Z = 3.16, p = 0.0016).</p>
+
+<h3>Direction agreement among co-significant genes</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Comparison</th><th>n both sig</th><th>% agree</th><th>Fisher OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>mCH vs CG 5mC</td><td class="num">3,977</td><td class="num">44.8%</td><td class="num">4.24</td><td class="num">3.1e-34</td></tr>
+<tr><td>mCH vs CG 5hmC</td><td class="num">4,152</td><td class="num">78.1%</td><td class="num">2.81</td><td class="num">1.6e-21</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/80_cross_modality/80_01d_composite/80_01d_composite.png" alt="Cross-modality composite" loading="lazy">
+  <div class="plot-caption">Three panels: mCH vs CG 5mC, mCH vs CG 5hmC, CG 5mC vs 5hmC. Data from separate experiments joined by gene name.</div>
+</div>
+</section>
+
+<section id="s80_02">
+<h2>80_02: K119ub stratification</h2>
+<div class="method"><span class="tag">method</span> K119ub peaks classified intragenic vs intergenic by ChIPseeker annotation against TxDb. Quadrant scatter (K119ub on x, MeCP2 on y, matching the causal model direction). "Divergent" set: K119ub gained + mCH hypo. GO BP enrichment of divergent genes.</div>
+
+<div class="plot-wrap">
+  <img src="results/sections/80_cross_modality/80_02a_quadrant_reoriented/80_02a_quadrant_reoriented.png" alt="K119ub-MeCP2 quadrant reoriented" loading="lazy">
+  <div class="plot-caption">x: K119ub fold. y: MeCP2 fold. Oriented to match the causal model (K119ub &rarr; MeCP2).</div>
+</div>
+</section>
+
+<!-- ===== FISHER SUMMARY ===== -->
+
+<section id="fisher">
+<h2>Fisher test summary (top 30 of 165)</h2>
+<p>All registered Fisher tests from the section pipeline, sorted by p-value. Each section writes a shard to <code>results/sections/fisher_registry/</code>.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Section</th><th>Test</th><th>OR</th><th>p-value</th></tr></thead>
+<tbody>
+<tr><td>20_01</td><td>mCH hyper vs MeCP2 up</td><td class="num">72.5</td><td class="num">&lt; 2.2e-16</td></tr>
+<tr><td>40_01</td><td>mCH hyper gene bodies overlap MeCP2 Up</td><td class="num">72.5</td><td class="num">&lt; 2.2e-16</td></tr>
+<tr><td>50_01</td><td>Intron enhancer vs gene sig</td><td class="num">5.41</td><td class="num">&lt; 2.2e-16</td></tr>
+<tr><td>50_01</td><td>Intron hypo vs gene hypo</td><td class="num">6.20</td><td class="num">&lt; 2.2e-16</td></tr>
+<tr><td>10_01</td><td>Body Unmarked vs mCH sig</td><td class="num">0.18</td><td class="num">2.0e-308</td></tr>
+<tr><td>40_01</td><td>Among sig: hyper vs hypo overlap MeCP2 Up</td><td class="num">53.7</td><td class="num">1.9e-305</td></tr>
+<tr><td>40_01</td><td>mCH hyper overlap K119ub Gained</td><td class="num">19.8</td><td class="num">8.5e-260</td></tr>
+<tr><td>10_03</td><td>Body Unmarked hypo</td><td class="num">0.21</td><td class="num">4.7e-243</td></tr>
+<tr><td>40_01</td><td>mCH hypo overlap K27ac Gained</td><td class="num">5.37</td><td class="num">2.9e-233</td></tr>
+<tr><td>20_03</td><td>K119ub up vs mCH hyper (among sig)</td><td class="num">81.5</td><td class="num">2.2e-215</td></tr>
+<tr><td>40_01</td><td>mCH hypo overlap K119ub Lost</td><td class="num">4.11</td><td class="num">4.6e-208</td></tr>
+<tr><td>40_01</td><td>mCH hyper overlap K27ac Lost</td><td class="num">15.1</td><td class="num">2.0e-206</td></tr>
+<tr><td>50_01</td><td>Exon-intron hypo concordance</td><td class="num">2.41</td><td class="num">3.4e-191</td></tr>
+<tr><td>40_01</td><td>mCH hypo overlap ATAC Up</td><td class="num">3.43</td><td class="num">1.4e-174</td></tr>
+<tr><td>60_03</td><td>Collapse rule gain agreement</td><td class="num">Inf</td><td class="num">5.8e-170</td></tr>
+<tr><td>40_01</td><td>Among sig: hyper vs hypo overlap K119ub Gained</td><td class="num">12.4</td><td class="num">5.3e-168</td></tr>
+<tr><td>10_01</td><td>Promoter Unmarked vs mCH sig</td><td class="num">0.44</td><td class="num">3.7e-152</td></tr>
+<tr><td>20_02</td><td>Convergence 2+ marks</td><td class="num">17.9</td><td class="num">1.5e-150</td></tr>
+<tr><td>10_04</td><td>K27ac overlap vs mCH sig</td><td class="num">2.31</td><td class="num">4.2e-143</td></tr>
+<tr><td>20_01</td><td>mCH hypo vs MeCP2 down</td><td class="num">13.5</td><td class="num">8.6e-143</td></tr>
+<tr><td>40_01</td><td>mCH hypo overlap MeCP2 Down</td><td class="num">13.5</td><td class="num">8.6e-143</td></tr>
+<tr><td>10_03</td><td>Promoter Unmarked hypo</td><td class="num">0.44</td><td class="num">1.6e-137</td></tr>
+<tr><td>40_01</td><td>Among sig: hyper vs hypo overlap K27ac Lost</td><td class="num">9.79</td><td class="num">1.6e-135</td></tr>
+<tr><td>40_01</td><td>mCH hyper overlap ATAC Down</td><td class="num">11.3</td><td class="num">2.3e-131</td></tr>
+<tr><td>20_03</td><td>K119ub up vs mCH hyper (all genes)</td><td class="num">2.02</td><td class="num">2.2e-116</td></tr>
+<tr><td>40_03</td><td>mCH hypo in A compartment</td><td class="num">2.61</td><td class="num">1.6e-110</td></tr>
+<tr><td>10_01</td><td>Body Active vs mCH sig</td><td class="num">2.03</td><td class="num">7.4e-103</td></tr>
+<tr><td>10_01</td><td>Promoter Active vs mCH sig</td><td class="num">1.99</td><td class="num">2.9e-95</td></tr>
+<tr><td>10_03</td><td>Promoter Active hypo</td><td class="num">1.99</td><td class="num">1.1e-88</td></tr>
+<tr><td>10_04</td><td>B.2 vs mCH sig</td><td class="num">0.43</td><td class="num">2.0e-82</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+</main>
+</div>
+
+<!-- Sidebar scroll highlight -->
+<script>
+(function() {
+  var links = document.querySelectorAll('nav.sidebar a');
+  var sections = [];
+  links.forEach(function(a) {
+    var id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      var el = document.getElementById(id.slice(1));
+      if (el) sections.push({ el: el, link: a });
+    }
+  });
+  function update() {
+    var scrollY = window.scrollY + 80;
+    var current = null;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].el.offsetTop <= scrollY) { current = sections[i]; break; }
+    }
+    links.forEach(function(a) { a.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>

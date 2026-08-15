@@ -1,0 +1,80 @@
+=========================================
+EM-seq section 80_02: K119ub stratification
+=========================================
+Job ID: 53505897
+Node: exp-4-15
+Start time: Fri Aug 14 16:14:53 PDT 2026
+=========================================
+
+TMPDIR=/expanse/lustre/projects/csd940/zalibhai/emseq/.scratch/53505897
+Code dir:   /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:   /expanse/lustre/projects/csd940/zalibhai/emseq
+Script:     /expanse/lustre/projects/csd940/zalibhai/emseq-repo/scripts/sections/80_cross_modality/80_02_k119ub_stratification.R
+Output dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections/80_cross_modality
+
+================================================================================
+EM-seq mCH SECTION PIPELINE — SHARED CONFIG
+================================================================================
+Environment: expanse
+Code dir:    /expanse/lustre/projects/csd940/zalibhai/emseq-repo
+Data dir:    /expanse/lustre/projects/csd940/zalibhai/emseq
+Results root: /expanse/lustre/projects/csd940/zalibhai/emseq-repo/results/sections 
+
+Loading mCH differential results...
+  21,097 genes tested, 5,557 significant (642 hyper, 4,915 hypo) at FDR<0.05
+
+Loading DiffBind results...
+  H2AK119ub: 41295 peaks (17078 gained, 6304 lost at FDR<0.05)
+  MeCP2: 36804 peaks (5675 gained, 1107 lost at FDR<0.05)
+  ATAC: dropping 209 peaks with NA coordinates
+  ATAC: 75658 peaks (9262 gained, 4159 lost at FDR<0.05)
+  H3K27ac: dropping 3 peaks with NA coordinates
+  H3K27ac: 25666 peaks (5076 gained, 6706 lost at FDR<0.05)
+  H3K27me3: dropping 3 peaks with NA coordinates
+  H3K27me3: 18321 peaks (2293 gained, 4810 lost at FDR<0.05)
+
+Loading consensus peak sets...
+  K119ub consensus: 34088 peaks
+  MeCP2 consensus: 36804 peaks
+
+Shared config loaded.
+
+=== Section 80_02: K119ub stratification and quadrant reorientation ===
+
+STEP 1: Axis-swapped quadrant scatter
+  K119ub gene signal: 23,150 genes (21,604 quantifiable)
+  Annotating MeCP2 peaks to genes...
+'select()' returned 1:many mapping between keys and columns
+  MeCP2 gene-level: 11,229 genes
+  Genes with both K119ub gene-body signal and MeCP2 fold: 10,751
+  Saved: 80_02a_quadrant_reoriented/{pdf,svg,png,jpg}
+  Wrote: 80_02_quadrant_summary.tsv (4 rows, 4 cols)
+
+STEP 2: K119ub peak location classification (full coordinates)
+  K119ub raw: 41,295 peaks (17,078 gained, 6,304 lost) using full coordinates
+  Annotating K119ub peaks with ChIPseeker...
+Error: invalid subscript
+In addition: Warning messages:
+1: In .merge_two_Seqinfo_objects(x, y) :
+  The 2 combined objects have no sequence levels in common. (Use
+  suppressWarnings() to suppress this warning.)
+2: In .merge_two_Seqinfo_objects(x, y) :
+  The 2 combined objects have no sequence levels in common. (Use
+  suppressWarnings() to suppress this warning.)
+3: In .merge_two_Seqinfo_objects(x, y) :
+  The 2 combined objects have no sequence levels in common. (Use
+  suppressWarnings() to suppress this warning.)
+4: In .merge_two_Seqinfo_objects(x, y) :
+  The 2 combined objects have no sequence levels in common. (Use
+  suppressWarnings() to suppress this warning.)
+5: In .merge_two_Seqinfo_objects(x, y) :
+  The 2 combined objects have no sequence levels in common. (Use
+  suppressWarnings() to suppress this warning.)
+Execution halted
+
+=========================================
+Complete: section 80_02
+Time: 41s
+Exit code: 1
+End time: Fri Aug 14 16:15:37 PDT 2026
+=========================================

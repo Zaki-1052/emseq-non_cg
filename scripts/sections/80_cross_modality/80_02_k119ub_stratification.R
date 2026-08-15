@@ -82,7 +82,8 @@ load_k119ub_raw <- function(filepath) {
     stop("Raw K119ub DiffBind is missing columns: ", paste(missing, collapse = ", "))
   }
 
-  df$Chr <- paste0("chr", as.character(df$seqnames))
+  raw_chr <- as.character(df$seqnames)
+  df$Chr <- ifelse(grepl("^chr", raw_chr), raw_chr, paste0("chr", raw_chr))
   df$peak_start <- df$start
   df$peak_end <- df$end
   df$peak_width <- df$end - df$start
