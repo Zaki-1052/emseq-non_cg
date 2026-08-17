@@ -1,0 +1,64 @@
+#!/bin/bash
+# scripts/dmrseq/03_gather_blocks.sb
+#SBATCH --job-name=dmrseq_gather_blocks
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=32G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/dmrseq/gather_blocks_%j.out
+
+# Phase 3b: Gather per-chromosome block DMR results into combined output.
+#
+# Input:  results/dmrseq/.per_chr/blocks/{chr}_dmrs.rds (21 files)
+# Output: results/dmrseq/mch_dmrs_blocks.tsv
+#         results/dmrseq/mch_dmr_summary_blocks.txt
+#
+# Usage: sbatch --dependency=afterok:<BLOCK_ARRAY_JID> 03_gather_blocks.sb
+
+echo "========================================="
+echo "dmrseq Phase 3: Gather block DMR results"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SCRIPT_DIR="${BASEDIR}/scripts/dmrseq"
+OUTDIR="${BASEDIR}/results/dmrseq"
+SPLIT_DIR="${BASEDIR}/.dmrseq_splits"
+
+echo "Results dir: $OUTDIR"
+echo "Split dir:   $SPLIT_DIR"
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/03_gather_results.R" \
+    --results-dir "$OUTDIR" \
+    --mode blocks \
+    --split-dir "$SPLIT_DIR" \
+    --clean TRUE
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

@@ -106,8 +106,8 @@ STEP2B_JID=$(sbatch --parsable --dependency=afterok:${STEP2A_JID} \
     "${SCRIPT_DIR}/03_mch_differential.sb")
 echo "  Step 03 - edgeR:         job $STEP2B_JID (after $STEP2A_JID)"
 
-STEP3_JID=$(sbatch --parsable "${SCRIPT_DIR}/06_mch_dmrseq.sb")
-echo "  Step 06 - dmrseq:        job $STEP3_JID (parallel)"
+echo "  Step 06 - dmrseq:        submitting via scripts/dmrseq/submit_dmrseq.sh"
+bash "${SCRIPT_DIR}/dmrseq/submit_dmrseq.sh"
 
 STEP4_JID=$(sbatch --parsable --dependency=afterok:${STEP2B_JID} \
     "${SCRIPT_DIR}/04_mch_integration.sb")
@@ -117,7 +117,7 @@ echo ""
 echo "========================================="
 echo "Dependency chain:"
 echo "  Step2a($STEP2A_JID) -> Step2b($STEP2B_JID) -> Step4($STEP4_JID)"
-echo "  Step3($STEP3_JID) (parallel)"
+echo "  Step06 (dmrseq) — submitted via scripts/dmrseq/submit_dmrseq.sh (parallel)"
 echo ""
 echo "Monitor: squeue -u \$USER"
 echo "Logs:    $LOGDIR"

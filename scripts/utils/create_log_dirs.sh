@@ -15,6 +15,7 @@ CODEDIR="$(cd "$(dirname "$0")/../.." && pwd)"
 dirs=(
     logs
     logs/02b_features
+    logs/dmrseq
     logs/sections
     logs/sections/10_chromatin
     logs/sections/20_chip_integration

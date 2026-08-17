@@ -1,0 +1,79 @@
+#!/bin/bash
+# scripts/dmrseq/02_dmrseq_blocks.sb
+#SBATCH --job-name=dmrseq_blocks
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=120G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --array=0-20
+#SBATCH --output=logs/dmrseq/blocks_%A_%a.out
+
+# Phase 2b: Per-chromosome large-scale block detection with dmrseq (block=TRUE).
+# One array task per chromosome (21 tasks).
+#
+# Input:  .dmrseq_splits/{sample}_{chr}.rds (from Phase 1)
+# Output: results/dmrseq/.per_chr/blocks/{chr}_dmrs.rds
+#
+# Usage: sbatch --dependency=afterok:<SPLIT_JID> 02_dmrseq_blocks.sb
+
+CHRS=(chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 \
+      chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chrX chrY)
+CHR="${CHRS[$SLURM_ARRAY_TASK_ID]}"
+
+echo "========================================="
+echo "dmrseq Phase 2: Block DMRs — ${CHR}"
+echo "========================================="
+echo "Job ID: ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SCRIPT_DIR="${BASEDIR}/scripts/dmrseq"
+SPLIT_DIR="${BASEDIR}/.dmrseq_splits"
+OUTDIR="${BASEDIR}/results/dmrseq"
+
+echo "Chromosome: $CHR"
+echo "Split dir:  $SPLIT_DIR"
+echo "Out dir:    $OUTDIR"
+echo ""
+
+if [[ ! -d "$SPLIT_DIR" ]]; then
+    echo "ERROR: Split directory not found: $SPLIT_DIR"
+    echo "Run Phase 1 (01_split_samples.sb) first."
+    exit 1
+fi
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/02_dmrseq_chr.R" \
+    --chr "$CHR" \
+    --split-dir "$SPLIT_DIR" \
+    --out-dir "$OUTDIR" \
+    --mode blocks \
+    --cutoff 0.005 \
+    --min-num-region 5 \
+    --workers 28
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete: ${CHR}"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE

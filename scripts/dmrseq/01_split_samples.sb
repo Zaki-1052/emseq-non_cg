@@ -1,0 +1,84 @@
+#!/bin/bash
+# scripts/dmrseq/01_split_samples.sb
+#SBATCH --job-name=dmrseq_split
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=48:00:00
+#SBATCH --account=csd940
+#SBATCH --output=logs/dmrseq/split_%j.out
+
+# Phase 1: Read all 8 samples, split by chromosome, save RDS.
+#
+# Input:  combined_ch/*_CH.methylKit.gz (8 files)
+# Output: .dmrseq_splits/{sample}_{chr}.rds (168 files)
+#         results/dmrseq/lambda_rates.tsv
+#
+# Usage: sbatch 01_split_samples.sb
+
+echo "========================================="
+echo "dmrseq Phase 1: Split samples by chromosome"
+echo "========================================="
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $HOSTNAME"
+echo "Start time: $(date)"
+echo "========================================="
+echo ""
+
+BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
+export TMPDIR="${BASEDIR}/.scratch/${SLURM_JOB_ID}"
+mkdir -p "$TMPDIR"
+echo "TMPDIR=$TMPDIR"
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate emseq_env
+
+SCRIPT_DIR="${BASEDIR}/scripts/dmrseq"
+CH_DIR="${BASEDIR}/combined_ch"
+OUTDIR="${BASEDIR}/results/dmrseq"
+SPLIT_DIR="${BASEDIR}/.dmrseq_splits"
+
+mkdir -p "$OUTDIR" "$SPLIT_DIR"
+
+echo "CH dir:    $CH_DIR"
+echo "Out dir:   $OUTDIR"
+echo "Split dir: $SPLIT_DIR"
+echo ""
+
+SAMPLES=(ctrl_M1 ctrl_M2 ctrl_F1 ctrl_F2 mut_M1 mut_M2 mut_F1 mut_F2)
+MISSING=0
+for s in "${SAMPLES[@]}"; do
+    f="${CH_DIR}/${s}_CH.methylKit.gz"
+    if [[ ! -s "$f" ]]; then
+        echo "ERROR: Combined CH file not found: $f"
+        MISSING=1
+    fi
+done
+if [[ $MISSING -eq 1 ]]; then
+    echo "Fix missing files before running."
+    exit 1
+fi
+echo "All 8 combined CH files verified."
+echo ""
+
+START=$(date +%s)
+
+Rscript "${SCRIPT_DIR}/01_split_samples.R" \
+    --ch-dir "$CH_DIR" \
+    --out-dir "$OUTDIR" \
+    --split-dir "$SPLIT_DIR" \
+    --threads "$SLURM_CPUS_PER_TASK"
+
+EXIT_CODE=$?
+END=$(date +%s)
+
+echo ""
+echo "========================================="
+echo "Complete"
+echo "Time: $((END - START))s"
+echo "Exit code: $EXIT_CODE"
+echo "End time: $(date)"
+echo "========================================="
+exit $EXIT_CODE
