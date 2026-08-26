@@ -40,9 +40,10 @@ echo "TMPDIR=$TMPDIR"
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate emseq_env
 
-SCRIPT_DIR="${BASEDIR}/scripts/dmrseq"
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+SCRIPT_DIR="${CODEDIR}/scripts/dmrseq"
 SPLIT_DIR="${BASEDIR}/.dmrseq_splits"
-OUTDIR="${BASEDIR}/results/dmrseq"
+OUTDIR="${CODEDIR}/results/dmrseq"
 
 echo "Chromosome: $CHR"
 echo "Split dir:  $SPLIT_DIR"

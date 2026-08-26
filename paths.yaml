@@ -19,7 +19,7 @@ local:
   code_dir: /Users/zakiralibhai/emseq
   data_dir: /Users/zakiralibhai/emseq
   hic_dir: /Users/zakiralibhai/Documents/GitHub/mariner_hi-c
-  bigwigs_dir: /Users/zakiralibhai/sdsc/bigwigs
+  bigwigs_dir: /Users/zakiralibhai/bigwigs
 
 expanse:
   code_dir: /expanse/lustre/projects/csd940/zalibhai/emseq-repo

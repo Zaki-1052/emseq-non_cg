@@ -1,0 +1,16 @@
+Loading per-sample aggregated counts...
+Loading differential results for comparison...
+Wrote 21097 genes to results/03_differential/pooled_vs_mean_rate_comparison.tsv
+
+=== Summary of pooled - mean differences ===
+  ctrl_delta:  median=-1.51e-04  mean=-1.74e-04  sd=3.67e-04  max|delta|=1.01e-02
+  mut_delta:  median=2.51e-04  mean=2.38e-04  sd=5.99e-04  max|delta|=7.24e-03
+  diff_delta:  median=4.22e-04  mean=4.12e-04  sd=6.55e-04  max|delta|=8.36e-03
+
+Spearman(mean_diff, pooled_diff): 0.964290
+Spearman(mean_diff, edger_logFC): 0.842459
+Spearman(pooled_diff, edger_logFC): 0.788866
+
+Among 5557 FDR<0.05 genes:
+  Direction disagreements with edgeR (mean_diff):   760 (13.7%)
+  Direction disagreements with edgeR (pooled_diff): 1534 (27.6%)

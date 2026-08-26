@@ -1,0 +1,56 @@
+Loading per-sample feature tables...
+  ctrl_M1    430,993 intervals  5,292,547,183 total coverage
+  ctrl_M2    430,993 intervals  7,022,843,968 total coverage
+  ctrl_F1    430,993 intervals  7,593,994,289 total coverage
+  ctrl_F2    430,993 intervals  7,994,849,474 total coverage
+  mut_M1     430,993 intervals  5,846,361,254 total coverage
+  mut_M2     430,993 intervals  16,585,519,171 total coverage
+  mut_F1     430,993 intervals  15,085,741,362 total coverage
+  mut_F2     430,993 intervals  6,933,790,992 total coverage
+
+Building gene body coordinates...
+  21,820 genes with valid body spans
+  430,993 intervals after filtering
+Expanding intervals into bins...
+Computing per-sample rates per gene x bin...
+  8,535,277 gene x bin x sample records
+Computing equal-weight and pooled profiles...
+
+=== Shift summary (pooled minus equal-weight, percentage points) ===
+  Ctrl line:  median=0.2597 pp  mean=0.2588 pp
+  Mut line:   median=0.3119 pp  mean=0.3101 pp
+  Delta:      median=0.0506 pp  mean=0.0513 pp
+
+  Equal-weight ctrl (mean across bins): 0.01765 (1.765%)
+  Equal-weight mut  (mean across bins): 0.01803 (1.803%)
+  Equal-weight delta:                   0.000372 (0.0372%)
+  Pooled ctrl:                          0.02024 (2.024%)
+  Pooled mut:                           0.02113 (2.113%)
+  Pooled delta:                         0.000885 (0.0885%)
+
+Plotting...
+Saved plot to results/sections/50_features/metagene_correction/metagene_equalweight_vs_pooled.png
+Saved delta plot to results/sections/50_features/metagene_correction/metagene_delta_equalweight_vs_pooled.png
+
+=== Lambda-corrected metagene ===
+Per-sample lambda rates:
+  ctrl_M1      1.3265%
+  ctrl_M2      0.9929%
+  ctrl_F1      1.0192%
+  ctrl_F2      1.1181%
+  mut_M1       0.8670%
+  mut_M2       1.6232%
+  mut_F1       1.1751%
+  mut_F2       1.8145%
+  Mean ctrl: 1.1142%   Mean mut: 1.3699%   Difference: 0.2558 pp
+
+  Lambda-corrected equal-weight ctrl: 0.00745 (0.745%)
+  Lambda-corrected equal-weight mut:  0.00561 (0.561%)
+  Lambda-corrected delta:             -0.001835 (-0.1835%)
+  Uncorrected equal-weight delta:     0.000372 (0.0372%)
+
+Plotting lambda-corrected metagene...
+Saved to results/sections/50_features/metagene_correction/metagene_lambda_corrected.png
+Saved to results/sections/50_features/metagene_correction/metagene_delta_lambda_corrected.png
+
+Done.

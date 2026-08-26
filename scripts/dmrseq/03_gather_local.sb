@@ -35,8 +35,9 @@ echo "TMPDIR=$TMPDIR"
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate emseq_env
 
-SCRIPT_DIR="${BASEDIR}/scripts/dmrseq"
-OUTDIR="${BASEDIR}/results/dmrseq"
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+SCRIPT_DIR="${CODEDIR}/scripts/dmrseq"
+OUTDIR="${CODEDIR}/results/dmrseq"
 SPLIT_DIR="${BASEDIR}/.dmrseq_splits"
 
 echo "Results dir: $OUTDIR"

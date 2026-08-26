@@ -38,10 +38,11 @@ conda activate emseq_env
 
 SAMPLES=(ctrl_M1 mut_M1 ctrl_F1 mut_F1 ctrl_M2 mut_M2 ctrl_F2 mut_F2)
 SAMPLE="${SAMPLES[$SLURM_ARRAY_TASK_ID]}"
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
 CH_FILE="${BASEDIR}/combined_ch/${SAMPLE}_CH.methylKit.gz"
-GENE_BED="${BASEDIR}/references/gene_bodies.protein_coding.bed"
-OUTDIR="${BASEDIR}/results/02_aggregate/aggregated"
-SCRIPT_DIR="${BASEDIR}/scripts"
+GENE_BED="${CODEDIR}/data/gene_bodies.protein_coding.bed"
+OUTDIR="${CODEDIR}/results/02_aggregate/aggregated"
+SCRIPT_DIR="${CODEDIR}/scripts"
 
 mkdir -p "$OUTDIR"
 

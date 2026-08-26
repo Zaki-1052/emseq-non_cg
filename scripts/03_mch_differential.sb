@@ -39,10 +39,11 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate emseq_env
 
 BASEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq"
-SCRIPT_DIR="${BASEDIR}/scripts"
-AGG_DIR="${BASEDIR}/results/02_aggregate/aggregated"
-OUTDIR="${BASEDIR}/results/03_differential"
-PLOT_DIR="${BASEDIR}/results/plots"
+CODEDIR="/expanse/lustre/projects/csd940/zalibhai/emseq-repo"
+SCRIPT_DIR="${CODEDIR}/scripts"
+AGG_DIR="${CODEDIR}/results/02_aggregate/aggregated"
+OUTDIR="${CODEDIR}/results/03_differential"
+PLOT_DIR="${CODEDIR}/results/plots"
 
 mkdir -p "$OUTDIR" "$PLOT_DIR"
 
